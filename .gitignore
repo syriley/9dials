@@ -1,0 +1,7 @@
+tmp/
+test/
+precompiled/
+eclipse/
+.project
+.classpath
+.settings/
