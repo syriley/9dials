@@ -12,7 +12,16 @@ public class Band {
 	@Id ObjectId id;
 	private String name;
 	private Date dateCompleted;
+	private Date dateStarted;
 	private String url;
+	
+	public Date getDateStarted() {
+		return dateStarted;
+	}
+	public void setDateStarted(Date dateStarted) {
+		this.dateStarted = dateStarted;
+	}
+	
 	private int numberOfTabs;
 	
 	public int getNumberOfTabs() {
