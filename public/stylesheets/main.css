@@ -1,0 +1,18 @@
+body {
+	font-family:arial;
+	
+}
+
+#main-content {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#searchbox-container {
+	text-align:center;
+}
+
+#searchbox-textbox {
+	width:400px;
+}

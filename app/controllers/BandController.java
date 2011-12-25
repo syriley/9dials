@@ -17,7 +17,7 @@ public class BandController extends CrawlerController {
 		Date oneHourAgo = calendar.getTime();
 		Query query = datastore.createQuery(Band.class)
 				.filter("dateCompleted = ", null)	
-				.filter("dateStarted = ", null)
+				.filter("dateStarted $ne ", null)
 				.order("-numberOfTabs")
 				.limit(1);
 		UpdateOperations<Band> updateOperations = datastore.createUpdateOperations(Band.class).set("dateStarted", new Date());

@@ -13,8 +13,8 @@ public class Application extends Controller {
         render();
     }
     
-    public static void sayHello(String myName) {
-        render(myName);
+    public static void search(String searchTerm) {
+        render(searchTerm);
     }
     
     public static void getNextTab() {
@@ -24,7 +24,6 @@ public class Application extends Controller {
 			urls.add(new URL("http://www.hotmail.com"));
 			urls.add(new URL("http://www.hotmailfs.com"));
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	renderJSON(urls);
