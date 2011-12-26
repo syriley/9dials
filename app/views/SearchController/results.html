@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+ 
+<h1>Results for: "${searchTerm ?: 'No Search Term'}"</h1>
+ 
+<a href="@{Application.index()}">Back to search</a>
+<ul>
+#{list items:bands, as:'band'}
+	<li><a href="${band.url}">${band.name}</a></li>
+#{/list}
+</ul>

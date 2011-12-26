@@ -6,9 +6,12 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 
+import play.db.jpa.Model;
+
+import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
-public class Band {
+@Entity public class Band{
 	@Id ObjectId id;
 	private String name;
 	private Date dateCompleted;

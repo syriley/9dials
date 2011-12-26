@@ -13,10 +13,6 @@ public class Application extends Controller {
         render();
     }
     
-    public static void search(String searchTerm) {
-        render(searchTerm);
-    }
-    
     public static void getNextTab() {
     	URL url = null;
     	List<URL> urls = new ArrayList<URL>();

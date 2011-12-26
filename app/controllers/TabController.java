@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.TabModel;
+
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.Morphia;
 import com.google.gson.Gson;
@@ -13,10 +15,11 @@ import com.sjriley.crawler.dao.Tab;
 
 public class TabController extends CrawlerController {
 	
-	static {
-		datastore = new Morphia().createDatastore(MongoProvider.getMongo(), "tabcrawler");
-	}
+	private static TabModel tabModel;
 	
+	static {
+		tabModel = new TabModel();
+	}
     public static void index() {
         render();
     }
@@ -25,7 +28,7 @@ public class TabController extends CrawlerController {
     	Gson gson = new Gson();
     	String data = params.get("data");
         Tab tab = gson.fromJson(data, Tab.class);
-        datastore.save(tab);
+        tabModel.save(tab);
     }
     
     public static void list() {
@@ -43,7 +46,7 @@ public class TabController extends CrawlerController {
 
     public static void get() {
     	
-    	List<Tab> tabs = datastore.find(Tab.class).limit(100).asList();
+    	List<Tab> tabs = tabModel.list();
     	renderJSON(tabs);
     }
 
