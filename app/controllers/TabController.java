@@ -20,8 +20,15 @@ public class TabController extends CrawlerController {
 	static {
 		tabModel = new TabModel();
 	}
-    public static void index() {
-        render();
+	
+    public static void index(String type) {
+    	Tab tab = tabModel.getOne("Tabs", type);
+        render(tab);
+    }
+    
+    public static void getNextTab(String type) {
+    	Tab tab = tabModel.getOne("Tabs", type);
+    	renderJSON(tab);
     }
     
     public static void create () {

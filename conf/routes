@@ -14,8 +14,11 @@ GET     /public/                                staticDir:public
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
 
+
 GET     /api/tab/all            TabController.list
+GET     /api/tab/next           TabController.getNextTab
 GET     /api/tab/{id}           TabController.get
+
 POST    /api/tab/?              TabController.create
 
 GET		/api/band/next/?		BandController.getNextBand

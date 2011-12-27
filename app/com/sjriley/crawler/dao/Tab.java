@@ -21,6 +21,33 @@ public class Tab {
 	private int numberOfVotes;
 	private Date updated;
 	private Date pageProcessed;
+	private Date dateTabStarted;
+	private Date dateTabCompleted;
+	private String originalTabText;
+	
+	public String getOriginalTabText() {
+		return originalTabText;
+	}
+
+	public void setOriginalTabText(String originalTabText) {
+		this.originalTabText = originalTabText;
+	}
+
+	public Date getDateTabStarted() {
+		return dateTabStarted;
+	}
+
+	public void setDateTabStarted(Date dateTabStarted) {
+		this.dateTabStarted = dateTabStarted;
+	}
+
+	public Date getDateTabCompleted() {
+		return dateTabCompleted;
+	}
+
+	public void setDateTabCompleted(Date dateTabCompleted) {
+		this.dateTabCompleted = dateTabCompleted;
+	}
 
 	public String getTitle() {
 		return title;
