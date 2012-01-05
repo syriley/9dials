@@ -24,7 +24,19 @@ public class Tab {
 	private Date dateTabStarted;
 	private Date dateTabCompleted;
 	private String originalTabText;
+	/**
+	 * 
+	 */
+	private boolean expire;
 	
+	public boolean isExpire() {
+		return expire;
+	}
+
+	public void setExpire(boolean expire) {
+		this.expire = expire;
+	}
+
 	public String getOriginalTabText() {
 		return originalTabText;
 	}
