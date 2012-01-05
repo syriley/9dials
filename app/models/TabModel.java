@@ -29,6 +29,7 @@ public class TabModel extends CrawlerModel {
 			query.filter("type", tabType);
 			query.filter("dateTabStarted = ", null);
 			query.filter("dateTabCompleted = ", null);
+			query.filter("expire != ", true);
 			query.order("-numberOfVotes");
 			query.limit(1);
 			UpdateOperations<Tab> updateOperations = datastore.createUpdateOperations(Tab.class).set("dateTabStarted", new Date());
