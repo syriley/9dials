@@ -5,29 +5,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import models.TabModel;
+import models.Tab;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
 import com.google.gson.Gson;
-import com.sjriley.crawler.dal.MongoProvider;
-import com.sjriley.crawler.dao.Tab;
 
-public class TabController extends CrawlerController {
-	
-	private static TabModel tabModel;
-	
-	static {
-		tabModel = new TabModel();
-	}
+public class Tabs extends CrawlerController {
 	
     public static void index(String type) {
-    	Tab tab = tabModel.getOne("Tabs", type);
+    	Tab tab = Tab.getOne("Tabs", type);
         render(tab);
     }
     
-    public static void getNextTab(String type) {
-    	Tab tab = tabModel.getOne("Tabs", type);
+    public static void next(String type) {
+    	Tab tab = Tab.getOne("Tabs", type);
     	renderJSON(tab);
     }
     
@@ -35,7 +25,7 @@ public class TabController extends CrawlerController {
     	Gson gson = new Gson();
     	String data = params.get("data");
         Tab tab = gson.fromJson(data, Tab.class);
-        tabModel.save(tab);
+        tab.save();
     }
     
     public static void list() {
@@ -53,7 +43,7 @@ public class TabController extends CrawlerController {
 
     public static void get() {
     	
-    	List<Tab> tabs = tabModel.list();
+    	List<Tab> tabs = Tab.list();
     	renderJSON(tabs);
     }
 
