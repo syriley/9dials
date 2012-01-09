@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Tab;
+import play.mvc.Controller;
 
 import com.google.gson.Gson;
 
-public class Tabs extends CrawlerController {
+public class Tabs extends Controller {
 	
     public static void index(String type) {
     	Tab tab = Tab.getOne("Tabs", type);

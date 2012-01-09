@@ -1,11 +1,12 @@
 package controllers;
 
 import models.Band;
+import play.mvc.Controller;
 
 import com.google.gson.Gson;
 
 
-public class Bands extends CrawlerController {
+public class Bands extends Controller {
 	
 	public static void next() {
 		Band band = Band.getNext();

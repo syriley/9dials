@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import models.Band;
+import play.mvc.Controller;
 
 
-public class Search extends CrawlerController {
+public class Search extends Controller {
 
 	 public static void results(String searchTerm) {
 		 List<Band> bands = Band.search(searchTerm);
