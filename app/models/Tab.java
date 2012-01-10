@@ -59,7 +59,7 @@ public class Tab extends Model {
 			morphiaQuery.filter("dateTabStarted = ", null);
 			morphiaQuery.filter("dateTabCompleted = ", null);
 			//query.or(query.criteria("expire").equal("false"), query.criteria("expire").notEqual(true));
-			morphiaQuery.filter("expire != ", false);
+			//morphiaQuery.filter("expire != ", false);
 			morphiaQuery.order("-numberOfVotes");
 			Query query = morphiaQuery.limit(1).getMorphiaQuery();
 			UpdateOperations<Tab> updateOperations = datastore.createUpdateOperations(Tab.class).set("dateTabStarted", new Date());
