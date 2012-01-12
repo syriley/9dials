@@ -19,7 +19,7 @@ public class Tabs extends Controller {
     
     public static void show(String id) {
     	Tab tab = Tab.findById(id);
-    	renderJSON(tab);
+    	render(tab);
     }
     
     public static void next(String type) {
@@ -35,7 +35,8 @@ public class Tabs extends Controller {
     }
     
 
-    public static void list(String artist) {
+    public static void list() {
+    	String artist = params.get("artist");
     	List<Tab> tabs = Tab.list(artist);
     	
     	for (Tab tab : tabs) {

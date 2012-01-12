@@ -46,9 +46,10 @@ public class Tab extends Model {
 	public static List<Tab> list (String artist) {
 		MorphiaQuery query = Tab.q();
 		if (artist != null) {
-			query.filter("artist", artist);
+			query.filter("artist", artist.replace("+", " "));
 		}
-		List<Tab> tabs = query.limit(100).asList();
+		query.criteria("originalTabText").exists();
+		List<Tab> tabs = query.limit(200).asList();
 		return tabs;
 	}
 	

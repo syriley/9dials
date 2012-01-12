@@ -12,9 +12,10 @@ var AppRouter = Backbone.Router.extend({
     },
 
     getTabsForBand: function(band) {
+        this.list();
     	console.log("getting tabs for " + band);
     	this.tabList = new TabCollection();
         this.tabListView = new TabListView({model: this.tabList});
-        this.tabList.fetch({band: band});
+        this.tabList.fetch({data: $.param({ artist: band})});
     }
 });

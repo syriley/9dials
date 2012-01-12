@@ -7,7 +7,8 @@
 	    <input type="submit" value="Search" />
 	</form>
 </div>
-<div id="bandList"></div>
+<div id="bandList" class="list"></div>
+<div id="tabList" class="list"></div>
 <script type="text/javascript">
 $(function(){
 	var app = new AppRouter();
@@ -20,5 +21,5 @@ $(function(){
 </script>
 
 <script type="text/template" id="tab-list-item">
-	<a href='#/tabs/list/<%= title %>'><%= name %></a>
+	<a href='tabs/show/<%= idString %>'><%= title %></a>
 </script>

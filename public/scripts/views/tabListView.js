@@ -6,6 +6,7 @@ var TabListView = Backbone.View.extend({
     },
 
     render: function(eventName) {
+        this.el.empty();
         _.each(this.model.models, function(band) {
             $(this.el).append(
                 new TabListItemView({model: band}).render().el);

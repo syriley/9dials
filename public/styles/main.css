@@ -16,3 +16,7 @@ body {
 #searchbox-textbox {
 	width:400px;
 }
+
+.list {
+	float:left;
+}

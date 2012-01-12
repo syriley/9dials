@@ -6,6 +6,7 @@ var BandListView = Backbone.View.extend({
     },
 
     render: function(eventName) {
+        this.el.empty();
         _.each(this.model.models, function(band) {
             $(this.el).append(
                 new BandListItemView({model: band}).render().el);
