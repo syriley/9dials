@@ -10,7 +10,8 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
-
+GET 	/tabs/show/{id}							Tabs.show
+GET 	/tabs/list/{artist}				 			Tabs.list
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
 
@@ -18,3 +19,6 @@ GET     /public/                                staticDir:public
 
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create
+
+# Import CRUD routes
+*      /admin              module:crud

@@ -7,3 +7,18 @@
 	    <input type="submit" value="Search" />
 	</form>
 </div>
+<div id="bandList"></div>
+<script type="text/javascript">
+$(function(){
+	var app = new AppRouter();
+	Backbone.history.start();
+});
+</script>
+
+<script type="text/template" id="band-list-item">
+	<a href='#/tabs/list/<%= name %>'><%= name %></a>
+</script>
+
+<script type="text/template" id="tab-list-item">
+	<a href='#/tabs/list/<%= title %>'><%= name %></a>
+</script>

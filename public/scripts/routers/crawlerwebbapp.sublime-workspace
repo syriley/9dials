@@ -1,0 +1,256 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/models/trackModel.js",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/lib/backbone-relational.js",
+		"/home/simon/projects/daw/web/src/main/webapp/style/common.css",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/views/regionViewOld.js",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/models/region.js",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/models/trackList.js",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/views/regionView.js",
+		"/home/simon/projects/daw/web/src/main/webapp/chromeSvg.html",
+		"/home/simon/projects/daw/web/src/main/webapp/index.html",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/trackManager.js",
+		"/home/simon/projects/daw/web/src/main/webapp/editSession.html",
+		"/home/simon/projects/daw/web/src/main/webapp/scripts/lib/underscore.s",
+		"/home/simon/projects/daw/web/src/main/webapp/session.html",
+		"/home/simon/projects/daw/frontend/json/session.json",
+		"/home/simon/projects/daw/frontend/scripts/controls.js",
+		"/home/simon/projects/daw/frontend/scripts/trackManager.js",
+		"/home/simon/projects/daw/frontend/scripts/region.js",
+		"/home/simon/projects/daw/frontend/style/common.css",
+		"/home/simon/projects/daw/frontend/scripts/track.js",
+		"/home/simon/projects/daw/frontend/chromeSvg.html",
+		"/home/simon/projects/daw/frontend/scripts/scheduler.js",
+		"/home/simon/projects/daw/frontend/scripts/jquery.tmpl.min.js",
+		"/home/simon/projects/daw/frontend/scripts/trackSegment.js",
+		"/home/simon/projects/daw/frontend/json/hope.ardour",
+		"/home/simon/projects/daw/frontend/scripts/eventTarget.js",
+		"/home/simon/projects/daw/frontend/scripts/raphael.js",
+		"/home/simon/projects/daw/frontend/chromeExample.html",
+		"/home/simon/projects/daw/frontend/mk2.html",
+		"/home/simon/projects/daw/frontend/index.html",
+		"/home/simon/projects/daw/frontend/resources/audio-testing.js",
+		"/home/simon/projects/daw/frontend/resources/buffer-loader.js",
+		"/home/simon/projects/daw/frontend/mixing.html",
+		"/home/simon/projects/daw/frontend/scripts/trackArea.js",
+		"/home/simon/projects/daw/frontend/firefox.html",
+		"/home/simon/projects/daw/frontend/chrome.html",
+		"/home/simon/projects/daw/frontend/index.html~",
+		"/home/simon/projects/daw/frontend/scripts/handlebars.js",
+		"/home/simon/projects/daw/frontend/new.html",
+		"/home/simon/projects/daw/frontend/scripts/mustache.js",
+		"/home/simon/projects/daw/frontend/scripts/jquery-1.7.min.js"
+	],
+	"find":
+	{
+		"height": 33.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"uploader",
+			"     ",
+			"Region",
+			"buffer",
+			"parentt",
+			"scheduler",
+			"new scheduler",
+			"scheduler",
+			"Scheduler",
+			"back",
+			"draw",
+			"trackSegment",
+			"TrackSegment",
+			"trackSegments",
+			"canvas",
+			"magni",
+			"\"\"",
+			":",
+			"pxp",
+			"pxPer",
+			"startPosition",
+			"        ",
+			"912",
+			"pageX",
+			"zoom",
+			"pxP",
+			"persec",
+			"812",
+			"512",
+			"dataContext",
+			"dataCanvas",
+			"TrackArea",
+			"trackArea",
+			"TrackArea",
+			"playNote",
+			"note",
+			"play",
+			"[",
+			"();",
+			"drawTra",
+			"draw",
+			"decode",
+			"ctx",
+			"        ",
+			"init",
+			"context",
+			".load",
+			"Kit",
+			"load",
+			"play",
+			"isLoaded",
+			".push",
+			"border",
+			"canvas",
+			"context",
+			"snare_thum",
+			"snare_con",
+			"track1Context",
+			"var",
+			"      function loadedMetadata() {\n",
+			"            ",
+			"writeAudio",
+			"		"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"RegionModel",
+			"trackManager",
+			"TrackManager",
+			"region",
+			"Region",
+			"regions",
+			"\"",
+			"\":\"",
+			"1000",
+			"layerX",
+			"912",
+			"812",
+			"context",
+			"canvas",
+			"Scheduler",
+			"scheduler",
+			"Scheduler",
+			"playheadContext",
+			"dataCanvas",
+			"dataContext",
+			"track1.context"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 232.0,
+	"status_bar_visible": true
+}

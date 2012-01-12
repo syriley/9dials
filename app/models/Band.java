@@ -17,6 +17,7 @@ import com.google.code.morphia.query.UpdateOperations;
 public class Band extends Model {
 	
 	private static final long serialVersionUID = 6397424855980948476L;
+	public String idString;
 	public String name;
 	public Date dateCompleted;
 	public Date dateStarted;
@@ -48,6 +49,12 @@ public class Band extends Model {
 		return band;
 	}
 	
+	public static List<Band> list() {
+		MorphiaQuery query = Band.q();
+		query.filter("name", 
+			Pattern.compile("^beat", Pattern.CASE_INSENSITIVE));
+		return query.limit(20).asList();
+	}
 	public static List<Band> search(String searchTerm) {
 		List<Band> bands = Band.q().filter("name",
 				Pattern.compile(searchTerm, Pattern.CASE_INSENSITIVE)).asList();

@@ -17,6 +17,11 @@ public class Tabs extends Controller {
         render(tab);
     }
     
+    public static void show(String id) {
+    	Tab tab = Tab.findById(id);
+    	renderJSON(tab);
+    }
+    
     public static void next(String type) {
     	Tab tab = Tab.getOne("Tabs", type);
     	renderJSON(tab);
@@ -29,22 +34,13 @@ public class Tabs extends Controller {
         tab.save();
     }
     
-    public static void list() {
-    	URL url = null;
-    	List<URL> urls = new ArrayList<URL>();
-		try {
-			urls.add(new URL("http://www.hotmail.com"));
-			urls.add(new URL("http://www.hotmailfs.com"));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	renderJSON(urls);
-    }
 
-    public static void get() {
+    public static void list(String artist) {
+    	List<Tab> tabs = Tab.list(artist);
     	
-    	List<Tab> tabs = Tab.list();
+    	for (Tab tab : tabs) {
+			tab.idString = tab.getId().toString();
+		}
     	renderJSON(tabs);
     }
 

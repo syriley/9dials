@@ -22,6 +22,7 @@ public class Tab extends Model {
 	public int rating;
 	public String type;
 	public int numberOfVotes;
+	public String idString;
 	public Date updated;
 	public Date pageProcessed;
 	public Date dateTabStarted;
@@ -42,8 +43,12 @@ public class Tab extends Model {
 		this.url = url.toExternalForm();
 	} 
 	
-	public static List<Tab> list () {
-		List<Tab> tabs = Tab.q().limit(100).asList();
+	public static List<Tab> list (String artist) {
+		MorphiaQuery query = Tab.q();
+		if (artist != null) {
+			query.filter("artist", artist);
+		}
+		List<Tab> tabs = query.limit(100).asList();
 		return tabs;
 	}
 	
