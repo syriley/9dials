@@ -56,14 +56,10 @@ public class Tab extends Model {
 	public static Tab getOne(String tabType, String crawlType) {
 		Tab tab = null;
 		if(crawlType == null || crawlType.equals("tab")) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.HOUR, -1);
-			Date date = calendar.getTime();
 			Datastore datastore = Tab.ds();
 			MorphiaQuery morphiaQuery = Tab.q();
 			morphiaQuery.filter("type", tabType);
 			morphiaQuery.filter("dateTabStarted", null);
-			morphiaQuery.filter("dateTabCompleted", null);
 			Query query = morphiaQuery.limit(1).getMorphiaQuery();
 			UpdateOperations<Tab> updateOperations = datastore.createUpdateOperations(Tab.class).set("dateTabStarted", new Date());
 			tab = datastore.findAndModify(query, updateOperations);
