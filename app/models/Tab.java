@@ -29,6 +29,7 @@ public class Tab extends Model {
 	public Date dateTabCompleted;
 	public String originalTabText;
 	public boolean expire;
+	public List<String> videoLinks;
 	
 	public URL getUrl() {
 		try {
