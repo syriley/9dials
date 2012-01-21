@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import play.modules.morphia.Model;
 
 import com.google.code.morphia.Datastore;
@@ -16,6 +20,7 @@ import com.google.code.morphia.query.UpdateOperations;
 @Entity 
 public class Band extends Model {
 	
+	Logger logger = LoggerFactory.getLogger(Band.class);
 	private static final long serialVersionUID = 6397424855980948476L;
 	public String idString;
 	public String name;
@@ -28,8 +33,7 @@ public class Band extends Model {
 		try {
 			return new URL (url);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return null;
 	}
@@ -49,10 +53,12 @@ public class Band extends Model {
 		return band;
 	}
 	
-	public static List<Band> list() {
+	public static List<Band> list(String search) {
+		
 		MorphiaQuery query = Band.q();
-		query.filter("name", 
-			Pattern.compile("^beat", Pattern.CASE_INSENSITIVE));
+		if (StringUtils.isNotEmpty(search)) {
+			query.filter("name", Pattern.compile(search, Pattern.CASE_INSENSITIVE));
+		}
 		return query.limit(20).asList();
 	}
 	public static List<Band> search(String searchTerm) {

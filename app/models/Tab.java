@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
 
 import play.modules.morphia.Model;
 
@@ -44,11 +47,12 @@ public class Tab extends Model {
 		this.url = url.toExternalForm();
 	} 
 	
-	public static List<Tab> list (String artist) {
+	public static List<Tab> list (String search) {
 		MorphiaQuery query = Tab.q();
-		if (artist != null) {
-			query.filter("artist", artist.replace("+", " "));
+		if (StringUtils.isNotEmpty(search)) {
+			query.filter("artist", Pattern.compile(search, Pattern.CASE_INSENSITIVE));
 		}
+		
 		query.criteria("originalTabText").exists();
 		List<Tab> tabs = query.limit(200).asList();
 		return tabs;
