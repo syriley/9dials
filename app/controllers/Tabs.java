@@ -23,7 +23,7 @@ public class Tabs extends Controller {
     }
     
     public static void next(String type) {
-    	Tab tab = Tab.getOne("Tabs", type);
+    	Tab tab = Tab.getOne("Chords", type);
     	renderJSON(tab);
     }
     
