@@ -1,16 +1,14 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
-${tab.artist} - ${tab.title}
-<br />
-Rating: ${tab.rating}
-<br />
-Type: ${tab.type}
-<br />
-Number of Votes: ${tab.numberOfVotes};
-<br />
-<iframe width="560" height="315" src="http://www.youtube.com/embed/nwLK5WH40Wo" frameborder="0" allowfullscreen></iframe>
-<br />
-Original Tab Text
+#{set title:'Tab ${tab.title} by ${tab.artist}' /}
+
+<h1>${tab.artist} - ${tab.title}</h1>
+
+#{if tab.videoLinks}
+	<div id="video">
+		<iframe width="300" height="200" src="${tab.videoLinks[0]}" frameborder="0" allowfullscreen></iframe>
+	</div>
+#{/if}
+
 <pre>
 	${tab.originalTabText}
 </pre>

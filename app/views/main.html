@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>#{get 'title' /}</title>
+        <title>#{get 'title' /} :: 9Tabs</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="@{'/public/styles/main.css'}">
         #{get 'moreStyles' /}
@@ -25,13 +25,23 @@
     <body>
     	<div id="site-navigation">
     		<ul>
-    			<li><a href="http://localhost:8080">Studio</a></li>
-    			<li><a href="http://localhost:9000">Tabs</a></li>
+    			<li><a class="white" href="http://www.9dials.com">Studio</a></li>
+    			<li><a class="green" href="http://tabs.9dials.com">Tabs</a></li>
+    			<li><a class="white" href="http://academy.9dials.com">Academy</a></li>
+    			<li><a class="white" href="http://gear.9dials.com">Gear</a></li>
+    			<li><a class="white"  href="http://tuna.9dials.com">Tuna</a></li>
     		</ul>
     		<br clear="left" />
     	</div>
     	<div id="main-content">
         	#{doLayout /}
+        </div>
+        <div id="footer">
+        	<a href="/howitworks">faq</a>
+        	| <a href="/howitworks">How it works</a>
+        	| <a href="/howitworks">Terms & Conditions</a>
+        	<br/>
+        	&copy; <a href="www.9dials.com">9dials</a>
         </div>
     </body>
 </html>

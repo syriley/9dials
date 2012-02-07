@@ -15,6 +15,8 @@ GET 	/tabs/list/{artist}				 			Tabs.list
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
 
+*       /{controller}                  {controller}.index
+
 
 
 POST    /bands/?             Bands.create

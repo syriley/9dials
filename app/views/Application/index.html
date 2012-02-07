@@ -2,12 +2,18 @@
 #{set title:'Home' /}
 <script type="text/javascript">
 	$(function(){
-		$('#search-button').click(function(){
+		var search = function(){
 			window.location.href = '#/tabs/list/' + $('#search-textbox').val();
-		});	
+		};	
+		$('#search-button').click(search)
+		$('#search-textbox').keypress(function(e) {
+			if (e.which == 13) {
+				search();
+			}
+		});
 	});
 </script>
-<div id="searchbox-container">
+<div id="search-container">
     <input id="search-textbox" type="text" name="searchTerm" /> 
     <input id="search-button" type="button" value="Search" />
 </div>
