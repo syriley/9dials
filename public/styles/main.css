@@ -47,7 +47,7 @@ input[type="text"] {
 	z-index:100;
 	width:100%;
 	margin: 0;
-	padding: 0.3em 0.5em;
+	padding: 0.3em 0;
 	background: #555 none;
 }
 
@@ -70,6 +70,12 @@ input[type="text"] {
 	margin-right:auto;
 	text-align:center;
 	font-size:14px;
+}
+
+#profile {
+	float:right;
+	color:white;
+	margin-right:10px;
 }
 
 a {
