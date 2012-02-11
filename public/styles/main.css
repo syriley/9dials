@@ -9,7 +9,7 @@ body {
 	float:right;
 }
 
-#main-content {
+#content-container {
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
@@ -51,6 +51,10 @@ input[type="text"] {
 	background: #555 none;
 }
 
+#site-navigation a:hover {
+	color:#0f0;
+}
+
 #site-navigation ul {
 	margin:0;
 	padding: 0;
@@ -78,11 +82,45 @@ input[type="text"] {
 	margin-right:10px;
 }
 
-a {
+a {	
 	color:#333;
 	text-decoration:none;
+}
+a:hover {
+	color:#0c0;
 }
 
 br[clear=left] {
 	clear: left;
+}
+
+ul {
+	display:inline;
+	margin:0;
+	padding:0;
+}
+#main-content ul li {
+	display:inline;
+	border-radius: 5px;
+	padding:2px;
+	border: 1px solid #999;
+}
+
+.song {
+	padding-right:10px;
+}
+#sidebar {
+	float:left;
+}
+
+.left {
+	float:left;
+}
+
+#main-content {
+	margin-left:210px;
+}
+
+.actions {
+	float:right;
 }

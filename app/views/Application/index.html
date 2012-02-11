@@ -19,6 +19,7 @@
 </div>
 <div id="bandList" class="list"></div>
 <div id="tabList" class="list"></div>
+<a href="findSession">Find a session</a>
 <script type="text/javascript">
 $(function(){
 	var app = new AppRouter();
@@ -33,3 +34,4 @@ $(function(){
 <script type="text/template" id="tab-list-item">
 	<a href='band/show/<%= idString %>'><%= artist %></a>:<a href='tabs/show/<%= idString %>'><%= title %></a>
 </script>
+
