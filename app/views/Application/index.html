@@ -1,37 +1,38 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
-<script type="text/javascript">
-	$(function(){
-		var search = function(){
-			window.location.href = '#/tabs/list/' + $('#search-textbox').val();
-		};	
-		$('#search-button').click(search)
-		$('#search-textbox').keypress(function(e) {
-			if (e.which == 13) {
-				search();
-			}
-		});
-	});
-</script>
-<div id="search-container">
-    <input id="search-textbox" type="text" name="searchTerm" /> 
-    <input id="search-button" type="button" value="Search" />
-</div>
-<div id="bandList" class="list"></div>
-<div id="tabList" class="list"></div>
+<h1>Studio</h1>
+
+<h2>Sessions</h2>
+<a href="sessions/create">Create a new session</a>
+
+<h4 class="song">${seshion[0].name}</h4>
+	<object height="81" width="100%"> 
+		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F35246506&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F35246506&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
+	</object> 
+  	<div class="actions">
+	  	<a href="/publish">edit</a>,
+	  	<a href="/collaborateowner">collaborate(owner)</a>,
+	  	<a href="/collaborateguest">collaborate(guest)</a>,
+	  	<a href="/publish">publish</a>
+  	</div>
+	<h4 class="song">${seshion[1].name}</h4>
+	<object height="81" width="100%"> 
+		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
+	</object>   
+	<div class="actions">
+		<a href="/publish">edit</a>,
+	  	<a href="/publish">collaborate</a>,
+	  	<a href="/publish">publish</a>
+	  </div>		
+
+<h4 class="song">${seshion[1].name}</h4>
+	<object height="81" width="100%"> 
+		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
+	</object>   
+	<div class="actions">
+		<a href="/publish">edit</a>,
+	  	<a href="/publish">collaborate</a>,
+	  	<a href="/publish">publish</a>
+	  </div>
+
 <a href="findSession">Find a session</a>
-<script type="text/javascript">
-$(function(){
-	var app = new AppRouter();
-	Backbone.history.start();
-});
-</script>
-
-<script type="text/template" id="band-list-item">
-	<a href='#/tabs/list/<%= name %>'><%= name %></a>
-</script>
-
-<script type="text/template" id="tab-list-item">
-	<a href='band/show/<%= idString %>'><%= artist %></a>:<a href='tabs/show/<%= idString %>'><%= title %></a>
-</script>
-

@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title:'Online Guitar Tuner' /}
 
-<h1>Mount St Harmony</h1>
+<h1>${ collective.name }</h1>
 <div id="sidebar">
 	<img src="@{'public/images/collective.jpg'}" />
 	<ul>
@@ -10,8 +10,7 @@
 	</ul>
 </div>
 <div id="main-content">
-	A jazz funk fusion incorporating many influences from around with heavy emphasis on the incredible works
-	from Jimmy Hendrix and Enya.
+	${ collective.description }
 	<h3>Members</h3>
 	<ul>
 		<li>Andrew Clark</li>

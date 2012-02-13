@@ -13,8 +13,7 @@ import com.google.gson.Gson;
 public class Tabs extends Controller {
 	
     public static void index(String type) {
-    	Tab tab = Tab.getOne("Tabs", type);
-        render(tab);
+        render();
     }
     
     public static void show(String id) {

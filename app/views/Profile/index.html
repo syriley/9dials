@@ -2,7 +2,7 @@
 #{set title:'Online Guitar Tuner' /}
 
 <a href="/profile/edit" style="float:right">Edit</a>
-<h1>Simon Riley</h1>
+<h1>${ user.name }</h1>
 <div id="sidebar">
 	<img src="@{'public/images/profile.jpg'}" />
 	<h2>Collectives</h2>
@@ -13,7 +13,7 @@
 	</ul>
 </div>
 <div id="main-content">
-	<p>I love everything about music. And I want to make it in the music industry</p>
+	<p>${ user.bio }</p>
 	
 	<h3>Instruments</h3>
 	<ul>
@@ -37,23 +37,5 @@
 	</div>
 	
 	<h3>Music</h3>
-	<h4 class="song">Moving to L.A.</h4>
-	<object height="81" width="100%"> 
-		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F35246506&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F35246506&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
-	</object> 
-  	<div class="actions">
-	  	<a href="/publish">edit</a>,
-	  	<a href="/collaborateowner">collaborate(owner)</a>,
-	  	<a href="/collaborateguest">collaborate(guest)</a>,
-	  	<a href="/publish">publish</a>
-  	</div>
-	<h4 class="song">Time to Rise ft. Tara Minton</h4>
-	<object height="81" width="100%"> 
-		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
-	</object>   
-	<div class="actions">
-		<a href="/publish">edit</a>,
-	  	<a href="/publish">collaborate</a>,
-	  	<a href="/publish">publish</a>
-	  </div>		
+	
 </div>

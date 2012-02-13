@@ -5,12 +5,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Session;
+
 import play.mvc.Controller;
 
 public class Application extends Controller {
 
     public static void index() {
-        render();
+    	List<Session> seshion = Session.findAll();
+        render(seshion);
     }
     
     public static void getNextTab() {
