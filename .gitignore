@@ -5,7 +5,6 @@ target/
 tmp/
 process_id.txt
 log/
-test/
 precompiled/
 eclipse/
 .project
