@@ -8,8 +8,12 @@ import play.db.jpa.Model;
 
 @Entity
 public class Instrument  extends Model{
-	@ManyToOne(targetEntity= User.class)
-	@JoinColumn(name="user_id")
+	
+	@ManyToOne
 	public User user;
 	public String name;
+	
+	public Instrument(String name) {
+		this.name = name;
+	}
 }

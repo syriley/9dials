@@ -16,9 +16,11 @@
 	<p>${ user.bio }</p>
 	
 	<h3>Instruments</h3>
+	
 	<ul>
-		<li>Guitar</li>
-		<li>Drums</li>
+		#{ list items: user.instruments, as:'instrument' } 
+		<li>${instrument.name}</li>
+		#{/list}
 	</ul>
 	<div>
 		<h4>Bands</h4>

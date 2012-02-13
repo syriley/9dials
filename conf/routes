@@ -2,11 +2,15 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Import Secure routes
+*       /                                       module:secure
+
 # Home page
 GET     /                                       Application.index
 
-# Import CRUD routes
-*      /admin              module:crud
+# Administration
+GET     /admin/?                                Admin.index
+*       /admin                                  module:crud
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

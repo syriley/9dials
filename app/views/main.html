@@ -31,7 +31,13 @@
     			<li><a class="white" href="http://gear.9dials.com">Gear</a></li>
     			<li><a class="white"  href="http://tabs.9dials.com/tuna">Tuna</a></li>
     		</ul>
-    		<a id="profile" href="/profile">Simon Riley</a>
+    		#{if user }
+    			<a id="profile" href="/profile">${user.name}</a>
+    		#{/if}
+    		#{else}
+    			<a id="profile" href="/login">login</a>
+    		#{/else}
+    		
     		<br clear="left" />
     	</div>
     	<div id="content-container">
