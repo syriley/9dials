@@ -19,10 +19,14 @@ public class User extends Model {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<Instrument> instruments;
 	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	public List<UserSession> userSessions;
+	
 	public User (String name, String email, String bio) {
 		this.name = name;
 		this.email = email;
 		this.bio = bio;
+		userSessions = new ArrayList<UserSession>();
 		instruments = new ArrayList<Instrument>();
 	}
 	

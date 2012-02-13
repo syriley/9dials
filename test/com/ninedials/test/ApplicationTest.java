@@ -1,3 +1,4 @@
+package com.ninedials.test;
 import org.junit.*;
 import play.test.*;
 import play.mvc.*;

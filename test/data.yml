@@ -6,3 +6,37 @@
    password: secret
    name: Bob
    bio: my bio
+   instruments:
+
+ User(s):
+   email: s@s.com
+   password: password
+   name: Bob
+   bio: my bio
+
+ Instrument(guitar):
+   User: s
+   name: guitar
+
+ Session(session1):
+   name: session1
+
+ Session(session2):
+   name: session2
+
+ UserSession(userSession1):
+   user: bob
+   session: session1
+
+ UserSession(userSession2):
+   user: bob
+   session: session2
+
+ SessionRole(owner):
+   name: owner
+
+ SessionRole(collaborator):
+   name: collaborator
+
+ SessionRole(guest):
+   name: guest
