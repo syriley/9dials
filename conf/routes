@@ -9,7 +9,6 @@
 GET     /                                       Application.index
 
 # Administration
-#GET     /admin/?                                Admin.index
 *       /admin                                  module:crud
 
 # Ignore favicon requests
@@ -20,13 +19,12 @@ GET     /public/                                staticDir:public
 GET 	/tabs/show/{id}							Tabs.show
 GET 	/tabs/list/{artist}				 			Tabs.list
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
 
-*       /{controller}                  {controller}.index
 
 
 #Sessions
 
+GET     /collaborate/{id}   Collaborate.index
 GET     /sessions/{id}      Sessions.form
 GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
@@ -36,3 +34,7 @@ POST    /tabs/?             Tabs.create
 
 # Import CRUD routes
 *      /admin              module:crud
+
+*       /{controller}/{action}                  {controller}.{action}
+
+*       /{controller}                  {controller}.index

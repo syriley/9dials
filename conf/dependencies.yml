@@ -5,3 +5,4 @@ require:
    # - play -> morphia 1.2.4b
     - crud
     - secure
+    - play -> cobertura 2.4

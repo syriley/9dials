@@ -18,5 +18,6 @@ public class SessionTest extends NineDialsTest {
 		assertEquals("new", fromDb.name);
 		assertEquals(1, fromDb.userSessions.size());
 		assertEquals("session1", fromDb.userSessions.get(0).session.name);
+		assertEquals("owner", fromDb.userSessions.get(0).sessionRole.name);
 	}
 }

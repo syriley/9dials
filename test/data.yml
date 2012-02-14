@@ -1,21 +1,28 @@
 # you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
+ SessionRole(owner):
+   name: owner
 
+ SessionRole(collaborator):
+   name: collaborator
+
+ SessionRole(guest):
+   name: guest
  User(bob):
    email: bob@gmail.com
    password: secret
-   name: Bob
+   name: Robert Richards
    bio: my bio
    instruments:
 
- User(s):
+ User(david):
    email: s@s.com
    password: password
-   name: Bob
+   name: David Simpkins
    bio: my bio
 
  Instrument(guitar):
-   User: s
+   User: david
    name: guitar
 
  Session(session1):
@@ -25,18 +32,17 @@
    name: session2
 
  UserSession(userSession1):
-   user: s
+   user: david
    session: session1
+   sessionRole: owner
 
  UserSession(userSession2):
-   user: s
+   user: bob
    session: session2
+   sessionRole: collaborator
 
- SessionRole(owner):
-   name: owner
-
- SessionRole(collaborator):
-   name: collaborator
-
- SessionRole(guest):
-   name: guest
+ UserSession(userSession3):
+   user: bob
+   session: session1
+   sessionRole: collaborator
+ 

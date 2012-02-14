@@ -41,7 +41,8 @@ public class User extends Model {
 	}
 	
 	public void createSession(Session session) {
-		UserSession userSession = new UserSession(this, session).save();
+		SessionRole sessionRole = SessionRole.find("byName", "owner").first();
+		UserSession userSession = new UserSession(this, session, sessionRole).save();
 		userSessions.add(userSession);
 		session.userSessions.add(userSession);
 	}

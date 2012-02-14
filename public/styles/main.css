@@ -12,6 +12,7 @@ body {
 
 #content-container {
 	overflow-y:auto;
+	padding:5px;
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;

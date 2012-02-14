@@ -23,4 +23,9 @@ public class Session extends Model{
 		this.description = description;
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		Session session = (Session)other;
+		return id == session.id;
+	}
 }
