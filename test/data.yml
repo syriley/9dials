@@ -25,11 +25,11 @@
    name: session2
 
  UserSession(userSession1):
-   user: bob
+   user: s
    session: session1
 
  UserSession(userSession2):
-   user: bob
+   user: s
    session: session2
 
  SessionRole(owner):

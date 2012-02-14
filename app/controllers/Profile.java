@@ -4,21 +4,10 @@ import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
 
-public class Profile extends Controller {
-	
-	@Before
-    static void setConnectedUser() {
-        if(Security.isConnected()) {
-            User user = User.find("byEmail", Security.connected()).first();
-            renderArgs.put("user", user);
-        }
-    }
+public class Profile extends LoggedInController {
 	
 	public static void index() {
-		
-		//User user = User.findById(id);
 		render();
-    
 	}
 	public static void edit() {
 		 render();

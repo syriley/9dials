@@ -1,15 +1,19 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 <h1>Create a new session</h1>
-<form method="post">
+#{form @save(seshion?.id)}
 	<table>
 		<tr>
+			#{field 'name'}
 			<th>name</th>
-			<td><input /></td>
+			<td><input name="${field.name}" value="${seshion?.name}"/></td>
+			#{/field}
 		</tr>
 		<tr>
+			#{field 'description'}
 			<th>description</th>
-			<td><input /></td>
+			<td><input name="${field.name}" value="${seshion?.description}"/></td>
+			#{/field}
 		</tr>
 		<tr>
 			<th>genres</th>
@@ -21,9 +25,9 @@
 		</tr>
 			<td></td>
 			<td style="text-align:right;">
-			<input type="submit" value="create" />
+			<input type="submit" value="save" />
 			</td>
 		</tr>
 	</table>
 
-</form>
+#{/form}

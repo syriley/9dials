@@ -25,6 +25,11 @@ GET 	/tabs/list/{artist}				 			Tabs.list
 *       /{controller}                  {controller}.index
 
 
+#Sessions
+
+GET     /sessions/{id}      Sessions.form
+GET		/sessions/new		Sessions.form
+POST	/sessions/new		Sessions.save
 
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create

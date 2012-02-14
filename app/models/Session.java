@@ -17,13 +17,10 @@ public class Session extends Model{
 	public String name;
 	public String description;
 	
-	public Session(String name) {
+	public Session(String name, String description) {
 		userSessions = new ArrayList<UserSession>();
 		this.name = name;
+		this.description = description;
 	}
-	public void addToUser(User user) {
-		UserSession userSession = new UserSession(user, this).save();
-		userSessions.add(userSession);
-		user.userSessions.add(userSession);
-	}
+	
 }

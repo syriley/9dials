@@ -11,31 +11,9 @@ import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
 
-public class Application extends Controller {
-
-	@Before
-    static void setConnectedUser() {
-        if(Security.isConnected()) {
-            User user = User.find("byEmail", Security.connected()).first();
-            renderArgs.put("user", user);
-        }
-    }
+public class Application extends LoggedInController {
 	
     public static void index() {
-    	List<Session> seshion = Session.findAll();
-        render(seshion);
+    	render();
     }
-    
-    public static void getNextTab() {
-    	URL url = null;
-    	List<URL> urls = new ArrayList<URL>();
-		try {
-			urls.add(new URL("http://www.hotmail.com"));
-			urls.add(new URL("http://www.hotmailfs.com"));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-    	renderJSON(urls);
-    }
-
 }

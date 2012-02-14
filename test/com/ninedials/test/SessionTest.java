@@ -10,8 +10,8 @@ public class SessionTest extends NineDialsTest {
 	@Test
 	public void addSessionToUser() {
 		User user = new User("new", "a@b.com", "bio").save();
-		Session session = new Session("session1").save();
-		session.addToUser(user);
+		Session session = new Session("session1", "desc").save();
+		user.createSession(session);
 		
 		User fromDb = User.find("byEmail", "a@b.com").first();
 		

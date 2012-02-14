@@ -39,4 +39,10 @@ public class User extends Model {
 	public static User connect(String email, String password) {
 	    return find("byEmailAndPassword", email, password).first();
 	}
+	
+	public void createSession(Session session) {
+		UserSession userSession = new UserSession(this, session).save();
+		userSessions.add(userSession);
+		session.userSessions.add(userSession);
+	}
 }
