@@ -13,12 +13,18 @@
    name: David Simpkins
    bio: my bio
 
+ User(barry):
+   email: a@a.com
+   password: password
+   name: Barry Appleton
+   bio: my bio
+
  Instrument(guitar):
    User: david
    name: guitar
 
  Session(session1):
-   name: session1
+   name: Session 1
 
  Session(session2):
    name: session2

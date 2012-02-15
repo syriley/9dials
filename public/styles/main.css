@@ -13,13 +13,20 @@ body {
 #content-container {
 	overflow-y:auto;
 	padding:5px;
+	
+	height:400px;
+}
+#content-header {
+	margin-top:70px;
 	width:1000px;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:70px;
-	height:400px;
 }
-
+#content-body {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+}
 input[type="text"] {
  border:1px solid #CCCCCC;	
 }

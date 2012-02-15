@@ -1,10 +1,12 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import play.db.jpa.Model;
+import controllers.admin.UserSessions;
 
 @Entity
 public class UserSession extends Model{
@@ -21,5 +23,9 @@ public class UserSession extends Model{
 		this.user = user;
 		this.session = session;
 		this.role = role;
+	}
+	
+	public static List<UserSession> getSharedUserSessions(long sessionId) {
+		return UserSession.find("session.id = ?", sessionId).fetch();
 	}
 }

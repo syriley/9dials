@@ -23,9 +23,11 @@ GET 	/tabs/list/{artist}				 			Tabs.list
 
 
 #Sessions
+WS      /socket                                 Sessions.WebSocket.listen
 
 GET     /collaborate/{id}   Collaborate.index
-GET     /sessions/{id}      Sessions.form
+GET     /sessions/{id}      Sessions.app
+GET     /sessions/edit/{id} Sessions.form
 GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
 

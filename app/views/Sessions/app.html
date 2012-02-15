@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:'Online Guitar Tuner' /}
+
+
+#{set 'contentHeader'}
+ <h1>${seshion?.name}</h1>
+#{/set}
+
+<script type="text/javascript">
+window.onload = function() {
+	var socket = null;
+}
+$(function() {
+ 
+   var socket = new WebSocket('@@{Sessions.WebSocket.listen}');
+   socket.onopen = function(evt) { 
+	   console.log(evt) 
+	};
+	
+   socket.onclose = function(evt){ 
+	   console.log(evt) 
+   	}; 
+   	
+   	socket.onmessage = function(evt) { 
+   		console.log(evt) 
+   		}; 
+   		
+   	socket.onerror = function(evt) { 
+   		console.log(evt) 
+   	};
+   // Use web socket messages to update the progress bar.
+   socket.onmessage = function(event) {
+      console.log(event.data);
+   };
+   
+//    socket.send('dfdsfs');
+//    socket.send('dfdsfs');socket.send('dfdsfs');
+   
+//    socket.send('dfdsfs');
+//    socket.send('dfdsfs');
+//    socket.send('dfdsfs');
+});
+</script>

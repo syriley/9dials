@@ -40,8 +40,14 @@
     		
     		<br clear="left" />
     	</div>
+    	<div id="content-header">
+	    		#{get 'contentHeader' /}
+	    	</div>
     	<div id="content-container">
-        	#{doLayout /}
+	    	
+	    	<div id="content-body">
+        		#{doLayout /}
+        	</div>
         </div>
         <div id="footer">
         	<a href="/howitworks">faq</a>

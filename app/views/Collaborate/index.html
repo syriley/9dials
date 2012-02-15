@@ -1,24 +1,28 @@
 #{extends 'main.html' /}
 #{set title:'Online Guitar Tuner' /}
 
-<h1>Share ${seshion.name}</h1>
+#{set 'contentHeader'}
+ <h1>Share ${seshion.name}</h1>
+#{/set}
 
+
+
+<h2>Shared Users</h2>
 <ul>
-#{list items:usersToShare, as: 'userToShare' }
-	<li>${userToShare.name} 
-	#{list items:userToShare.userSessions, as: 'userSession'}
-		#{if userSession.session.id == seshion.id}
-		
-			(${userSession.sessionRole.name})
-		
-			#{if userSession.sessionRole.equals('collaborator')}
-				Make Owner
-			#{/if}	
+#{list items:sharedUserSessions, as: 'sharedUserSession' }
+	<li>
+		${sharedUserSession.user.name} 
+		#{if sharedUserSession.role.equals('owner')}
+			(owner)
 		#{/if}
-		#{else }
-			Share, Make Owner
-		#{/else}
+		
+	</li>
 	#{/list}
+</ul>
+<h2>All Users</h2>
+<ul>
+#{list items:allUsers, as: 'aUser' }
+	<li>${aUser.name} 
 	</li>
 #{/list}
 </ul>
@@ -29,4 +33,5 @@
 <p>This allows the session to be <a href="findSession">searchable</a></p> 
 
 <h2>Search</h2>
-<p>Search for a drummer who's been playing for 2+ years and is into blues</p> 
+<p>Search for a drummer who's been playing for 2+ years and is into blues</p>
+<a href="/sessions">Done</a> 

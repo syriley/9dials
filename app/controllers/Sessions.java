@@ -7,7 +7,12 @@ import javax.swing.text.html.HTML.Tag;
 import models.Session;
 import models.User;
 import net.sf.oval.guard.Post;
+import play.Logger;
 import play.mvc.Controller;
+import play.mvc.WebSocketController;
+import play.mvc.Http.WebSocketClose;
+import play.mvc.Http.WebSocketEvent;
+import play.mvc.Http.WebSocketFrame;
 
 public class Sessions extends LoggedInController {
 	
@@ -49,12 +54,31 @@ public class Sessions extends LoggedInController {
 	    index();
 	}
 	
+	public static void app(long id) {
+		Session seshion = Session.findById(id);
+		render(seshion);
+	}
+	
 	private static void validate() {
 		 // Validate
 	    validation.valid(session);
 	    if(validation.hasErrors()) {
 	        render("@form", session);
 	    }
+	}
+	
+	public static class WebSocket extends WebSocketController {
+		 public static void listen() {
+		    while (inbound.isOpen())
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		    outbound.send("sdf");
+
+		 }
 	}
 }
 
