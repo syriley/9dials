@@ -10,14 +10,15 @@ public class UserTest extends NineDialsTest {
     @Test
     public void createAndRetrieveUser() {
         // Create a new user and save it
-        new User("bob@gmail.com", "secret", "Bob").save();
+        User user = new User("name", "test@gmail.com", "secret", "bio").save();
         
         // Retrieve the user with bob username
-        User bob = User.find("byEmail", "bob@gmail.com").first();
+        User fromDb = User.find("byEmail", "test@gmail.com").first();
         
         // Test 
-        assertNotNull(bob);
-        assertEquals("Bob", bob.name);
+        assertNotNull(user);
+        assertNotNull(fromDb);
+        assertEquals("name", fromDb.name);
     }
     
     @Test

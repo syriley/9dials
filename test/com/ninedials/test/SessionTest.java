@@ -9,7 +9,7 @@ public class SessionTest extends NineDialsTest {
 	
 	@Test
 	public void addSessionToUser() {
-		User user = new User("new", "a@b.com", "bio").save();
+		User user = new User("new", "a@b.com", "password", "bio").save();
 		Session session = new Session("session1", "desc").save();
 		user.createSession(session);
 		
@@ -18,6 +18,6 @@ public class SessionTest extends NineDialsTest {
 		assertEquals("new", fromDb.name);
 		assertEquals(1, fromDb.userSessions.size());
 		assertEquals("session1", fromDb.userSessions.get(0).session.name);
-		assertEquals("owner", fromDb.userSessions.get(0).sessionRole.name);
+		assertEquals("owner", fromDb.userSessions.get(0).role);
 	}
 }

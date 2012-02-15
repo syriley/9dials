@@ -15,12 +15,11 @@ public class UserSession extends Model{
 	public User user;
 	@ManyToOne
 	public Session session;
-	@OneToOne
-	public SessionRole sessionRole; 
+	public String role; 
 	
-	public UserSession(User user, Session session, SessionRole sessionRole) {
+	public UserSession(User user, Session session, String role) {
 		this.user = user;
 		this.session = session;
-		this.sessionRole = sessionRole;
+		this.role = role;
 	}
 }

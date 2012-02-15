@@ -19,6 +19,6 @@ public class ApplicationTest extends FunctionalTest {
     public void testAdminSecurity() {
         Response response = GET("/admin");
         assertStatus(302, response);
-        assertHeaderEquals("Location", "/admin/login", response);
+        assertHeaderEquals("Location", "/login", response);
     }
 }

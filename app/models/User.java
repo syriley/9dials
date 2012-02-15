@@ -22,10 +22,11 @@ public class User extends Model {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
-	public User (String name, String email, String bio) {
+	public User (String name, String email, String password, String bio) {
 		this.name = name;
 		this.email = email;
 		this.bio = bio;
+		this.password = password;
 		userSessions = new ArrayList<UserSession>();
 		instruments = new ArrayList<Instrument>();
 	}
@@ -41,8 +42,8 @@ public class User extends Model {
 	}
 	
 	public void createSession(Session session) {
-		SessionRole sessionRole = SessionRole.find("byName", "owner").first();
-		UserSession userSession = new UserSession(this, session, sessionRole).save();
+		String role ="owner";
+		UserSession userSession = new UserSession(this, session, role).save();
 		userSessions.add(userSession);
 		session.userSessions.add(userSession);
 	}
