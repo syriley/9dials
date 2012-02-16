@@ -42,7 +42,11 @@ public class SessionTest extends UnitTest {
 	@Test
 	public void addSessionToUser() {
 		User user = User.find("byEmail", "a@a.com").first();
-		Session sessino = user.createNewSession();
+		Session session = user.createNewSession("testSession");
+		//List<Session> sessions = user.getSessions();
+		
+		assertEquals((long)user.id, session.sessionUsers.get(0).userId);
+		//assertEquals("testSession", user.getSessions().get);
 	}
 	
 	@Test
@@ -50,10 +54,9 @@ public class SessionTest extends UnitTest {
 		User user = User.find("byEmail", "a@a.com").first();
 		Session session = new Session("session 1", "a description");
 		SessionUser sessionUser = session.addSessionUser();
-		sessionUser.userId = 1	;
+		sessionUser.userId = user.id	;
 		sessionUser.role = "owner";
 		session.save();
-		
 		
 		List<Session> sessions = user.getSessions();
 		assertEquals("session 1", sessions.get(0).name);

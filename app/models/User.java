@@ -45,10 +45,12 @@ public class User extends Model {
 		return Session.find().filter("sessionUsers.userId", id).asList();
 	}
 	
-	public void createNewSession(String name) {
-		String role ="owner";
-		UserSession userSession = new UserSession(this, new Session(name), role).save();
-		userSessions.add(userSession);
-		//ssession.userSessions.add(userSession);
+	public Session createNewSession(String name) {
+		Session session = new Session(name);
+		SessionUser sessionUser = session.addSessionUser();
+		sessionUser.userId = id;
+		sessionUser.role = "owner";
+		session.save();
+		return session;
 	}
 }

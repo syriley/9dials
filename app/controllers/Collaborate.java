@@ -28,8 +28,8 @@ public class Collaborate extends LoggedInController {
 	}
 	
 	public static void removeUser(Long sessionId, Long userId) {
-		UserSession userSession = UserSession.findByUserAndSession(userId, sessionId);
-		userSession.delete();
+		//UserSession userSession = UserSession.findByUserAndSession(userId, sessionId);
+		//userSession.delete();
 		index(sessionId);
 	}
 	
