@@ -13,7 +13,8 @@ public class Instrument  extends Model{
 	public User user;
 	public String name;
 	
-	public Instrument(String name) {
+	public Instrument(String name, User user) {
 		this.name = name;
+		this.user=user;
 	}
 }

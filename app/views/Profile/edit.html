@@ -1,3 +1,12 @@
 #{extends 'studio.html' /}
 #{set title:'Online Guitar Tuner' /}
 <h1>Edit Profile</h1>
+#{form @Profile.addInstrument()}
+    <p>
+        <label for="name">Instrument name: </label>
+        <input type="text" name="name" id="name" />
+    </p>
+    <p>
+        <input type="submit" value="Submit your comment" />
+    </p>
+#{/form}
