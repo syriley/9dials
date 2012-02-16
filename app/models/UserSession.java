@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import play.db.jpa.Model;
 import controllers.admin.UserSessions;
@@ -15,7 +16,8 @@ public class UserSession extends Model{
 	//SessionRole sessionRole;
 	@ManyToOne
 	public User user;
-	@ManyToOne
+	public Session sessionId;
+	@Transient
 	public Session session;
 	public String role; 
 	
@@ -25,15 +27,15 @@ public class UserSession extends Model{
 		this.role = role;
 	}
 	
-	public static UserSession findByUserAndSession(long userId,  long sessionId) {
-		String queryString = "select us " +
-				"from UserSession us " +
-				"where us.session.id = ? " +
-				"and us.user.id = ?";
-		return UserSession.find(queryString, sessionId, userId).first();
-	}
+//	public static UserSession findByUserAndSession(long userId,  long sessionId) {
+//		String queryString = "select us " +
+//				"from UserSession us " +
+//				"where us.session.id = ? " +
+//				"and us.user.id = ?";
+//		return UserSession.find(queryString, sessionId, userId).first();
+//	}
 	
-	public static List<UserSession> getSharedUserSessions(long sessionId) {
+	public static List<UserSession> getSharedUserSessions(Object sessionId) {
 		return UserSession.find("session.id = ?", sessionId).fetch();
 	}
 }

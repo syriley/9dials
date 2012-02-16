@@ -41,10 +41,14 @@ public class User extends Model {
 	    return find("byEmailAndPassword", email, password).first();
 	}
 	
-	public void createSession(Session session) {
+	public List<Session> getSessions() {
+		return Session.find().filter("sessionUsers.userId", id).asList();
+	}
+	
+	public void createNewSession(String name) {
 		String role ="owner";
-		UserSession userSession = new UserSession(this, session, role).save();
+		UserSession userSession = new UserSession(this, new Session(name), role).save();
 		userSessions.add(userSession);
-		session.userSessions.add(userSession);
+		//ssession.userSessions.add(userSession);
 	}
 }
