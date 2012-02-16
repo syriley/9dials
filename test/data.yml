@@ -29,6 +29,9 @@
  Session(session2):
    name: session2
 
+ Session(unattachedSession):
+   name: unattached Session 
+
  UserSession(userSession1):
    user: david
    session: session1
@@ -43,4 +46,3 @@
    user: bob
    session: session1
    role: collaborator
- 
