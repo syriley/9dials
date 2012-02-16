@@ -1,4 +1,4 @@
-#{extends 'main.html' /}
+#{extends 'studio.html' /}
 #{set title:'Online Guitar Tuner' /}
 
 #{set 'contentHeader'}
@@ -15,6 +15,10 @@
 		#{if sharedUserSession.role.equals('owner')}
 			(owner)
 		#{/if}
+		#{else}
+			<!--a href="@{makeUserOwner(sharedUserSession.user.id)}">make owner</a,-->
+			<a href="@{removeUser(seshion.id, sharedUserSession.user.id)}">remove</a>
+		#{/else}
 		
 	</li>
 	#{/list}
@@ -22,7 +26,7 @@
 <h2>All Users</h2>
 <ul>
 #{list items:allUsers, as: 'aUser' }
-	<li>${aUser.name} 
+	<li>${aUser.name} <a href="@{shareWith(seshion.id,aUser.id)}">share</a>
 	</li>
 #{/list}
 </ul>

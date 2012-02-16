@@ -23,13 +23,13 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-    	<div id="site-navigation">
+    	<div class="site-navigation">
     		<ul>
-    			<li><a class="white" href="http://www.9dials.com">Studio</a></li>
-    			<li><a class="green" href="http://tabs.9dials.com">Tabs</a></li>
-    			<li><a class="white" href="http://tabs.9dials.com/academy">Academy</a></li>
-    			<li><a class="white" href="http://gear.9dials.com">Gear</a></li>
-    			<li><a class="white"  href="http://tabs.9dials.com/tuna">Tuna</a></li>
+    			<li><a id="studioLink" href="@{Sessions.index}">Studio</a></li>
+    			<li><a id="tabsLink" href="@{Tabs.index}">Tabs</a></li>
+    			<li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
+    			<li><a id="gearLink" href="http://gear.9dials.com">Gear</a></li>
+    			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
     		</ul>
     		#{if user }
     			<a id="profile" href="/profile">${user.name}</a>

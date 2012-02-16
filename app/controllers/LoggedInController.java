@@ -12,5 +12,8 @@ public class LoggedInController extends Controller {
             User user = User.find("byEmail", Security.connected()).first();
             renderArgs.put("user", user);
         }
+        else {
+        	redirect("/login");
+        }
     }
 }

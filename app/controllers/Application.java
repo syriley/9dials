@@ -11,7 +11,7 @@ import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
 
-public class Application extends LoggedInController {
+public class Application extends Controller {
 	
     public static void index() {
     	render();

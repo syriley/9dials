@@ -51,7 +51,7 @@ input[type="text"] {
 	color:white;
 }
 
-#site-navigation {
+.site-navigation {
 	position:fixed;
 	top:0;
 	z-index:100;
@@ -61,17 +61,19 @@ input[type="text"] {
 	background: #555 none;
 }
 
-#site-navigation a:hover {
-	color:#0f0;
+.site-navigation a {
+	color:#fff;
 }
 
-#site-navigation ul {
+
+
+.site-navigation ul {
 	margin:0;
 	padding: 0;
 	list-style-type:none;
 }
 
-#site-navigation li {
+.site-navigation li {
 	float: left;
 	width:6%;
 	text-align:center;
@@ -96,9 +98,7 @@ a {
 	color:#333;
 	text-decoration:none;
 }
-a:hover {
-	color:#0c0;
-}
+
 
 br[clear=left] {
 	clear: left;
@@ -158,4 +158,8 @@ input {
 
 table {
 	text-align:left;
+}
+
+#tabsLink a:hover  {
+	color:#0f0;
 }

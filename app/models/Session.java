@@ -28,4 +28,13 @@ public class Session extends Model{
 		Session session = (Session)other;
 		return id == session.id;
 	}
+
+	public void shareWithUser(User user) {
+		new UserSession(user, this, "collaborator").save();
+	}
+	
+	public void removeUser(Long userId) {
+		UserSession userSession = UserSession.findByUserAndSession(userId, this.id);
+		userSession.delete();
+	}
 }
