@@ -10,13 +10,13 @@ import play.Logger;
 public class Collaborate extends LoggedInController {
 	public static void index(Long id) {
 		Session seshion = Session.findById(id);
-		List<UserSession> sharedUserSessions = UserSession.getSharedUserSessions(id);
+		//List<UserSession> sharedUserSessions = UserSession.getSharedUserSessions(id);
 		List<User> allUsers = User.findAll();
-		for(UserSession userSession : sharedUserSessions) {
-			allUsers.remove(userSession.user);
-		}
-		Logger.debug("Logging works");
-		render(seshion, sharedUserSessions, allUsers);
+//		for(UserSession userSession : sharedUserSessions) {
+//			allUsers.remove(userSession.user);
+//		}
+//		Logger.debug("Logging works");
+//		render(seshion, sharedUserSessions, allUsers);
 	}
 	
 	public static void shareWith(Long sessionId, Long userId) {
@@ -28,8 +28,8 @@ public class Collaborate extends LoggedInController {
 	}
 	
 	public static void removeUser(Long sessionId, Long userId) {
-		UserSession userSession = UserSession.findByUserAndSession(userId, sessionId);
-		userSession.delete();
+//		UserSession userSession = UserSession.findByUserAndSession(userId, sessionId);
+//		userSession.delete();
 		index(sessionId);
 	}
 	
