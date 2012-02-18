@@ -1,11 +1,12 @@
 package com.ninedials.test;
-import org.junit.*;
-import java.util.*;
-import play.test.*;
-import models.*;
+import models.OAuthUserHelper;
+import models.User;
+
+import org.junit.Test;
+
+import com.google.gson.JsonObject;
 
 public class UserTest extends NineDialsTest {
-
    
     @Test
     public void createAndRetrieveUser() {
@@ -28,5 +29,4 @@ public class UserTest extends NineDialsTest {
         assertNull(User.connect("bob@gmail.com", "badpassword"));
         assertNull(User.connect("tom@gmail.com", "secret"));
     }
-
 }

@@ -32,7 +32,9 @@ GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
 GET     /sessions/{id}      Sessions.app
 GET     /sessions/edit/{id} Sessions.form
-GET     /api/instruments Instruments.list
+GET     /api/instruments 	Instruments.list
+GET     /api/images/{id}    PictureServer.getPicture
+GET     /loginrouter    Application.loginRouter                      
 
 
 POST    /bands/?             Bands.create

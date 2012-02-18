@@ -1,6 +1,7 @@
 logs/
 bin/
 test-result/
+data/
 db/
 target/
 tmp/

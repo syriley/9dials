@@ -5,4 +5,5 @@ require:
    # - play -> morphia 1.2.4b
     - crud
     - secure
-#  - play -> cobertura 2.4
+    - play -> fbconnect 0.6
+   #  - play -> cobertura 2.4

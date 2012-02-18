@@ -16,4 +16,13 @@ public class Application extends Controller {
     public static void index() {
     	render();
     }
+    
+    public static void loginRouter(){
+    	if(flash.get("newuser")!=null){
+    		Profile.edit();
+    	}
+    	else{
+    		Sessions.index();
+    	}
+    }
 }

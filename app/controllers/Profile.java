@@ -1,24 +1,52 @@
 package controllers;
 
-import models.UserInstrument;
+import java.util.HashMap;
+import java.util.Map;
+
+import jobs.ExampleJob;
+import models.Picture;
 import models.User;
-import play.mvc.Before;
-import play.mvc.Controller;
+import play.Logger;
+import play.mvc.Router;
 
 public class Profile extends LoggedInController {
 	
 	public static void index() {
 		render();
 	}
+	
 	public static void edit() {
+		new ExampleJob().now();
 		 render();
 	 }
+		
+	public static void updateBasics(String name){
+		User user = User.find("byEmail", Security.connected()).first();
+		user.name=name;
+		user.save();
+        edit();
+	}
 	
 	public static void addInstrument (String name) {		
 		User user = User.find("byEmail", Security.connected()).first();
 		user.addInstrument(name);
 		user.save();
-        edit();
-        
+        edit();        
 	}
+	
+	public static void uploadPicture(Picture picture) {
+        picture.save();
+        User user = User.find("byEmail", Security.connected()).first();
+		String url = getPictureUrl(picture);
+		user.setImageUrl(url);
+		user.save();
+        edit();
+    }
+
+	private static String getPictureUrl(Picture picture) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", picture.id);			
+		String url = Router.reverse("PictureServer.getPicture", map).url;
+		return url;
+	}	
 }

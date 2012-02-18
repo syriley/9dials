@@ -5,6 +5,7 @@
         <title>#{get 'title' /} :: 9Tabs</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="@{'/public/styles/main.css'}">
+                <link rel="stylesheet" media="screen" href="@{'/public/styles/play-fbconnect.min.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/scripts/lib/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
@@ -26,7 +27,6 @@
     	<div class="site-navigation">
     		<ul>
     			<li><a id="studioLink" href="@{Sessions.index}">Studio</a></li>
-    			<li><a id="tabsLink" href="@{Tabs.index}">Tabs</a></li>
     			<li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
     			<li><a id="gearLink" href="http://gear.9dials.com">Gear</a></li>
     			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
