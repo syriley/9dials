@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Instrument;
+import models.UserInstrument;
 import models.User;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -18,7 +18,7 @@ public class Profile extends LoggedInController {
 		User user = User.find("byEmail", Security.connected()).first();
 		user.addInstrument(name);
 		user.save();
-        index();
+        edit();
         
 	}
 }

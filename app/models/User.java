@@ -17,23 +17,28 @@ public class User extends Model {
 	public String password;
 	public String bio;
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	public List<Instrument> instruments;
+	public List<UserInstrument> instruments;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
 	public User (String name, String email, String password, String bio) {
+		System.out.println("Creating new user");
 		this.name = name;
 		this.email = email;
 		this.bio = bio;
 		this.password = password;
 		userSessions = new ArrayList<UserSession>();
-		instruments = new ArrayList<Instrument>();
+		instruments = new ArrayList<UserInstrument>();
 	}
 	
 	public User addInstrument (String name) {
-		Instrument instrument = new Instrument(name).save();
-		instruments.add(instrument);
+		Instrument instrument = Instrument.find("name=?",name).first();
+		if(instrument==null){
+			instrument = new Instrument(name).save();
+		}
+		UserInstrument userInstrument= new UserInstrument(instrument,this).save();
+		instruments.add(userInstrument);
 		return this;
 	}
 	

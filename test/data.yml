@@ -20,8 +20,11 @@
    bio: my bio
 
  Instrument(guitar):
-   User: david
    name: guitar
+
+ UserInstrument(guitar):
+   User: david
+   Instrument: guitar
 
  Session(session1):
    name: Session 1

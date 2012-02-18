@@ -32,6 +32,7 @@ GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
 GET     /sessions/{id}      Sessions.app
 GET     /sessions/edit/{id} Sessions.form
+GET     /api/instruments Instruments.list
 
 
 POST    /bands/?             Bands.create
