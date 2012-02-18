@@ -32,6 +32,7 @@
     			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
     		</ul>
     		#{if user }
+    			<a id="profile" href="/logout">Logout</a>|
     			<a id="profile" href="/profile">${user.name}</a>
     		#{/if}
     		#{else}

@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonObject;
+
+import models.OAuthUserHelper;
 import models.Session;
 import models.User;
 
@@ -19,10 +22,20 @@ public class Application extends Controller {
     
     public static void loginRouter(){
     	if(flash.get("newuser")!=null){
-    		Profile.edit();
+    		NewUser.index();
     	}
     	else{
     		Sessions.index();
     	}
+    }
+    
+    public static void fakeLogin(){
+    	JsonObject data = new JsonObject();
+    	String testName = "OAuth Test";
+    	String testEmail = "oauth@test.com";
+    	data.addProperty("name", testName);
+    	data.addProperty("email", testEmail);
+    	OAuthUserHelper.oAuthCallback(data);
+    	loginRouter();    	
     }
 }

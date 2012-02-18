@@ -28,4 +28,5 @@ public class OAuthUserHelper {
 	private static void setNewUserFlag() {
 		Flash.current().put("newuser", "true");		
 	}
+	
 }
