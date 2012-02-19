@@ -27,10 +27,16 @@
    Instrument: guitar
 
  Session(session1):
+   sessionId: 1
    name: Session 1
 
  Session(session2):
    name: session2
+
+ Session(session3):
+   sessionId: 1  
+   name: session3
+   description: description
 
  Session(unattachedSession):
    name: unattached Session 

@@ -11,10 +11,10 @@ import play.mvc.Controller;
 public class Search extends Controller {
 
      public static void results(String searchTerm) {
-             List<Band> bands = Band.search(searchTerm);
-             Map<String, Object> model = new HashMap<String, Object>();
-             model.put("bands", bands);
-             model.put("searchTerm", searchTerm);
-     render(model);
+//             List<Band> bands = Band.search(searchTerm);
+//             Map<String, Object> model = new HashMap<String, Object>();
+//             model.put("bands", bands);
+//             model.put("searchTerm", searchTerm);
+//     render(model);
      }
 }

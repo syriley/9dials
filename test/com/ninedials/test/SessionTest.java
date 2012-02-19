@@ -30,4 +30,22 @@ public class SessionTest extends NineDialsTest {
 		assertEquals(1, fromDb.userSessions.size());
 		assertEquals("collaborator", fromDb.userSessions.get(0).role);
 	}
+	
+	@Test
+	public void getSession() {
+		Session session = Session.getSession(1L);
+		assertEquals("session3", session.name);
+		assertEquals("description", session.description);
+	}
+	
+	@Test
+	public void updateSession() {
+		Session session = Session.getSession(1L);
+		assertEquals("session3", session.name);
+		Session update = new Session("updatedName", "updatedDescription");
+		Session inMemoryUpdated = Session.updateSession(session.id, update);
+		assertEquals("updatedName", inMemoryUpdated.name);
+		Session updateTest = Session.getSession(1L);
+		assertEquals("updatedName", updateTest.name);
+	}
 }
