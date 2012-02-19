@@ -1,10 +1,10 @@
 #{extends 'studio.html' /}
-#{set title:'Online Guitar Tuner' /}
+#{set title:'9 Dials - ' + _user.name /}
 
 <a href="/profile/edit" style="float:right">Edit</a>
-<h1>${ user.name }</h1>
+<h1>${ _user.name }</h1>
 <div id="sidebar">
-	<img width="200" height = "300" src="${user.imageUrl}" />
+	<img width="200" height = "300" src="${_user.imageUrl}" />
 	<h2>Collectives</h2>
 	<ul>
 		<li><a href="/collective">Mount St Harmony</a></li>
@@ -13,12 +13,12 @@
 	</ul>
 </div>
 <div id="main-content">
-	<p>${ user.bio }</p>
+	<p>${ _user.bio }</p>
 	
 	<h3>Instruments</h3>
 	
 	<ul>
-		#{ list items: user.instruments, as:'uinstrument' } 
+		#{ list items: _user.instruments, as:'uinstrument' } 
 		<li>${uinstrument.instrument.name}</li>
 		#{/list}
 	</ul>

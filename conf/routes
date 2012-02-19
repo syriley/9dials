@@ -3,7 +3,7 @@
 # ~~~~
 
 # Import Secure routes
-*       /                                       module:secure
+*       /auth       module:securesocial
 
 # Home page
 GET     /                                       Application.index

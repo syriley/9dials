@@ -5,14 +5,14 @@
 #{form @Profile.updateBasics()}
 	<p>
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="${user.name}"/>
+        <input type="text" name="name" id="name" value="${_user.name}"/>
     </p>
     <p>
     <input type="submit" value="Save changes" />
     #{/form}
 
 <h3>Upload a profile picture</h3>
-<img width="100" height = "100" src="${user.imageUrl}" />
+<img width="100" height = "100" src="${_user.imageUrl}" />
 #{form @Profile.uploadPicture(), enctype:'multipart/form-data'}
     <input type="file" name="picture.image" />
     <input type="submit" name="submit" value="Upload picture" />
@@ -20,7 +20,7 @@
 
 <h3>Instruments</h3>	
 	<ul>
-		#{ list items: user.instruments, as:'uinstrument' } 
+		#{ list items: _user.instruments, as:'uinstrument' } 
 		<li>${uinstrument.instrument.name}</li>
 		#{/list}
 	</ul>

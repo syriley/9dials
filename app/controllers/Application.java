@@ -31,7 +31,7 @@ public class Application extends Controller {
     
     public static void fakeLogin(){
     	JsonObject data = new JsonObject();
-    	String testName = "OAuth Test";
+    	String testName = "Test User";
     	String testEmail = "oauth@test.com";
     	data.addProperty("name", testName);
     	data.addProperty("email", testEmail);

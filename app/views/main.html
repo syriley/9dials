@@ -31,9 +31,9 @@
     			<li><a id="gearLink" href="http://gear.9dials.com">Gear</a></li>
     			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
     		</ul>
-    		#{if user }
+    		#{if _user }
     			<a id="profile" href="/logout">Logout</a>|
-    			<a id="profile" href="/profile">${user.name}</a>
+    			<a id="profile" href="/profile">${_user.name}</a>
     		#{/if}
     		#{else}
     			<a id="profile" href="/login">login</a>
