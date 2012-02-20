@@ -1,20 +1,14 @@
 package controllers;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import models.OAuthUserHelper;
+import play.mvc.Controller;
+import play.mvc.With;
 
 import com.google.gson.JsonObject;
 
-import models.OAuthUserHelper;
-import models.Session;
-import models.User;
+import controllers.securesocial.SecureSocialPublic;
 
-import play.mvc.Before;
-import play.mvc.Controller;
-
-public class Application extends Controller {
+public class Application extends PublicUserController {
 	
     public static void index() {
     	render();
