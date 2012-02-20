@@ -15,6 +15,6 @@ public class Search extends Controller {
 //             Map<String, Object> model = new HashMap<String, Object>();
 //             model.put("bands", bands);
 //             model.put("searchTerm", searchTerm);
-//     render(model);
+//  	  render(model);
      }
 }

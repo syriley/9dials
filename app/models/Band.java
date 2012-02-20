@@ -1,24 +1,24 @@
 package models;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import play.modules.morphia.Model;
-
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.query.Query;
-import com.google.code.morphia.query.UpdateOperations;
-
-@Entity 
-public class Band extends Model {
+//import java.net.MalformedURLException;
+//import java.net.URL;
+//import java.util.Date;
+//import java.util.List;
+//import java.util.regex.Pattern;
+//
+//import org.apache.commons.lang.StringUtils;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//
+//import play.modules.morphia.Model;
+//
+//import com.google.code.morphia.Datastore;
+//import com.google.code.morphia.annotations.Entity;
+//import com.google.code.morphia.query.Query;
+//import com.google.code.morphia.query.UpdateOperations;
+//
+//@Entity 
+public class Band {//extends Model {
         
 //        Logger logger = LoggerFactory.getLogger(Band.class);
 //        private static final long serialVersionUID = 6397424855980948476L;
