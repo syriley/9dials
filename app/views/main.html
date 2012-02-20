@@ -3,9 +3,9 @@
 <html>
     <head>
         <title>#{get 'title' /} :: 9Tabs</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/styles/main.css'}">
-                <link rel="stylesheet" media="screen" href="@{'/public/styles/play-fbconnect.min.css'}">
+        <meta charset="${_response_encoding}">        
+        <link rel="stylesheet" media="screen" href="@{'/public/bootstrap/css/bootstrap.min.css'}">
+        <script src="@{'/public/bootstrap/js/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/scripts/lib/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
@@ -24,38 +24,48 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-    	<div class="site-navigation">
-    		<ul>
+		    
+    	<div class="navbar">
+    	<div class="navbar-inner">
+    		<div class="container">
+    		<ul class="nav">
     			<li><a id="studioLink" href="@{Sessions.index}">Studio</a></li>
     			<li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
     			<li><a id="gearLink" href="http://gear.9dials.com">Gear</a></li>
     			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
     		</ul>
+    		<ul class="nav pull-right">
     		#{if _user }
-    			<a id="profile" href="/logout">Logout</a>|
-    			<a id="profile" href="/profile">${_user.name}</a>
+    			<li><a id="profile" href="/auth/logout">Logout</a>|</li>
+    			<li><a id="profile" href="/profile">${_user.name}</a></li>
     		#{/if}
     		#{else}
-    			<a id="profile" href="/login">login</a>
+    			<li><a id="profile" href="/auth/login">login</a></li>
     		#{/else}
-    		
-    		<br clear="left" />
+    		</ul>
     	</div>
-    	<div id="content-header">
+    	</div>
+    	</div>
+    	<div class="container-fluid">
+    	<div class="row-fluid">
+  		<div id="content-header" class="span12">
 	    		#{get 'contentHeader' /}
-	    	</div>
-    	<div id="content-container">
-	    	
-	    	<div id="content-body">
+	    </div>
+	    </div>
+	    <div class="row-fluid">
+    	<div id="content-body" class="span12">
         		#{doLayout /}
-        	</div>
         </div>
-        <div id="footer">
+        </div>
+        <div class="row-fluid">
+        <div id="footer" class="span12">
         	<a href="/howitworks">faq</a>
         	| <a href="/howitworks">How it works</a>
         	| <a href="/howitworks">Terms & Conditions</a>
         	<br/>
         	&copy; <a href="www.9dials.com">9dials</a>
+        </div>
+        </div>
         </div>
     </body>
 </html>
