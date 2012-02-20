@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jobs.ExampleJob;
+import models.Instrument;
 import models.Picture;
 import models.User;
 import play.Logger;
@@ -29,7 +30,11 @@ public class Profile extends LoggedInController {
 	
 	public static void addInstrument (String name) {		
 		User user = User.find("byEmail", Security.connected()).first();
-		user.addInstrument(name);
+		Instrument instrument = Instrument.find("byName", name).first();
+		if (instrument == null) {
+			instrument = new Instrument(name);
+		}
+		user.addInstrument(instrument);
 		user.save();
         edit();        
 	}

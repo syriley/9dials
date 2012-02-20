@@ -5,15 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import play.Logger;
 import play.db.jpa.Model;
-import play.mvc.Scope.Flash;
 
 import com.google.gson.JsonObject;
-
-import controllers.Profile;
  
 @Entity
 public class User extends Model {
@@ -24,8 +21,8 @@ public class User extends Model {
 	public String bio;
 	private String imageUrl;
 	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
-	public List<UserInstrument> instruments;
+	@ManyToMany
+	public List<Instrument> instruments;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
@@ -40,16 +37,12 @@ public class User extends Model {
 		this.bio = bio;
 		this.password = password;
 		userSessions = new ArrayList<UserSession>();
-		instruments = new ArrayList<UserInstrument>();
+		instruments = new ArrayList<Instrument>();
 	}
 	
-	public User addInstrument (String name) {
-		Instrument instrument = Instrument.find("name=?",name).first();
-		if(instrument==null){
-			instrument = new Instrument(name).save();
-		}
-		UserInstrument userInstrument= new UserInstrument(instrument,this).save();
-		instruments.add(userInstrument);
+	public User addInstrument (Instrument instrument) {
+		instrument.save();
+		instruments.add(instrument);
 		return this;
 	}
 	
