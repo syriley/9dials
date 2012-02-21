@@ -66,19 +66,5 @@ public class Sessions extends LoggedInController {
 	        render("@form", session);
 	    }
 	}
-	
-	public static class WebSocket extends WebSocketController {
-		 public static void listen() {
-		    while (inbound.isOpen())
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-		    outbound.send("sdf");
-
-		 }
-	}
 }
 
