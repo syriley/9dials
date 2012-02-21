@@ -1,4 +1,4 @@
-#{extends 'studio.html' /}
+#{extends 'main.html' /}
 #{set title:'Online Guitar Tuner' /}
 <h1>Edit Profile</h1>
 <h3>Basic details</h3>
@@ -20,8 +20,8 @@
 
 <h3>Instruments</h3>	
 	<ul>
-		#{ list items: _user.instruments, as:'uinstrument' } 
-		<li>${uinstrument.instrument.name}</li>
+		#{ list items: _user.instruments, as:'instrument' } 
+		<li>${instrument.name}</li>
 		#{/list}
 	</ul>
 #{form @Profile.addInstrument()}
