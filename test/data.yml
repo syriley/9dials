@@ -22,6 +22,45 @@
  Instrument(guitar):
    name: guitar
 
+ Instrument(piano):
+   name: piano
+
+ Instrument(drums):
+   name: drums
+
+ Instrument(bassguitar):
+   name: bass guitar
+
+ Instrument(kazoo):
+   name: kazoo
+
+ Instrument(saxophone):
+   name: saxophone
+
+ Instrument(oboe):
+   name: oboe
+
+ Instrument(keyboard):
+   name: keyboard
+
+ Instrument(vocal):
+   name: vocal
+
+ Instrument(violin):
+   name: violin
+
+ Instrument(viola):
+   name: viola
+
+ Instrument(trumpet):
+   name: trumpet
+
+ Instrument(trombone):
+   name: trombone
+
+ Instrument(flute):
+   name: flute 
+
  Session(session1):
    sessionId: 1
    name: Session 1

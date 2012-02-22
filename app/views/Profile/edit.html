@@ -1,5 +1,11 @@
 #{extends 'main.html' /}
-#{set title:'Online Guitar Tuner' /}
+#{set title:_user.name +" Edit Profile" /}
+#{set 'moreStyles'}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jquery-ui-1.8.17.custom.css'}">
+#{/set}
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/lib/jquery-ui-1.8.17.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
 <h1>Edit Profile</h1>
 <h3>Basic details</h3>
 #{form @Profile.updateBasics()}
@@ -23,14 +29,25 @@
 		#{ list items: _user.instruments, as:'instrument' } 
 		<li>${instrument.name}</li>
 		#{/list}
-	</ul>
+	</ul>	
 #{form @Profile.addInstrument()}
     <p>
         <label for="name">Instrument name: </label>
-        <input type="text" name="name" id="name" />
+        <input  id="instrument-add" type="text" name="name" id="name" />
     </p>
     <p>
         <input class= "btn btn-primary" type="submit" value="Add instrument" />
     </p>
 #{/form}
 <a href="/profile" >Done</a>
+<style>
+	.ui-autocomplete-loading { background: white url(@{'public/images/ui-anim_basic_16x16.gif'}) right center no-repeat; }
+	</style>
+<script>
+	$(function() {		
+		$( "#instrument-add" ).autocomplete({
+			source: "/api/instruments",
+			minLength: 2
+		});
+	});
+	</script>
