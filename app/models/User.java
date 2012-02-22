@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 public class User extends Model {
  	
 	public String name;
+	public String username;
 	public String email;
 	public String password;
 	public String bio;

@@ -33,6 +33,7 @@ POST	/sessions/new		Sessions.save
 GET     /sessions/{id}      Sessions.app
 GET     /sessions/edit/{id} Sessions.form
 GET     /api/instruments 	Instruments.list
+GET     /api/users 			Users.list
 GET     /api/images/{id}    PictureServer.getPicture
 GET     /loginrouter    Application.loginRouter
 GET     /fakefblogin    Application.fakeLogin                      

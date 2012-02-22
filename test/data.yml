@@ -3,6 +3,7 @@
  
  User(bob):
    email: robert.richards@gmail.com
+   username: robby1
    password: secret
    name: Robert Richards
    bio: my bio
@@ -10,12 +11,14 @@
  User(david):
    email: s@s.com
    password: password
+   username: simpko
    name: David Simpkins
    bio: my bio
 
  User(barry):
    email: a@a.com
    password: password
+   username: bigbarryapple
    name: Barry Appleton
    bio: my bio
 

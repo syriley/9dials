@@ -30,9 +30,9 @@ public class BasicUserService implements UserService.Service {
 
     public SocialUser find(UserId id) {
     	SocialUser user = users.get(id.id + id.provider.toString());
-    	if(id.provider.name().equals("userpass")){
+    /*	if(id.provider.name().equals("userpass")){
     		user = fakeLogin(id);
-    	}
+    	}*/
     	if(user!=null){
     		User ouruser = User.find("byEmail", user.email).first();
     		if(ouruser == null){
@@ -64,6 +64,8 @@ public class BasicUserService implements UserService.Service {
 			ouruser  = new User();
 			ouruser.email=user.email;	
 			ouruser.name=user.displayName;
+			ouruser.username=user.id.id;
+			ouruser.password=user.password;
 			ouruser.save();
 			Flash.current().put("newuser", "true");		
 		}
