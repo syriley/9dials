@@ -1,5 +1,6 @@
 
 #{fixture delete:'all', load:'data.yml' /}
+${new Bootstrap().encryptUserPasswords()}
 #{selenium}
 	clearSession()
 	open('/auth/login')

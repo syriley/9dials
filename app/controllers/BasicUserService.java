@@ -29,10 +29,10 @@ public class BasicUserService implements UserService.Service {
     private Map<String, SocialUser> activations = Collections.synchronizedMap(new HashMap<String, SocialUser>());
 
     public SocialUser find(UserId id) {
-    	SocialUser user = users.get(id.id + id.provider.toString());
-    /*	if(id.provider.name().equals("userpass")){
-    		user = fakeLogin(id);
-    	}*/
+    	SocialUser user = users.get(id.id + id.provider.toString());    	
+    	if(id.provider.name().equals("userpass")){
+    		user = getStoredUserPassUser(id);    	
+    	}
     	if(user!=null){
     		User ouruser = User.find("byEmail", user.email).first();
     		if(ouruser == null){
@@ -46,6 +46,19 @@ public class BasicUserService implements UserService.Service {
     	}
         return user;
     }
+
+	private SocialUser getStoredUserPassUser(UserId id) {
+		User ouruser = User.find("byEmail", id.id).first();
+		SocialUser user = null;
+		if(ouruser!=null){
+			user = new SocialUser();
+			user.password=ouruser.password;
+			user.id=id;
+			user.email=ouruser.email;
+			user.isEmailVerified=ouruser.isEmailVerified;
+		}
+		return user;
+	}
 
 	private SocialUser fakeLogin(UserId id) {
 		SocialUser user = new SocialUser();

@@ -21,6 +21,7 @@ public class User extends Model {
 	public String password;
 	public String bio;
 	private String imageUrl;
+	public boolean isEmailVerified = true;
 	
 	@ManyToMany
 	public List<Instrument> instruments;
