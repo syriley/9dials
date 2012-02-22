@@ -2,9 +2,8 @@
 #{fixture delete:'all', load:'data.yml' /}
 #{selenium}
 	clearSession()
-    open('/')
-    clickAndWait('id=profile')
-    type('id=username','s@s.com')
-    type('id=password','password')
-    clickAndWait('id=signin')
+	open('/auth/login')
+	type('id=displayName','s@s.com')
+	type('id=password','password')
+	clickAndWait('id=upsubmit')
 #{/selenium}

@@ -1,10 +1,10 @@
 #{fixture delete:'all', load:'data.yml' /}
 #{selenium}
 	clearSession()
-    open('/login')
-    type('id=username','s@s.com')
+    open('/auth/login')
+    type('id=displayName','s@s.com')
     type('id=password','password')
-    clickAndWait('id=signin')
+    clickAndWait('id=upsubmit')
     
     open('/profile')
     verifyTextPresent('David Simpkins')

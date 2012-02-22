@@ -1,0 +1,16 @@
+# Application dependencies
+
+require:
+    - play
+#    - play -> morphia 1.2.4d
+    - crud
+    - secure
+    - securesocial -> securesocial 0.2.4
+   #  - play -> cobertura 2.4
+
+repositories:
+    - 9 Dials Utils:
+        type:       http
+        artifact:   "http://util.9dials.com/dist/[module]-[revision].zip"
+        contains:
+            - securesocial

@@ -2,10 +2,10 @@
 
 #{selenium}
 	clearSession()
-	open('/login')
-    type('id=username','s@s.com')
-    type('id=password','password')
-    clickAndWait('id=signin')
+	open('/auth/login')
+	type('id=displayName','s@s.com')
+	type('id=password','password')
+	clickAndWait('id=upsubmit')
 
     open('/sessions')
     clickAndWait('link=Create a new session')
@@ -17,10 +17,10 @@
 	
 #{selenium}
 	clearSession()
-	open('/login')
-    type('id=username','s@s.com')
-    type('id=password','password')
-    clickAndWait('id=signin')
+	open('/auth/login')
+	type('id=displayName','s@s.com')
+	type('id=password','password')
+	clickAndWait('id=upsubmit')
     
 	open('/sessions')
     clickAndWait('link=edit')
