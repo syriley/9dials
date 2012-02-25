@@ -6,79 +6,51 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
+import play.db.jpa.JPABase;
 import play.db.jpa.Model;
 
 @Entity
 public class Session extends Model{
 	
 	public Long sessionId;
-	public Date modified;
 	public String name;
 	public String description;
-	@OneToMany
-	public List<SessionDetail> sessionDetails;
+	public Date modified;
+	@Transient
+	public Branch currentBranch;
+	@OneToOne
+	public Version version;
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
-	public List<UserSession> userSessions;
-	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
-	public List<Track> tracks;
+	public List<Branch>branches;
 	
 	public Session() {
 		this(null,null);
 	}
+	
 	public Session(String name, String description) {
-		userSessions = new ArrayList<UserSession>();
-		sessionDetails = new ArrayList<SessionDetail>();
-//		tracks = new ArrayList<Track>();
 		this.name = name;
 		this.description = description;
 	}
-	
-	public static Session getSession(long sessionId) {
-		Session aggregatedSession = new Session();
-		
-		List<Session> sessions = Session.find("sessionId = ? order by modified", sessionId).fetch();
-		for (Session session : sessions) {
-			if(session.name != null) {
-				aggregatedSession.name = session.name;
-			}
-			
-			if(session.description != null) {
-				aggregatedSession.description = session.description;
-			}
-			aggregatedSession.id = session.id;
-		}
-		return aggregatedSession;
+
+	public void removeUser(Long userId) {
+		UserSession userSession = UserSession.findByUserAndBranch(userId, this.id);
+		userSession.delete();
 	}
 	
-	public static Session updateSession(long id, Session session) {
-		Session originalSession = Session.findById(id);
-		Session deltaSession = new Session();
-		deltaSession.sessionId = originalSession.sessionId;
-		if (originalSession.name != session.name) {
-			deltaSession.name = session.name;
-		}
-		
-		if (originalSession.description != session.description) {
-			deltaSession.description = session.description;
-		}
-		deltaSession.save();
-		return deltaSession;
-	}
-	
-	@Override
-	public boolean equals(Object other) {
-		Session session = (Session)other;
-		return id == session.id;
+	public List<Track> getTracks() {
+		return currentBranch.tracks;
 	}
 
-	public void shareWithUser(User user) {
-		new UserSession(user, this, "collaborator").save();
+	public void addTrack() {
+		addTrack("untitled");
 	}
 	
-	public void removeUser(Long userId) {
-		UserSession userSession = UserSession.findByUserAndSession(userId, this.id);
-		userSession.delete();
+	public void addTrack(String name) {
+		currentBranch.addTrack(name);
 	}
 }

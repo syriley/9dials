@@ -1,27 +1,30 @@
 # you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
  
- User(bob):
-   email: robert.richards@gmail.com
-   username: robby1
-   password: secret
-   name: Robert Richards
-   bio: my bio
-
- User(david):
-   email: s@s.com
+ Version(version1):
+   
+ Version(version2):
+   
+ Version(version3):
+   
+ Version(version4):
+ 
+ Version(version5):
+ 
+ User(user1):
+   email: user1@9dials.com
    password: password
-   username: simpko
-   name: David Simpkins
+   username: user1
+   name: User 1
    bio: my bio
 
- User(barry):
-   email: a@a.com
+ User(user2):
+   email: user2@9dials.com
    password: password
-   username: bigbarryapple
-   name: Barry Appleton
+   username: user2
+   name: User 2
    bio: my bio
-
+   
  Instrument(guitar):
    name: guitar
 
@@ -65,50 +68,50 @@
    name: flute 
 
  Session(session1):
-   sessionId: 1
-   name: Session 1
-
+   name: session1
+   description: session 1 description
+   
  Session(session2):
    name: session2
+   sessionId: 2
 
- Session(session3):
-   sessionId: 1  
-   name: session3
-   description: description
+ Branch(branch1):  
+   version: version5
+   session: session1
+   
+ Branch(branch2):  
+   session: session1
+   version: version2
 
  Session(unattachedSession):
    name: unattached Session 
 
+ UserSession(userSession1):
+   user: user1
+   branch: branch1
+   role: owner
+   
  Track(track1v1):
-   session: session1
+   branch: branch1
    trackId: 1
    name: track1v1
+   version: version3
 
  Track(track2v1):
-   session: session1
+   branch: branch1
    trackId: 2
    name: track2v1
+   version: version4
 
  Track(track2v2):
-   session: session1
+   branch: branch1
    trackId: 2
    name: track2v2
+   version: version1
 
- Region(region1#):
+ Region(region1):
    track: track2v2
+   branch: branch1
    startPosition: 5
 
- UserSession(userSession1):
-   user: david
-   session: session1
-   role: owner
-
- UserSession(userSession2):
-   user: bob
-   session: session2
-   role: collaborator
-
- UserSession(userSession3):
-   user: bob
-   session: session1
-   role: collaborator
+    

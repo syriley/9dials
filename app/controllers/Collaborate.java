@@ -2,9 +2,9 @@ package controllers;
 
 import java.util.List;
 
+import models.Branch;
 import models.Session;
 import models.User;
-import models.UserSession;
 import play.Logger;
 
 public class Collaborate extends LoggedInController {
@@ -19,12 +19,12 @@ public class Collaborate extends LoggedInController {
 //		render(seshion, sharedUserSessions, allUsers);
 	}
 	
-	public static void shareWith(Long sessionId, Long userId) {
-		Session session = Session.findById(sessionId);
+	public static void shareWith(Long branchId, Long userId) {
+		Branch branch = Branch.findById(branchId);
 		User user = User.findById(userId);
-		session.shareWithUser(user);
-		Logger.debug("Loading session id %s", sessionId);
-		index(sessionId);
+		branch.shareWithUser(user);
+		Logger.debug("Loading session id %s", branchId);
+		index(branchId);
 	}
 	
 	public static void removeUser(Long sessionId, Long userId) {

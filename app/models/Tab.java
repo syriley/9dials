@@ -1,4 +1,5 @@
-//package models;
+package models;
+public class Tab{}
 //
 //import java.net.MalformedURLException;
 //import java.net.URL;

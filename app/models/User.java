@@ -52,11 +52,25 @@ public class User extends Model {
 	    return find("byEmailAndPassword", email, password).first();
 	}
 	
+	public Session getSession(long sessionId) {
+		for (UserSession userSession : userSessions) {
+			if (userSession.branch.session.getId().equals(sessionId)) {
+				Session session = userSession.branch.session;
+				session.currentBranch = userSession.branch;
+				session.currentBranch.getTracks();
+				return session;
+			}
+		}
+		return null;
+	}
+	
 	public void createSession(Session session) {
+		Branch branch = new Branch(session).save();
 		String role ="owner";
-		UserSession userSession = new UserSession(this, session, role).save();
+		UserSession userSession = new UserSession(this, branch, role);
 		userSessions.add(userSession);
-		session.userSessions.add(userSession);
+		session.currentBranch = branch;
+		session.addTrack();
 	}
 	
 	public String getImageUrl(){

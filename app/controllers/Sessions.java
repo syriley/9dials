@@ -21,8 +21,9 @@ public class Sessions extends LoggedInController {
         render(seshion);
 	}
 	
-	public static void show() {
-		render();
+	public static void show(Long id) {
+		Session seshion = Session.findById(id);
+		render(seshion);
 	}
 	
 	public static void form(Long id) {
@@ -52,11 +53,6 @@ public class Sessions extends LoggedInController {
 			 session.save();
 		}		
 	    index();
-	}
-	
-	public static void app(long id) {
-		Session seshion = Session.findById(id);
-		render(seshion);
 	}
 	
 	private static void validate() {

@@ -25,8 +25,14 @@ public class UserTest extends NineDialsTest {
     @Test
     public void tryConnectAsUser() {        
         // Test 
-        assertNotNull(User.connect("s@s.com", "password"));
+        assertNotNull(User.connect("user1@9dials.com", "password"));
         assertNull(User.connect("bob@gmail.com", "badpassword"));
         assertNull(User.connect("tom@gmail.com", "secret"));
+    }
+    
+    @Test
+    public void userSessions() {
+    	User user1 = User.find("byUsername", "user1").first();
+    	assertEquals(1, user1.userSessions.size());
     }
 }

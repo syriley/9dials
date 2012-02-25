@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import play.db.jpa.Model;
-import controllers.admin.UserSessions;
 
 @Entity
 public class UserSession extends Model{
@@ -15,25 +15,21 @@ public class UserSession extends Model{
 	//SessionRole sessionRole;
 	@ManyToOne
 	public User user;
-	@ManyToOne
-	public Session session;
+	@OneToOne
+	public Branch branch;
 	public String role; 
 	
-	public UserSession(User user, Session session, String role) {
+	public UserSession(User user, Branch branch, String role) {
 		this.user = user;
-		this.session = session;
+		this.branch = branch;
 		this.role = role;
 	}
 	
-	public static UserSession findByUserAndSession(long userId,  long sessionId) {
+	public static UserSession findByUserAndBranch(long userId,  long branchId) {
 		String queryString = "select us " +
 				"from UserSession us " +
-				"where us.session.id = ? " +
-				"and us.user.id = ?";
-		return UserSession.find(queryString, sessionId, userId).first();
-	}
-	
-	public static List<UserSession> getSharedUserSessions(long sessionId) {
-		return UserSession.find("session.id = ?", sessionId).fetch();
+				"where us.user.id = ? " +
+				"and us.branch.id = ?";
+		return UserSession.find(queryString, userId, branchId).first();
 	}
 }
