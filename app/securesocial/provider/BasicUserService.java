@@ -1,4 +1,4 @@
-package controllers;
+package securesocial.provider;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,6 +62,7 @@ public class BasicUserService implements UserService.Service {
 
 	private SocialUser fakeLogin(UserId id) {
 		SocialUser user = new SocialUser();
+		
 		user.email=id.id;
 		user.isEmailVerified=true;
 		user.password=Crypto.passwordHash("password");
