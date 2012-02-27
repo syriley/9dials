@@ -26,6 +26,13 @@ public class Collaborate extends LoggedInController {
 		index(sessionId);
 	}
 	
+	public static void share(Long sessionId, String access) {
+		Session session = Session.findById(sessionId);
+		session.access = access;
+		session.save();
+		index(sessionId);
+	}
+	
 	public static void removeUser(Long sessionId, Long userId) {
 //		UserSession userSession = UserSession.findByUserAndSession(userId, sessionId);
 //		userSession.delete();

@@ -17,6 +17,8 @@ public class Session extends Model{
 	public Date modified;
 	public String name;
 	public String description;
+	public String access;
+	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	

@@ -67,6 +67,7 @@
  Session(session1):
    sessionId: 1
    name: Session 1
+   access: Private
 
  Session(session2):
    name: session2

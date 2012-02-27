@@ -4,12 +4,23 @@
 #{set 'contentHeader'}
  <h1>Share ${seshion.name}</h1>
  <p>${seshion.description}</p>
- <h2>Tags</h2>
+ 
 #{/set}
 
-
-
-<h2>Shared Users</h2>
+<script type="text/javascript">
+<!--
+	$(function(){
+		$('#shareDropdown').popover({
+			title: "Sharing settings",
+			delay: {show:1000, hide:100}
+		});
+	    $('#tagsTypeahead').typeahead({source: ['guitar','piano']})
+	});
+//-->
+</script>
+<h2>Tags</h2>
+<input id="tagsTypeahead" type="text" data-provide="typeahead">
+<h2>Collaborators</h2>
 <ul>
 </ul>
 <a href="#">Add user</a> </h2>
@@ -23,8 +34,33 @@
 
 
 <h2>Sharing settings</h2>
-<p>This allows the session to be <a href="findSession">searchable</a></p> 
 
+    <div class="btn-group">
+    <a id="shareDropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#"
+     data-content="This determines for whom the session may be searchable" rel="shareDropdown">
+   		<i class="icon-share" ></i>
+   		${seshion.access}
+    	<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+    	<li>
+    		<a href='@{share(seshion.id, "Private")}'>
+    			<i class="icon-user" ></i>
+    			Private
+    		</a>
+    	</li>
+    	<li>
+    		<a href='@{share(seshion.id, "Collective Only")}'>
+    			<i class="icon-fire" ></i>
+    			Collective Only
+    		</a>
+		</li>
+    	<li><a href='@{share(seshion.id, "Public")}'>
+    	<i class="icon-share" ></i>
+    	Public</a>
+    	</li>
+    </ul>
+    </div>
 <h2>Search</h2>
 <p>Search for a drummer who's been playing for 2+ years and is into blues</p>
 <a href="/sessions">Done</a> 

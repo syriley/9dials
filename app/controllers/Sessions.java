@@ -59,6 +59,13 @@ public class Sessions extends LoggedInController {
 		render(seshion);
 	}
 	
+	public static void share(Long sessionId, String access) {
+		Session session = Session.findById(sessionId);
+		session.access = access;
+		session.save();
+		form(sessionId);
+	}
+	
 	private static void validate() {
 		 // Validate
 	    validation.valid(session);

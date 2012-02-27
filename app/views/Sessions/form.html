@@ -1,33 +1,88 @@
 #{extends 'studio.html' /}
 #{set title:'Home' /}
-<h1>Create a new session</h1>
+<h1>Edit session</h1>
+<script type="text/javascript">
+<!--
+	$(function(){
+		$('#shareDropdown').popover({
+			title: "Sharing settings",
+			delay: {show:1000, hide:100}
+		});
+	    $('#tagsTypeahead').typeahead({source: ['guitar','piano']})
+	});
+//-->
+</script>
 #{form @save(seshion?.id)}
-	<table>
-		<tr>
-			#{field 'name'}
-			<th>name</th>
-			<td><input name="${field.name}" value="${seshion?.name}"/></td>
-			#{/field}
-		</tr>
-		<tr>
-			#{field 'description'}
-			<th>description</th>
-			<td><input name="${field.name}" value="${seshion?.description}"/></td>
-			#{/field}
-		</tr>
-		<tr>
-			<th>genres</th>
-			<td>blues</td>
-		<tr>
-		<tr>
-			<th>looking for a</th>
-			<td>drummer</td>
-		</tr>
-			<td></td>
-			<td style="text-align:right;">
-			<input type="submit" value="save" />
-			</td>
-		</tr>
-	</table>
-
+	<div class="row">
+		<div class="span4">	
+		<table>
+			<tr>
+				#{field 'name'}
+				<th>name</th>
+				<td><input name="${field.name}" value="${seshion?.name}"/></td>
+				#{/field}
+			</tr>
+			<tr>
+				#{field 'description'}
+				<th>description</th>
+				<td><input name="${field.name}" value="${seshion?.description}"/></td>
+				#{/field}
+			</tr>
+				<td></td>
+				<td style="text-align:right;">
+				<input type="submit" value="save" />
+				</td>
+			</tr>
+		</table>
+		</div>
+		<div class="span4 offset4">
+		    <div class="btn-group">
+		    <a id="shareDropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#"
+		     data-content="This determines for whom the session may be searchable" rel="shareDropdown">
+		   		<i class="icon-share" ></i>
+		   		${seshion.access}
+		    	<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+		    	<li>
+		    		<a href='@{share(seshion.id, "Private")}'>
+		    			<i class="icon-user" ></i>
+		    			Private
+		    		</a>
+		    	</li>
+		    	<li>
+		    		<a href='@{share(seshion.id, "Collective Only")}'>
+		    			<i class="icon-fire" ></i>
+		    			Collective Only
+		    		</a>
+				</li>
+		    	<li><a href='@{share(seshion.id, "Public")}'>
+		    	<i class="icon-share" ></i>
+		    	Public</a>
+		    	</li>
+		    </ul>
+		    </div>
+	    </div>
+    </div>
 #{/form}
+<div class="row">
+	<div class="span4">
+		<h2>Tags</h2>
+		<input id="tagsTypeahead" type="text" data-provide="typeahead">
+	</div>
+	<div class="span4 ">
+		<h2>Looking for</h2>
+		<input id="tagsTypeahead" type="text" data-provide="typeahead">
+	</div>
+</div>
+<h2>Collaborators</h2>
+<ul>
+</ul>
+<a href="#">Add user</a> </h2>
+<ul>
+#{list items:allUsers, as: 'aUser' }
+	<li>${aUser.name} <a href="@{shareWith(seshion.id,aUser.id)}">share</a>
+	</li>
+#{/list}
+</ul>
+</input type="submit" value="save" />
