@@ -17,20 +17,14 @@ public class Session extends Model{
 	public Date modified;
 	public String name;
 	public String description;
-	@OneToMany
-	public List<SessionDetail> sessionDetails;
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
-	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
-	public List<Track> tracks;
 	
 	public Session() {
 		this(null,null);
 	}
 	public Session(String name, String description) {
 		userSessions = new ArrayList<UserSession>();
-		sessionDetails = new ArrayList<SessionDetail>();
-//		tracks = new ArrayList<Track>();
 		this.name = name;
 		this.description = description;
 	}

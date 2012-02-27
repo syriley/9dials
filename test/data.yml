@@ -79,25 +79,6 @@
  Session(unattachedSession):
    name: unattached Session 
 
- Track(track1v1):
-   session: session1
-   trackId: 1
-   name: track1v1
-
- Track(track2v1):
-   session: session1
-   trackId: 2
-   name: track2v1
-
- Track(track2v2):
-   session: session1
-   trackId: 2
-   name: track2v2
-
- Region(region1#):
-   track: track2v2
-   startPosition: 5
-
  UserSession(userSession1):
    user: david
    session: session1
