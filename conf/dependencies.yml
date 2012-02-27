@@ -5,5 +5,26 @@ require:
 #    - play -> morphia 1.2.4d
     - crud
     - secure
-    - play -> securesocial 0.2.4
+#    - play -> scala 0.9.1
+    - securesocial -> securesocial 0.2.4
    #  - play -> cobertura 2.4
+    #- org.scalatest -> scalatest_2.9.1 1.7.RC2
+   # - net.liftweb -> lift-json_2.9.1 2.4
+
+repositories:
+ - scala-tools:
+        type: iBiblio
+        root: "http://scala-tools.org/repo-releases/"
+        contains:
+            - org.scalatest.*
+            - net.liftweb.*
+ - Custom_Modules:
+      type: local
+      artifact: "${application.path}/../[module]"
+      contains:
+         - local -> *
+ - 9 Dials Utils:
+        type:       http
+        artifact:   "http://util.9dials.com/dist/[module]-[revision].zip"
+        contains:
+            - securesocial
