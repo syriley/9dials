@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set title:'Mailing List' /}
+
+<h1>Mailing List</h1>
+#{form @save()}
+	<div class="row">
+		<div class="span4">	
+		<table>
+			<tr>
+				#{field 'name'}
+				<th>name</th>
+				<td><input name="${field.name}" value="${recipient?.name}"/></td>
+				#{/field}
+			</tr>
+			<tr>
+				#{field 'emailAddress'}
+				<th>Address</th>
+				<td><input name="${field.name}" value="${recipient?.emailAddress}"/></td>
+				#{/field}
+			</tr>
+				<td></td>
+				<td style="text-align:right;">
+				<input type="submit" value="save" />
+				</td>
+			</tr>
+		</table>
+		</div>
+    </div>
+#{/form}
