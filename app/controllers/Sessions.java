@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.text.html.HTML.Tag;
 
 import models.Session;
-import models.User;
+import models.AUser;
 import net.sf.oval.guard.Post;
 import play.Logger;
 import play.mvc.Controller;
@@ -37,7 +37,7 @@ public class Sessions extends LoggedInController {
 		Session session;
 		
 		if(id == null) {
-		    User user = User.find("byEmail", Security.connected()).first();
+		    AUser user = AUser.find("byEmail", Security.connected()).first();
 		    session = new Session(name, description).save();
 		  	   
 		    validate();

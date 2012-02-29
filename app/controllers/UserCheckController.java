@@ -1,6 +1,6 @@
 package controllers;
 
-import models.User;
+import models.AUser;
 import play.Logger;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -25,7 +25,7 @@ public class UserCheckController extends Controller {
 		rememberOriginalUrl();
 		SocialUser user =  SecureSocial.getCurrentUser();
 		if(user!=null && !session.contains("_user")){
-			User ouruser = User.find("byEmail", user.email).first();
+			AUser ouruser = AUser.find("byEmail", user.email).first();
 			if(ouruser!=null){
 			   renderArgs.put("_user", ouruser);
 			}

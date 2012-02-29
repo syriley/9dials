@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import models.Instrument;
-import models.User;
+import models.AUser;
 import play.mvc.Controller;
 
 public class Users extends Controller{
@@ -17,29 +17,29 @@ public class Users extends Controller{
 	}
 
 	public static List<String> filterUsers(String term){
-		List<User> matchedUsers = findMatchingUsers(term);		
+		List<AUser> matchedUsers = findMatchingUsers(term);		
 		List<String> userNames = extractUserNames(matchedUsers);
 		return userNames;
 	}			
 	
-	private static List<User> findMatchingUsers(String term) {
-		List<User> allUsers = Collections.emptyList();
+	private static List<AUser> findMatchingUsers(String term) {
+		List<AUser> allUsers = Collections.emptyList();
 		if(term==null|| term.equals("")){
-			allUsers= User.find("order by username").fetch(MAX_ITEMS);
+			allUsers= AUser.find("order by username").fetch(MAX_ITEMS);
 		}
 		else{
-			allUsers= User.find("username like ? order by username","%"+term+"%").fetch(MAX_ITEMS);	
+			allUsers= AUser.find("username like ? order by username","%"+term+"%").fetch(MAX_ITEMS);	
 		}
 		return allUsers;
 	}
 
 	private static List<String> extractUserNames(
-			List<User> allUsers) {
+			List<AUser> allUsers) {
 		if(allUsers.isEmpty()){
 			return Collections.emptyList();
 		}
 		List<String> userNames = new ArrayList<String>();
-		for(User i : allUsers){
+		for(AUser i : allUsers){
 			userNames.add(i.username);
 		}
 		return userNames;

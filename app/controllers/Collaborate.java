@@ -3,7 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Session;
-import models.User;
+import models.AUser;
 import models.UserSession;
 import play.Logger;
 
@@ -11,7 +11,7 @@ public class Collaborate extends LoggedInController {
 	public static void index(Long id) {
 		Session seshion = Session.findById(id);
 	//	List<UserSession> sharedUserSessions = UserSession.getSharedUserSessions(id);
-		List<User> allUsers = User.findAll();
+		List<AUser> allUsers = AUser.findAll();
 //		for(UserSession userSession : sharedUserSessions) {
 //			allUsers.remove(userSession.user);
 //		}
@@ -20,7 +20,7 @@ public class Collaborate extends LoggedInController {
 	
 	public static void shareWith(Long sessionId, Long userId) {
 		Session session = Session.findById(sessionId);
-		User user = User.findById(userId);
+		AUser user = AUser.findById(userId);
 		session.shareWithUser(user);
 		Logger.debug("Loading session id %s", sessionId);
 		index(sessionId);

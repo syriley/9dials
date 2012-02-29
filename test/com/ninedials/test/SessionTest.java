@@ -1,7 +1,7 @@
 package com.ninedials.test;
 
 import models.Session;
-import models.User;
+import models.AUser;
 
 import org.junit.Test;
 
@@ -9,11 +9,11 @@ public class SessionTest extends NineDialsTest {
 	
 	@Test
 	public void addSessionToUser() {
-		User user = new User("new", "a@b.com", "password", "bio").save();
+		AUser user = new AUser("new", "a@b.com", "password", "bio").save();
 		Session session = new Session("session1", "desc").save();
 		user.createSession(session);
 		
-		User fromDb = User.find("byEmail", "a@b.com").first();
+		AUser fromDb = AUser.find("byEmail", "a@b.com").first();
 		
 		assertEquals("new", fromDb.name);
 		assertEquals(1, fromDb.userSessions.size());
@@ -24,9 +24,9 @@ public class SessionTest extends NineDialsTest {
 	@Test
 	public void shareSessionWithUser() {
 		Session session = Session.find("byName", "unattached Session").first();
-		User user = User.find("byEmail", "a@a.com").first();
+		AUser user = AUser.find("byEmail", "a@a.com").first();
 		session.shareWithUser(user);
-		User fromDb = User.find("byEmail", "a@a.com").first();
+		AUser fromDb = AUser.find("byEmail", "a@a.com").first();
 		assertEquals(1, fromDb.userSessions.size());
 		assertEquals("collaborator", fromDb.userSessions.get(0).role);
 	}

@@ -1,7 +1,7 @@
 package controllers;
 
 import models.MailingListRecipient;
-import models.User;
+import models.AUser;
 import play.mvc.Controller;
 
 public class MailingList extends Controller{

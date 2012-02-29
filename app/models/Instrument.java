@@ -11,7 +11,7 @@ import play.db.jpa.Model;
 public class Instrument  extends Model{
 	
 	@ManyToMany(mappedBy="instruments")
-	public List<User> users;
+	public List<AUser> users;
 	public String name;
 	
 	public Instrument(String name) {

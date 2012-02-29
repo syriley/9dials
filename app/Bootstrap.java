@@ -1,6 +1,6 @@
 import java.util.List;
 
-import models.User;
+import models.AUser;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.libs.Crypto;
@@ -17,8 +17,8 @@ public class Bootstrap extends Job {
     }
 
 	public void encryptUserPasswords() {
-		List<User> users = User.findAll();
-		for(User user : users){
+		List<AUser> users = AUser.findAll();
+		for(AUser user : users){
 			user.password=Crypto.passwordHash(user.password);
 			user.save();
 		}

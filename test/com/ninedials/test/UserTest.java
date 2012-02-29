@@ -1,6 +1,6 @@
 package com.ninedials.test;
 import models.OAuthUserHelper;
-import models.User;
+import models.AUser;
 
 import org.junit.Test;
 
@@ -11,10 +11,10 @@ public class UserTest extends NineDialsTest {
     @Test
     public void createAndRetrieveUser() {
         // Create a new user and save it
-        User user = new User("name", "test@gmail.com", "secret", "bio").save();
+        AUser user = new AUser("name", "test@gmail.com", "secret", "bio").save();
         
         // Retrieve the user with bob username
-        User fromDb = User.find("byEmail", "test@gmail.com").first();
+        AUser fromDb = AUser.find("byEmail", "test@gmail.com").first();
         
         // Test 
         assertNotNull(user);
@@ -25,8 +25,8 @@ public class UserTest extends NineDialsTest {
     @Test
     public void tryConnectAsUser() {        
         // Test 
-        assertNotNull(User.connect("s@s.com", "password"));
-        assertNull(User.connect("bob@gmail.com", "badpassword"));
-        assertNull(User.connect("tom@gmail.com", "secret"));
+        assertNotNull(AUser.connect("s@s.com", "password"));
+        assertNull(AUser.connect("bob@gmail.com", "badpassword"));
+        assertNull(AUser.connect("tom@gmail.com", "secret"));
     }
 }

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import models.User;
+import models.AUser;
 import play.Logger;
 import play.libs.Codec;
 import play.libs.Crypto;
@@ -34,10 +34,10 @@ public class BasicUserService implements UserService.Service {
     		user = getStoredUserPassUser(id);    	
     	}
     	if(user!=null){
-    		User ouruser = User.find("byEmail", user.email).first();
+    		AUser ouruser = AUser.find("byEmail", user.email).first();
     		if(ouruser == null){
     			Logger.info("Creating user for: "+user.email);
-				ouruser  = new User();
+				ouruser  = new AUser();
 				ouruser.email=user.email;
 				ouruser.name=user.displayName;
 				ouruser.save();
@@ -48,7 +48,7 @@ public class BasicUserService implements UserService.Service {
     }
 
 	private SocialUser getStoredUserPassUser(UserId id) {
-		User ouruser = User.find("byEmail", id.id).first();
+		AUser ouruser = AUser.find("byEmail", id.id).first();
 		SocialUser user = null;
 		if(ouruser!=null){
 			user = new SocialUser();
@@ -72,10 +72,10 @@ public class BasicUserService implements UserService.Service {
 
     public void save(SocialUser user) {
     	user.isEmailVerified=true;
-		User ouruser = User.find("byEmail", user.email).first();
+		AUser ouruser = AUser.find("byEmail", user.email).first();
 		if(ouruser == null){
 			Logger.info("Creating user for: "+user.email);
-			ouruser  = new User();
+			ouruser  = new AUser();
 			ouruser.email=user.email;	
 			ouruser.name=user.displayName;
 			ouruser.username=user.id.id;

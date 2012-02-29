@@ -69,7 +69,7 @@ public class Session extends Model{
 		return id == session.id;
 	}
 
-	public void shareWithUser(User user) {
+	public void shareWithUser(AUser user) {
 		new UserSession(user, this, "collaborator").save();
 	}
 	

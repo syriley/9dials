@@ -13,7 +13,7 @@ import play.db.jpa.Model;
 import com.google.gson.JsonObject;
  
 @Entity
-public class User extends Model {
+public class AUser extends Model {
  	
 	public String name;
 	public String username;
@@ -29,10 +29,10 @@ public class User extends Model {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
-	public User(){
+	public AUser(){
 	}
 	
-	public User (String name, String email, String password, String bio) {
+	public AUser (String name, String email, String password, String bio) {
 		System.out.println("Creating new user");
 		this.name = name;
 		this.email = email;
@@ -42,13 +42,13 @@ public class User extends Model {
 		instruments = new ArrayList<Instrument>();
 	}
 	
-	public User addInstrument (Instrument instrument) {
+	public AUser addInstrument (Instrument instrument) {
 		instrument.save();
 		instruments.add(instrument);
 		return this;
 	}
 	
-	public static User connect(String email, String password) {
+	public static AUser connect(String email, String password) {
 	    return find("byEmailAndPassword", email, password).first();
 	}
 	
