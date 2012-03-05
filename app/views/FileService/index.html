@@ -1,0 +1,14 @@
+#{extends 'main.html' /}
+#{set title:'Track Upload Example' /}
+
+<h1>Track Upload Example</h1>
+<ul>
+#{list items:models.Track.findAll(), as:'track'}
+    <li><a href="@{FileService.getTrack(track.id)}" >Track ${track.id}</a></li>
+#{/list}
+</ul>
+<form action="@{FileService.uploadTrack()}" method="POST" enctype="multipart/form-data">
+    <input type="file" id="audio" name="audio" />
+    <input type="submit" value="Send it..." />
+</form>
+

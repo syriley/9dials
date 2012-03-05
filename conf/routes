@@ -35,6 +35,7 @@ GET     /sessions/edit/{id} Sessions.form
 GET     /api/instruments 	Instruments.list
 GET     /api/users 			Users.list
 GET     /api/images/{id}    PictureServer.getPicture
+POST    /api/sessions/track/ FileService.uploadAudio
 GET     /loginrouter    Application.loginRouter
 GET     /fakefblogin    Application.fakeLogin                      
 
