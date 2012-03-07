@@ -54,10 +54,23 @@ public class Sessions extends LoggedInController {
 	    index();
 	}
 	
+	public static void saveData(Long id, String data) {
+		Session session = Session.findById(id);
+		session.data = data;
+		session.save();
+	}
+	
 	public static void app(long id) {
 		Session seshion = Session.findById(id);
 		render(seshion);
 	}
+	
+	public static void appJson(long id) {
+		Session seshion = Session.findById(id);
+		renderJSON(seshion.data);
+	}
+	
+	
 	
 	public static void share(Long sessionId, String access) {
 		Session session = Session.findById(sessionId);

@@ -1,3 +1,4 @@
+package jobs;
 import java.util.List;
 
 import models.AUser;
@@ -10,12 +11,15 @@ import play.test.Fixtures;
 public class Bootstrap extends Job {
  
     public void doJob() {
-        // Check if the database is empty
-    	Fixtures.deleteDatabase();
-        Fixtures.loadModels("../test/data.yml");
-        encryptUserPasswords();
+    	reloadData();
     }
 
+    public void reloadData() {
+		Fixtures.deleteDatabase();
+	    Fixtures.loadModels("../test/data.yml");
+	    encryptUserPasswords();
+    }
+    
 	public void encryptUserPasswords() {
 		List<AUser> users = AUser.findAll();
 		for(AUser user : users){

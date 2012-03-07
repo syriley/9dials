@@ -1,4 +1,4 @@
-package com.ninedials.test;
+package com.ninedials.test.unit;
 import models.OAuthUserHelper;
 import models.AUser;
 

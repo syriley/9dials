@@ -1,4 +1,4 @@
-package com.ninedials.test;
+package com.ninedials.test.unit;
 
 import java.util.List;
 

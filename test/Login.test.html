@@ -1,6 +1,5 @@
-
 #{fixture delete:'all', load:'data.yml' /}
-${new Bootstrap().encryptUserPasswords()}
+${new jobs.Bootstrap().reloadData()}
 #{selenium}
 	clearSession()
 	open('/auth/login')

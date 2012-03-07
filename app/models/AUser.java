@@ -9,6 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import play.db.jpa.Model;
+import play.libs.Crypto;
 
 import com.google.gson.JsonObject;
  
@@ -49,7 +50,7 @@ public class AUser extends Model {
 	}
 	
 	public static AUser connect(String email, String password) {
-	    return find("byEmailAndPassword", email, password).first();
+	    return find("byEmailAndPassword", email, Crypto.passwordHash(password)).first();
 	}
 	
 	public void createSession(Session session) {

@@ -1,4 +1,6 @@
 logs/
+server.pid
+public/app/
 bin/
 test-result/
 data/

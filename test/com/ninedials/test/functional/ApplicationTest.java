@@ -1,4 +1,4 @@
-package com.ninedials.test;
+package com.ninedials.test.functional;
 import org.junit.*;
 import play.test.*;
 import play.mvc.*;

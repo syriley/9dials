@@ -1,4 +1,4 @@
-package com.ninedials.test;
+package com.ninedials.test.unit;
 import models.OAuthUserHelper;
 import models.AUser;
 
@@ -25,8 +25,8 @@ public class UserTest extends NineDialsTest {
     @Test
     public void tryConnectAsUser() {        
         // Test 
-        assertNotNull(AUser.connect("s@s.com", "password"));
         assertNull(AUser.connect("bob@gmail.com", "badpassword"));
         assertNull(AUser.connect("tom@gmail.com", "secret"));
+        assertNotNull(AUser.connect("s@s.com", "password"));
     }
 }
