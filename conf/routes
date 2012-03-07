@@ -20,7 +20,7 @@ GET 	/tabs/show/{id}							Tabs.show
 GET 	/tabs/list/{artist}				 			Tabs.list
 # Catch all
 
-
+WS   /helloSocket            MyWebSocket.hello
 
 #Sessions
 

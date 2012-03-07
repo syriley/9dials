@@ -2,3 +2,39 @@
 #{set title:'Home' /}
 
 <h1>Publish your Music</h1>
+	<script type="text/javascript">
+	
+	$(document).ready(function() {
+		var socket;
+		window.onbeforeunload = function() {
+		    socket.onclose = function () {}; // disable onclose handler first
+		    socket.close()
+		};
+
+// 	    try{
+
+			var host = "@@{MyWebSocket.hello}";
+		    socket = new WebSocket(host);
+	
+		        console.log('Socket Status: '+socket.readyState);
+	
+		        socket.onopen = function(){
+		       		 console.log('Socket Status: '+socket.readyState+' (open)');
+		        }
+	
+		        socket.onmessage = function(msg){
+		       		 console.log('Received: '+msg.data);
+		        }
+	
+		        socket.onclose = function(){
+		       		 console.log('Socket Status: '+socket.readyState+' (Closed)');
+		        }			
+	
+// 		    } catch(exception){
+// 		   		 console.log('Error'+exception);
+// 		    }
+			
+			setInterval(function(){socket.send("Sending this");}, 1000);
+		});
+		
+	</script>
