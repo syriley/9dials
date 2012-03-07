@@ -1,4 +1,4 @@
 #!/bin/bash
 git pull origin master
 play dependencies --sync
-play run
+$PLAY_HOME/play restart
