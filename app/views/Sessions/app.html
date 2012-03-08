@@ -9,3 +9,64 @@
 Raw data
 
 ${seshion.data}
+	</script>
+	<div id ="mouseContainer" style="position:relative; min-height:200px">
+		<div id="aacom" style="position:absolute; left:50px">
+			user1
+		</div>
+		<div id="sscom" style="position:absolute; left:50px">
+			user2
+		</div>
+	</div>
+	<script src="http://easywebsocket.org/easyWebSocket.min.js"></script>
+	<script>
+		$(document).ready(function() {
+		    var socket = new EasyWebSocket("ws://9dials.com/resource");
+		    socket.onopen = function(){
+		    	console.log("opening")
+		    }
+		    socket.onmessage = function(event){
+				setMousePointer(event)				
+		    }
+		    socket.onclose = function(){
+		    	console.log("closing")
+		    	socket = new EasyWebSocket("ws://9dials.com/resource");
+		    }
+		    
+		    var animating = false;
+		    var setMousePointer = function(event) {
+		    	if (!animating) {
+					console.log("received "+ event.data);
+					var splitMessage = event.data.split(	":"),
+					relX = splitMessage[1],
+					relY = splitMessage[2],
+					username = splitMessage[0].replace("@","")
+					.replace(".","");
+					
+			    	
+		    		$("#" + username).animate({
+			    		"left": relX,
+			    		"top": relY
+			    		},
+			    		30, function(){
+			    			animating=false
+			    	});
+		    	}
+		    	animating = true;
+		    }
+		    
+		    var sendMouseEvent = function(event) {
+		    	
+    		    var parentOffset = $("#mouseContainer").offset(); 
+	    		var relX = event.pageX - parentOffset.left;
+	    		var relY = event.pageY - parentOffset.top;
+	    		console.log ("Sending", event)
+		    	socket.send("${user.id.id}:" + relX + ":" + relY);
+		    }
+		    
+			$("#content-body").mousemove(sendMouseEvent);
+			
+		});
+	    
+	    
+	</script>
