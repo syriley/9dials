@@ -53,6 +53,10 @@ public class AUser extends Model {
 	    return find("byEmailAndPassword", email, Crypto.passwordHash(password)).first();
 	}
 	
+	public static AUser findByUsername(String username) {
+		return AUser.find("byUsername", username).first();
+	}
+	
 	public void createSession(Session session) {
 		String role ="owner";
 		UserSession userSession = new UserSession(this, session, role).save();
@@ -75,5 +79,13 @@ public class AUser extends Model {
 	
 	public static void facebookOAuthCallback(JsonObject data){
 		OAuthUserHelper.oAuthCallback(data);
+	}
+
+	public List<Session> getSessions() {
+		List<Session> sessions = new ArrayList<Session>();
+		for (UserSession userSession : userSessions ) {
+			sessions.add(userSession.session);
+		}
+		return sessions;
 	}
 }

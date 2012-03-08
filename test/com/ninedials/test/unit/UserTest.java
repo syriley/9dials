@@ -1,10 +1,10 @@
 package com.ninedials.test.unit;
-import models.OAuthUserHelper;
+import java.util.List;
+
 import models.AUser;
+import models.Session;
 
 import org.junit.Test;
-
-import com.google.gson.JsonObject;
 
 public class UserTest extends NineDialsTest {
    
@@ -29,4 +29,13 @@ public class UserTest extends NineDialsTest {
         assertNull(AUser.connect("tom@gmail.com", "secret"));
         assertNotNull(AUser.connect("s@s.com", "password"));
     }
+    
+    @Test
+    public void getSessions() {        
+        // Test 
+        AUser user = AUser.findByUsername("user1");
+        List<Session> sessions = user.getSessions();
+        assertEquals("session1", sessions.get(0).name);
+    }
+    
 }

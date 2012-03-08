@@ -43,4 +43,8 @@ public class Session extends Model{
 		UserSession userSession = UserSession.findByUserAndSession(userId, this.id);
 		userSession.delete();
 	}
+	
+	public List<UserSession> getUserSessions() {
+		return UserSession.getSharedUserSessions(this);
+	}
 }

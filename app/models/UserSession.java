@@ -33,7 +33,7 @@ public class UserSession extends Model{
 		return UserSession.find(queryString, sessionId, userId).first();
 	}
 	
-	public static List<UserSession> getSharedUserSessions(long sessionId) {
-		return UserSession.find("session.id = ?", sessionId).fetch();
+	public static List<UserSession> getSharedUserSessions(Session session) {
+		return UserSession.find("session", session).fetch();
 	}
 }

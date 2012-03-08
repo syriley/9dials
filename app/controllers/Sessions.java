@@ -1,24 +1,21 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.html.HTML.Tag;
+import controllers.admin.UserSessions;
 
-import models.Session;
 import models.AUser;
-import net.sf.oval.guard.Post;
-import play.Logger;
-import play.mvc.Controller;
-import play.mvc.WebSocketController;
-import play.mvc.Http.WebSocketClose;
-import play.mvc.Http.WebSocketEvent;
-import play.mvc.Http.WebSocketFrame;
+import models.Session;
+import models.UserSession;
 
 public class Sessions extends LoggedInController {
 	
 	public static void index() {
-		List<Session> seshion = Session.findAll();
-        render(seshion);
+		List<Session> otherSeshions = Session.findAll();
+        AUser ourUser = (AUser)renderArgs.get("_user");
+        otherSeshions.removeAll(ourUser.getSessions());
+        render(otherSeshions);
 	}
 	
 	public static void show() {
@@ -28,7 +25,15 @@ public class Sessions extends LoggedInController {
 	public static void form(Long id) {
 	 if(id != null) {
 	        Session seshion = Session.findById(id);
-	        render(seshion);
+
+	        List<UserSession> userSessions = UserSession.getSharedUserSessions(seshion);
+	        List<AUser> sharedUsers = new ArrayList<AUser>();
+	       
+	        
+	        List<AUser> allOtherUsers = AUser.findAll();
+	        allOtherUsers.removeAll(sharedUsers);
+	        
+	        render(seshion, userSessions, allOtherUsers);
 	    }
 		render();
 	}
@@ -70,12 +75,24 @@ public class Sessions extends LoggedInController {
 		renderJSON(seshion.data);
 	}
 	
+	public static void shareWithUser(Long sessionId, String username) {
+		AUser user = AUser.find("byUsername", username).first();
+		Session session = Session.findById(sessionId);
+		session.shareWithUser(user);
+		form(sessionId);
+	}
 	
 	
 	public static void share(Long sessionId, String access) {
 		Session session = Session.findById(sessionId);
 		session.access = access;
 		session.save();
+		form(sessionId);
+	}
+	
+	public static void removeUser(Long sessionId, Long userId) {
+		UserSession userSesssion = UserSession.findByUserAndSession(userId, sessionId);
+		userSesssion.delete();
 		form(sessionId);
 	}
 	

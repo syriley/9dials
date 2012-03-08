@@ -8,7 +8,7 @@ import org.junit.Test;
 public class SessionTest extends NineDialsTest {
 	
 	@Test
-	public void addSessionToUser() {
+	public void createSession() {
 		AUser user = new AUser("new", "a@b.com", "password", "bio").save();
 		Session session = new Session("session1", "desc").save();
 		user.createSession(session);

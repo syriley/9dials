@@ -12,7 +12,7 @@ public class UserSessionTest extends NineDialsTest {
 	@Test
 	public void getSharedUsers() {
 		Session session = Session.find("byName", "session1").first();
-		List<UserSession> userSessions = UserSession.getSharedUserSessions(session.id);
+		List<UserSession> userSessions = UserSession.getSharedUserSessions(session);
 		assertEquals(2, userSessions.size());
 	}
 	

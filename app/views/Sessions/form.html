@@ -8,7 +8,8 @@
 			title: "Sharing settings",
 			delay: {show:1000, hide:100}
 		});
-	    $('#tagsTypeahead').typeahead({source: ['guitar','piano']})
+	    $('#tagsTypeahead').typeahead({source: ['guitar','piano']});
+	    $('.typeahead').typeahead();
 	});
 //-->
 </script>
@@ -40,23 +41,26 @@
 		    <a id="shareDropdown" class="btn dropdown-toggle" data-toggle="dropdown" href="#"
 		     data-content="This determines for whom the session may be searchable" rel="shareDropdown">
 		   		<i class="icon-share" ></i>
-		   		${seshion.access}
+		   		${seshion?.access }
+		   		#{ifnot seshion}
+		   			Private
+		   		#{/ifnot}
 		    	<span class="caret"></span>
 		    </a>
 		    <ul class="dropdown-menu">
 		    	<li>
-		    		<a href='@{share(seshion.id, "Private")}'>
+		    		<a href='@{share(seshion?.id, "Private")}'>
 		    			<i class="icon-user" ></i>
 		    			Private
 		    		</a>
 		    	</li>
 		    	<li>
-		    		<a href='@{share(seshion.id, "Collective Only")}'>
+		    		<a href='@{share(seshion?.id, "Collective Only")}'>
 		    			<i class="icon-fire" ></i>
 		    			Collective Only
 		    		</a>
 				</li>
-		    	<li><a href='@{share(seshion.id, "Public")}'>
+		    	<li><a href='@{share(seshion?.id, "Public")}'>
 		    	<i class="icon-share" ></i>
 		    	Public</a>
 		    	</li>
@@ -72,15 +76,31 @@
 	</div>
 	<div class="span4 ">
 		<h2>Looking for</h2>
-		<input id="tagsTypeahead" type="text" data-provide="typeahead">
+		<input id="tagsTypeahead" type="text" data-source="typeahead">
 	</div>
 </div>
 <h2>Collaborators</h2>
 <ul>
+	#{list items: userSessions, as: 'userSession'}
+		<li>${userSession.user.name} 
+			#{if userSession.role.equals("owner")}
+				(${userSession.role})
+			#{/if}
+			#{else}
+				<a href="@{removeUser(seshion.id, userSession.user.id)}">remove</a>
+			#{/else}
+		</li>
+	#{/list}
 </ul>
-<a href="#">Add user</a> </h2>
+#{form @shareWithUser(seshion?.id)}
+	#{field 'username'}
+	<input name	="${field.name}" type="text" data-source='[#{list items: allOtherUsers, as: 'aUser' }"${aUser.username}",#{/list}" "]'  data-provide="typeahead" >
+	#{/field}
+	<input type="submit" value="Add user" />
+#{/form}
 <ul>
 #{list items:allUsers, as: 'aUser' }
+
 	<li>${aUser.name} <a href="@{shareWith(seshion.id,aUser.id)}">share</a>
 	</li>
 #{/list}
