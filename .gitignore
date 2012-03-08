@@ -1,6 +1,6 @@
 logs/
 server.pid
-public/app/
+webapp/public/app/
 bin/
 test-result/
 data/
