@@ -8,3 +8,8 @@
 .bordered a {
 	text-decoration:none;
 }
+
+.feature-box {
+	min-height:120px;
+	padding-top:10px;
+}
