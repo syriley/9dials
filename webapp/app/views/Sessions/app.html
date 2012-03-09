@@ -18,53 +18,59 @@ ${seshion.data}
 			user2
 		</div>
 	</div>
-	<script src="http://easywebsocket.org/easyWebSocket.min.js"></script>
+	<script src="@{'/public/javascripts/socket.io.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+	<script>
+	$(document).ready(function() {
+	  	var studio = io.connect('http://localhost:9001/studio');
+	  	studio.on('ready', function (data) {
+		    console.log(data);
+	  	});
+	  	studio.on('mouseBroadcast', function (data) {
+	    	console.log(data);
+	    	setMousePointer(data)
+	  	});
+	  	
+	    	  	
+	  	var waiting = false;
+	    var sendMouseEvent = function(event) {
+	    	if(!waiting) {
+	    		waiting = true;
+	    		_.delay(function(){waiting = false}, 100);
+			    var parentOffset = $("#mouseContainer").offset(), 
+	    		relX = event.pageX - parentOffset.left,
+	    		relY = event.pageY - parentOffset.top;
+	    		
+	    		var username = "${user.id.id}";
+	    		username = username.replace("@","")
+				.replace(".","");
+		    	studio.emit('mouseMoved', { username: username, x: relX, y: relY});
+	    		
+	    		setMousePointer({username: username, x:relX, y:relY});
+	    	}
+	    }
+	    
+	    var setMousePointer = function(event){
+	    		
+	    	console.log ("Moving pointer", event)		
+    		$("#" + event.username ).css({
+	    		"left": event.x,
+	    		"top": event.y
+	    		},
+	    		30);;
+    	}
+	    
+	  	$("#content-body").mousemove(sendMouseEvent);
+	});
+	</script>
 	<script>
 		$(document).ready(function() {
-		    var socket = new EasyWebSocket("ws://9dials.com/resource");
-		    socket.onopen = function(){
-		    	console.log("opening")
-		    }
-		    socket.onmessage = function(event){
-				setMousePointer(event)				
-		    }
-		    socket.onclose = function(){
-		    	console.log("closing")
-		    	socket = new EasyWebSocket("ws://9dials.com/resource");
-		    }
+
 		    
-		    var animating = false;
-		    var setMousePointer = function(event) {
-		    	if (!animating) {
-					console.log("received "+ event.data);
-					var splitMessage = event.data.split(	":"),
-					relX = splitMessage[1],
-					relY = splitMessage[2],
-					username = splitMessage[0].replace("@","")
-					.replace(".","");
-					
-			    	
-		    		$("#" + username).animate({
-			    		"left": relX,
-			    		"top": relY
-			    		},
-			    		30, function(){
-			    			animating=false
-			    	});
-		    	}
-		    	animating = true;
-		    }
+		   
 		    
-		    var sendMouseEvent = function(event) {
-		    	
-    		    var parentOffset = $("#mouseContainer").offset(); 
-	    		var relX = event.pageX - parentOffset.left;
-	    		var relY = event.pageY - parentOffset.top;
-	    		console.log ("Sending", event)
-		    	socket.send("${user.id.id}:" + relX + ":" + relY);
-		    }
+		
 		    
-			$("#content-body").mousemove(sendMouseEvent);
+// 			
 			
 		});
 	    
