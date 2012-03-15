@@ -70,6 +70,11 @@ public class Sessions extends LoggedInController {
 		render(seshion);
 	}
 	
+	public static void app2(long id) {
+        Session seshion = Session.findById(id);
+        render(seshion);
+    }
+	
 	public static void appJson(long id) {
 		Session seshion = Session.findById(id);
 		renderJSON(seshion.data);

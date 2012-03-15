@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRONT_END_ROOT=../9dials-frontend
+FRONT_END_ROOT=../../9dials-frontend
 FRONT_END_DESTINATION=public/app
 
 git pull origin master
