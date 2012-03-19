@@ -39,6 +39,22 @@
 
   <script data-main="@{'/public/app/src/main.js'}" src="@{'/public/app/lib/require.js'}"></script>
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <div id="flash-recorder"style=""> 
+            <object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="140">
+              <param name="movie" value="assets/recorder.swf" />
+              <param name="flashVars" value="uploadUrl=http://localhost:8080/api/session/2" />
+                  <!--[if !IE]>-->
+              <object type="application/x-shockwave-flash" data="@{'public/assets/recorder.swf'}" width="250" height="140" flashVars="uploadUrl=http://localhost:8080/api/session/2">
+              <!--<![endif]-->
+              <div>
+                <p>Your flash player is not working properly. Please click the link below
+                <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+              </div>
+              <!--[if !IE]>-->
+              </object>
+              <!--<![endif]-->
+            </object>
+          </div>
   <div id="main" role="main">
 
 
