@@ -42,9 +42,9 @@
     <div id="flash-recorder"style=""> 
             <object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="140">
               <param name="movie" value="assets/recorder.swf" />
-              <param name="flashVars" value="uploadUrl=http://localhost:8080/api/session/2" />
+              <param name="flashVars" value="uploadUrl=http://localhost:9000/sources" />
                   <!--[if !IE]>-->
-              <object type="application/x-shockwave-flash" data="@{'public/assets/recorder.swf'}" width="250" height="140" flashVars="uploadUrl=http://localhost:8080/api/session/2">
+              <object type="application/x-shockwave-flash" data="@{'public/assets/recorder.swf'}" width="250" height="140" flashVars="uploadUrl=http://localhost:9000/sources">
               <!--<![endif]-->
               <div>
                 <p>Your flash player is not working properly. Please click the link below
@@ -55,6 +55,10 @@
               <!--<![endif]-->
             </object>
           </div>
+          <br/>
+	<a href="/sessions/addTrack?sessionId=${seshion.id}&track={'id':44,'name':'Untitled','regions':[]}">add track to session</a>
+	<br/>
+	<a href="/sessions/addRegion?sessionId=${seshion.id}&trackId=44&region={'id':45,'start_position':'100000'}">add region to track</a>
   <div id="main" role="main">
 
 

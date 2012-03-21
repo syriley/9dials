@@ -30,17 +30,19 @@ GET     /collaborate/share/{id}/{access}   Collaborate.share
 GET     /sessions/index     Sessions.index
 GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
-#GET     /sessions/{id}      Sessions.app
+#GET    /sessions/{id}      Sessions.app
 GET     /sessions/edit/{id} Sessions.form
+
 GET     /api/sessions/{id} 	Sessions.appJson
 POST    /api/sessions/{id} 	Sessions.saveData
 GET     /api/instruments 	Instruments.list
 GET     /api/users 			Users.list
 GET     /api/images/{id}    PictureServer.getPicture
-POST    /api/sessions/track/ FileService.uploadAudio
+
 GET     /loginrouter    Application.loginRouter
 GET     /fakefblogin    Application.fakeLogin                      
 
+POST    /sources Sources.upload
 
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create

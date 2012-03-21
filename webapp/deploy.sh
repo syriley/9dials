@@ -18,7 +18,8 @@ cp $FLEX_ROOT/recorder.swf public/assets/
 
 if [ -d "$FRONT_END_ROOT" ]; then
     echo "Copying Studio App"
-    cp -r $FRONT_END_ROOT/public $FRONT_END_DESTINATION
+    rm -r $FRONT_END_DESTINATION/*
+    cp -r $FRONT_END_ROOT/public/* $FRONT_END_DESTINATION
     cp -r $FRONT_END_ROOT/views $FRONT_END_DESTINATION
 fi
 

@@ -10,11 +10,12 @@ Raw data
 
 ${seshion.data}
 
-<a href="@{FileService.index}">
-	<p>Track upload example page</p>
-</a>
 	
 	</script>
+	<br/>
+	<a href="/sessions/addTrack?sessionId=${seshion.id}&track={'id':44,'name':'Untitled','regions':[]}">add track to session</a>
+	<br/>
+	<a href="/sessions/addRegion?sessionId=${seshion.id}&trackId=44&region={'id':45,'start_position':'100000'}">add region to track</a>
 	<div id ="mouseContainer" style="position:relative; min-height:200px">
 		<div id="aacom" style="position:absolute; left:50px">
 			user1
@@ -64,13 +65,6 @@ ${seshion.data}
 	    		30);;
     	}
 	    
-	  	$("#content-body").mousemove(sendMouseEvent);
+	  	//$("#content-body").mousemove(sendMouseEvent);
 	});
-	</script>
-	<script>
-		$(document).ready(function() {
-			
-		});
-	    
-	    
 	</script>

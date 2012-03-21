@@ -3,6 +3,10 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import controllers.admin.UserSessions;
 
 import models.AUser;
@@ -11,6 +15,8 @@ import models.UserSession;
 
 public class Sessions extends LoggedInController {
 	
+    private static JsonParser parser = new JsonParser();
+    
 	public static void index() {
 		List<Session> otherSeshions = Session.findAll();
         AUser ourUser = (AUser)renderArgs.get("_user");
@@ -59,6 +65,14 @@ public class Sessions extends LoggedInController {
 	    index();
 	}
 	
+	private static void validate() {
+        // Validate
+       validation.valid(session);
+       if(validation.hasErrors()) {
+           render("@form", session);
+       }
+	}
+	
 	public static void saveData(Long id, String data) {
 		Session session = Session.findById(id);
 		session.data = data;
@@ -74,11 +88,6 @@ public class Sessions extends LoggedInController {
         Session seshion = Session.findById(id);
         render(seshion);
     }
-	
-	public static void appJson(long id) {
-		Session seshion = Session.findById(id);
-		renderJSON(seshion.data);
-	}
 	
 	public static void shareWithUser(Long sessionId, String username) {
 		AUser user = AUser.find("byUsername", username).first();
@@ -101,12 +110,64 @@ public class Sessions extends LoggedInController {
 		form(sessionId);
 	}
 	
-	private static void validate() {
-		 // Validate
-	    validation.valid(session);
-	    if(validation.hasErrors()) {
-	        render("@form", session);
-	    }
-	}
+	
+	
+	public static void addTrack(long sessionId, String track) {
+	    Session session = Session.findById(sessionId);
+        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
+        
+        JsonObject trackJson = (JsonObject) parser.parse(track);
+        
+        JsonArray tracks = sessionJson.getAsJsonArray("tracks");
+        tracks.add(trackJson);
+        sessionJson.add("tracks", tracks);
+        session.data = sessionJson.toString();
+        session.save();
+        app2(sessionId);
+    }
+	
+	public static void addSource(long sessionId, String source) {
+	    Session session = Session.findById(sessionId);
+        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
+	    
+        JsonObject sourceJson = (JsonObject) parser.parse(source);
+        JsonArray trackJsonArray = sessionJson.getAsJsonArray("sources");
+        trackJsonArray.add(sourceJson);
+        sessionJson.add("sources", trackJsonArray);
+
+        session.data = sessionJson.toString();
+        session.save();
+        app2(sessionId);
+    }
+	
+	public static void addRegion(long sessionId, int trackId, String region) {
+	    Session session = Session.findById(sessionId);
+        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
+        
+        JsonObject regionJson = (JsonObject) parser.parse(region);
+        JsonArray tracksJson = sessionJson.getAsJsonArray("tracks");
+        JsonArray newTracksJson = new JsonArray();
+        
+        for(int i = 0; i < tracksJson.size(); i++) {
+            JsonObject track = tracksJson.get(i).getAsJsonObject();
+            
+            if(track.get("id").getAsInt() == trackId) {
+                JsonArray regionsJson = (JsonArray)track.get("regions");
+                if (regionsJson == null) {
+                    regionsJson = new JsonArray();
+                }
+                regionsJson.add(regionJson);
+                track.add("regions", regionJson);
+            }
+            
+            newTracksJson.add(track);
+        }
+        
+        sessionJson.add("tracks", newTracksJson);
+        
+        session.data = sessionJson.toString();
+        session.save();
+        app2(sessionId);
+    }
 }
 

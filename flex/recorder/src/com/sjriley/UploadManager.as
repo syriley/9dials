@@ -9,26 +9,35 @@ package com.sjriley
 	import flash.net.URLLoader;
 	import flash.utils.ByteArray;
 	import mx.core.FlexGlobals;
+	import ru.inspirit.net.MultipartURLLoader;
 	
 	public class UploadManager extends EventDispatcher
 	{//FileManager Class
 	
-		private var urlLoader:URLLoader;
+		private var urlLoader:MultipartURLLoader;
 		private var urlRequest:URLRequest;
 		
 	
 		public function upload($fileBytes:ByteArray):void
 		{
-			urlLoader = new URLLoader();
-			urlLoader.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
-			urlRequest = new URLRequest();
+			urlLoader = new MultipartURLLoader();
+			//urlLoader.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
+			//urlRequest = new URLRequest();
 
-			urlRequest.url = FlexGlobals.topLevelApplication.parameters.uploadUrl;
-			urlRequest.method = URLRequestMethod.POST;
-			urlRequest.contentType = "application/octet-stream";
-			urlRequest.data = $fileBytes;
-			Logger.log("uploading file to " + urlRequest.url);
-			urlLoader.load(urlRequest);
+			//urlRequest.url = FlexGlobals.topLevelApplication.parameters.uploadUrl;
+			//urlRequest.method = URLRequestMethod.POST;
+
+			//urlRequest.data = $fileBytes;
+			//Logger.log("uploading file to " + urlRequest.url);
+			Logger.log('starting upload');
+			try {
+				urlLoader.addFile($fileBytes, 'file', 'file')
+				urlLoader.load(FlexGlobals.topLevelApplication.parameters.uploadUrl);
+			}
+			catch (err:Error)
+			{
+			 	Logger.log(err.message);
+			}
 		}
 
 		//Event
