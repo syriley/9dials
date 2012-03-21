@@ -31,7 +31,7 @@ package com.sjriley
 			//Logger.log("uploading file to " + urlRequest.url);
 			Logger.log('starting upload');
 			try {
-				urlLoader.addFile($fileBytes, 'file', 'file')
+				urlLoader.addFile($fileBytes, 'newSource.ogg', 'file')
 				urlLoader.load(FlexGlobals.topLevelApplication.parameters.uploadUrl);
 			}
 			catch (err:Error)
