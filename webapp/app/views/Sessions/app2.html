@@ -42,9 +42,9 @@
     <div id="flash-recorder"style=""> 
             <object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="140">
               <param name="movie" value="assets/recorder.swf" />
-              <param name="flashVars" value="uploadUrl=http://localhost:9000/sources" />
+              <param name="flashVars" value="uploadUrl=@{Sources.upload()}" />
                   <!--[if !IE]>-->
-              <object type="application/x-shockwave-flash" data="@{'public/assets/recorder.swf'}" width="250" height="140" flashVars="uploadUrl=http://localhost:9000/sources">
+              <object type="application/x-shockwave-flash" data="@{'public/assets/recorder.swf'}" width="250" height="140" flashVars="uploadUrl=@{Sources.upload()}">
               <!--<![endif]-->
               <div>
                 <p>Your flash player is not working properly. Please click the link below
