@@ -8,7 +8,9 @@
         <title>#{get 'title' /} :: 9Dials</title>
         <meta charset="${_response_encoding}">        
         <link rel="stylesheet" media="screen" href="@{'/public/bootstrap/css/bootstrap.min.css'}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common.css'}">        
+        <link rel="stylesheet" media="screen" href="@{'/public/bootstrap/css/render.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/common.css'}">
+                
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/lib/jquery.js'}" type="text/javascript" charset="${_response_encoding}"></script>
@@ -29,56 +31,86 @@
     </head>
     <body>
 		    
-    	<div class="navbar">
-    	<div class="navbar-inner">
-    		<div class="container">
-    		<a class="brand" href="/">9 Dials Online Studio</a>
-    		<ul class="nav">
-    			<li><a id="studioLink" href="@{Sessions.index}">Studio</a></li>
-    			<li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
-    			<li><a id="gearLink" href="http://gear.9dials.com">Gear</a></li>
-    			<li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
-    		</ul>
-    		<ul class="nav pull-right">
-    		#{if _user }
-    		<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">${_user.name} <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/profile">My Profile</a></li>
-                <li class="divider"></li>
-                <li><a href="/auth/logout">Logout</a></li>
-              </ul>
-            </li>
-    		#{/if}
-    		#{else}
-    			<li><a id="profile" href="/auth/login">login</a></li>
-    		#{/else}
-    		</ul>
-    	</div>
-    	</div>
-    	</div>
-    	<div class="container">
-    	<div class="row-fluid">
-  		<div id="content-header" class="span12">
-	    		#{get 'contentHeader' /}
-	    </div>
-	    </div>
-	    <div class="row-fluid">
-    	<div id="content-body" class="span12">
-        		#{doLayout /}
+    	<header class="header">
+		  <div class="container">
+		    <div class="row">
+		      <div class="span6"> <a href="@{Application.index}"><img id="page_logo" src="@{'/public/images/logo.png'}" width="183" height="55" alt="9dials"></a> </div>
+		      <div class="span6">
+		        <ul class="nav nav-pills header-nav">
+		          <li class="#{get 'home' /}"><a href="@{Application.index}">Home page</a></li>
+		          <li class="#{get 'studio' /}">  <a id="studioLink" href="@{Sessions.index}">Studio</a></li>
+    			  <li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
+    			  <li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
+    			  #{if _user }
+		    		<li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">${_user.name} <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="/profile">My Profile</a></li>
+		                <li class="divider"></li>
+		                <li><a href="/auth/logout">Logout</a></li>
+		              </ul>
+		            </li>
+		    		#{/if}
+		    		#{else}
+		    			<li><a id="profile" href="/auth/login">login</a></li>
+		    		#{/else}
+		        </ul>
+		      </div>
+		    </div>
+		  </div>
+		</header>
+    	<div class="container" id="#{get 'id' /}">
+  	    		#{doLayout /}
         </div>
-        </div>
-        <div class="row-fluid">
-        <div id="footer" class="span12">
-        	<a href="/howitworks">faq</a>
-        	| <a href="/howitworks">How it works</a>
-        	| <a href="/howitworks">Terms & Conditions</a>
-        	| <a href='/fakefblogin'>Fake login</a>
-        	<br/>
-        	&copy; <a href="www.9dials.com">9dials</a>
-        </div>
-        </div>
-        </div>
+	    <footer class="footer">
+	       	<div class="container footer_content">
+	       		<div class="row">
+	       			<div class="span2 frow_white">
+	       				<p>&copy;<strong><a href="www.9dials.com">9dials</a></strong>
+	       			</div>
+			        <div class="span2 footer_render">
+			        	<h4>Learn</h4>
+			        	<ul class="unstyled">
+			        		<li><a href="/howitworks">Faq</a></li>
+			        		<li><a href="/howitworks">How it works</a></li>
+			        		<li><a href="/howitworks"></a>Premium Accounts</li>
+			        	</ul>
+			        </div>
+			        <div class="span2 footer_render">
+			        	<h4>Community</h4>
+			        	<ul class="unstyled">
+			        		<li><a href="/howitworks">Featured artists</a></li>
+			        		<li><a href="/howitworks">Forum</a></li>
+			        	</ul>
+			        </div>
+			        <div class="span2 footer_render">
+			        	<h4>About</h4>
+			        	<ul class="unstyled">
+			        		<li><a href="/howitworks">Contact</a></li>
+			        		<li><a href="/howitworks">Terms & Conditions</a></li>
+			        	</ul>
+			        </div>
+		        </div>
+        	</div>
+        	<div class="footer_bottom">
+		    <div class="container">
+		      <div class="row">
+		        <div class="span6 frow">
+		          <div class="input-prepend">
+		            <h3>Stay updated</h3>
+		            <p>If you would like to be one of the first to get access to our new tool, please join our mailing list</p>
+		            <form class=" form-inline">
+		              <span class="add-on"><i class="icon-envelope"></i></span>
+		              <input type="text" class="input-small span2" placeholder="Email">
+		              <button type="submit" class="btn"><i class="icon-check"></i>Subscribe</button>
+		            </form>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+	    </footer>
+        
+        
         <!-- Piwik --> 
 		<script type="text/javascript">
 		var pkBaseURL = (("https:" == document.location.protocol) ? "https://util.9dials.com/piwik/" : "http://util.9dials.com/piwik/");
