@@ -23,4 +23,7 @@ if [ -d "$FRONT_END_ROOT" ]; then
     cp -r $FRONT_END_ROOT/views $FRONT_END_DESTINATION
 fi
 
-$PLAY_HOME/play restart
+$PLAY_HOME/play stop
+rm server.pid
+$PLAY_HOME/play start
+
