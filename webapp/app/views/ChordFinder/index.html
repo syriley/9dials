@@ -1,11 +1,13 @@
 #{extends 'main.html' /}
 #{set title:'Chord Finder' /}
+
 #{set chordFinder:'active' /}
 #{set 'moreStyleSheets' /}
 	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/chordFinder.css'}">
-#/{set/}
+#{set/}
 
-<div id="single">
+#{set id:'single' /}
+
 	<hr class="soften" />
 	<h1>Chord Finder</h1>
 	
@@ -71,4 +73,3 @@
 		</div>
 	</div>
 	<hr class="space" />
-</div>
