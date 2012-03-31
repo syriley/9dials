@@ -1,6 +1,8 @@
 package controllers;
 
+import models.MailingListRecipient;
 import models.OAuthUserHelper;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -21,6 +23,12 @@ public class Application extends PublicUserController {
     	else{
     		Sessions.index();
     	}
+    }
+    
+    public static void mailingList(String emailAddress, String requestUrl) {
+        new MailingListRecipient(emailAddress).save();
+        Logger.debug("Request url", requestUrl);
+        redirect(requestUrl);
     }
     
     public static void fakeLogin(){

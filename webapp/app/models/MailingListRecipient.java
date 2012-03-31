@@ -8,12 +8,10 @@ import play.db.jpa.Model;
 public class MailingListRecipient extends Model{
 
 	
-	public MailingListRecipient(String name, String email) {
+	public MailingListRecipient(String email) {
 		super();
-		this.name = name;
 		this.email = email;
 	}
 	
-	public String name;
 	public String email;
 }
