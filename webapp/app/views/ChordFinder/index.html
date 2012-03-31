@@ -9,29 +9,36 @@
 #{set id:'single' /}
 
 	<hr class="soften" />
-	<script type="text/javascript"><!--
+	<!-- script type="text/javascript"><!--
 		google_ad_client = "ca-pub-7240991998302198";
 		/* ChordFinderLeaderBoard */
 		google_ad_slot = "5482188107";
 		google_ad_width = 728;
 		google_ad_height = 90;
 		//-->
-		</script>
+		<!--  /script>
 		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
+	</script-->
 	<h1>Chord Finder</h1>
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.getJSON("@{'/public/assets/chords.json'}", function(noteData) {
+				console.log(noteData);	
+				
+			});
+		});
+	</script>
 	<p>	
 		Chords are built up around a root note with the other notes creating the harmonies and 'feel' of the chord. This tool gives you the finger positions, in several variations,
 		for the chord you are looking for.
 	</p>
 	<div class="row">
 		<div id="fretboard">
-			<div class="root-note" style="top:171px;left:215px;" ></div>
-			<div class="note" style="top:151px;left:215px;" ></div>
-			<div class="note" style="top:131px;left:215px;" ></div>
-			<div class="note" style="top:115px;left:291px;" ></div>
+			<div id="ENote" class="root-note" style="top:171px;left:215px;" ></div>
+			<div id="aNote" class="note" style="top:151px;left:215px;" ></div>
+			<div class="dNote" style="top:131px;left:215px;" ></div>
+			<div class="gNote" style="top:115px;left:291px;" ></div>
 		</div>
 	</div>
 	<div class="row">
