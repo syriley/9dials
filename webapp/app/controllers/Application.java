@@ -27,7 +27,6 @@ public class Application extends PublicUserController {
     
     public static void mailingList(String emailAddress, String requestUrl) {
         new MailingListRecipient(emailAddress).save();
-        Logger.debug("Request url", requestUrl);
         redirect(requestUrl);
     }
     
