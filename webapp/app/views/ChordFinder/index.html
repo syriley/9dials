@@ -1,0 +1,74 @@
+#{extends 'main.html' /}
+#{set title:'Chord Finder' /}
+#{set chordFinder:'active' /}
+#{set 'moreStyleSheets' /}
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/chordFinder.css'}">
+#/{set/}
+
+<div id="single">
+	<hr class="soften" />
+	<h1>Chord Finder</h1>
+	
+	<p>	
+		Chords are built up around a root note with the other notes creating the harmonies and 'feel' of the chord. This tool gives you the finger positions, in several variations,
+		for the chord you are looking for.
+	</p>
+	<div class="row">
+		<div id="fretboard">
+			<div class="root-note" style="top:171px;left:215px;" ></div>
+			<div class="note" style="top:151px;left:215px;" ></div>
+			<div class="note" style="top:131px;left:215px;" ></div>
+			<div class="note" style="top:115px;left:291px;" ></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2">
+			<h4>Root note</h4>
+		    <div class="btn-group">
+		    <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+		    A
+		    <span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+		    	<li><a href="#">A# (Bb)</a></li>
+		    	<li><a href="#">B</a></li>	
+		    	<li><a href="#">C</a></li>
+		    	<li><a href="#">C# (Db)</a></li>
+		    </ul>
+		    </div>
+		</div>
+		<div class="span2">
+			<h4>Chord type</h4>
+		    <div class="btn-group">
+		    <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">
+		    Major
+		    <span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+				<li><a href="#">Minor</a></li>
+				<li><a href="#">dim</a></li>
+				<li><a href="#">aug</a></li>
+				<li><a href="#">sus</a></li>
+				<li><a href="#">6</a></li>
+				<li><a href="#">7</a></li>
+				<li><a href="#">maj7</a></li>
+				<li><a href="#">9</a></li>
+				<li><a href="#">add9</a></li>
+				<li><a href="#">m6</a></li>
+				<li><a href="#">m7</a></li>
+				<li><a href="#">mmaj7</a></li>
+				<li><a href="#">m9</a></li>
+				<li><a href="#">11</a></li>
+				<li><a href="#">7sus4</a></li>
+				<li><a href="#">13</a></li>
+				<li><a href="#">6add9</a></li>
+				<li><a href="#">-5</a></li>
+				<li><a href="#">7-5</a></li>
+				<li><a href="#">7maj5</a></li>
+				<li><a href="#">maj9</a></li>
+		    </ul>
+		    </div>
+		</div>
+	</div>
+	<hr class="space" />
+</div>

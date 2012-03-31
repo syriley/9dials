@@ -34,13 +34,13 @@
     	<header class="header">
 		  <div class="container">
 		    <div class="row">
-		      <div class="span6"> <a href="@{Application.index}"><img id="page_logo" src="@{'/public/images/logo.png'}" width="183" height="55" alt="9dials"></a> </div>
-		      <div class="span6">
+		      <div class="span5"> <a href="@{Application.index}"><img id="page_logo" src="@{'/public/images/logo.png'}" width="183" height="55" alt="9dials"></a> </div>
+		      <div class="span7">
 		        <ul class="nav nav-pills header-nav">
 		          <li class="#{get 'home' /}"><a href="@{Application.index}">Home page</a></li>
 		          <li class="#{get 'studio' /}">  <a id="studioLink" href="@{Sessions.index}">Studio</a></li>
+		          <li class="#{get 'chordFinder' /}"><a href="@{ChordFinder.index}">Chord Finder</a></li>
     			  <li><a id="academyLink" href="@{Academy.index}">Academy</a></li>
-    			  <li><a id="tunaLink"  href="@{Tuna.index}">Tuna</a></li>
     			  #{if _user }
 		    		<li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">${_user.name} <b class="caret"></b></a>
