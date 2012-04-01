@@ -1,0 +1,48 @@
+#{extends 'studio.html' /}
+#{set title:'Online Guitar Academy' /}
+<hr class="soften" />
+<h1>${lesson.name}</h1>
+<p>${lesson.pdfLocation}</p>
+<p>${lesson.youtubeLocation}</p>
+#{set 'moreScripts'}
+		<script type="text/javascript">
+		  // This specifies the location of the pdf.js file.
+		  PDFJS.workerSrc = "/auth/public/javascripts/lib/pdf.js";
+		</script>
+		<script type="text/javascript">
+		'use strict';
+		PDFJS.getPdf('/auth/public/assets/pdfs/drumLessons/${lesson.name}', function getPdfHelloWorld(data) {
+		  //
+		  // Instantiate PDFDoc with PDF data
+		  //
+		  var pdf = new PDFJS.PDFDoc(data);
+		  var page = pdf.getPage(1);
+		  var scale = 1.5;
+		
+		  //
+		  // Prepare canvas using PDF page dimensions
+		  //
+		  var canvas = document.getElementById('the-canvas');
+		  var context = canvas.getContext('2d');
+		  canvas.height = page.height * scale;
+		  canvas.width = page.width * scale;
+		
+		  //
+		  // Render PDF page into canvas context
+		  //
+		  page.startRendering(context);
+		});
+	</script>
+	
+#{/set}
+
+<div class="row">
+	<div class="offset2">
+		<iframe width="620" height="378" frameborder="0" 
+			src="${lesson.youtubeLocation}" 
+			type="text/html" class="youtube-player" title="YouTube video player"></iframe>
+	</div>
+</div>
+
+<canvas id="the-canvas"></canvas>
+<hr class="space" />

@@ -8,11 +8,12 @@
 <div class="row">
 	<div class="span12">
 		<h2>Drum Lessons</h2>
-		<ul>
 			#{list items:drumLessonGroups, as: 'drumLessonGroup' }
-				<li>${drumLessonGroup.name}</li>
+				<h2>${drumLessonGroup.name}</h2>
+				#{list items:drumLessonGroup.lessons, as: 'lesson'}
+					<span><a href="@{showLesson(lesson.name)}">${lesson.name}</a></span>
+				#{/list}				
 			#{/list}
-		</ul>
 	</div>
 </div>
 

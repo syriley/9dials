@@ -8,18 +8,23 @@ import play.db.jpa.Model;
 @Entity
 public class DrumLesson extends Model{
 
-    public String lessonName;
+    public String name;
     public String pdfLocation;
-	public String youTubeLocation;
+	public String youtubeLocation;
 	@ManyToOne 
 	public DrumLessonGroup drumLessonGroup;
 
-    public DrumLesson(String lessonName, String pdfLocation,
-            String youTubeLocation, DrumLessonGroup drumLessonGroup) {
+    public DrumLesson(String name, String pdfLocation,
+            String youtubeLocation, DrumLessonGroup drumLessonGroup) {
         super();
-        this.lessonName = lessonName;
+        this.name = name;
         this.pdfLocation = pdfLocation;
-        this.youTubeLocation = youTubeLocation;
+        this.youtubeLocation = youtubeLocation;
         this.drumLessonGroup = drumLessonGroup;
     }
+    
+    public static DrumLesson findByName(String name) {
+        return DrumLesson.find("byName", name).first();
+    }
+    
 }
