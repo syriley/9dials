@@ -94,11 +94,18 @@
    user: bob
    session: session1
    role: collaborator
+   
+ DrumLessonGroup(drumLessonGroup1):
+   name: General Lessons
+   
+ DrumLessonGroup(drumLessonGroup2):
+   name: Rudiments 
  
  DrumLesson(drumLesson1):
    pdfLocation: http://www.youtube.com/embed/oZ_Mcf0V-98?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
    youTubeLocation: http://s3.amazonaws.com/drumlessonscom/03-combining-drum-fills.pdf 
    name: 03-combining-drum-fills.pdf
+   drumLessonGroup: drumLessonGroup2
  
  DrumLesson:
    pdfLocation: http://www.youtube.com/embed/gv8mKTe8Xxg?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0

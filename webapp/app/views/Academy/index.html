@@ -5,4 +5,16 @@
 
 <p>Our academy will allow you to find guitar teachers and students alike, facilitating scheduling, learning material and video lessons.</p>
 
+<div class="row">
+	<div class="span12">
+		<h2>Drum Lessons</h2>
+		<ul>
+			#{list items:drumLessonGroups, as: 'drumLessonGroup' }
+				<li>${drumLessonGroup.name}</li>
+			#{/list}
+		</ul>
+	</div>
+</div>
+
+
 <hr class="space" />
