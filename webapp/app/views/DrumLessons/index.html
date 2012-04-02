@@ -21,12 +21,13 @@
 	#{/list}
 	</div>
 	<div class="span10">
-		<h2>Drum Lessons</h2>
 			#{list items:drumLessonGroups, as: 'drumLessonGroup' }
+				<div class="span3">
 				<h2>${drumLessonGroup.name}</h2>
 				#{list items:drumLessonGroup.lessons, as: 'lesson'}
-					<span><a href="@{showLesson(lesson.name)}">${lesson.name}</a></span>
-				#{/list}				
+					<span><a href="@{Academy.showLesson(lesson.name)}">${lesson.name}</a></span>
+				#{/list}			
+				</div>	
 			#{/list}
 	</div>
 </div>
