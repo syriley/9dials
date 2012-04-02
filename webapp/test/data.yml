@@ -3,7 +3,7 @@
  
  AUser(bob):
    email: robert.richards@gmail.com
-   username: robby1
+   Username: Robby1
    password: secret
    name: Robert Richards
    bio: my bio
@@ -11,74 +11,74 @@
  AUser(david):
    email: s@s.com
    password: password
-   username: user1
+   Username: User1
    name: David Simpkins
    bio: my bio
 
  AUser(barry):
    email: a@a.com
    password: password
-   username: bigbarryapple
+   Username: Bigbarryapple
    name: Barry Appleton
    bio: my bio
 
  Instrument(guitar):
-   name: guitar
+   name: Guitar
 
  Instrument(piano):
-   name: piano
+   name: Piano
 
  Instrument(drums):
-   name: drums
+   name: Drums
 
  Instrument(bassguitar):
-   name: bass guitar
+   name: Bass Guitar
 
  Instrument(kazoo):
-   name: kazoo
+   name: Kazoo
 
  Instrument(saxophone):
-   name: saxophone
+   name: Saxophone
 
  Instrument(oboe):
-   name: oboe
+   name: Oboe
 
  Instrument(keyboard):
-   name: keyboard
+   name: Keyboard
 
  Instrument(vocal):
-   name: vocal
+   name: Vocal
 
  Instrument(violin):
-   name: violin
+   name: Violin
 
  Instrument(viola):
-   name: viola
+   name: Viola
 
  Instrument(trumpet):
-   name: trumpet
+   name: Trumpet
 
  Instrument(trombone):
-   name: trombone
+   name: Trombone
 
  Instrument(flute):
-   name: flute 
+   name: Flute 
 
  Session(session1):
-   name: session1
+   name: Session1
    access: Private
    data: | 
      {"version":0.1,"name":"hope","sample_rate":48000,"sources":[{"url":"sounds/hope/solo_guitar.ogg","id":1,"sample_rate":48000},{"url":"sounds/hope/bass.ogg","id":2,"sample_rate":48000},{"url":"sounds/hope/rhythm_guitar.ogg","id":3,"sample_rate":48000}],"tracks":[{"id":4,"name":"SoloGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":7,"start_position":0,"length":432212,"source_id":1}]},{"id":5,"name":"BassGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":8,"start_position":0,"length":232212,"source_id":2}]},{"id":6,"name":"RhythmGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":9,"start_position":1223000,"length":232212,"source_id":3}]}],"playhead":{"position":0}}
 
  Session(session2):
-   name: session2
+   name: Session2
 
  Session(session3):
-   name: session3
+   name: Session3
    description: description
 
  Session(unattachedSession):
-   name: unattached Session 
+   name: Unattached Session 
 
  UserSession(userSession1):
    user: david
@@ -95,901 +95,921 @@
    session: session1
    role: collaborator
    
- DrumLessonGroup(drumLessonGroup1):
-   name: General
    
- DrumLessonGroup(drumLessonGroup2):
-   name: Rudiments 
+ DrumLessonGroup(rudiments):
+   name: Rudiments
+   
+ DrumLessonGroup(dynamic):
+   name: Dynamic
+ 
+ DrumLessonGroup(theory):
+   name: Theory & Notation
+   
+ DrumLessonGroup(bass):
+   name: Bass Drum
+   
+ DrumLessonGroup(rock):
+   name: Rock
+   
+ DrumLessonGroup(heavymetal):
+   name: Heavy Metal
+ 
+ DrumLessonGroup(playalong):
+   name: Play Along
+ 
+ DrumLessonGroup(recording):
+   name: Recording
+   
  
  DrumLesson(drumLesson1):
    youtubeLocation: http://www.youtube.com/embed/oZ_Mcf0V-98?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/03-combining-drum-fills.pdf 
-   name: 03-combining-drum-fills.pdf
-   drumLessonGroup: drumLessonGroup2
+   name: Combining Drum Fills
+   drumLessonGroup: rudiments
  
  DrumLesson(drumLesson4):  
    youtubeLocation: http://www.youtube.com/embed/gv8mKTe8Xxg?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/02-playing-fills-backwards.pdf 
-   name: 02-playing-fills-backwards.pdf
-   drumLessonGroup: drumLessonGroup2
+   name: Playing Fills Backwards
+   drumLessonGroup: rudiments
  
  
  DrumLesson(drumLesson5):   
    youtubeLocation: http://www.youtube.com/embed/Y1pQYL0IulY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson6):   
    youtubeLocation: http://www.youtube.com/embed/Z7tKC5VwqG8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson7):   
    youtubeLocation: http://www.youtube.com/embed/qTzHhSsT8wM?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dl-the-rosanna-shuffle.pdf 
-   drumLessonGroup: drumLessonGroup2
-   name: dl-the-rosanna-shuffle.pdf
+   drumLessonGroup: rudiments
+   name: The Rosanna Shuffle
  
  
  DrumLesson(drumLesson8):   
    youtubeLocation: http://www.youtube.com/embed/f5Mhc0xXgkE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dl-ohr-applications.pdf 
-   name: dl-ohr-applications.pdf
+   name: Applications
  
  
  DrumLesson(drumLesson9):   
    youtubeLocation: http://www.youtube.com/embed/n5GOYT2D73c?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson10):   
    youtubeLocation: http://www.youtube.com/embed/tCvHnJzZKq8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson11):   
    youtubeLocation: http://www.youtube.com/embed/bYBPJ57FyFc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/opening-closing-hats-beginner.pdf 
-   name: opening-closing-hats-beginner.pdf
+   name: Opening Closing Hats Beginner
  
  
  DrumLesson(drumLesson12):   
    youtubeLocation: http://www.youtube.com/embed/bCbCjUV9aT8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/opening-closing-hats-intermediate.pdf 
-   name: opening-closing-hats-intermediate.pdf
+   name: Opening Closing Hats Intermediate
  
  
  DrumLesson(drumLesson13):   
    youtubeLocation: http://www.youtube.com/embed/HVjTfOwU6AI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/opening-closing-hats-advanced.pdf 
-   name: opening-closing-hats-advanced.pdf
+   name: Opening Closing Hats Advanced
  
  
  DrumLesson(drumLesson14):   
    youtubeLocation: http://www.youtube.com/embed/n5aNoETMXRA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/ghost-notes-beginner.pdf 
-   name: ghost-notes-beginner.pdf
+   name: Ghost Notes Beginner
  
  
  DrumLesson(drumLesson15):   
    youtubeLocation: http://www.youtube.com/embed/fVqia99StKc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/ghost-notes-intermediate.pdf 
-   name: ghost-notes-intermediate.pdf
+   name: Ghost Notes Intermediate
  
  
  DrumLesson(drumLesson16):   
    youtubeLocation: http://www.youtube.com/embed/zBpAPx1XLoU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/ghost-notes-advanced.pdf 
-   name: ghost-notes-advanced.pdf
+   name: Ghost Notes Advanced
  
  
  DrumLesson(drumLesson17):   
    youtubeLocation: http://www.youtube.com/embed/3ak2KU3zXEY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/cross-sticking-grooves-beginner.pdf 
-   name: cross-sticking-grooves-beginner.pdf
+   name: Cross Sticking Grooves Beginner
  
  
  DrumLesson(drumLesson18):   
    youtubeLocation: http://www.youtube.com/embed/N-0ConT8Q-E?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: dynamic
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/cross-sticking-grooves-intermediate.pdf 
-   name: cross-sticking-grooves-intermediate.pdf
+   name: Cross Sticking Grooves Intermediate
  
  
  DrumLesson(drumLesson19):   
    youtubeLocation: http://www.youtube.com/embed/EZJhAmF2-jo?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: theory 
  
  DrumLesson(drumLesson20):   
    youtubeLocation: http://www.youtube.com/embed/K9RQHiC-1ls?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-quarter-notes.pdf 
-   name: how-to-count-quarter-notes.pdf
+   name: How To Count Quarter Notes
  
  
  DrumLesson(drumLesson21):   
    youtubeLocation: http://www.youtube.com/embed/EGJNmA-4wFE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-eighth-notes.pdf 
-   name: how-to-count-eighth-notes.pdf
+   name: How To Count Eighth Notes
  
  
  DrumLesson(drumLesson22):   
    youtubeLocation: http://www.youtube.com/embed/1co_WbX0gXo?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-16th-notes.pdf 
-   name: how-to-count-16th-notes.pdf
+   name: How To Count 16Th Notes
  
  
  DrumLesson(drumLesson23):   
    youtubeLocation: http://www.youtube.com/embed/NR5uEKQOTkU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-32nd-notes.pdf 
-   name: how-to-count-32nd-notes.pdf
+   name: How To Count 32Nd Notes
  
  
  DrumLesson(drumLesson24):   
    youtubeLocation: http://www.youtube.com/embed/KuReHJyyL_c?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-8th-note-triplets.pdf 
-   name: how-to-count-8th-note-triplets.pdf
+   name: How To Count 8Th Note Triplets
  
  
  DrumLesson(drumLesson25):   
    youtubeLocation: http://www.youtube.com/embed/7UN_6t16Y5k?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-16th-note-triplets.pdf 
-   name: how-to-count-16th-note-triplets.pdf
+   name: How To Count 16Th Note Triplets
  
  
  DrumLesson(drumLesson26):   
    youtubeLocation: http://www.youtube.com/embed/FkSNW-vtT_E?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: theory
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-count-quarter-note-triplets.pdf 
-   name: how-to-count-quarter-note-triplets.pdf
+   name: How To Count Quarter Note Triplets
  
  
  DrumLesson(drumLesson27):   
    youtubeLocation: http://www.youtube.com/embed/YJVgernoQUE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/01-single-stroke-roll.pdf 
-   name: 01-single-stroke-roll.pdf
+   name: Single Stroke Roll
  
  
  DrumLesson(drumLesson28):   
    youtubeLocation: http://www.youtube.com/embed/Z89YwuvVeYo?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/02-single-stroke-four.pdf 
-   name: 02-single-stroke-four.pdf
+   name: Single Stroke Four
  
  
  DrumLesson(drumLesson29):   
    youtubeLocation: http://www.youtube.com/embed/Z9nFougbgEI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/03-single-stroke-seven.pdf 
-   name: 03-single-stroke-seven.pdf
+   name: Single Stroke Seven
  
  
  DrumLesson(drumLesson30):   
    youtubeLocation: http://www.youtube.com/embed/tWDvWxyTpKk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/04-multiple-bounce-roll.pdf 
-   name: 04-multiple-bounce-roll.pdf
+   name: Multiple Bounce Roll
  
  
  DrumLesson(drumLesson31):   
    youtubeLocation: http://www.youtube.com/embed/1FopMNahnaw?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/05-double-stroke-roll.pdf 
-   name: 05-double-stroke-roll.pdf
+   name: Double Stroke Roll
  
  
  DrumLesson(drumLesson32):   
    youtubeLocation: http://www.youtube.com/embed/TDl9glYni_M?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/06-triple-stroke-roll.pdf 
-   name: 06-triple-stroke-roll.pdf
+   name: Triple Stroke Roll
  
  
  DrumLesson(drumLesson33):   
    youtubeLocation: http://www.youtube.com/embed/j4GTHcjMYrs?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/07-five-stroke-roll.pdf 
-   name: 07-five-stroke-roll.pdf
+   name: Five Stroke Roll
  
  
  DrumLesson(drumLesson34):   
    youtubeLocation: http://www.youtube.com/embed/m3_jgskFos4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/08-six-stroke-roll.pdf 
-   name: 08-six-stroke-roll.pdf
+   name: Six Stroke Roll
  
  
  DrumLesson(drumLesson35):   
    youtubeLocation: http://www.youtube.com/embed/4M3VK-Verp8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/09-seven-stroke-roll.pdf 
-   name: 09-seven-stroke-roll.pdf
+   name: Seven Stroke Roll
  
  
  DrumLesson(drumLesson36):   
    youtubeLocation: http://www.youtube.com/embed/c6cZGPxUoD0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/10-nine-stroke-roll.pdf 
-   name: 10-nine-stroke-roll.pdf
+   name: Nine Stroke Roll
  
  
  DrumLesson(drumLesson37):   
    youtubeLocation: http://www.youtube.com/embed/iuYHXjLTcbY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/11-ten-stroke-roll.pdf 
-   name: 11-ten-stroke-roll.pdf
+   name: Ten Stroke Roll
  
  
  DrumLesson(drumLesson38):   
    youtubeLocation: http://www.youtube.com/embed/-fIX1iNlyLA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/12-eleven-stroke-roll.pdf 
-   name: 12-eleven-stroke-roll.pdf
+   name: Eleven Stroke Roll
  
  
  DrumLesson(drumLesson39):   
    youtubeLocation: http://www.youtube.com/embed/jTRovql0kyg?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/13-thirteen-stroke-roll.pdf 
-   name: 13-thirteen-stroke-roll.pdf
+   name: Thirteen Stroke Roll
  
  
  DrumLesson(drumLesson40):   
    youtubeLocation: http://www.youtube.com/embed/u_KZ5T_kzDE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/14-fifteen-stroke-roll.pdf 
-   name: 14-fifteen-stroke-roll.pdf
+   name: Fifteen Stroke Roll
  
  
  DrumLesson(drumLesson41):   
    youtubeLocation: http://www.youtube.com/embed/8Zai1sGeYmA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/15-seventeen-stroke-roll.pdf 
-   name: 15-seventeen-stroke-roll.pdf
+   name: Seventeen Stroke Roll
  
  
  DrumLesson(drumLesson42):   
    youtubeLocation: http://www.youtube.com/embed/Ji5bKi5i0RY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/16-single-paradiddle.pdf 
-   name: 16-single-paradiddle.pdf
+   name: Single Paradiddle
  
  
  DrumLesson(drumLesson43):   
    youtubeLocation: http://www.youtube.com/embed/hLpUeaXNcOo?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/17-double-paradiddle.pdf 
-   name: 17-double-paradiddle.pdf
+   name: Double Paradiddle
  
  
  DrumLesson(drumLesson44):   
    youtubeLocation: http://www.youtube.com/embed/8HzVFwiIHNw?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/18-triple-paradiddle.pdf 
-   name: 18-triple-paradiddle.pdf
+   name: Triple Paradiddle
  
  
  DrumLesson(drumLesson45):   
    youtubeLocation: http://www.youtube.com/embed/d9UkA7oa12Y?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/19-single-paradiddle-diddle.pdf 
-   name: 19-single-paradiddle-diddle.pdf
+   name: Single Paradiddle Diddle
  
  
  DrumLesson(drumLesson46):   
    youtubeLocation: http://www.youtube.com/embed/eMOGfXviFQM?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/20-flams.pdf 
-   name: 20-flams.pdf
+   name: Flams
  
  
  DrumLesson(drumLesson47):   
    youtubeLocation: http://www.youtube.com/embed/eUAK9UCKQRU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/21-flam-taps.pdf 
-   name: 21-flam-taps.pdf
+   name: Flam Taps
  
  
  DrumLesson(drumLesson48):   
    youtubeLocation: http://www.youtube.com/embed/Je_KBfW2EGw?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/22-flam-accents.pdf 
-   name: 22-flam-accents.pdf
+   name: Flam Accents
  
  
  DrumLesson(drumLesson49):   
    youtubeLocation: http://www.youtube.com/embed/tp9g_eSPZ5Y?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/23-flamacue.pdf 
-   name: 23-flamacue.pdf
+   name: Flamacue
  
  
  DrumLesson(drumLesson50):   
    youtubeLocation: http://www.youtube.com/embed/KZjFRFTIZBE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/24-flam-paradiddle.pdf 
-   name: 24-flam-paradiddle.pdf
+   name: Flam Paradiddle
  
  
  DrumLesson(drumLesson51):   
    youtubeLocation: http://www.youtube.com/embed/mDZ-NBkqSlc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/25-single-flammed-mill.pdf 
-   name: 25-single-flammed-mill.pdf
+   name: Single Flammed Mill
  
  
  DrumLesson(drumLesson52):   
    youtubeLocation: http://www.youtube.com/embed/sE331NrAB1Y?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/26-flam-paradiddle-diddle.pdf 
-   name: 26-flam-paradiddle-diddle.pdf
+   name: Flam Paradiddle Diddle
  
  
  DrumLesson(drumLesson53):   
    youtubeLocation: http://www.youtube.com/embed/WNWDiNlHD04?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/27-swiss-army-triplets.pdf 
-   name: 27-swiss-army-triplets.pdf
+   name: Swiss Army Triplets
  
  
  DrumLesson(drumLesson54):   
    youtubeLocation: http://www.youtube.com/embed/3iLTFigQst0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/28-inverted-flam-tap.pdf 
-   name: 28-inverted-flam-tap.pdf
+   name: Inverted Flam Tap
  
  
  DrumLesson(drumLesson55):   
    youtubeLocation: http://www.youtube.com/embed/RyqHKKR3LmU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/29-flam-drag.pdf 
-   name: 29-flam-drag.pdf
+   name: Flam Drag
  
  
  DrumLesson(drumLesson56):   
    youtubeLocation: http://www.youtube.com/embed/GPula3g89Fk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/30-pataflafla.pdf 
-   name: 30-pataflafla.pdf
+   name: Pataflafla
  
  
  DrumLesson(drumLesson57):   
    youtubeLocation: http://www.youtube.com/embed/NWIcD1NSwD4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/31-drag-ruff.pdf 
-   name: 31-drag-ruff.pdf
+   name: Drag Ruff
  
  
  DrumLesson(drumLesson58):   
    youtubeLocation: http://www.youtube.com/embed/okQJLBE1CtY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/32-single-drag-tap.pdf 
-   name: 32-single-drag-tap.pdf
+   name: Single Drag Tap
  
  
  DrumLesson(drumLesson59):   
    youtubeLocation: http://www.youtube.com/embed/PqANqc2EP68?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/33-double-drag-tap.pdf 
-   name: 33-double-drag-tap.pdf
+   name: Double Drag Tap
  
  
  DrumLesson(drumLesson60):   
    youtubeLocation: http://www.youtube.com/embed/GnZRUWV3_W4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/34-lesson-25.pdf 
-   name: 34-lesson-25.pdf
+   name: Lesson 25
  
  
  DrumLesson(drumLesson61):   
    youtubeLocation: http://www.youtube.com/embed/z_2_hHA4HsU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/35-single-dragadiddle.pdf 
-   name: 35-single-dragadiddle.pdf
+   name: Single Dragadiddle
  
  
  DrumLesson(drumLesson62):   
    youtubeLocation: http://www.youtube.com/embed/ZMexzMD4DOQ?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/36-dragadiddle-1.pdf 
-   name: 36-dragadiddle-1.pdf
+   name: Dragadiddle 1
  
  
  DrumLesson(drumLesson63):   
    youtubeLocation: http://www.youtube.com/embed/yRPwERMvY8A?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/37-dragadiddle-2.pdf 
-   name: 37-dragadiddle-2.pdf
+   name: Dragadiddle 2
  
  
  DrumLesson(drumLesson64):   
    youtubeLocation: http://www.youtube.com/embed/CPedwuOZErc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dl-single-stroke-roll-speed.pdf 
-   name: dl-single-stroke-roll-speed.pdf
+   name: Dl Single Stroke Roll Speed
  
  
  DrumLesson(drumLesson65):   
    youtubeLocation: http://www.youtube.com/embed/xiv39umnrVk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dl-single-paradiddle-applications.pdf 
-   name: dl-single-paradiddle-applications.pdf
+   name: Single Paradiddle Applications
  
  
  DrumLesson(drumLesson66):   
    youtubeLocation: http://www.youtube.com/embed/4wWqjSTjpgA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/38-single-ratamacue.pdf 
-   name: 38-single-ratamacue.pdf
+   name: Single Ratamacue
  
  
  DrumLesson(drumLesson67):   
    youtubeLocation: http://www.youtube.com/embed/-A9rWRlXyIU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/39-double-ratamacue.pdf 
-   name: 39-double-ratamacue.pdf
+   name: Double Ratamacue
  
  
  DrumLesson(drumLesson68):   
    youtubeLocation: http://www.youtube.com/embed/Hv3allPwtIU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/bds-heel-toe-fills.pdf 
-   name: bds-heel-toe-fills.pdf
+   name: Heel Toe Fills
  
  
  DrumLesson(drumLesson69):   
    youtubeLocation: http://www.youtube.com/embed/s6zpJYlXEJ4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/bds-heel-toe-beats.pdf 
-   name: bds-heel-toe-beats.pdf
+   name: Heel Toe Beats
  
  
  DrumLesson(drumLesson70):   
    youtubeLocation: http://www.youtube.com/embed/ZmvARo03d4o?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson71):   
    youtubeLocation: http://www.youtube.com/embed/eorHFn65bYk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/bass-drum-independence-etude.pdf 
-   name: bass-drum-independence-etude.pdf
+   name: Bass Drum Independence Etude
  
  
  DrumLesson(drumLesson72):   
    youtubeLocation: http://www.youtube.com/embed/034m9bQqjY8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: bass 
  
  DrumLesson(drumLesson73):   
    youtubeLocation: http://www.youtube.com/embed/IYtmNxAN07o?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: bass 
  
  DrumLesson(drumLesson74):   
    youtubeLocation: http://www.youtube.com/embed/9H2R7wqoQ5g?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: bass 
  
  DrumLesson(drumLesson75):   
    youtubeLocation: http://www.youtube.com/embed/4IWhy_1RO2I?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/single-pedal-bass-drum-speed-advanced.pdf 
-   name: single-pedal-bass-drum-speed-advanced.pdf
+   name: Single Pedal Bass Drum Speed Advanced
  
  
  DrumLesson(drumLesson76):   
    youtubeLocation: http://www.youtube.com/embed/4iyzfRk5FLI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/single-pedal-bass-drum-speed-intermediate.pdf 
-   name: single-pedal-bass-drum-speed-intermediate.pdf
+   name: Single Pedal Bass Drum Speed Intermediate
  
  
  DrumLesson(drumLesson77):   
    youtubeLocation: http://www.youtube.com/embed/HT6LFE_Sjh0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/single-pedal-bass-drum-speed-1-beginner.pdf 
-   name: single-pedal-bass-drum-speed-1-beginner.pdf
+   name: Single Pedal Bass Drum Speed 1 Beginner
  
  
  DrumLesson(drumLesson78):   
    youtubeLocation: http://www.youtube.com/embed/_9Pw13dCbL4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dbd-intermediate-double-bass-fills.pdf 
-   name: dbd-intermediate-double-bass-fills.pdf
+   name: Dbd Intermediate Double Bass Fills
  
  
  DrumLesson(drumLesson79):   
    youtubeLocation: http://www.youtube.com/embed/i-EDIP-sg7g?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dbd-double-bass-warm-ups.pdf 
-   name: dbd-double-bass-warm-ups.pdf
+   name: Dbd Double Bass Warm Ups
  
  
  DrumLesson(drumLesson80):   
    youtubeLocation: http://www.youtube.com/embed/B7n4PkwWOAU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dbd-double-bass-beats.pdf 
-   name: dbd-double-bass-beats.pdf
+   name: Dbd Double Bass Beats
  
  
  DrumLesson(drumLesson81):   
    youtubeLocation: http://www.youtube.com/embed/b1I-0MMSHwg?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/progress-chart.pdf 
-   name: progress-chart.pdf
+   name: Progress Chart
  
  
  DrumLesson(drumLesson82):   
    youtubeLocation: http://www.youtube.com/embed/OE1-WLCi3s4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: bass
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dbd-beginner-double-bass-fills.pdf 
-   name: dbd-beginner-double-bass-fills.pdf
+   name: Dbd Beginner Double Bass Fills
  
  
  DrumLesson(drumLesson83):   
    youtubeLocation: http://www.youtube.com/embed/dllDh7fmG1Y?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rock 
  
  DrumLesson(drumLesson84):   
    youtubeLocation: http://www.youtube.com/embed/qV2AujNqjxs?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/01-cool-linear-drum-fill.pdf 
-   name: 01-cool-linear-drum-fill.pdf
+   name: 01 Cool Linear Drum Fill
  
  
  DrumLesson(drumLesson85):   
    youtubeLocation: http://www.youtube.com/embed/XaM5KQIuns4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/dl-broken-up-hi-hat-concept.pdf 
-   name: dl-broken-up-hi-hat-concept.pdf
+   name: Dl Broken Up Hi Hat Concept
  
  
  DrumLesson(drumLesson86):   
    youtubeLocation: http://www.youtube.com/embed/B1vJIS7rmoI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/polyrhythm-4-over-7.pdf 
-   name: polyrhythm-4-over-7.pdf
+   name: Polyrhythm 4 Over 7
  
  
  DrumLesson(drumLesson87):   
    youtubeLocation: http://www.youtube.com/embed/2DQx58axEns?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/polyrhythm-4-over-5.pdf 
-   name: polyrhythm-4-over-5.pdf
+   name: Polyrhythm 4 Over 5
  
  
  DrumLesson(drumLesson88):   
    youtubeLocation: http://www.youtube.com/embed/P7pWn8Pxdro?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/polyrhythm-4-over-3.pdf 
-   name: polyrhythm-4-over-3.pdf
+   name: Polyrhythm 4 Over 3
  
  
  DrumLesson(drumLesson89):   
    youtubeLocation: http://www.youtube.com/embed/1VgtO1Q-61c?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/how-to-read-a-polyrhythm-chart.pdf 
-   name: how-to-read-a-polyrhythm-chart.pdf
+   name: How To Read A Polyrhythm Chart
  
  
  DrumLesson(drumLesson90):   
    youtubeLocation: http://www.youtube.com/embed/tUmpuLeaNoc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rock 
  
  DrumLesson(drumLesson91):   
    youtubeLocation: http://www.youtube.com/embed/mn4spSM5RF4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/07-5-4-drum-fills-advanced.pdf 
-   name: 07-5-4-drum-fills-advanced.pdf
+   name: 07 5 4 Drum Fills Advanced
  
  
  DrumLesson(drumLesson92):   
    youtubeLocation: http://www.youtube.com/embed/luvXITTeEhk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/06-5-4-drum-fills-intermediate.pdf 
-   name: 06-5-4-drum-fills-intermediate.pdf
+   name: 06 5 4 Drum Fills Intermediate
  
  DrumLesson(drumLesson93):   
    youtubeLocation: http://www.youtube.com/embed/RNIb5XO7YGA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/05-5-4-drum-fills-beginner.pdf 
-   name: 05-5-4-drum-fills-beginner.pdf
+   name: 05 5 4 Drum Fills Beginner
  
  
  DrumLesson(drumLesson94):   
    youtubeLocation: http://www.youtube.com/embed/WAuq7ISZM0A?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/04-5-4-drum-beats-advanced.pdf 
-   name: 04-5-4-drum-beats-advanced.pdf
+   name: 04 5 4 Drum Beats Advanced
  
  
  DrumLesson(drumLesson95):   
    youtubeLocation: http://www.youtube.com/embed/s8-MbVF-Cqc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/03-5-4-drum-beats-intermediate.pdf 
-   name: 03-5-4-drum-beats-intermediate.pdf
+   name: 03 5 4 Drum Beats Intermediate
  
  
  DrumLesson(drumLesson96):   
    youtubeLocation: http://www.youtube.com/embed/Q9s186JmkRU?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/02-5-4-drum-beats-beginner.pdf 
-   name: 02-5-4-drum-beats-beginner.pdf
+   name: 02 5 4 Drum Beats Beginner
  
  DrumLesson(drumLesson97):   
    youtubeLocation: http://www.youtube.com/embed/NXKJlUyP4So?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rock 
  
  DrumLesson(drumLesson98):   
    youtubeLocation: http://www.youtube.com/embed/YYYKhjG7CgY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rock 
  
  DrumLesson(drumLesson99):   
    youtubeLocation: http://www.youtube.com/embed/2NU5Bqtz6Y8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rock 
  
  DrumLesson(drumLesson100):   
    youtubeLocation: http://www.youtube.com/embed/845A3glVL4E?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/broken-16th-note-drum-fills-intermediate.pdf 
-   name: broken-16th-note-drum-fills-intermediate.pdf
+   name: Broken 16Th Note Drum Fills Intermediate
  
  
  DrumLesson(drumLesson101):   
    youtubeLocation: http://www.youtube.com/embed/Q_LXs0xXxOc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/broken-16th-note-drum-fills-beginner.pdf 
-   name: broken-16th-note-drum-fills-beginner.pdf
+   name: Broken 16Th Note Drum Fills Beginner
  
  DrumLesson(drumLesson102):   
    youtubeLocation: http://www.youtube.com/embed/K4Z0cuz4Drc?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/16th-note-linear-fills-intermediate.pdf 
-   name: 16th-note-linear-fills-intermediate.pdf
+   name: 16Th Note Linear Fills Intermediate
  
  
  DrumLesson(drumLesson103):   
    youtubeLocation: http://www.youtube.com/embed/O21pV3QRtvQ?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/16th-note-linear-fills-beginner.pdf 
-   name: 16th-note-linear-fills-beginner.pdf
+   name: 16Th Note Linear Fills Beginner
  
  
  DrumLesson(drumLesson104):   
    youtubeLocation: http://www.youtube.com/embed/6q9nr0wye2w?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/7-8-drum-fills-advanced.pdf 
-   name: 7-8-drum-fills-advanced.pdf
+   name: 7 8 Drum Fills Advanced
  
  
  DrumLesson(drumLesson105):   
    youtubeLocation: http://www.youtube.com/embed/vfwev65F8EY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/7-8-drum-fills-intermediate.pdf 
-   name: 7-8-drum-fills-intermediate.pdf
+   name: 7 8 Drum Fills Intermediate
  
  
  DrumLesson(drumLesson106):   
    youtubeLocation: http://www.youtube.com/embed/Dip8dq7XQcE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/7-8-drum-fills-beginner.pdf 
-   name: 7-8-drum-fills-beginner.pdf
+   name: 7 8 Drum Fills Beginner
  
  DrumLesson(drumLesson107):   
    youtubeLocation: http://www.youtube.com/embed/xEkMSZyKDt8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/learning-7-8-odd-time.pdf 
-   name: learning-7-8-odd-time.pdf
+   name: Learning 7 8 Odd Time
  
  DrumLesson(drumLesson108):   
    youtubeLocation: http://www.youtube.com/embed/mrVgC6dwsKE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-broken-eighth-note-fills.pdf 
-   name: rd-broken-eighth-note-fills.pdf
+   name: Rd Broken Eighth Note Fills
  
  
  DrumLesson(drumLesson109):   
    youtubeLocation: http://www.youtube.com/embed/9suVqkdOq6c?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-two-handed-hi-hat-beats.pdf 
-   name: rd-two-handed-hi-hat-beats.pdf
+   name: Rd Two Handed Hi Hat Beats
  
  
  DrumLesson(drumLesson110):   
    youtubeLocation: http://www.youtube.com/embed/2rRgOR-FG38?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-quarter-note-drum-fills.pdf 
-   name: rd-quarter-note-drum-fills.pdf
+   name: Rd Quarter Note Drum Fills
  
  DrumLesson(drumLesson111):   
    youtubeLocation: http://www.youtube.com/embed/9GtQ1f1FiLE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-int-tom-tom-drum-beats.pdf 
-   name: rd-int-tom-tom-drum-beats.pdf
+   name: Rd Int Tom Tom Drum Beats
  
  DrumLesson(drumLesson112):   
    youtubeLocation: http://www.youtube.com/embed/Mk_2VwOqnMk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-int-punk-rock-drum-beats.pdf 
-   name: rd-int-punk-rock-drum-beats.pdf
+   name: Rd Int Punk Rock Drum Beats
  
  DrumLesson(drumLesson113):   
    youtubeLocation: http://www.youtube.com/embed/a4L7fydMlxY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-int-linear-drum-beats.pdf 
-   name: rd-int-linear-drum-beats.pdf
+   name: Rd Int Linear Drum Beats
  
  
  DrumLesson(drumLesson114):   
    youtubeLocation: http://www.youtube.com/embed/ZEd3cbKU9hs?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-half-time-drum-beats.pdf 
-   name: rd-half-time-drum-beats.pdf
+   name: Rd Half Time Drum Beats
  
  DrumLesson(drumLesson115):   
    youtubeLocation: http://www.youtube.com/embed/gj3-L-tNl4o?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-eigth-note-drum-fills.pdf 
-   name: rd-eigth-note-drum-fills.pdf
+   name: Rd Eigth Note Drum Fills
  
  DrumLesson(drumLesson116):   
    youtubeLocation: http://www.youtube.com/embed/MHVqvKMgy24?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-beg-tom-tom-drum-beats.pdf 
-   name: rd-beg-tom-tom-drum-beats.pdf
+   name: Rd Beg Tom Tom Drum Beats
  
  DrumLesson(drumLesson117):   
    youtubeLocation: http://www.youtube.com/embed/4GcP8ApSoMw?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-beg-pun-rock-drum-beats.pdf 
-   name: rd-beg-pun-rock-drum-beats.pdf
+   name: Rd Beg Pun Rock Drum Beats
  
  
  DrumLesson(drumLesson118):   
    youtubeLocation: http://www.youtube.com/embed/-GPHTNhamBw?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/rd-beg-linear-drum-beats.pdf 
-   name: rd-beg-linear-drum-beats.pdf
+   name: Rd Beg Linear Drum Beats
  
  
  DrumLesson(drumLesson119):   
    youtubeLocation: http://www.youtube.com/embed/cCk9iG5MHAE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rock
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/08-odd-time-beats.pdf 
-   name: 08-odd-time-beats.pdf
+   name: 08 Odd Time Beats
  
  
  DrumLesson(drumLesson120):   
    youtubeLocation: http://www.youtube.com/embed/mP3VzrkuJow?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/07-broken-double-bass-beats-int.pdf 
-   name: 07-broken-double-bass-beats-int.pdf
+   name: 07 Broken Double Bass Beats Int
  
  
  DrumLesson(drumLesson121):   
    youtubeLocation: http://www.youtube.com/embed/DM65UlwOWuA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/06-metal-drum-fills-int.pdf 
-   name: 06-metal-drum-fills-int.pdf
+   name: 06 Metal Drum Fills Int
  
  DrumLesson(drumLesson122):   
    youtubeLocation: http://www.youtube.com/embed/MntKjwKrOtM?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/05-blast-beats.pdf 
-   name: 05-blast-beats.pdf
+   name: 05 Blast Beats
  
  DrumLesson(drumLesson123):   
    youtubeLocation: http://www.youtube.com/embed/jNL9ypFdAzI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/04-metal-drum-fills-beg.pdf 
-   name: 04-metal-drum-fills-beg.pdf
+   name: 04 Metal Drum Fills Beg
  
  
  DrumLesson(drumLesson124):   
    youtubeLocation: http://www.youtube.com/embed/gY7yRJivG3k?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/03-snare-drum-comping.pdf 
-   name: 03-snare-drum-comping.pdf
+   name: 03 Snare Drum Comping
  
  
  DrumLesson(drumLesson125):   
    youtubeLocation: http://www.youtube.com/embed/G11Zu6rsX-4?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/02-broken-double-bass-beats-beg.pdf 
-   name: 02-broken-double-bass-beats-beg.pdf
+   name: 02 Broken Double Bass Beats Beg
   
  DrumLesson(drumLesson126):   
    youtubeLocation: http://www.youtube.com/embed/4J-jXJZWz-0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: heavymetal
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/01-single-pedal-bass-drum-beats-beg.pdf 
-   name: 01-single-pedal-bass-drum-beats-beg.pdf
+   name: 01 Single Pedal Bass Drum Beats Beg
   
  DrumLesson(drumLesson127):   
    youtubeLocation: http://www.youtube.com/embed/O-PpBpMyls8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson128):   
    youtubeLocation: http://www.youtube.com/embed/wOeX0Kl3DcA?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson129):   
    youtubeLocation: http://www.youtube.com/embed/RBvihYLuuWY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson130):   
    youtubeLocation: http://www.youtube.com/embed/U7z4gBkMS-8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson131):   
    youtubeLocation: http://www.youtube.com/embed/ysaQATpBSn0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson132):   
    youtubeLocation: http://www.youtube.com/embed/x51MzvcBwHY?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson133):   
    youtubeLocation: http://www.youtube.com/embed/_YFJH9sV_Dk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson134):   
    youtubeLocation: http://www.youtube.com/embed/MzvyikiDWwQ?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson135):   
    youtubeLocation: http://www.youtube.com/embed/L3r87s002nM?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson136):   
    youtubeLocation: http://www.youtube.com/embed/a2jgOOOp6UI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson137):   
    youtubeLocation: http://www.youtube.com/embed/FRi01OZ7LIM?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson138):   
    youtubeLocation: http://www.youtube.com/embed/eELgoAtPDSo?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson139):   
    youtubeLocation: http://www.youtube.com/embed/RNOSU-opMQQ?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson140):   
    youtubeLocation: http://www.youtube.com/embed/Vou6KzJzGk8?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson141):   
    youtubeLocation: http://www.youtube.com/embed/N0kUX-aAReI?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson142):   
    youtubeLocation: http://www.youtube.com/embed/uyQhWj2xuB0?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson143):   
    youtubeLocation: http://www.youtube.com/embed/unC1NSEF7jE?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
    pdfLocation: http://s3.amazonaws.com/drumlessonscom/drumeo-live-55.pdf 
-   name: drumeo-live-55.pdf
+   name: Drumeo Live 55
  
  
  DrumLesson(drumLesson144):   
    youtubeLocation: http://www.youtube.com/embed/utmuFA__6bg?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson145):   
    youtubeLocation: http://www.youtube.com/embed/PqpYK2jr8Ik?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2 
+   drumLessonGroup: rudiments 
  
  DrumLesson(drumLesson146):   
    youtubeLocation: http://www.youtube.com/embed/2_MZI2XUSXk?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0
-   drumLessonGroup: drumLessonGroup2
+   drumLessonGroup: rudiments
