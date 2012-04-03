@@ -1,31 +1,28 @@
-   #{extends 'studio.html' /}
+#{extends 'academy.html' /}
 #{set title:'Online Guitar Academy' /}
 
-<hr class="soften" />
-<div class="row">
-<div class="span6 offset4">
-<a href="@{Academy.index}" class="btn">Guitar Lessons</a><a href="@{DrumLessons.index}" class="btn">Drum Lessons</a>
-</div>
-</div>
-
-
-<h1>Academy</h1>
+<h1>Drum Lessons</h1>
 
 <p>Our academy will allow you to find guitar teachers and students alike, facilitating scheduling, learning material and video lessons.</p>
 
+<hr class="space" />
 
 <div class="row">
 	<div class="span2">
-	#{list items:drumLessonGroups, as: 'drumLessonGroup' }
-	<a href="@{Academy.index}" class="btn">${drumLessonGroup.name}</a>
-	#{/list}
+		#{list items:drumLessonGroups, as: 'drumLessonGroup' }
+		<div >
+			<a href="@{Academy.index}" class="btn">${drumLessonGroup.name}</a>
+		</div>
+		#{/list}
 	</div>
 	<div class="span10">
 			#{list items:drumLessonGroups, as: 'drumLessonGroup' }
 				<div class="span3">
 				<h2>${drumLessonGroup.name}</h2>
 				#{list items:drumLessonGroup.lessons, as: 'lesson'}
-					<span><a href="@{Academy.showLesson(lesson.name)}">${lesson.name}</a></span>
+					#{if lesson.name }
+						<a href="@{Academy.showLesson(lesson.name)}">${lesson.name}</a><br/>
+					#{/if}
 				#{/list}			
 				</div>	
 			#{/list}

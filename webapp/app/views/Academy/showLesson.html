@@ -1,9 +1,9 @@
-#{extends 'studio.html' /}
-#{set title:'Online Guitar Academy' /}
+#{extends 'academy.html' /}
+#{set title:'lesson.name :: Drum Lesson' /}
 <hr class="soften" />
+
 <h1>${lesson.name}</h1>
-<p>${lesson.pdfLocation}</p>
-<p>${lesson.youtubeLocation}</p>
+<p>Hosted with permission from <a href="http://www.drumlessons.com">drumlessons.com</a></p>
 #{set 'moreScripts'}
 		<script type="text/javascript">
 		  // This specifies the location of the pdf.js file.
@@ -11,7 +11,7 @@
 		</script>
 		<script type="text/javascript">
 		'use strict';
-		PDFJS.getPdf('/auth/public/assets/pdfs/drumLessons/${lesson.name}', function getPdfHelloWorld(data) {
+		PDFJS.getPdf('/auth/public/assets/pdfs/drumLessons/${lesson.pdfLocation}', function getPdfHelloWorld(data) {
 		  //
 		  // Instantiate PDFDoc with PDF data
 		  //

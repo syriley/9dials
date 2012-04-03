@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set academy:'active' /}
+#{set id:'single' /}
+
+<hr class="soften" />
+<div class="row">
+	<div class="span8 offset2">
+		<a href="@{Academy.index}" class="btn span2">Academy Home</a><a href="@{Academy.index}" class="btn span2">Guitar Lessons</a><a href="@{DrumLessons.index}" class="btn span2">Drum Lessons</a>
+	</div>
+</div>
+
+#{doLayout /}
