@@ -2,6 +2,8 @@ package jobs;
 import java.util.List;
 
 import models.AUser;
+import play.Play;
+import play.Play.Mode;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.libs.Crypto;
@@ -15,6 +17,10 @@ public class Bootstrap extends Job {
     }
 
     public void reloadData() {
+        //don't ever overwrite live data
+        if (Play.mode == Mode.PROD) {
+            return;
+        }
 		Fixtures.deleteDatabase();
 	    Fixtures.loadModels("../test/data.yml");
 	    encryptUserPasswords();
