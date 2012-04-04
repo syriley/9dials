@@ -1,10 +1,11 @@
 #{extends 'academy.html' /}
-#{set title:'lesson.name | Drum Lesson' /}
+#{set title: lesson.name + ' | Drum Lesson' /}
 <hr class="soften" />
 
+#{form @DrumLessons.saveLesson(lesson.id)}
 <div class="row">
 	<div class="span3">
-		<h1>${lesson.name}</h1>
+		<input type="text" name="name" value="${lesson.name}" />
 	</div>
 	<div class="offset10">
 		<a href="@{Academy.editLesson(lesson.name)}" class="btn">Edit</a>
@@ -44,12 +45,19 @@
 #{/set}
 
 <div class="row">
+	<div class="span3">
+		<input type="text" name="youtubeLocation" value="${lesson.youtubeLocation}" />
+	</div>
+</div>
+<div class="row">
 	<div class="offset2">
 		<iframe width="620" height="378" frameborder="0" 
 			src="${lesson.youtubeLocation}" 
 			type="text/html" class="youtube-player" title="YouTube video player"></iframe>
 	</div>
 </div>
+<input type="submit" class="btn btn-primary" value="save" />
 
 <canvas id="the-canvas"></canvas>
 <hr class="space" />
+#{/form}

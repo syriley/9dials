@@ -16,4 +16,10 @@ public class Academy extends Controller{
          DrumLesson lesson = DrumLesson.findByName(name);
          render(lesson);
      }
+	 
+	 public static void editLesson(String name) {
+	         DrumLesson lesson = DrumLesson.findByName(name);
+	         render(lesson);
+	     }
+
 }
