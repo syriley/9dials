@@ -3,7 +3,6 @@ package controllers;
 import java.util.HashMap;
 import java.util.Map;
 
-import jobs.ExampleJob;
 import models.Instrument;
 import models.Picture;
 import models.AUser;
@@ -17,7 +16,6 @@ public class Profile extends LoggedInController {
 	}
 	
 	public static void edit() {
-		new ExampleJob().now();
 		 render();
 	 }
 		
