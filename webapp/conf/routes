@@ -8,8 +8,9 @@
 # Home page
 GET     /                                       Application.index
 
+# Import CRUD routes
 # Administration
-*       /admin                                  module:crud
+*       /admin/crud                                  module:crud
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
@@ -46,9 +47,7 @@ POST    /sources Sources.upload
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create
 
-# Import CRUD routes
-*      /admin              module:crud
-
+*       /admin/{controller}/{action}                  admin.{controller}.{action}
 *       /{controller}/{action}                  {controller}.{action}
 
 *       /{controller}                  {controller}.index

@@ -35,7 +35,7 @@
     	<header class="header">
 		  <div class="container">
 		    <div class="row">
-		      <div class="span5"> <a href="@{Application.index}"><img id="page_logo" src="@{'/public/images/logo.png'}" width="183" height="55" alt="9dials"></a> </div>
+		      <div class="span5"> <H1 style="color:white">Admin</H1> </div>
 		      <div class="span7">
 		        <ul class="nav nav-pills header-nav">
 		          <li class="#{get 'home' /}"><a href="@{Application.index}">Home page</a></li>
@@ -60,7 +60,16 @@
 		    </div>
 		  </div>
 		</header>
-    	<div class="container" id="#{get 'id' /}">
+    	<div class="container" id="single">
+    		<hr class="soften"/>
+    		<div class="row">
+    			<div class="offset4">
+    				<a href="http://www.9dials.com/blog/wp-login.php" target="_blank" class="btn">Blog</a>
+    				<a href="http://webmail.9dials.com" target="_blank" class="btn">Mail</a>
+    				<a href="http://piwik.9dials.com" target="_blank" class="btn">Piwik</a>
+    				<a href="#" class="btn">Directory</a>
+    			</div>
+    		</div>
   	    		#{doLayout /}
         </div>
 	    <footer class="footer">
@@ -95,7 +104,6 @@
 			        	<ul class="unstyled">
 			        		<li><a href="/howitworks">Contact</a></li>
 			        		<li><a href="/howitworks">Terms & Conditions</a></li>
-			        		<li><a href="@{admin.Dashboard.index}">Admin</a></li>
 			        	</ul>
 			        </div>
 		        </div>
