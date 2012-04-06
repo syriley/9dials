@@ -9,7 +9,7 @@ import com.google.gson.JsonParser;
 
 import controllers.admin.UserSessions;
 
-import models.AUser;
+import models.User;
 import models.Session;
 import models.UserSession;
 
@@ -19,7 +19,7 @@ public class Sessions extends LoggedInController {
     
 	public static void index() {
 		List<Session> otherSeshions = Session.findAll();
-        AUser ourUser = (AUser)renderArgs.get("_user");
+        User ourUser = (User)renderArgs.get("_user");
         otherSeshions.removeAll(ourUser.getSessions());
         render(otherSeshions);
 	}
@@ -33,10 +33,10 @@ public class Sessions extends LoggedInController {
 	        Session seshion = Session.findById(id);
 
 	        List<UserSession> userSessions = UserSession.getSharedUserSessions(seshion);
-	        List<AUser> sharedUsers = new ArrayList<AUser>();
+	        List<User> sharedUsers = new ArrayList<User>();
 	       
 	        
-	        List<AUser> allOtherUsers = AUser.findAll();
+	        List<User> allOtherUsers = User.findAll();
 	        allOtherUsers.removeAll(sharedUsers);
 	        
 	        render(seshion, userSessions, allOtherUsers);
@@ -48,7 +48,7 @@ public class Sessions extends LoggedInController {
 		Session session;
 		
 		if(id == null) {
-		    AUser user = AUser.find("byEmail", Security.connected()).first();
+		    User user = User.find("byEmail", Security.connected()).first();
 		    session = new Session(name, description).save();
 		  	   
 		    validate();
@@ -90,7 +90,7 @@ public class Sessions extends LoggedInController {
     }
 	
 	public static void shareWithUser(Long sessionId, String username) {
-		AUser user = AUser.find("byUsername", username).first();
+		User user = User.find("byUsername", username).first();
 		Session session = Session.findById(sessionId);
 		session.shareWithUser(user);
 		form(sessionId);

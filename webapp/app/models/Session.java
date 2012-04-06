@@ -35,7 +35,7 @@ public class Session extends Model{
 		this.description = description;
 	}
 	
-	public void shareWithUser(AUser user) {
+	public void shareWithUser(User user) {
 		new UserSession(user, this, "collaborator").save();
 	}
 	

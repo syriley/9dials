@@ -1,6 +1,6 @@
 package com.ninedials.test.unit;
 import models.OAuthUserHelper;
-import models.AUser;
+import models.User;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class OAuthUserHelperTest extends NineDialsTest {
     	OAuthUserHelper.oAuthCallback(data);
         
         // Retrieve the user with bob username
-        AUser fromDb = AUser.find("byEmail", "oauth@test.com").first();
+        User fromDb = User.find("byEmail", "oauth@test.com").first();
         
         // Test 
         assertNotNull(fromDb);

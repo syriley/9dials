@@ -5,7 +5,7 @@ import java.util.Map;
 
 import models.Instrument;
 import models.Picture;
-import models.AUser;
+import models.User;
 import play.Logger;
 import play.mvc.Router;
 
@@ -20,14 +20,14 @@ public class Profile extends LoggedInController {
 	 }
 		
 	public static void updateBasics(String name){
-		AUser user = AUser.find("byEmail", Security.connected()).first();
+		User user = User.find("byEmail", Security.connected()).first();
 		user.name=name;
 		user.save();
         edit();
 	}
 	
 	public static void addInstrument (String name) {		
-		AUser user = AUser.find("byEmail", Security.connected()).first();
+		User user = User.find("byEmail", Security.connected()).first();
 		Instrument instrument = Instrument.find("byName", name).first();
 		if (instrument == null) {
 			instrument = new Instrument(name);
@@ -39,7 +39,7 @@ public class Profile extends LoggedInController {
 	
 	public static void uploadPicture(Picture picture) {
         picture.save();
-        AUser user = AUser.find("byEmail", Security.connected()).first();
+        User user = User.find("byEmail", Security.connected()).first();
 		String url = getPictureUrl(picture);
 		user.setImageUrl(url);
 		user.save();

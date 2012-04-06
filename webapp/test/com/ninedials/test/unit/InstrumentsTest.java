@@ -3,7 +3,7 @@ package com.ninedials.test.unit;
 import java.util.List;
 
 import models.OAuthUserHelper;
-import models.AUser;
+import models.User;
 
 import org.junit.Test;
 

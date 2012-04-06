@@ -9,11 +9,11 @@ public class OAuthUserHelper {
 
 	public static void oAuthCallback(JsonObject data){
 		String email = data.get("email").getAsString();		
-		AUser user = AUser.find("byEmail", email).first();
+		User user = User.find("byEmail", email).first();
 		if(user == null){
 			String name = data.get("name").getAsString();
 			Logger.info("Creating user for: "+email);
-			user = new AUser();
+			user = new User();
 			user.email=email;
 			user.name=name;
 			user.save();

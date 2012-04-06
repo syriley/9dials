@@ -3,7 +3,7 @@ package com.ninedials.test.unit;
 import java.util.List;
 
 import models.Session;
-import models.AUser;
+import models.User;
 import models.UserSession;
 
 import org.junit.Test;

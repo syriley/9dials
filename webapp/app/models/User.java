@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import play.db.jpa.Model;
 import play.libs.Crypto;
@@ -14,7 +15,8 @@ import play.libs.Crypto;
 import com.google.gson.JsonObject;
  
 @Entity
-public class AUser extends Model {
+@Table(name="auser")
+public class User extends Model {
  	
 	public String name;
 	public String username;
@@ -30,10 +32,10 @@ public class AUser extends Model {
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
-	public AUser(){
+	public User(){
 	}
 	
-	public AUser (String name, String email, String password, String bio) {
+	public User (String name, String email, String password, String bio) {
 		System.out.println("Creating new user");
 		this.name = name;
 		this.email = email;
@@ -43,18 +45,18 @@ public class AUser extends Model {
 		instruments = new ArrayList<Instrument>();
 	}
 	
-	public AUser addInstrument (Instrument instrument) {
+	public User addInstrument (Instrument instrument) {
 		instrument.save();
 		instruments.add(instrument);
 		return this;
 	}
 	
-	public static AUser connect(String email, String password) {
+	public static User connect(String email, String password) {
 	    return find("byEmailAndPassword", email, Crypto.passwordHash(password)).first();
 	}
 	
-	public static AUser findByUsername(String username) {
-		return AUser.find("byUsername", username).first();
+	public static User findByUsername(String username) {
+		return User.find("byUsername", username).first();
 	}
 	
 	public void createSession(Session session) {

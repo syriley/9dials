@@ -1,6 +1,6 @@
 package controllers;
 
-import models.AUser;
+import models.User;
 import play.Logger;
 import play.mvc.Before;
 import play.mvc.Controller;
