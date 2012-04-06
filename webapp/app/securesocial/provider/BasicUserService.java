@@ -41,6 +41,7 @@ public class BasicUserService implements UserService.Service {
 				ouruser.email=user.email;
 				ouruser.name=user.displayName;
 				ouruser.save();
+				play.mvc.Scope.Flash.current().put("newuser",true);
     		}
     		play.mvc.Scope.Session.current().put("username", user.email);
     	}

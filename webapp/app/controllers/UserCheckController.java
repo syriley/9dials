@@ -21,13 +21,16 @@ public class UserCheckController extends Controller {
 	}
 	
 	@Before
-    static void setConnectedUser() {    	
+    static void setConnectedUser() {
 		rememberOriginalUrl();
 		SocialUser user =  SecureSocial.getCurrentUser();
 		if(user!=null && !session.contains("_user")){
 			User ouruser = User.find("byEmail", user.email).first();
 			if(ouruser!=null){
 			   renderArgs.put("_user", ouruser);
+			   if(flash.contains("newuser")){		
+				   redirect("/welcome");				   
+			   }
 			}
 		}
     }
