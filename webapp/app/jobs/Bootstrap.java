@@ -2,6 +2,7 @@ package jobs;
 import java.util.List;
 
 import models.User;
+import play.Logger;
 import play.Play;
 import play.Play.Mode;
 import play.jobs.Job;
@@ -21,6 +22,7 @@ public class Bootstrap extends Job {
         if (Play.mode == Mode.PROD) {
             return;
         }
+        Logger.info("Reloading database");
 		Fixtures.deleteDatabase();
 	    Fixtures.loadModels("../test/data.yml");
 	    encryptUserPasswords();

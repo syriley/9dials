@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import play.db.jpa.Model;
 
@@ -13,14 +14,17 @@ public class DrumLesson extends Model{
 	public String youtubeLocation;
 	@ManyToOne 
 	public DrumLessonGroup drumLessonGroup;
+	@OneToOne 
+	public User user;
 
     public DrumLesson(String name, String pdfLocation,
-            String youtubeLocation, DrumLessonGroup drumLessonGroup) {
+            String youtubeLocation, DrumLessonGroup drumLessonGroup, User user) {
         super();
         this.name = name;
         this.pdfLocation = pdfLocation;
         this.youtubeLocation = youtubeLocation;
         this.drumLessonGroup = drumLessonGroup;
+        this.user = user;
     }
     
     public static DrumLesson findByName(String name) {

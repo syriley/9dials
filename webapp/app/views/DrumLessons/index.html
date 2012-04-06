@@ -21,7 +21,7 @@
 				<h2>${drumLessonGroup.name}</h2>
 				#{list items:drumLessonGroup.lessons, as: 'lesson'}
 					#{if lesson.name }
-						<a href="@{Academy.showLesson(lesson.name)}">${lesson.name}</a><br/>
+						<a href="@{DrumLessons.showLesson(lesson.id)}">${lesson.name}</a><br/>
 					#{/if}
 				#{/list}			
 				</div>	

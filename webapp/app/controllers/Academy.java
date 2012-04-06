@@ -12,14 +12,4 @@ public class Academy extends Controller{
 		 render(drumLessonGroups);
 	 }
 	 
-	 public static void showLesson(String name) {
-         DrumLesson lesson = DrumLesson.findByName(name);
-         render(lesson);
-     }
-	 
-	 public static void editLesson(String name) {
-	         DrumLesson lesson = DrumLesson.findByName(name);
-	         render(lesson);
-	     }
-
 }

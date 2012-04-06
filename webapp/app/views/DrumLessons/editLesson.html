@@ -7,11 +7,7 @@
 	<div class="span3">
 		<input type="text" name="name" value="${lesson.name}" />
 	</div>
-	<div class="offset10">
-		<a href="@{Academy.editLesson(lesson.name)}" class="btn">Edit</a>
-	</div>
 </div>
-<p>Hosted with permission from <a href="http://www.drumlessons.com">drumlessons.com</a></p>
 #{set 'moreScripts'}
 		<script type="text/javascript">
 		  // This specifies the location of the pdf.js file.
@@ -52,7 +48,7 @@
 <div class="row">
 	<div class="offset2">
 		<iframe width="620" height="378" frameborder="0" 
-			src="${lesson.youtubeLocation}" 
+			src="http://www.youtube.com/embed/${lesson.youtubeLocation}?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0" 
 			type="text/html" class="youtube-player" title="YouTube video player"></iframe>
 	</div>
 </div>
