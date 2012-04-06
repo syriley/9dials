@@ -18,9 +18,9 @@ public class Bootstrap extends Job {
 
     public void reloadData() {
         //don't ever overwrite live data
-        if (Play.mode == Mode.PROD) {
-            return;
-        }
+        //if (Play.mode == Mode.PROD) {
+        //    return;
+        //}
 		Fixtures.deleteDatabase();
 	    Fixtures.loadModels("../test/data.yml");
 	    encryptUserPasswords();
