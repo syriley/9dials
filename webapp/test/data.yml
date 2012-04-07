@@ -63,6 +63,15 @@
 
  Instrument(flute):
    name: Flute 
+   
+ School(school1):
+   name: school1
+   email: school@school.com
+   website: school.com
+   hasReplied: true
+   hasLinked: false
+   longitude: 0.345
+   latitude: 0.543
 
  Session(session1):
    name: session1

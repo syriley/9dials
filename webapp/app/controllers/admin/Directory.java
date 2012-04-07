@@ -6,22 +6,24 @@ import controllers.LoggedInController;
 
 import models.DrumLesson;
 import models.DrumLessonGroup;
+import models.School;
 import play.mvc.Controller;
 
 public class Directory extends LoggedInController{
 	 public static void index() {
-	     List<DrumLessonGroup> drumLessonGroups = DrumLessonGroup.findAll();
-		 render(drumLessonGroups);
+	     List<School> schools = School.findAll();
+	     render(schools);
 	 }
 	 
-	 public static void showLesson(String name) {
-         DrumLesson lesson = DrumLesson.findByName(name);
-         render(lesson);
+	 public static void add(String name, 
+	                         String email, 
+	                         String website, 
+	                         boolean hasReplied, 
+	                         boolean hasLinked,
+	                         double longitude,
+	                         double latitude) {
+	     School school = new School(name, email, website, hasReplied, hasLinked, longitude, latitude);
+	     school.save();
+         index();
      }
-	 
-	 public static void editLesson(String name) {
-	         DrumLesson lesson = DrumLesson.findByName(name);
-	         render(lesson);
-	     }
-
 }
