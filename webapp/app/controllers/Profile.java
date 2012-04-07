@@ -23,7 +23,23 @@ public class Profile extends LoggedInController {
 	
 	public static void settings() {
 		 render();
-	 }
+	}
+	
+	public static void createUsername(@Required String username){
+		User user = User.find("byEmail", Security.connected()).first();
+		User userCheck = User.find("byUsername", username).first();
+		if(userCheck!=null){
+			validation.addError("username", "Username is already taken, please choose another");
+		}
+		if(validation.hasErrors()) {
+	          params.flash(); // add http parameters to the flash scope
+	          validation.keep(); // keep the errors for the next request
+	          NewUser.index();
+	    }
+		user.username=username;
+		user.save();
+		NewUser.index();
+	}
 	
 	public static void updateBasics(@Required String name, @Required String username,@Email String email){		
 		User user = User.find("byEmail", Security.connected()).first();

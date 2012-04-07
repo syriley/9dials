@@ -38,7 +38,7 @@ GET     /sessions/edit/{id} Sessions.form
 POST    /api/sessions/{id} 	Sessions.saveData
 GET     /api/instruments 	Instruments.list
 GET     /api/users 			Users.list
-GET     /api/images/{id}    PictureServer.getPicture
+ GET     /api/images/{id}    PictureServer.getPicture
 
 #User management
 GET		/welcome		NewUser.index
@@ -50,7 +50,9 @@ POST    /sources Sources.upload
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create
 
-*       /admin/{controller}/{action}                  admin.{controller}.{action}
+*       /me/{username}                  PublicProfile.profile
+
+*       /admin/{controller}/{action}            admin.{controller}.{action}
 *       /{controller}/{action}                  {controller}.{action}
 
 *       /{controller}                  {controller}.index
