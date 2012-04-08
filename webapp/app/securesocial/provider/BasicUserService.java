@@ -40,6 +40,7 @@ public class BasicUserService implements UserService.Service {
 				ouruser  = new User();
 				ouruser.email=user.email;
 				ouruser.name=user.displayName;
+				ouruser.username=user.id.id;
 				ouruser.save();
 				play.mvc.Scope.Flash.current().put("newuser",true);
     		}
@@ -79,7 +80,6 @@ public class BasicUserService implements UserService.Service {
 			ouruser  = new User();
 			ouruser.email=user.email;	
 			ouruser.name=user.displayName;
-			ouruser.username=user.id.id;
 			ouruser.password=user.password;
 			ouruser.save();
 			Flash.current().put("newuser", "true");		

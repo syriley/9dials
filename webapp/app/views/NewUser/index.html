@@ -1,4 +1,51 @@
 #{extends 'studio.html' /}
+#{set id:"single"/}
 #{set title:" Welcome " + _user.name /}
 <h3>Welcome to 9 Dials</h3>
-Hello ${_user.name}, looks like you are new to 9 Dials, would you like to <a href="/profile/edit" >setup your profile</a> or <a href="/sessions">start making music</a>?
+#{if _user.username == null }
+Thanks for trying 9 Dials, all we need to get started is a username: 
+#{form @Profile.createUsername(),  class:'form-horizontal'}
+<fieldset>
+	<legend>Setup a username</legend>	
+    <div class="control-group  #{ifError 'username'} error #{/ifError}">
+      <label class="control-label" for="username">Username:</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="username" name="username" value="#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}">
+        <span class="help-inline">#{error 'username' /}</span>
+        <p class="help-block">Your profile will be at: 9dials.com/<span id="usersuggestion">#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}</span></p>        
+      </div>
+    </div>    
+    <div class="form-actions">
+    	<button type="submit" class="btn btn-primary">Create username</button>
+    </div>
+    </fieldset>     
+    #{/form}
+    #{/if}
+    #{else}
+    <div class="row">
+    <p>Thanks for joining, you're ready to go.</p>
+      <div class="span4">
+        <h2>Create Music</h2>
+        <p>Record your own tracks directly in the browser, or upload them to start editing</p>
+        <a href="@{CreateMusic.index}" class="btn">Start making music</a> 
+      </div>
+      <div class="span4">
+        <h2>Share Online</h2>
+        <p>Open your session to the community to allow like minded musicians to add their own flavour to your music</p>
+        <a href="@{Share.index}" class="btn">Read more &raquo;</a>
+      </div>
+      <div class="span4">
+        <h2>Publish to the world</h2>
+        <p>Use our connections to get your music heard by the right people</p>
+        <a href="@{HowToPublish.index}" class="btn">Read more &raquo;</a>
+      </div>
+    </div>
+    #{/else}    
+  </div>
+  <script type="text/javascript">
+  $('#username').keyup(function() {
+  	newval = $('#username').val();
+    $('#usersuggestion').text(newval);
+	});
+  </script>  
+    
