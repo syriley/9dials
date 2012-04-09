@@ -11,4 +11,8 @@ public class Security extends Secure.Security {
     	redirect("/sessions");
     }
     
+    public static String connected() {
+        return Security.connected();
+    }
+    
 }
