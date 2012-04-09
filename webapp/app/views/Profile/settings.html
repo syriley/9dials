@@ -1,0 +1,118 @@
+#{extends 'main.html' /}
+#{set id:'single' /}
+#{set title:"Account Settings" /}
+#{set 'moreStyles'}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/jquery-ui-1.8.17.custom.css'}">
+#{/set}
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/lib/jquery-ui-1.8.17.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{/set}
+<div class="row">
+  <div class="span4">
+  	<div class="well" style="margin-top:10px;padding:8px 0;">
+  	<ul class="nav nav-list">
+  		<li class="nav-header">${_user.name}</li>  		
+  		<li ><a href="edit"><i class="icon-user"></i> Profile</a></li>
+  		<li class="active"><a href="settings"><i class="icon-cog"></i> Account Settings</a></li>
+  	</ul>
+  	</div>
+  </div>
+  <div class="span8">
+  #{ifErrors}
+	<div class="alert alert-error" style="margin-top:10px;">
+  	There was a problem with your request. Please check the form and try again.
+	</div>
+#{/ifErrors}
+<div class="well" style="margin-top:10px;padding:8px 8px;">
+#{form @Profile.updateBasics(),  class:'form-horizontal'}
+<fieldset>
+	<legend>About You</legend>
+	<div class="control-group">
+      <label class="control-label" for="name">Name:</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="name" name="name" value="${_user.name}"> 
+      </div>      
+    </div>
+    <div class="control-group  #{ifError 'username'} error #{/ifError}">
+      <label class="control-label" for="username">Username:</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="username" name="username" value="${_user.username}">
+        <span class="help-inline">#{error 'username' /}</span>
+        <p class="help-block">Your profile will be at: 9dials.com/${_user.name}</span>        
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="email">Email:</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge" id="email" name="email" value="${_user.email}">        
+      </div>
+    </div>
+    <div class="form-actions">
+    	<button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+    </fieldset>     
+    #{/form}
+  </div>  
+  <div class="well" style="margin-top:10px;padding:8px 8px;">
+  #{if _user.password == null }  	     
+	#{form @Profile.createPassword(),  class:'form-horizontal'}
+	<fieldset>
+	<legend>Create Password</legend>
+	<div class="alert alert-info">
+  	<strong>Want to setup a password?</strong> You currently log in using your Google or Facebook account. You can continue using these even if you setup a 9 Dials password.
+	</div>    
+    <div class="control-group #{ifError 'newpw'} error #{/ifError}">
+      <label class="control-label" for="name">New Password:</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="newpw" name="newpw">
+        <span class="help-inline">#{error 'newpw' /}</span>  
+      </div>
+    </div>
+    <div class="control-group #{ifError 'newpw2'} error #{/ifError}">
+      <label class="control-label" for="name">New Password (Confirm):</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="newpw2" name="newpw2">
+        <span class="help-inline">#{error 'newpw2' /}</span>  
+      </div>
+    </div>   	
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+    </fieldset>     
+    #{/form}       
+  #{/if}
+  #{else}
+#{form @Profile.updatePassword(),  class:'form-horizontal'}
+<fieldset>
+	<legend>Change Password</legend>	
+    <div class="control-group #{ifError 'oldpw'} error #{/ifError}">
+      <label class="control-label" for="name">Old Password:</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="oldpw" name="oldpw">
+        <span class="help-inline">#{error 'oldpw' /}</span> 
+      </div>
+    </div>
+    <div class="control-group #{ifError 'newpw'} error #{/ifError}">
+      <label class="control-label" for="name">New Password:</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="newpw" name="newpw">
+        <span class="help-inline">#{error 'newpw' /}</span>  
+      </div>
+    </div>
+    <div class="control-group #{ifError 'newpw2'} error #{/ifError}">
+      <label class="control-label" for="name">New Password (Confirm):</label>
+      <div class="controls">
+        <input type="password" class="input-xlarge" id="newpw2" name="newpw2">
+        <span class="help-inline">#{error 'newpw2' /}</span>  
+      </div>
+    </div>   	
+    <div class="form-actions">
+    	<button type="submit" class="btn btn-primary">Change password</button>
+    </div>
+    </fieldset>     
+    #{/form}
+    #{/else}
+  </div>
+  
+  </div>
+</div>
