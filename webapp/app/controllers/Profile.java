@@ -25,12 +25,10 @@ public class Profile extends LoggedInController {
 		 render();
 	}
 	
+	
 	public static void createUsername(@Required String username){
 		User user = User.find("byEmail", Security.connected()).first();
-		User userCheck = User.find("byUsername", username).first();
-		if(userCheck!=null){
-			validation.addError("username", "Username is already taken, please choose another");
-		}
+		validateUsernameNotTaken(username);
 		if(validation.hasErrors()) {
 	          params.flash(); // add http parameters to the flash scope
 	          validation.keep(); // keep the errors for the next request
@@ -40,17 +38,25 @@ public class Profile extends LoggedInController {
 		user.save();
 		NewUser.index();
 	}
+
+	private static void validateUsernameNotTaken(String username) {
+		User userCheck = User.find("byUsername", username).first();
+		if(userCheck!=null){
+			validation.addError("username", "Username is already taken, please choose another");
+		}
+	}
 	
 	public static void updateBasics(@Required String name, @Required String username,@Email String email){		
 		User user = User.find("byEmail", Security.connected()).first();
-		user.name=name;
-		user.username=username;
-		user.email=user.email;	
+		validateUsernameNotTaken(username);
 		if(validation.hasErrors()) {
 	          params.flash(); // add http parameters to the flash scope
 	          validation.keep(); // keep the errors for the next request
 	          settings();
 	    }
+		user.name=name;
+		user.username=username;
+		user.email=user.email;
 		user.save();
         settings();
 	}

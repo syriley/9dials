@@ -38,6 +38,7 @@ GET     /sessions/edit/{id} Sessions.form
 POST    /api/sessions/{id} 	Sessions.saveData
 GET     /api/instruments 	Instruments.list
 GET     /api/users 			Users.list
+GET     /api/users/validate Users.validate
  GET     /api/images/{id}    PictureServer.getPicture
 
 #User management
