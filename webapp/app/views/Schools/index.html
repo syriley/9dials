@@ -8,6 +8,12 @@
 		<p>Finding a music teacher or school can be the most important decision in your music career.
 		Use our tool to find the most highly rated school in your area.
 		</p>
+		
+		#{list items: schools, as: 'school'}
+			<h3>${school.name}</h3>
+			<p><a href="${school.website}">${school.website}</a><br/>
+			${school.email}</p>
+		#{/list}
 	</div>
 </div>
 

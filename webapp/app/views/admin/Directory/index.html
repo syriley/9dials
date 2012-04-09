@@ -1,44 +1,86 @@
 #{ extends 'admin.html' /}
 
-<h1>School Directory</h1>
-
-<h3>Add new school</h3>
-#{form @admin.Directory.add() }
-	<input type="text" name="name" value="Name" />
-	<input type="text" name="website" value="Website" />
-	<input type="text" name="email" value="Email" />
-	<input type="checkbox" name="hasReplied" />
-	<input type="checkbox" name="hasLinked" />
-	<input type="text" name="longitude" value="Longitude" />
-	<input type="text" name="latitude" value="Latitude" />
-	<input type="submit" class="btn btn-primary" value="save"/>
-#{/form}
-
-<h3>Current Schools</h3>
-
-<table class="table">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Website</th>
-			<th>Has Replied</th>
-			<th>Has Linked</th>
-			<th>Longidude</th>
-			<th>Latidude</th>
-		</tr>
-	</thead>
-	<tbody>
-#{list items: schools, as: 'school'}
-	<tr>	
-		<td>${school.name}</td>
-		<td>${school.email}</td>
-		<td>${school.website}</td>
-		<td>${school.hasReplied}</td>
-		<td>${school.hasLinked}</td>
-		<td>${school.longitude}</td>
-		<td>${school.latitude}</td>
-	</tr>
-#{/list}
-	</tbody>
-</table>
+<div class="row">
+	<div class="span12">
+		<h1>School Directory</h1>
+		
+		<h3>Add new school</h3>
+		<form action="@{add()}" class="well">
+			<input name="name" type="text" placeholder="Name" />
+			<input name="email" type="text" placeholder="Email" />
+			<input name="website" type="text" placeholder="Website" />
+			<input name="longitude" type="text" placeholder="Longitude" />
+			<input name="latitude" type="text" placeholder="Latitude" />
+			
+			<input type="submit" class="btn btn-primary" value="Add"/>
+		</form>
+		#{ifErrors}
+ 
+		   <div class="alert alert-error">
+			   	<h3>Oops..</h3>
+			   	<ul>
+			   #{errors}
+			       <li>${error}</li>
+			   #{/errors}
+			   </ul>
+		 	</div>
+		#{/ifErrors}
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Website</th>
+						<th>Have Emailed</th>
+						<th>Has Replied</th>
+						<th>Has Linked</th>
+						<th>Longitude</th>
+						<th>Latitude</th>
+					</tr>
+				</thead>
+				<tbody>
+				#{list items: schools, as: 'school'}
+				
+					<tr>
+						<td>${school.name}</td>
+					    <td>${school.email}</td>
+					    <td>${school.website}</td>
+					    <td><label class="checkbox">
+								<input name="haveEmailed" type="checkbox" 
+								#{if school.haveEmailed}checked="checked" #{/if}/>Have Emailed
+							</label>
+						</td>
+					    <form action="updateReplied" name="updateReplied${school.id}">
+					    <td><label class="checkbox">
+					    		<input name="id" type="hidden" value="${school.id}" />
+								<input name="hasReplied" type="checkbox" onclick="document.updateReplied${school.id}.submit()"
+								#{if school.hasReplied}checked="checked" #{/if}/>Has Replied
+							</label>
+						</td>
+						</form>
+						<form action="updateLinked" name="updateLinked${school.id}">
+					    <td><label class="checkbox">
+					    		<input name="id" type="hidden" value="${school.id}" />
+								<input name="hasLinked" type="checkbox" onclick="document.updateLinked${school.id}.submit()"
+								#{if school.hasLinked}checked="checked" #{/if}/>Has Linked
+							</label>
+						</td>
+						</form>
+					    <td>${school.longitude}</td>
+					    <td>${school.latitude}</td>
+					</tr>
+				
+				#{/list}
+				</tbody>
+			</table>
+			<h3>Not yet emailed</h3>
+			<div class="well">
+				#{list items: notEmailed, as: 'school'}
+					${school.email},
+				#{/list}
+			</div>
+			#{form @markAsEmailed()}
+				<input type="submit" value="Mark all as emailed" class="btn"/>
+			#{/form}
+		</div>
+	</div>
