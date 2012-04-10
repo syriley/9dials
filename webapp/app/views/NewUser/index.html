@@ -4,14 +4,14 @@
 <h3>Welcome to 9 Dials</h3>
 #{if _user.username == null }
 Thanks for trying 9 Dials, all we need to get started is a username: 
-#{form @Profile.createUsername(),  class:'form-horizontal'}
+#{form @Profile.createUsername(),  id:"userform", class:'form-horizontal'}
 <fieldset>
 	<legend>Setup a username</legend>	
-    <div class="control-group  #{ifError 'username'} error #{/ifError}">
+    <div id="usergroup" class="control-group  #{ifError 'username'} error #{/ifError}">
       <label class="control-label" for="username">Username:</label>
       <div class="controls">
-        <input type="text" class="input-xlarge" id="username" name="username" value="#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}">
-        <span class="help-inline">#{error 'username' /}</span>
+        <input type="text" class="input-xlarge" id="username" name="username" value="#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}"><span class="add-on"><i id="usercheck" ></i></span>        
+        <span id="userhelp" class="help-inline">#{error 'username' /}</span>
         <p class="help-block">Your profile will be at: 9dials.com/<span id="usersuggestion">#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}</span></p>        
       </div>
     </div>    
@@ -43,7 +43,47 @@ Thanks for trying 9 Dials, all we need to get started is a username:
     #{/else}    
   </div>
   <script type="text/javascript">
+  $(document).ready(function() { 
+    // validate signup form on keyup and submit 
+    var validator = $("#userform").validate({ 
+        rules: { 
+            username: { 
+                required: true, 
+                minlength: 2, 
+                remote: "/api/users/validate" 
+            } 
+        }, 
+        messages: { 
+            username: { 
+                required: "Enter a username", 
+                minlength: "Enter at least 5 characters", 
+                remote: jQuery.format("{0} is already in use")  
+            } 
+        }, 
+        // the errorPlacement has to take the table layout into account 
+        errorPlacement: function(error, element) { 
+            if ( element.is(":radio") ) 
+                error.appendTo( element.parent().next().next() ); 
+            else if ( element.is(":checkbox") ) 
+                error.appendTo ( element.next() ); 
+            else 
+                error.appendTo( element.parent().next() ); 
+        }, 
+        highlight: function(element, errorClass) {        
+        	$('#usergroup').removeClass("success");
+        	$('#usergroup').addClass("error");
+        	$('#userhelp').text("Username taken");
+        },
+        // set this class to error-labels to indicate valid fields 
+        success: function(label) {
+        $('#usergroup').removeClass("error");
+        $('#usergroup').addClass("success");                
+        $('#userhelp').text("Username available");
+        } 
+    });       
+	}); 
   $('#username').keyup(function() {
+   $("#userform").validate().element( "#username" );
   	newval = $('#username').val();
     $('#usersuggestion').text(newval);
 	});

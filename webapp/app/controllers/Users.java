@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import models.Instrument;
 import models.User;
 import play.mvc.Controller;
 
 public class Users extends Controller{
 
 	public static final int MAX_ITEMS = 10;
+	
+	public static void validate(String username){
+		renderJSON(validateUsernameNotTaken(username));	
+	}
+	
+	private static boolean validateUsernameNotTaken(String username) {
+		User userCheck = User.find("byUsername", username).first();
+		return userCheck ==null;		
+	}
+
 	public static void list(String term){
 		List<String> instrumentNames = filterUsers(term);
 		renderJSON(instrumentNames);
