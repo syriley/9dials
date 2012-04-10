@@ -1,22 +1,34 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import controllers.Security;
 
 import play.data.validation.Required;
+import play.data.validation.Unique;
 import play.db.jpa.Model;
 
 @Entity
 public class School extends Model {
     
     public String name;
-    @Required
     public String email;
-    @Required
+    @Unique
     public String website;
+    public String logoUrl;
+    @ElementCollection
+    public List<String> phoneNumbers;
+    @ElementCollection
+    public List<String> photoUrls;
+    public String Description;
+    @OneToOne
+    public Address address;
     public boolean haveEmailed;
     public boolean hasReplied;
     public boolean hasLinked;
@@ -26,7 +38,7 @@ public class School extends Model {
     public School(String name, String email, String website,
             boolean haveEmailed, boolean hasReplied, boolean hasLinked, double longitude,
             double latitude) {
-        super();
+        this();
         this.name = name;
         this.email = email;
         this.website = website;
@@ -35,6 +47,12 @@ public class School extends Model {
         this.hasLinked = hasLinked;
         this.longitude = longitude;
         this.latitude = latitude;
+    }
+
+    public School() {
+        phoneNumbers = new ArrayList<String>();
+        photoUrls = new ArrayList<String>();
+        address = new Address();
     }
 
     public static void markAllAsEmailed(User currentUser) {
@@ -53,5 +71,9 @@ public class School extends Model {
     public static List<School> findAllLinked() {
         List<School> schools = School.find("hasLinked = ?", true).fetch();
         return schools;
+    }
+
+    public static School findByWebsite(String website) {
+        return School.find("website = ?", website).first();
     }
 }

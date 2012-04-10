@@ -21,6 +21,22 @@
    username: bigbarryapple
    name: Barry Appleton
    bio: my bio
+ 
+ Location(brighton):
+   city: brighton
+   country: england
+
+ Location(hove):
+   city: hove
+   country: england
+
+ Location(nottingham):
+   city: nottingham
+   country: england
+
+ Location(liverpool):
+   city: liverpool
+   country: england
 
  Instrument(guitar):
    name: Guitar
@@ -64,6 +80,10 @@
  Instrument(flute):
    name: Flute 
    
+ Address(address1):
+   locality: Nottingham
+   postalCode: AB12 3CD
+
  School(school1):
    name: school1
    email: school@school.com
@@ -72,6 +92,7 @@
    hasLinked: false
    longitude: 0.345
    latitude: 0.543
+   address: address1
 
  Session(session1):
    name: session1
