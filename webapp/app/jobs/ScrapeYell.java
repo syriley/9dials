@@ -38,11 +38,12 @@ public class ScrapeYell extends Job {
         KEYWORDS.add("music+lessons");
     }
     public void doJob() {
+        Logger.debug("Starting Yell Scraper");
         HttpClient client = ClientFactory.getInstance().getClient();
         List<Location> locations = Location.findUnprocessed();
         for (Location location : locations) {
             for (String keyword : KEYWORDS) {
-                Logger.info("Getting Yell info for %s in %s", keyword, location);
+                Logger.info("Getting Yell info for %s in %s", keyword, location.city);   
                 try {
                     URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + location.city);
                     Document document = client.downloadAsDocument(url);

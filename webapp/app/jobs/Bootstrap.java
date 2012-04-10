@@ -14,6 +14,7 @@ import play.test.Fixtures;
 public class Bootstrap extends Job {
  
     public void doJob() {
+        Logger.debug("Starting Bootstrap job");
     	reloadData();
     }
 
