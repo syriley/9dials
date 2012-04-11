@@ -48,8 +48,8 @@ public class ScrapeYell extends Job {
                 } catch (InterruptedException e2) {
                     e2.printStackTrace();
                 }
-                String locationString = location.city.replace(" ", "+");
-                locationString = locationString.replace("&", "");
+                String locationString = location.city.replaceAll(" ", "+");
+                locationString = locationString.replaceAll("&", "");
                 Logger.info("Getting Yell info for %s in %s", keyword, locationString);   
                 try {
                     URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + location.city);
