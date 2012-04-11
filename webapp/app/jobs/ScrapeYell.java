@@ -43,6 +43,13 @@ public class ScrapeYell extends Job {
         List<Location> locations = Location.findUnprocessed();
         for (Location location : locations) {
             for (String keyword : KEYWORDS) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e2) {
+                    e2.printStackTrace();
+                }
+                String locationString = location.city.replace(" ", "+");
+                locationString = locationString.replace("&", "");
                 Logger.info("Getting Yell info for %s in %s", keyword, location.city);   
                 try {
                     URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + location.city);
