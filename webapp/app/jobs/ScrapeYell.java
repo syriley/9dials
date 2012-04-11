@@ -125,6 +125,8 @@ public class ScrapeYell extends Job {
                
                 catch (Exception e) {
                     Logger.error("Unexpected Exception, %s ", e.getMessage());
+                    Logger.error("Stack Trace, %s ", e.getStackTrace());
+                    
                     try {
                         Thread.sleep(5 * 1000);
                     } catch (InterruptedException e1) {
