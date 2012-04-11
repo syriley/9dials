@@ -50,7 +50,7 @@ public class ScrapeYell extends Job {
                 }
                 String locationString = location.city.replace(" ", "+");
                 locationString = locationString.replace("&", "");
-                Logger.info("Getting Yell info for %s in %s", keyword, location.city);   
+                Logger.info("Getting Yell info for %s in %s", keyword, locationString);   
                 try {
                     URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + location.city);
                     Document document = client.downloadAsDocument(url);
