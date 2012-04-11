@@ -52,7 +52,7 @@ public class ScrapeYell extends Job {
                 locationString = locationString.replaceAll("&", "");
                 Logger.info("Getting Yell info for %s in %s", keyword, locationString);   
                 try {
-                    URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + location.city);
+                    URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + locationString);
                     Document document = client.downloadAsDocument(url);
                     Elements schools = document.select("div.parentListing");
                     
