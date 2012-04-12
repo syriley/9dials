@@ -73,20 +73,22 @@ public class AnonymousClient implements util.connection.HttpClient {
         // by the default operator to look up socket factories.
         NetlibURLStreamHandlerFactory factory = new NetlibURLStreamHandlerFactory(false);
         factory.setNetLayerForHttpHttpsFtp(netLayer);
-        handler = factory.createURLStreamHandler("https");
+        handler = factory.createURLStreamHandler("http");
         log.info("Anonymous httpClient initialized");
     }
     
     public String download(URL source) throws IOException {
         // set the request URL
-        URL request = new URL("http", source.getHost(), 80, source.getPath(), handler);
-
+        URL request = new URL(source, source.getFile(), handler);
         // send request and receive response
         log.info("download (start) from source="+source);
         URLConnection connection = request.openConnection();
         connection.setDoOutput(true);
         connection.setDoInput(true);
+        connection.setUseCaches(false);
+        
         connection.connect();
+        
 
         String responsebody = IOUtils.toString(connection.getInputStream(), "UTF-8");
         // read the response

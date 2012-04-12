@@ -26,7 +26,7 @@ import util.connection.HttpClient;
 public class ScrapeYell extends Job {
     //TODO:add yelp and touchlocal
     private static final String YELL_SEARCH_URL = 
-        "http://www.yell.com/ucs/UcsSearchAction.do?location=?YYY&keywords=XXX";
+        "http://www.yell.com/ucs/UcsSearchAction.do?location=YYY&keywords=XXX";
     
     private static final List<String> KEYWORDS = new ArrayList<String>();
     
