@@ -26,7 +26,7 @@ public class ClientFactory {
 	public HttpClient getClient(String type) {
 	    if(type != null) {
             if(type.equals("anonymous")) {
-                NetLayer lowerNetLayer = NetFactory.getInstance().getNetLayerById(NetLayerIDs.TOR);
+                NetLayer lowerNetLayer = NetFactory.getInstance().getNetLayerById(NetLayerIDs.TOR_OVER_TLS_OVER_TCPIP);
                 return new  AnonymousClient(lowerNetLayer);
             }
 	    }

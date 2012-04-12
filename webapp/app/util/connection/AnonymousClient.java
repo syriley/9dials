@@ -19,8 +19,11 @@ package util.connection;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLStreamHandler;
 import java.util.logging.Logger;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -39,6 +42,7 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.silvertunnel.netlib.adapter.httpclient.NetlibSocketFactory;
+import org.silvertunnel.netlib.adapter.url.NetlibURLStreamHandlerFactory;
 import org.silvertunnel.netlib.api.NetLayer;
 
 
@@ -49,63 +53,46 @@ import org.silvertunnel.netlib.api.NetLayer;
  */
 public class AnonymousClient implements util.connection.HttpClient {
     private static final Logger log = Logger.getLogger(AnonymousClient.class.getName());
-    private NetLayer lowerNetLayer;
     private static final String USER_AGENT = "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1";
+    URLStreamHandler handler;
+    private NetLayer netLayer;
     
-    /** use the same HTTPClient for multiple requests to one site to allow cookie handling */
-    private HttpClient httpClient;
-
     /**
      * Initialize HttpComponents Client
      * 
-     * @param lowerNetLayer    TCP/IP compatible layer;
+     * @param netLayer    TCP/IP compatible layer;
      *                         layer for SSL/TLS/https connections
      *                         will be created inside this class
      *                         and may not be passed as argument here 
      */
-    public AnonymousClient(NetLayer lowerNetLayer) {
-    	httpClient = null;
+    public AnonymousClient(NetLayer netLayer) {
+    	
+        this.netLayer = netLayer; 
+        netLayer.waitUntilReady();
         // register the "http" protocol scheme, it is required
         // by the default operator to look up socket factories.
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        final int DEFAULT_PORT_HTTP = 80;
-        this.lowerNetLayer = lowerNetLayer;
-        schemeRegistry.register(new Scheme("http", new NetlibSocketFactory(lowerNetLayer), DEFAULT_PORT_HTTP));
-
-        /* TODO - DOES CURRENTLY NOT WORK: register the "https" protocol scheme
-        final int DEFAULT_PORT_HTTPS = 443;
-        NetLayer httpsLowerNetLayer = new TLSNetLayer(lowerNetLayer);  
-        schemeRegistry.register(new Scheme("https", new NetlibSocketFactory(httpsLowerNetLayer), DEFAULT_PORT_HTTPS));
-        */
-
-        // set http(s) client parameters
-        HttpParams params = new BasicHttpParams();
-        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params, "UTF-8");
-        if (USER_AGENT!=null) {
-            HttpProtocolParams.setUserAgent(params, USER_AGENT);
-        }
-
-        // create http(s) client
-        ClientConnectionManager ccm = new ThreadSafeClientConnManager(schemeRegistry);
-        httpClient = new DefaultHttpClient(ccm, params);
-        
-        log.info("HttpComponents Client/httpClient initialized="+httpClient.toString());
+        NetlibURLStreamHandlerFactory factory = new NetlibURLStreamHandlerFactory(false);
+        factory.setNetLayerForHttpHttpsFtp(netLayer);
+        handler = factory.createURLStreamHandler("https");
+        log.info("Anonymous httpClient initialized");
     }
     
     public String download(URL source) throws IOException {
         // set the request URL
-        HttpUriRequest request = new HttpGet(source.toExternalForm());
+        URL request = new URL("http", source.getHost(), 80, source.getPath(), handler);
 
         // send request and receive response
         log.info("download (start) from source="+source);
-        HttpResponse response = httpClient.execute(request);
-        log.info("download (end)   from source="+source+"    with statusLine=\""+response.getStatusLine()+"\"");
- 
+        URLConnection connection = request.openConnection();
+        connection.setDoOutput(true);
+        connection.setDoInput(true);
+        connection.connect();
+
+        String responsebody = IOUtils.toString(connection.getInputStream(), "UTF-8");
         // read the response
-        String responseString = EntityUtils.toString(response.getEntity());
-        EntityUtils.consume(response.getEntity());
-        return responseString;
+        netLayer.clear();
+        netLayer.waitUntilReady();
+        return responsebody;
     }
     
     public Document downloadAsDocument(URL source) throws IOException {
