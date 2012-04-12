@@ -56,7 +56,10 @@ public class ScrapeYell extends Job {
                     Document document = client.downloadAsDocument(url);
                     Elements schools = document.select("div.parentListing");
                     
+                    Logger.debug("Number of schools is %d", schools.size());
+                    
                     for (Element schoolElement : schools) {
+                        Logger.debug("School response = \n %s", schoolElement.toString());
                         School school = new School();
                         Element name = schoolElement.select("span.fn").first();
                         Element phoneNumber = schoolElement.select("span.tel").first();
@@ -106,7 +109,11 @@ public class ScrapeYell extends Job {
                     }
                     
                     if(JPA.em().getTransaction().isActive()) {
-                        Logger.info("Flushing");
+                        JPA.em().flush();
+                        JPA.em().getTransaction().commit();
+                    }
+                        JPA.em().getTransaction().begin();
+                        Logger.info("Updating location");
                         location.dateProcessed = new Date();
                         location.save();
                         JPA.em().flush();
