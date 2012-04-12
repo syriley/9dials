@@ -26,15 +26,12 @@ import util.connection.HttpClient;
 public class ScrapeYell extends Job {
     //TODO:add yelp and touchlocal
     private static final String YELL_SEARCH_URL = 
-        "http://www.yell.com/ucs/UcsSearchAction.do?keywords=XXX&location=";
+        "http://www.yell.com/ucs/UcsSearchAction.do?location=?YYY&keywords=XXX";
     
     private static final List<String> KEYWORDS = new ArrayList<String>();
     
     static {
         KEYWORDS.add("guitar+lessons");
-        KEYWORDS.add("guitar+tutor");
-        KEYWORDS.add("piano+lessons");
-        KEYWORDS.add("piano+tutor");
         KEYWORDS.add("music+lessons");
     }
     public void doJob() {
@@ -52,8 +49,9 @@ public class ScrapeYell extends Job {
                 locationString = locationString.replaceAll("&", "");
                 Logger.info("Getting Yell info for %s in %s", keyword, locationString);   
                 try {
-                    URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword) + locationString);
+                    URL url = new URL(YELL_SEARCH_URL.replace("XXX", keyword).replaceAll("YYY", locationString));
                     Document document = client.downloadAsDocument(url);
+                    Logger.debug("Response = %s ", document);
                     Elements schools = document.select("div.parentListing");
                     
                     Logger.debug("Number of schools is %d", schools.size());
