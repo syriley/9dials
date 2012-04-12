@@ -112,13 +112,13 @@ public class ScrapeYell extends Job {
                         JPA.em().flush();
                         JPA.em().getTransaction().commit();
                     }
-                        JPA.em().getTransaction().begin();
-                        Logger.info("Updating location");
-                        location.dateProcessed = new Date();
-                        location.save();
-                        JPA.em().flush();
-                        JPA.em().getTransaction().commit();
-                    }
+                    
+                    JPA.em().getTransaction().begin();
+                    Logger.info("Updating location");
+                    location.dateProcessed = new Date();
+                    location.save();
+                    JPA.em().flush();
+                    JPA.em().getTransaction().commit();
                     
                     Thread.sleep(RandomUtils.nextInt(20) * 1000);
                 } 
