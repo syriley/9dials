@@ -75,6 +75,7 @@ public class ScrapeYell extends Job {
                             school.website = website.attr("href");
                         }
                         
+                        Logger.debug("shool %s has website %s", school.name, school.website);
                         Address address = school.address;
                         
                         if(streetAddress != null) {
@@ -93,11 +94,12 @@ public class ScrapeYell extends Job {
                             school.photoUrls.add(photo.attr("src"));
                         }
                         
+                        if(!JPA.em().getTransaction().isActive()) {
+                            JPA.em().getTransaction().begin();                            
+                        }
                         //handle unique key in java as JPA transactions rank
                         if(school.website != null && School.findByWebsite(school.website) == null) {
-                            if(!JPA.em().getTransaction().isActive()) {
-                                JPA.em().getTransaction().begin();                            
-                            }
+                            Logger.debug("School has a website so saving");
                             address.save();
                             school.save();
                         }
