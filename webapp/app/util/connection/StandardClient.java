@@ -1,4 +1,4 @@
-package util;
+package util.connection;
 
 import java.io.IOException;
 import java.net.URL;

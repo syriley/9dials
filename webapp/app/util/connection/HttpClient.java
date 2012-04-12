@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-package util;
+package util.connection;
 
 import java.io.IOException;
 import java.net.URL;

@@ -19,8 +19,8 @@ import play.Logger;
 import play.db.jpa.JPA;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
-import util.ClientFactory;
-import util.HttpClient;
+import util.connection.ClientFactory;
+import util.connection.HttpClient;
  
 @OnApplicationStart(async=true)
 public class ScrapeYell extends Job {
@@ -39,7 +39,7 @@ public class ScrapeYell extends Job {
     }
     public void doJob() {
         Logger.debug("Starting Yell Scraper");
-        HttpClient client = ClientFactory.getInstance().getClient();
+        HttpClient client = ClientFactory.getInstance().getClient("anonymous");
         List<Location> locations = Location.findUnprocessed();
         for (Location location : locations) {
             for (String keyword : KEYWORDS) {
