@@ -40,11 +40,6 @@ public class ScrapeYell extends Job {
         List<Location> locations = Location.findUnprocessed();
         for (Location location : locations) {
             for (String keyword : KEYWORDS) {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e2) {
-                    e2.printStackTrace();
-                }
                 String locationString = location.city.replaceAll(" ", "+");
                 locationString = locationString.replaceAll("&", "");
                 Logger.info("Getting Yell info for %s in %s", keyword, locationString);   
@@ -118,7 +113,6 @@ public class ScrapeYell extends Job {
                     JPA.em().flush();
                     JPA.em().getTransaction().commit();
                     
-                    Thread.sleep(RandomUtils.nextInt(20) * 1000);
                 } 
                 catch (ClientProtocolException e) {
                     Logger.error("Could not retrieve Yell page %s", e);
@@ -126,9 +120,6 @@ public class ScrapeYell extends Job {
                 catch (IOException e) {
                     Logger.error("Could not retrieve Yell page %s", e);
                 } 
-                catch (InterruptedException e) {
-                    Logger.error("Sleep interrupted %s", e);
-                }
                
                 catch (Exception e) {
                     Logger.error("Unexpected Exception, %s ", e.getMessage());
