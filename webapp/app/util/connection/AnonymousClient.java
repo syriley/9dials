@@ -79,8 +79,7 @@ public class AnonymousClient implements util.connection.HttpClient {
     
     public String download(URL source) throws IOException {
         // set the request URL
-        URL context = null;
-        URL request = new URL(context, source.toExternalForm(), handler);
+        URL request = new URL(source, source.getFile(), handler);
         // send request and receive response
         log.info("download (start) from source="+source);
         URLConnection connection = request.openConnection();
