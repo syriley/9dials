@@ -84,7 +84,7 @@ public class School extends Model {
     }
 
     public static School getSchoolWithoutEmail() {
-        return School.find("email is null order by updated").first()    ;
+        return School.find("email is null order by updated desc").first()    ;
     }
 
     @Override

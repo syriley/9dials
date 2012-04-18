@@ -47,6 +47,7 @@ public class GetContactEmails extends Job {
         while(true) {
             School school = School.getSchoolWithoutEmail();
             if(school == null) {
+                Logger.info("school is null");
                 break;
             }
             Logger.debug("Getting email addresses for %s", school.website);
@@ -55,7 +56,7 @@ public class GetContactEmails extends Job {
             if(!JPA.em().getTransaction().isActive()) {
                 JPA.em().getTransaction().begin();
             }
-            Logger.info("Updating location");
+            Logger.info("Updating school");
             school.updated = new Date();
             school.save();
             JPA.em().flush();
@@ -78,14 +79,17 @@ public class GetContactEmails extends Job {
                     
                     String href = element.attr("href");
                     if(href.contains("mailto:")) {
+                        Logger.debug("Mailto found %s", href);
                         extractedEmails.add(href.replace("mailto:", ""));
                     }
                     
                     else if (href.contains("twitter.com/")) {
+                        Logger.debug("Twitter found %s", href);
                         school.twitter = href;
                     }
                     
                     else if (href.contains("facebook.com/")) {
+                        Logger.debug("Facebook found %s", href);
                         school.facebook = href;
                     }
                     
@@ -112,9 +116,12 @@ public class GetContactEmails extends Job {
             }
             
             school.possibleEmails.addAll(extractedEmails);
+            Logger.debug("%d emails found", school.possibleEmails.size());
             
             if(school.possibleEmails.size() == 1) {
+                
                 school.email =  (String)school.possibleEmails.toArray()[0];
+                Logger.debug("Setting email as %s", school.email);
             }
         }
         catch (MalformedURLException e) {
