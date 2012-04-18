@@ -78,6 +78,10 @@ public class GetContactEmails extends Job {
                 if(element.hasAttr("href")) {
                     
                     String href = element.attr("href");
+                    if(href.matches(".*\\.AVI|\\.avi|\\.jpg|\\.png|\\.mp3|\\.wma|\\.mpg.*")) {
+                        Logger.debug("%s not valid, continuing", href);
+                        continue;
+                    }
                     if(href.contains("mailto:")) {
                         Logger.debug("Mailto found %s", href);
                         extractedEmails.add(href.replace("mailto:", ""));
@@ -107,10 +111,19 @@ public class GetContactEmails extends Job {
             }
             
             for (URL url : pagesToScrape) {
-                String response = client.download(url);
-                matcher = pattern.matcher(response);
-                if(matcher.find()) {
-                    extractedEmails.add(matcher.group());
+                Logger.debug("Getting page %s", url.toExternalForm());
+                try {
+                    String response = client.download(url);
+                    matcher = pattern.matcher(response);
+                    if(matcher.find()) {
+                        extractedEmails.add(matcher.group());
+                    }
+                }
+                catch (OutOfMemoryError e) {
+                    Logger.error("%s was too large to download", url);
+                }
+                catch (IllegalArgumentException e) {
+                    Logger.error("%s url was not allowed", url);
                 }
                 Thread.sleep(500);
             }
@@ -137,6 +150,6 @@ public class GetContactEmails extends Job {
             Logger.error("%s", e.getMessage());
         } catch (InterruptedException e) {
             Logger.error("%s", e.getMessage());
-        }
+        } 
     }
 }
