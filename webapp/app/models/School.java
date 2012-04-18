@@ -1,16 +1,14 @@
 package models;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import controllers.Security;
-
-import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
 
@@ -23,10 +21,16 @@ public class School extends Model {
     public String website;
     public String logoUrl;
     @ElementCollection
-    public List<String> phoneNumbers;
+    public Set<String> phoneNumbers;
+    
     @ElementCollection
-    public List<String> photoUrls;
+    public Set<String> possibleEmails;
+    
+    @ElementCollection
+    public Set<String> photoUrls;
     public String Description;
+    public String twitter;
+    public String facebook;
     @OneToOne
     public Address address;
     public boolean haveEmailed;
@@ -34,6 +38,7 @@ public class School extends Model {
     public boolean hasLinked;
     public double longitude;
     public double latitude;
+    public Date updated;
     
     public School(String name, String email, String website,
             boolean haveEmailed, boolean hasReplied, boolean hasLinked, double longitude,
@@ -50,8 +55,9 @@ public class School extends Model {
     }
 
     public School() {
-        phoneNumbers = new ArrayList<String>();
-        photoUrls = new ArrayList<String>();
+        phoneNumbers = new HashSet<String>();
+        possibleEmails = new HashSet<String>();
+        photoUrls = new HashSet<String>();
         address = new Address();
     }
 
@@ -76,4 +82,21 @@ public class School extends Model {
     public static School findByWebsite(String website) {
         return School.find("website = ?", website).first();
     }
+
+    public static School getSchoolWithoutEmail() {
+        return School.find("email is null order by updated").first()    ;
+    }
+
+    @Override
+    public String toString() {
+        return "School [name=" + name + ", email=" + email + ", website="
+                + website + ", logoUrl=" + logoUrl + ", phoneNumbers="
+                + phoneNumbers + ", possibleEmails=" + possibleEmails
+                + ", photoUrls=" + photoUrls + ", Description=" + Description
+                + ", address=" + address + ", haveEmailed=" + haveEmailed
+                + ", hasReplied=" + hasReplied + ", hasLinked=" + hasLinked
+                + ", longitude=" + longitude + ", latitude=" + latitude
+                + ", updated=" + updated + "]";
+    }
+    
 }

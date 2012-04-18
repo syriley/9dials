@@ -93,6 +93,11 @@
    longitude: 0.345
    latitude: 0.543
    address: address1
+ 
+ School(school2):
+   name: twochords
+   website: http://www.twochordsmore.co.uk/
+   address: address1
 
  Session(session1):
    name: session1

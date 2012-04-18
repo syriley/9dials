@@ -16,6 +16,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import play.Logger;
+import play.Play;
+import play.Play.Mode;
 import play.db.jpa.JPA;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -31,10 +33,15 @@ public class ScrapeYell extends Job {
     private static final List<String> KEYWORDS = new ArrayList<String>();
     
     static {
-        KEYWORDS.add("guitar+lessons");
-        KEYWORDS.add("music+lessons");
+        KEYWORDS.add("piano+lessons");
     }
     public void doJob() {
+        if (true) {
+            return;
+        }
+        if(Play.mode == Mode.DEV) { 
+            return;
+        }
         Logger.debug("Starting Yell Scraper");
         HttpClient client = ClientFactory.getInstance().getClient("anonymous");
         List<Location> locations = Location.findUnprocessed();
