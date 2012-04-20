@@ -15,7 +15,7 @@ public class Directory extends LoggedInController{
     
 	 public static void index(int start, int size, String originalSearch) {
 	     if (size == 0) {
-	         size = 3;
+	         size = 40;
 	     }
 	     String search = originalSearch;
 	     if (StringUtils.isEmpty(search)) {
