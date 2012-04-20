@@ -2,16 +2,15 @@
 
 require:
     - play
-#    - play -> morphia 1.2.4d
+#   - play -> morphia 1.2.4d
     - crud
     - secure
-#    - play -> scala 0.9.1
+#   - play -> scala 0.9.1
     - securesocial -> securesocial 0.2.6
-   #  - play -> cobertura 2.4
-    #- org.scalatest -> scalatest_2.9.1 1.7.RC2
-   # - net.liftweb -> lift-json_2.9.1 2.4
+#   - play -> cobertura 2.4
+#   - org.scalatest -> scalatest_2.9.1 1.7.RC2
+#   - net.liftweb -> lift-json_2.9.1 2.4
     - com.amazonaws -> aws-java-sdk 1.2.7
-
 repositories:
  - scala-tools:
         type: iBiblio

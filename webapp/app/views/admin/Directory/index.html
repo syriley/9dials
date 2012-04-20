@@ -4,27 +4,14 @@
 	<div class="span12">
 		<h1>School Directory</h1>
 		
-		<h3>Add new school</h3>
-		<form action="@{add()}" class="well">
-			<input name="name" type="text" placeholder="Name" />
-			<input name="email" type="text" placeholder="Email" />
-			<input name="website" type="text" placeholder="Website" />
-			<input name="longitude" type="text" placeholder="Longitude" />
-			<input name="latitude" type="text" placeholder="Latitude" />
-			
-			<input type="submit" class="btn btn-primary" value="Add"/>
-		</form>
-		#{ifErrors}
- 
-		   <div class="alert alert-error">
-			   	<h3>Oops..</h3>
-			   	<ul>
-			   #{errors}
-			       <li>${error}</li>
-			   #{/errors}
-			   </ul>
-		 	</div>
-		#{/ifErrors}
+	    <form class="well form-search" action="@{index()}">
+		    <input name="originalSearch" type="text" class="input-medium search-query" value="${originalSearch}">
+		    <button type="submit" class="btn">Search</button>
+	    </form>
+	    <a href="@{admin.Directory.index(page, 0, '')}" class="btn">all</a>
+		#{list items: pages, as: 'page'}
+			<a href="@{admin.Directory.index(page, 0, originalSearch)}" class="btn">${page}</a>
+		#{/list}
 			<table class="table">
 				<thead>
 					<tr>
@@ -73,6 +60,32 @@
 				#{/list}
 				</tbody>
 			</table>
+			#{list items: pages, as: 'page'}
+				<a href="@{admin.Directory.index(page, 0, originalSearch)}" class="btn">${page}</a>
+			#{/list}
+			
+			<h3>Add new school</h3>
+			<form action="@{add()}" class="well">
+				<input name="name" type="text" placeholder="Name" />
+				<input name="email" type="text" placeholder="Email" />
+				<input name="website" type="text" placeholder="Website" />
+				<input name="longitude" type="text" placeholder="Longitude" />
+				<input name="latitude" type="text" placeholder="Latitude" />
+				
+				<input type="submit" class="btn btn-primary" value="Add"/>
+			</form>
+			#{ifErrors}
+	 
+			   <div class="alert alert-error">
+				   	<h3>Oops..</h3>
+				   	<ul>
+				   #{errors}
+				       <li>${error}</li>
+				   #{/errors}
+				   </ul>
+			 	</div>
+			#{/ifErrors}
+			
 			<h3>Not yet emailed</h3>
 			<div class="well">
 				#{list items: notEmailed, as: 'school'}

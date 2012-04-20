@@ -7,9 +7,14 @@
 </div>
 <div class="row">
 	<div class="span8">
-		<form action="@admin.Directory.update(school.id)" class="well">
+		<form action="@{admin.Directory.update()}" class="well">
+			<input type="hidden" name="id" value="${school.id}" />
 			<label>Name</label>
 			<input name="name" value="${school.name}" />
+			<label>Contact First Name</label>
+			<input name="firstName" value="${school.firstName}" />
+			<label>Contact Last Name</label>
+			<input name="lastName" value="${school.lastName}" />
 			<label>Website</label>	
 			<input name="website" value="${school.website}" />
 			<label>Email</label>
@@ -23,11 +28,14 @@
 			<label>Facebook</label>
 			<input name="facebook" value="${school.facebook}" />
 			<label>Have Emailed</label>
-			<input type="checkbox" name="haveEmailed" value="${school.haveEmailed}" />
+			<input type="checkbox" name="haveEmailed" value="${school.haveEmailed}" 
+			#{if school.haveEmailed}checked="checked" #{/if}/>
 			<label>Has Replied</label>
-			<input type="checkbox" name="hasReplied" value="${school.hasReplied}" />
+			<input type="checkbox" name="hasReplied" value="${school.hasReplied}" 
+			#{if school.hasReplied}checked="checked" #{/if}/>/>
 			<label>Has Linked</label>
-			<input type="checkbox" name="hasLinked" value="${school.hasLinked}" />
+			<input type="checkbox" name="hasLinked" value="${school.hasLinked}" 
+			#{if school.hasLinked}checked="checked" #{/if} />
 			<label>Longitude</label>
 			<input type="checkbox" name="longitude" value="${school.longitude}" />
 			<label>Latitude</label>
@@ -35,7 +43,7 @@
 			<label>Updated</label>
 			<input type="checkbox" name="updated" value="${school.updated}" />
 									
-   			
+   			<input type="submit" class="btn btn-primary" value="Save" />
 		</form>
 	</div>
 	<div class="span4"  class="well">

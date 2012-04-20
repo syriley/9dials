@@ -1,6 +1,9 @@
 package controllers.admin;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import models.School;
 import models.User;
@@ -10,10 +13,27 @@ import play.data.validation.Error;
 
 public class Directory extends LoggedInController{
     
-	 public static void index() {
-	     List<School> schools = School.findAll();
+	 public static void index(int start, int size, String originalSearch) {
+	     if (size == 0) {
+	         size = 3;
+	     }
+	     String search = originalSearch;
+	     if (StringUtils.isEmpty(search)) {
+	         search = "%";
+	     }
+	     else {
+	         search = "%"+ search +"%";
+	     }
+	     search = search.toLowerCase();
+	     List<School> schools = School.find("website like ? or email like ? order by haveEmailed desc, email desc", search,search).fetch(start,size);
 	     List<School> notEmailed = School.find("haveEmailed = ?", false).fetch();
-	     render(schools, notEmailed);
+	     int count = School.find("website like ? or email like ?", search, search).fetch().size();
+	     int numberOfPager = (int)Math.ceil(count/size) + 2;
+	     List<Integer> pages = new ArrayList<Integer>();
+	     for (int i = 1; i < numberOfPager; i++) {
+	         pages.add(i);
+	     }
+	     render(schools, notEmailed, pages, originalSearch);
 	 }
 	 
 	 public static void add(String name,
@@ -29,7 +49,7 @@ public class Directory extends LoggedInController{
 	     validation.required(website);
 	     if(!validation.hasErrors()) {
 	         (new School(name, email, website, haveEmailed, hasReplied, hasLinked, longitude, latitude)).save();
-	         index();
+	         index(0,0, "");
 	     }
 	     else {
 	         List<School> schools = School.findAll();
@@ -43,20 +63,20 @@ public class Directory extends LoggedInController{
         School school = School.findById(id);
         school.hasReplied = hasReplied;
         school.save();
-        index();
+        index(0,0,"");
     }
     
     public static void updateLinked(long id, boolean hasLinked) {
         School school = School.findById(id);
         school.hasLinked = hasLinked;
         school.save();
-        index();
+        index(0,0,"");
     }
     
     public static void markAsEmailed() {
         User currentUser = User.findByUsername(Security.connected());
         School.markAllAsEmailed(currentUser);
-        index();
+        index(0,0,"");
     }
     
     public static void show(long id) {
@@ -64,8 +84,12 @@ public class Directory extends LoggedInController{
         render(school);
     }
     
-    public static void update(long id, String name) {
+    public static void update(long id, String name, String firstName, String lastName) {
         School school = School.findById(id);
+        school.name = name;
+        school.firstName = firstName;
+        school.lastName = lastName;
+        school.save();
         show(id);
     }
 

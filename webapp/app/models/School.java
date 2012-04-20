@@ -17,6 +17,8 @@ public class School extends Model {
     
     public String name;
     public String email;
+    public String firstName;
+    public String lastName;
     @Unique
     public String website;
     public String logoUrl;
