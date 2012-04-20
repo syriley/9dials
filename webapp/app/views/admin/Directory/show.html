@@ -1,0 +1,57 @@
+#{ extends 'admin.html' /}
+
+<div class="row">
+	<div class="span12">
+		<h1>${school.name}</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="span8">
+		<form action="@admin.Directory.update(school.id)" class="well">
+			<label>Name</label>
+			<input name="name" value="${school.name}" />
+			<label>Website</label>	
+			<input name="website" value="${school.website}" />
+			<label>Email</label>
+			<input name="email" value="${school.email}" />
+			<label>Logo Url</label>
+			<input name="logoUrl" value="${school.logoUrl}" />
+			<label>Description</label>
+			<input name="description" value="${school.description}" />
+			<label>Twitter</label>
+			<input name="twitter" value="${school.twitter}" />
+			<label>Facebook</label>
+			<input name="facebook" value="${school.facebook}" />
+			<label>Have Emailed</label>
+			<input type="checkbox" name="haveEmailed" value="${school.haveEmailed}" />
+			<label>Has Replied</label>
+			<input type="checkbox" name="hasReplied" value="${school.hasReplied}" />
+			<label>Has Linked</label>
+			<input type="checkbox" name="hasLinked" value="${school.hasLinked}" />
+			<label>Longitude</label>
+			<input type="checkbox" name="longitude" value="${school.longitude}" />
+			<label>Latitude</label>
+			<input type="checkbox" name="latitude" value="${school.latitude}" />
+			<label>Updated</label>
+			<input type="checkbox" name="updated" value="${school.updated}" />
+									
+   			
+		</form>
+	</div>
+	<div class="span4"  class="well">
+		<table>
+		#{list items: school.possibleEmails, as: 'email'}
+			<tr>
+	   			<td>${email}</td>
+	   			<td><a href="@{admin.Directory.updatePrimaryEmail(school.id, email)}" class="btn btn-primary" >Set as Primary</a></td> 
+	  		</tr>
+  		#{/list}
+  		</table>
+  		<form action="@{admin.Directory.addPossibleEmail()}">
+  			<input type="hidden" name="id" value="${school.id}" />
+  			<input name="emailAddress" />
+  			<input type="submit" class="btn btn-primary" value="add"/>
+  		</form>
+	</div>
+	<hr class="space"/>
+</div>

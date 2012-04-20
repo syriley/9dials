@@ -42,7 +42,7 @@
 				#{list items: schools, as: 'school'}
 				
 					<tr>
-						<td>${school.name}</td>
+						<td><a href="@{admin.Directory.show(school.id)}">${school.name}</a></td>
 					    <td>${school.email}</td>
 					    <td>${school.website}</td>
 					    <td><label class="checkbox">

@@ -93,6 +93,9 @@
    longitude: 0.345
    latitude: 0.543
    address: address1
+   possibleEmails: 
+     - aasdf
+     - fff
  
  School(school2):
    name: twochords

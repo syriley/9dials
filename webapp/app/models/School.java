@@ -28,7 +28,7 @@ public class School extends Model {
     
     @ElementCollection
     public Set<String> photoUrls;
-    public String Description;
+    public String description;
     public String twitter;
     public String facebook;
     @OneToOne
@@ -92,7 +92,7 @@ public class School extends Model {
         return "School [name=" + name + ", email=" + email + ", website="
                 + website + ", logoUrl=" + logoUrl + ", phoneNumbers="
                 + phoneNumbers + ", possibleEmails=" + possibleEmails
-                + ", photoUrls=" + photoUrls + ", Description=" + Description
+                + ", photoUrls=" + photoUrls + ", Description=" + description
                 + ", address=" + address + ", haveEmailed=" + haveEmailed
                 + ", hasReplied=" + hasReplied + ", hasLinked=" + hasLinked
                 + ", longitude=" + longitude + ", latitude=" + latitude

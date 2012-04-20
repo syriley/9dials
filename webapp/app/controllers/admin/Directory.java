@@ -58,4 +58,28 @@ public class Directory extends LoggedInController{
         School.markAllAsEmailed(currentUser);
         index();
     }
+    
+    public static void show(long id) {
+        School school = School.findById(id);
+        render(school);
+    }
+    
+    public static void update(long id, String name) {
+        School school = School.findById(id);
+        show(id);
+    }
+
+    public static void updatePrimaryEmail(long id, String emailAddress) {
+        School school = School.findById(id);
+        school.email = emailAddress;
+        school.save();
+        show(id);
+    }
+    
+    public static void addPossibleEmail(long id, String emailAddress) {
+        School school = School.findById(id);
+        school.possibleEmails.add(emailAddress);
+        school.save();
+        show(id);
+    }
 }
