@@ -88,7 +88,8 @@
    name: school1
    email: school@school.com
    website: school.com
-   hasReplied: true
+   haveEmailed: true
+   hasReplied: false
    hasLinked: false
    longitude: 0.345
    latitude: 0.543
@@ -101,6 +102,22 @@
    name: twochords
    website: http://www.twochordsmore.co.uk/
    address: address1
+ 
+ School(school3):
+   name: Statues of Us
+   email: schoo3@school.com
+   website: http://www.statuesofus.org
+   haveEmailed: true
+   hasReplied: true
+   hasLinked: true
+   twitter: http://www.twitter.com/statuestunes
+   facebook: http://www.facebook.com/statuesofus
+   longitude: 0.345
+   latitude: 0.543
+   address: address1
+   possibleEmails: 
+     - aasdf
+     - fff
 
  Session(session1):
    name: session1

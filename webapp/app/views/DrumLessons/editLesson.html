@@ -1,59 +1,61 @@
 #{extends 'academy.html' /}
 #{set title: lesson.name + ' | Drum Lesson' /}
+
+#{set 'moreScripts'}
+			<script type="text/javascript">
+			  // This specifies the location of the pdf.js file.
+			  PDFJS.workerSrc = "/auth/public/javascripts/lib/pdf.js";
+			</script>
+			<script type="text/javascript">
+			'use strict';
+			PDFJS.getPdf('/auth/public/assets/pdfs/drumLessons/${lesson.pdfLocation}', function getPdfHelloWorld(data) {
+			  //
+			  // Instantiate PDFDoc with PDF data
+			  //
+			  var pdf = new PDFJS.PDFDoc(data);
+			  var page = pdf.getPage(1);
+			  var scale = 1.5;
+			
+			  //
+			  // Prepare canvas using PDF page dimensions
+			  //
+			  var canvas = document.getElementById('the-canvas');
+			  var context = canvas.getContext('2d');
+			  canvas.height = page.height * scale;
+			  canvas.width = page.width * scale;
+			
+			  //
+			  // Render PDF page into canvas context
+			  //
+			  page.startRendering(context);
+			});
+		</script>
+		
+	#{/set}
+	
 <hr class="soften" />
 
-#{form @DrumLessons.saveLesson(lesson.id)}
-<div class="row">
-	<div class="span3">
-		<input type="text" name="name" value="${lesson.name}" />
+<form action="@DrumLessons.saveLesson(lesson.id)" class="well">
+	<div class="row">
+		<div class="span3">
+			<label>Name</label>
+			<input type="text" name="name" value="${lesson.name}" />
+			<label>Youtube Location (optional)</label>
+			<input type="text" name="youtubeLocation" value="${lesson.youtubeLocation}" />
+		</div>
+		<div class="offset4">
+			<iframe width="310" height="189" frameborder="0" 
+				src="http://www.youtube.com/embed/${lesson.youtubeLocation}?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0" 
+				type="text/html" class="youtube-player" title="YouTube video player"></iframe>
+		</div>
 	</div>
-</div>
-#{set 'moreScripts'}
-		<script type="text/javascript">
-		  // This specifies the location of the pdf.js file.
-		  PDFJS.workerSrc = "/auth/public/javascripts/lib/pdf.js";
-		</script>
-		<script type="text/javascript">
-		'use strict';
-		PDFJS.getPdf('/auth/public/assets/pdfs/drumLessons/${lesson.pdfLocation}', function getPdfHelloWorld(data) {
-		  //
-		  // Instantiate PDFDoc with PDF data
-		  //
-		  var pdf = new PDFJS.PDFDoc(data);
-		  var page = pdf.getPage(1);
-		  var scale = 1.5;
-		
-		  //
-		  // Prepare canvas using PDF page dimensions
-		  //
-		  var canvas = document.getElementById('the-canvas');
-		  var context = canvas.getContext('2d');
-		  canvas.height = page.height * scale;
-		  canvas.width = page.width * scale;
-		
-		  //
-		  // Render PDF page into canvas context
-		  //
-		  page.startRendering(context);
-		});
-	</script>
+	<div class="row">
+		<div class="span12">
+			<label>Lesson Text (optional)</label>
+		</div>
+	</div>
+	<input type="submit" class="btn btn-primary" value="save" />
 	
-#{/set}
-
-<div class="row">
-	<div class="span3">
-		<input type="text" name="youtubeLocation" value="${lesson.youtubeLocation}" />
-	</div>
-</div>
-<div class="row">
-	<div class="offset2">
-		<iframe width="620" height="378" frameborder="0" 
-			src="http://www.youtube.com/embed/${lesson.youtubeLocation}?modestbranding=1&rel=0&hl=en&fs=1&border=0&iv_load_policy=3&hd=1&showinfo=0" 
-			type="text/html" class="youtube-player" title="YouTube video player"></iframe>
-	</div>
-</div>
-<input type="submit" class="btn btn-primary" value="save" />
-
-<canvas id="the-canvas"></canvas>
-<hr class="space" />
-#{/form}
+	<canvas id="the-canvas"></canvas>
+	<hr class="space" />
+</form>

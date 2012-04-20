@@ -27,6 +27,8 @@ public class DrumLesson extends Model{
         this.user = user;
     }
     
+    public DrumLesson() {}
+
     public static DrumLesson findByName(String name) {
         return DrumLesson.find("byName", name).first();
     }

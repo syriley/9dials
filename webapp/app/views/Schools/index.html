@@ -10,9 +10,17 @@
 		</p>
 		
 		#{list items: schools, as: 'school'}
-			<h3>${school.name}</h3>
-			<p><a href="${school.website}">${school.website}</a><br/>
-			${school.email}</p>
+			<h3><a href="@{show(school.id)}">${school.name}</a></h3>
+			${school.email}
+			#{if school.hasReplied}<p><a href="${school.website}" target="_blank"	>website</a><br/>
+				#{if school.twitter != null}
+					<a href="${school.twitter}" target="_blank"><img src="@{'/public/images/twitter.png'}"/></a>
+				#{/if}
+				#{if school.facebook != null}
+					<a href="${school.facebook}" target="_blank"><img src="@{'/public/images/facebook.png'}"/></a>
+				#{/if}
+			#{/if}
+			
 		#{/list}
 	</div>
 </div>

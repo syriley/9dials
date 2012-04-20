@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 
 import models.DrumLesson;
 import models.DrumLessonGroup;
+import play.data.validation.Required;
 import play.mvc.Controller;
 
 public class DrumLessons extends Controller{
@@ -23,12 +24,16 @@ public class DrumLessons extends Controller{
     
     public static void editLesson(long id) {
         DrumLesson lesson = DrumLesson.findById(id);
+        if (lesson == null) {
+            lesson = new DrumLesson(); 
+        }
         render(lesson);
     }
     
-    public static void saveLesson(long id, String name, String youtubeLocation) {
+    public static void saveLesson(long id,@Required String name, String youtubeLocation) {
         
         DrumLesson lesson = DrumLesson.findById(id);
+        
         lesson.name = name;
         
         Pattern watchPattern = Pattern.compile("www.youtube.com/watch\\?v=([a-zA-Z1-9]+)&");

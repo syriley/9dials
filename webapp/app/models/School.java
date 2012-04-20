@@ -78,6 +78,11 @@ public class School extends Model {
         List<School> schools = School.find("hasLinked = ?", true).fetch();
         return schools;
     }
+    
+    public static List<School> findAllEmailed() {
+        List<School> schools = School.find("haveEmailed = ?", true).fetch();
+        return schools;
+    }
 
     public static School findByWebsite(String website) {
         return School.find("website = ?", website).first();

@@ -1,0 +1,25 @@
+#{extends 'academy.html' /}
+#{set title:'school.name' /}
+
+<div class="row frow">
+	<div class="span12">
+		<h1>${school.name}</h1>
+		
+		<p>${school.description}</p>
+		
+		#{if school.hasReplied}<p><a href="${school.website}" target="_blank"	>visit website</a><br/>
+			#{if school.twitter != null}
+				<a href="${school.twitter}" target="_blank"><img src="@{'/public/images/twitter.png'}"/></a>
+			#{/if}
+			#{if school.facebook != null}
+				<a href="${school.facebook}" target="_blank"><img src="@{'/public/images/facebook.png'}"/></a>
+			#{/if}
+		#{/if}
+		
+		<p>If you would like a link to your site and social media please email us at <a href="mailto:contact@9dials.com">contact@9dials.com</a>
+		and we can set up your page and give you a login to manage it.</p>
+	</div>
+</div>
+
+
+<hr class="space" />
