@@ -11,7 +11,15 @@ require:
 #   - org.scalatest -> scalatest_2.9.1 1.7.RC2
 #   - net.liftweb -> lift-json_2.9.1 2.4
     - com.amazonaws -> aws-java-sdk 1.2.7
+    - provided -> silvertunnel 0.13
+    - provided -> jsoup 1.6.2
+
 repositories:
+ - provided:
+        type: local
+        artifact: "${application.path}/jar/[module]-[revision].jar"
+        contains:
+          - provided -> *
  - scala-tools:
         type: iBiblio
         root: "http://scala-tools.org/repo-releases/"
