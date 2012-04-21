@@ -4,7 +4,11 @@
 <div class="row frow">
 	<div class="span12">
 		<h1>${school.name}</h1>
-		
+		#{if school.address != null }
+			<div>
+				${school.address.streetAddress}, ${school.address.locality}, ${school.address.postalCode}
+			</div>
+		#{/if}
 		<p>${school.description}</p>
 		
 		#{if school.hasReplied}<p><a href="${school.website}" target="_blank"	>visit website</a><br/>
