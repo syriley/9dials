@@ -28,6 +28,12 @@ public class GetContactEmailsTest extends NineDialsTest {
         school = new School();
         school.website = website;
     }
+
+
+    @Test
+    public void emptyTest(){
+	assertEquals(true,true);
+    }
 //    @Test
 //    public void mailToTest() {
 //        setSchool("http://www.twochordsmore.co.uk/");
