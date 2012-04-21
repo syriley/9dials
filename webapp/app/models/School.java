@@ -63,17 +63,19 @@ public class School extends Model {
         address = new Address();
     }
 
-    public static void markAllAsEmailed(User currentUser) {
-        List<School> schools = School.findAll();
+    public static void markBatchAsEmailed() {
+        List<School> schools = School.getNextEmailBatch();
         for (School school : schools) {
             if(!school.haveEmailed) {
                 school.haveEmailed = true;
+                school.updated = new Date();
                 school.save();
-                String action = "marked " + school.email + " as emailed";
-                UserAction userAction = new UserAction(currentUser, action);
-                userAction.save();
             }
         }
+    }
+    
+    public static List<School> getNextEmailBatch() {
+        return School.find("haveEmailed = ? order by email", false).fetch(25);
     }
 
     public static List<School> findAllLinked() {

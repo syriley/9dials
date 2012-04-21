@@ -26,7 +26,7 @@ public class Directory extends LoggedInController{
 	     }
 	     search = search.toLowerCase();
 	     List<School> schools = School.find("website like ? or email like ? order by haveEmailed desc, email desc", search,search).fetch(start,size);
-	     List<School> notEmailed = School.find("haveEmailed = ?", false).fetch();
+	     List<School> notEmailed = School.getNextEmailBatch();
 	     int count = School.find("website like ? or email like ?", search, search).fetch().size();
 	     int numberOfPager = (int)Math.ceil(count/size) + 2;
 	     List<Integer> pages = new ArrayList<Integer>();
@@ -74,8 +74,7 @@ public class Directory extends LoggedInController{
     }
     
     public static void markAsEmailed() {
-        User currentUser = User.findByUsername(Security.connected());
-        School.markAllAsEmailed(currentUser);
+        School.markBatchAsEmailed();
         index(0,0,"");
     }
     

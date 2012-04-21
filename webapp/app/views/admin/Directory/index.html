@@ -86,14 +86,14 @@
 			 	</div>
 			#{/ifErrors}
 			
-			<h3>Not yet emailed</h3>
+			<h3>Next batch to be emailed</h3>
 			<div class="well">
 				#{list items: notEmailed, as: 'school'}
 					${school.email},
 				#{/list}
 			</div>
 			#{form @markAsEmailed()}
-				<input type="submit" value="Mark all as emailed" class="btn"/>
+				<input type="submit" value="Mark batch as emailed" class="btn"/>
 			#{/form}
 		</div>
 	</div>

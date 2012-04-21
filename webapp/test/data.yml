@@ -101,6 +101,7 @@
  School(school2):
    name: twochord
    website: http://www.twochordsre.co.uk/
+   email: 4
    address: address1
  
  School(school3):
@@ -123,10 +124,12 @@
    name: twocho
    website: http://www.thordsmore.co.uk/
    address: address1
+   email: 5
 
  School(school5):
    name: twochords
    website: http://www.twochordsmore.co.uk/
+   email: 6
    address: address1
 
  Session(session1):
