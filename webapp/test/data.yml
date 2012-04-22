@@ -22,6 +22,15 @@
    name: Barry Appleton
    bio: my bio
  
+ User(fbjohn):
+   email: john@facebook.com
+   password: password
+   username: user1
+   name: David Simpkins
+   bio: my bio
+   externalId: 10000000
+   externalProvider: facebook
+ 
  Location(brighton):
    city: brighton
    country: england
@@ -232,6 +241,23 @@
    youtubeLocation: tCvHnJzZKq8
    drumLessonGroup: rudiments 
  
+ Source(guitar):
+   fileName: lingding.ogg
+   s3key: 08f79c82-abd1-40e4-a561-c7fa9fed4847
+   url: http://localhost:9000/share/08f79c82-abd1-40e4-a561-c7fa9fed4847
+   name: Awesome guitar solo
+   creator: fbjohn
  
+ Source(bongos):
+   fileName: lingding.ogg
+   s3key: 08f79c82-abd1-40e4-a561-c7fa9fed4847
+   url: http://localhost:9000/share/08f79c82-abd1-40e4-a561-c7fa9fed4847
+   name: My first go on the bongos
+   creator: fbjohn
  
- 
+ Source(boner):
+   fileName: lingding.ogg
+   s3key: 08f79c82-abd1-40e4-a561-c7fa9fed4847
+   url: http://localhost:9000/share/08f79c82-abd1-40e4-a561-c7fa9fed4847
+   name: There's a boner in the pool
+   creator: fbjohn

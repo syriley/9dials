@@ -1,0 +1,28 @@
+#{extends 'fbapp_audio.html' /}
+#{set title:'My Sound Wall' /}
+<div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '351696901530052', // App ID
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+      });
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+  </script>
+<h1>${source.name} by ${source.creator.name}</h1>
+ <div id="sm2-container">
+  <!-- SM2 flash goes here -->
+ </div>
+<ul class="graphic">
+	<li style="vertical-align:top;"><a href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a><div class="fb-like" data-href="${source.url}" data-send="true" data-width="200" data-show-faces="false"></div></li>	
+</ul>

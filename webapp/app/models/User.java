@@ -24,6 +24,8 @@ public class User extends Model {
 	public String password;
 	public String bio;
 	private String imageUrl;
+	public String externalId;
+	public String externalProvider;
 	public boolean isEmailVerified = true;
 	
 	@ManyToMany

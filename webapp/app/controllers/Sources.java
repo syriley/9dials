@@ -5,42 +5,75 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import models.Source;
-import models.Track;
+import models.User;
 
 import org.apache.commons.io.IOUtils;
 
 import play.Logger;
+import play.modules.facebook.FbGraphException;
+import play.mvc.Router;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
-public class Sources extends LoggedInController {
-    
-    public static final String AWS_ACCESS_KEY = "AKIAJXRBBFNYBXNUNBZQ";
-    public static final String AWS_SECRET_KEY = "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";
-    public static final String BUCKET_NAME = "9dials";
+public class Sources extends FacebookLoggedInController{
+	  
+	public static final String AWS_ACCESS_KEY = "AKIAJLGV564C5LYG5WHQ";
+	public static final String AWS_SECRET_KEY = "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";
+    public static final String BUCKET_NAME = "media.9dials.com";
+  
+    public static String getFileUrl(String fileName){
+    	return "http://"+BUCKET_NAME+"/"+fileName;
+    }
     
 	public static void index() {
 		render();
 	}
-	
-	public static void upload(File  file) throws FileNotFoundException {
-	    AWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
-	    AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
-	    s3Client.createBucket(BUCKET_NAME);
-	    String s3Key = UUID.randomUUID().toString();
-	    s3Client.putObject(BUCKET_NAME, s3Key, file);
-	    Source source = new Source(file.getName(),s3Key);
-	    source.save();
-	    
+
+	public static void audio() {
+		render();
 	}
 	
-	public static void uploadLocally(File  file) {
+	public static void upload(File file, String name) throws FileNotFoundException, FbGraphException {
+		User fbUser = FacebookSecurity.getCurrentFbUser();	
+	    AWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
+	    AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
+	    String s3key = UUID.randomUUID().toString();
+	    s3Client.putObject(BUCKET_NAME, s3key, file);
+	    String url = getLocalUrl(s3key);
+	    Source source = new Source(fbUser,file.getName(),s3key,name, url);
+	    source.save();
+	    index();
+	}
+	
+	public static List<Source> findMine() throws FbGraphException{
+		User fbUser = FacebookSecurity.getCurrentFbUser();		
+		return Source.find("byCreator", fbUser).fetch(10);
+	}
+	
+	private static String getLocalUrl(String s3key) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sourceId", s3key);	
+		String url = Router.getFullUrl("MyClips.index", map);
+		return url;
+	}
+
+	private static String getPlayableUrl(String s3key) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("sourceId", s3key);	
+		String url = Router.getFullUrl("Share.index", map);
+		return url;
+	}
+	
+	public static void uploadLocally(File file) {
 	    
 	    FileOutputStream moveTo = null;
 	    try {
@@ -50,11 +83,5 @@ public class Sources extends LoggedInController {
         } catch (IOException e) {
             Logger.error(e, "local upload error");
         }
-	}
-	 
-	public static void getTrack(long id ){
-	    Track track = Track.findById(id);
-		response.setContentTypeIfNotSet("audio/ogg");
-	    renderBinary(new File(track.audioUrl));
 	}
 }

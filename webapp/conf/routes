@@ -23,6 +23,12 @@ GET 	/tabs/list/{artist}				 			Tabs.list
 
 WS   /helloSocket            MyWebSocket.hello
 
+#FB App
+GET     /wall                                      Sources.index
+GET     /fb/canvas/                                Wall.index
+POST    /fb/canvas/                               Wall.index
+GET     /share/{sourceId}								   Share.index
+GET     /myclips/{sourceId}								   MyClips.index
 #Sessions
 
 GET     /collaborate/index   Collaborate.index

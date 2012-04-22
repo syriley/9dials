@@ -1,0 +1,17 @@
+#{extends 'fbapp_base.html' /}
+#{set title:'My Sound Wall' /}
+ <script type="text/javascript">
+    function facebookLogin() {
+        // get current login status from facebook.com
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // the user is logged in and connected to your app
+                window.location = "@{FacebookSecurity.facebookLogin()}";
+            } else {
+                window.location = "@{FacebookSecurity.facebookLogout()}";
+            }
+         });
+    }
+</script>
+<div>Welcome to 9 Dials. To access your sound wall you must log in with your facebook account.</div>
+<fb:login-button  scope="email,publish_stream" onlogin="facebookLogin();"></fb:login-button>

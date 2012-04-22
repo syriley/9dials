@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import play.db.jpa.Model;
 
@@ -8,12 +9,19 @@ import play.db.jpa.Model;
 public class Source extends Model
 {
     
-    public Source(String fileName, String s3Key) {
+    public Source(User creator,String fileName, String s3key, String sourceName, String url) {
         super();
+        this.creator=creator;
         this.fileName = fileName;
-        this.s3Key = s3Key;
+        this.s3key = s3key;
+        this.name=sourceName;
+        this.url=url;
     }
     
     public String fileName;
-    public String s3Key;
+    public String name;
+    public String s3key;
+    public String url;
+    @ManyToOne
+    public User creator;
 }

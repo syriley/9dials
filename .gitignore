@@ -4,6 +4,7 @@ recorder.swf
 /node/node_modules
 server.pid
 webapp/public/app/
+webapp/lib
 bin/
 test-result/
 data/

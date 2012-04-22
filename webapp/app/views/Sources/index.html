@@ -1,14 +1,20 @@
-#{extends 'main.html' /}
-#{set title:'Track Upload Example' /}
-
-<h1>Track Upload Example</h1>
-<ul>
-#{list items:models.Track.findAll(), as:'track'}
-    <li><a href="@{Sources.getTrack(track.id)}" >Track ${track.id}</a></li>
-#{/list}
-</ul>
-<form action="@{Sources.upload()}" method="POST" enctype="multipart/form-data">
-    <input type="file" id="file" name="file" />
-    <input type="submit" value="Send it..." />
+#{extends 'fbapp_audio.html' /}
+#{set title:'My Sound Wall' /}
+<h1>My Sound Wall ${fbuser.name}</h1>
+ <div id="sm2-container">
+  <!-- SM2 flash goes here -->
+ </div> 
+<form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
+      <input class="input-file" id="file" name="file" type="file">
+      <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
+      <button type="submit" class="btn">Upload</button>    
 </form>
-
+<ul class="graphic">
+<form>
+#{list items:controllers.Sources.findMine(), as:'source'}
+	<li style="vertical-align:top;"><a href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> <input type="button" value="Share it!" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" /></li>	
+#{/list}
+</form>
+</ul>
+<p><a onclick='postToFeed(); return false;'>Post to Feed</a></p>
+    <p id='msg'></p>

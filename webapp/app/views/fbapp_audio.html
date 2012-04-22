@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">  
+     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ninedials: http://ogp.me/ns/fb/ninedials#">
+  	<meta property="fb:app_id"      content="351696901530052" /> 
+  	<meta property="og:type"        content="ninedials:audio_clip" /> 
+  	<meta property="og:url"         content="Put Your Own URL Here" /> 
+  	<meta property="og:title"       content="Sample Clip Name" /> 
+  	<meta property="og:description" content="Listen to me singing in my lounge!" /> 
+  	<meta property="og:image"       content="http://www.aotg.com/cuttingroom/wp-content/uploads/2011/12/audio_waveform_003.jpg" />
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/lib/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/inlineplayer.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/flashblock.css'}" />
+		<script type="text/javascript" src="@{'/public/javascripts/lib/soundmanager2-nodebug-jsmin.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/lib/inlineplayer.js'}"></script>
+        <link rel="stylesheet" media="screen" href="@{'/public/bootstrap/css/bootstrap.min.css'}">        
+        <script src="@{'/public/bootstrap/js/bootstrap.js'}" type="text/javascript" charset="${_response_encoding}"></script>        
+        #{get 'moreScripts' /}        
+        <script type="text/javascript">
+  		function postClip(url){
+      FB.api(
+        '/me/ninedials:share?audio_clip='+url,
+        'post',
+        function(response) {
+           if (!response || response.error) {
+              alert('Error occured');
+           } else {
+              alert('Cook was successful! Action ID: ' + response.id);
+           }
+        });
+  }
+  </script>
+    </head>
+    	<body>
+    	#{fbg.scriptAsync /}    	
+    	<div class="container" >
+  	    		#{doLayout /}
+        </div>
+	    </body>
+</html>
