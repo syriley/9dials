@@ -3,7 +3,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
-	minWidth="250" minHeight="140"
+	minWidth="270" minHeight="140"
 	creationComplete="init(event)">
 
 	<fx:Declarations>
@@ -85,7 +85,7 @@
 				}//disable
 				else
 				{//enable
-					Logger.log("Stop Recording");
+					Logger.log("Complete");
 					playPauseButton.enabled = true;
 					uploadButton.enabled = true;
 				}//enable           
@@ -95,7 +95,7 @@
 			{//handleMicManagerChange
 				if (micManager.isRecording)
 				{//update label
-					recordButton.label = "Stop Recording";
+					recordButton.label = "Complete";
 					Logger.log("Started Recording");
 				}//update label
 				else
@@ -170,7 +170,7 @@
 			{//handleEncodeComplete
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Uploading (nearly implemented)";
+				progressLabel.text = "Upload complete";
 				uploadManager.upload(oggManager.encodedBytes)	;
 				playPauseButton.enabled = true;
 				uploadButton.enabled = true;
@@ -206,19 +206,14 @@
 			
 		]]>
 	</fx:Script>
-	<mx:VBox>
-		<mx:HBox>
-			<s:Button id="recordButton" label="Record" click="handleRecordClick(event)" />
+	<mx:VBox height="60" backgroundColor="#3B5998" width="270"
+		paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+		<mx:HBox x="40">
+			<s:Button id="recordButton" label="Record" width="80" click="handleRecordClick(event)" />
 			<s:Button id="playPauseButton" label="Play" click="handlePlayPauseClick(event)" />
 			<s:Button id="uploadButton" label="Upload" click="handleUploadClick(event)" />
 		</mx:HBox>
-		<s:Label text="Recorder"
-			x="72" y="74" color="#FFFFFF"
-			fontSize="20" backgroundColor="#000000"
-			height="44" width="240"
-			textAlign="center" verticalAlign="middle"
-			fontWeight="bold" fontFamily="verdana"/>
-		<s:Label id="progressLabel" text="Progress" />
+		<s:Label color="white" fontWeight="bold" id="progressLabel" text="Progress" />
 	</mx:VBox>
 </s:Application>
 
