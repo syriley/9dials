@@ -3,7 +3,7 @@
      <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ninedials: http://ogp.me/ns/fb/ninedials#">
   	<meta property="fb:app_id"      content="351696901530052" /> 
   	<meta property="og:type"        content="ninedials:audio_clip" /> 
-  	<meta property="og:url"         content="Put Your Own URL Here" /> 
+  	<meta property="og:url"         content="${play.Play.configuration.get("application.baseUrl")+request.url}" /> 
   	<meta property="og:title"       content="Sample Clip Name" /> 
   	<meta property="og:description" content="Listen to me singing in my lounge!" /> 
   	<meta property="og:image"       content="http://www.aotg.com/cuttingroom/wp-content/uploads/2011/12/audio_waveform_003.jpg" />
