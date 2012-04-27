@@ -3,7 +3,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
-	minWidth="270" minHeight="140"
+	minWidth="500" minHeight="140"
 	creationComplete="init(event)">
 
 	<fx:Declarations>
@@ -171,7 +171,7 @@
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
 				progressLabel.text = "Upload complete";
-				uploadManager.upload(oggManager.encodedBytes)	;
+				uploadManager.upload(oggManager.encodedBytes, titleTextbox.text)	;
 				playPauseButton.enabled = true;
 				uploadButton.enabled = true;
 				
@@ -206,11 +206,13 @@
 			
 		]]>
 	</fx:Script>
-	<mx:VBox height="60" backgroundColor="#3B5998" width="270"
+	<mx:VBox height="60" backgroundColor="#3B5998" width="500"
 		paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
 		<mx:HBox x="40">
 			<s:Button id="recordButton" label="Record" width="80" click="handleRecordClick(event)" />
 			<s:Button id="playPauseButton" label="Play" click="handlePlayPauseClick(event)" />
+			<s:Label color="white" text="Title:" paddingTop="5" fontWeight="bold" />
+			<s:TextInput id="titleTextbox" width="170" text="Untitled" />
 			<s:Button id="uploadButton" label="Upload" click="handleUploadClick(event)" />
 		</mx:HBox>
 		<s:Label color="white" fontWeight="bold" id="progressLabel" text="Progress" />

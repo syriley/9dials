@@ -73,8 +73,9 @@ package com.sjriley
 		
 		public function startPlay():void
 		{//startPlay
+			Logger.log('Starting play')
 			_isPlaying = true;
-			_soundChannel = _sound.play();
+			_soundChannel = _sound.play(0,1);
 			
 			dispatchEvent(new Event(Event.CHANGE));
 		}//startPlay

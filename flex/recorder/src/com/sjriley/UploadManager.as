@@ -18,7 +18,7 @@ package com.sjriley
 		private var urlRequest:URLRequest;
 		
 	
-		public function upload($fileBytes:ByteArray):void
+		public function upload($fileBytes:ByteArray, $title:String):void
 		{
 			urlLoader = new MultipartURLLoader();
 			//urlLoader.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
@@ -31,7 +31,7 @@ package com.sjriley
 			//Logger.log("uploading file to " + urlRequest.url);
 			Logger.log('starting upload');
 			try {
-				urlLoader.addFile($fileBytes, 'newSource.ogg', 'file')
+				urlLoader.addFile($fileBytes, 'newSource.ogg', $title)
 				urlLoader.load(FlexGlobals.topLevelApplication.parameters.uploadUrl);
 			}
 			catch (err:Error)
