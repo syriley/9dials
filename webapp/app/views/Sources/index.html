@@ -1,14 +1,52 @@
 #{extends 'fbapp_audio.html' /}
 #{set title:'My Sound Wall' /}
 <h1>My Sound Wall ${fbuser.name}</h1>
- <div id="sm2-container">
-  <!-- SM2 flash goes here -->
- </div> 
-<form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
+<div class="row">        
+        <div class="span9 columns">
+<ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#upload" data-toggle="tab">Upload</a></li>
+            <li><a href="#record" data-toggle="tab">Record something new</a></li>            
+</ul>
+<div id="myTabContent" class="tab-content">
+	<div class="tab-pane fade in active" id="upload">
+      <form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
       <input class="input-file" id="file" name="file" type="file">
       <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
       <button type="submit" class="btn">Upload</button>    
-</form>
+	</form>
+    </div>
+    <div class="tab-pane fade" id="rec">
+      <form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
+      <input class="input-file" id="file" name="file" type="file">
+      <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
+      <button type="submit" class="btn">Upload</button>    
+	</form>
+    </div>
+    <div class="tab-pane fade" id="record">
+    	<div style="text-align:center margin:0; padding:0">	
+			<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="140">
+				<param name="movie" value="/public/assets/recorder.swf" />
+				<param name="flashVars" value="uploadUrl=upload" />
+				
+        		<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="/public/assets/recorder.swf" width="500" height="140" flashVars="uploadUrl=upload">
+				<!--<![endif]-->
+				<div>
+					<h1>Alternative content</h1>
+					<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+				</div>
+				<!--[if !IE]>-->
+				</object>
+				<!--<![endif]-->
+			</object>
+		</div>
+    </div>
+</div>	
+        </div>
+      </div>
+ <div id="sm2-container">
+  <!-- SM2 flash goes here -->
+ </div> 
 <ul class="graphic">
 <form>
 #{list items:controllers.Sources.findMine(), as:'source'}

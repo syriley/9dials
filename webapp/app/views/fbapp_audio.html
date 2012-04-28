@@ -9,16 +9,16 @@
   	<meta property="og:image"       content="http://www.aotg.com/cuttingroom/wp-content/uploads/2011/12/audio_waveform_003.jpg" />
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="${_response_encoding}"></script>
+        <link rel="stylesheet" href="@{'/public/bootstrap/css/bootstrap.css'}">                
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/lib/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/inlineplayer.css'}" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/flashblock.css'}" />
 		<script type="text/javascript" src="@{'/public/javascripts/lib/soundmanager2-nodebug-jsmin.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/lib/inlineplayer.js'}"></script>
-        <link rel="stylesheet" media="screen" href="@{'/public/bootstrap/css/bootstrap.min.css'}">        
-        <script src="@{'/public/bootstrap/js/bootstrap.js'}" type="text/javascript" charset="${_response_encoding}"></script>        
+		<script type="text/javascript" src="@{'/public/bootstrap/js/bootstrap.js'}"></script>
+                               
         #{get 'moreScripts' /}        
         <script type="text/javascript">
   		function postClip(url){
@@ -34,6 +34,10 @@
         });
   }
   </script>
+  <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
+		<script type="text/javascript">
+		swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+		</script>
         #{if play.Play.configuration.get("application.mode") == 'prod'}
 		<script type="text/javascript">
 
