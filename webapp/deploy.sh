@@ -4,8 +4,6 @@ FRONT_END_ROOT=../../9dials-frontend
 FRONT_END_DESTINATION=public/app
 FLEX_ROOT=../flex/recorder
 
-echo "Getting Latest version..."
-git pull origin master
 echo "Resolving dependencies..."
 play dependencies --sync
 
