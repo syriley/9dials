@@ -1,6 +1,7 @@
 package controllers;
 
 import models.User;
+import play.Logger;
 import play.modules.facebook.FbGraph;
 import play.modules.facebook.FbGraphException;
 import play.mvc.Controller;
@@ -42,8 +43,23 @@ public class FacebookSecurity extends Controller{
     }
 
 	public static User getCurrentFbUser() throws FbGraphException {
+		try{
+			String sessionFbId = Session.current().get("fbuserid");
+			if(sessionFbId==null){				
+				sessionFbId = getUserExternalFbId();
+			}
+			User fbUser = User.find("byExternalIdAndExternalProvider", sessionFbId,"facebook").first();
+	        return fbUser;
+		} catch(ArrayIndexOutOfBoundsException e){
+			Logger.info("No facebook user logged in");
+			return null;
+		}		        
+	}
+
+	private static String getUserExternalFbId() throws FbGraphException {
+		String sessionFbId;
 		JsonObject profile = FbGraph.getObject("me"); // fetch the logged in user
-        User fbUser = User.find("byExternalIdAndExternalProvider", profile.get("id").getAsString(),"facebook").first();
-        return fbUser;
+		sessionFbId = profile.get("id").getAsString();
+		return sessionFbId;
 	}
 }
