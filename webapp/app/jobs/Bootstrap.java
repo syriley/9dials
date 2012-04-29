@@ -20,9 +20,10 @@ public class Bootstrap extends Job {
 
     public void reloadData() {
         //don't ever overwrite live data
-        if (Play.mode == Mode.PROD) {
+    	String jpaDdl = Play.configuration.getProperty("jpa.ddl","none"); 
+        if (jpaDdl.equals("none")) {
             return;
-        }
+        }        
         Logger.info("Reloading database");
 		Fixtures.deleteDatabase();
 	    Fixtures.loadModels("../test/data.yml");
