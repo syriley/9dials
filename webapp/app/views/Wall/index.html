@@ -13,5 +13,38 @@
          });
     }
 </script>
-<div>Welcome to 9 Dials. To access your sound wall you must log in with your facebook account.</div>
-<fb:login-button  scope="email,publish_stream" onlogin="facebookLogin();"></fb:login-button>
+<div class="row">
+<div class="span6">
+<ul>
+#{if flash.error}
+    <p style="color:#c00">
+        ${flash.error}
+    </p>
+#{/if}
+</ul>
+<div style="margin:10px">
+<h1>9 Dials Audio</h1>
+<p style="font-size:1.25em">9 Dials is the easiest way to share audio with your Facebook friends. To start you must log in with your facebook account.</p>
+<fb:login-button size="large" scope="email" onlogin="facebookLogin();"></fb:login-button>
+</div>
+</div>
+</div>
+<div style="text-align:center" class="row">
+<div class="span2 well">
+        <h2>Record </h2>
+        <p>Record an audio clip directly in your browser and share it in one click.</p>
+        <img width="96" height="96" src="/public/images/microphone.png"> 
+</div>
+<div class="span2 well">
+        <h2>Upload</h2>
+        <p>Got some audio you want to share? One click upload and you're ready to share.</p>
+        <img width="96" height="96" src="/public/images/arrow_up.png">
+</div>
+<div class="span2 well">
+        <h2>Share</h2>
+        <p>Easily share your clip with your Facebook friends on your timeline or send it directly to a friend.</p>
+        <img src="/public/images/facebook-share-button.png">
+</div>
+</div>
+
+
