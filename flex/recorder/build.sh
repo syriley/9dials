@@ -1,3 +1,15 @@
 #/bin/bash
-echo 'Building flash recorder'
-mxmlc -source-path=src -library-path=lib -output=recorder.swf App.mxml
+if [ $# -ne 1 ]; then
+        echo "usage: ./build.sh [fb|nine]"
+        exit 1
+fi
+
+
+if [ $1 == "nine" ]; then
+    echo 'Building NineDials flash recorder'
+    mxmlc -source-path=src -library-path=lib -output=recorder.swf NineDials.mxml
+fi
+if [ $1 == "fb" ]; then
+    echo 'Building Facebook flash recorder'
+    mxmlc -source-path=src -library-path=lib -output=recorder.swf Facebook.mxml
+fi
