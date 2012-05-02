@@ -54,6 +54,8 @@ GET     /fakefblogin    Application.fakeLogin
 
 POST    /sources Sources.upload
 
+POST    /api/sources Sources.upload
+
 POST    /bands/?             Bands.create
 POST    /tabs/?             Tabs.create
 
