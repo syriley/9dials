@@ -16,8 +16,11 @@ import models.User;
 import org.apache.commons.io.IOUtils;
 
 import play.Logger;
+import play.Play;
 import play.modules.facebook.FbGraphException;
+import play.mvc.Http;
 import play.mvc.Router;
+import play.mvc.Router.ActionDefinition;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -85,8 +88,28 @@ public class Sources extends FacebookLoggedInController{
         }
 	}
 	
+	public static String getFullUrl(String action, Map<String, Object> args) {
+        ActionDefinition actionDefinition = Router.reverse(action, args);
+        String base = getBaseUrl();
+        if (actionDefinition.method.equals("WS")) {
+            return base.replaceFirst("https?", "ws") + actionDefinition;
+        }
+        return base + actionDefinition;
+    }
+
+    // Gets baseUrl from current request or application.baseUrl in application.conf
+    protected static String getBaseUrl() {
+            // No current request is present - must get baseUrl from config
+            String appBaseUrl = Play.configuration.getProperty("application.baseUrl", "application.baseUrl");
+            if (appBaseUrl.endsWith("/")) {
+                // remove the trailing slash
+                appBaseUrl = appBaseUrl.substring(0, appBaseUrl.length()-1);
+            }
+            return appBaseUrl;
+    }
+
 	public static String getIndexUrl(){
 		Map<String,Object> map = new HashMap<String,Object>();
-		return Router.getFullUrl("sources.index", map);
+		return getFullUrl("sources.index", map);
 	}
 }
