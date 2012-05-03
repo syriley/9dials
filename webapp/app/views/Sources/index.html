@@ -15,14 +15,8 @@
       <button type="submit" class="btn">Upload</button>    
 	</form>
     </div>
-    <div class="tab-pane fade" id="rec">
-      <form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
-      <input class="input-file" id="file" name="file" type="file">
-      <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
-      <button type="submit" class="btn">Upload</button>    
-	</form>
-    </div>
     <div class="tab-pane fade" id="record">
+    	<input style="margin-bottom:5px;" id="refreshBtn" class="btn btn-primary" type="button" value="Refresh list">
     	<div style="text-align:center margin:0; padding:0">	
 			<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="140">
 				<param name="movie" value="/public/assets/recorder.swf" />
@@ -40,6 +34,7 @@
 				<!--<![endif]-->
 			</object>
 		</div>
+			
     </div>
 </div>	
         </div>
@@ -53,7 +48,15 @@
 	#{include 'Sources/intro.html' /}
 #{/if}
 #{list items:controllers.Sources.findMine(), as:'source'}
-	<li style="vertical-align:top;"><a href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> <input type="button" value="Share it!" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" /></li>	
+	<li style="vertical-align:top;">
+	<a class="inline-playable sm2_link"  href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> 
+	<input class="btn" type="button" value="Post to timeline" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" />
+	<input class="btn" type="button" value="Send to friends" onclick="sendClip('http://www.facebook.com/dialog/send?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=@@{Sources.index()}')" />	
 #{/list}
 </form>
 </ul>
+<script>
+$('#refreshBtn').click(function() {
+  location.reload();
+});
+</script>

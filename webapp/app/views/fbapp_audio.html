@@ -6,7 +6,7 @@
   	<meta property="og:url"         content="${play.Play.configuration.get("application.baseUrl")+request.url}" /> 
   	<meta property="og:title"       content="Sample Clip Name" /> 
   	<meta property="og:description" content="Listen to me singing in my lounge!" /> 
-  	<meta property="og:image"       content="http://www.aotg.com/cuttingroom/wp-content/uploads/2011/12/audio_waveform_003.jpg" />
+  	<meta property="og:image"       content="http://www.9dials.com/public/images/audio_waveform.jpg" />
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="${_response_encoding}"></script>
@@ -32,7 +32,11 @@
               alert('Cook was successful! Action ID: ' + response.id);
            }
         });
-  }
+        }
+        function sendClip(url){
+      		window.location.href = url;
+      		
+        }; 
   </script>
   <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
 		<script type="text/javascript">
