@@ -65,14 +65,14 @@ public class Sources extends FacebookLoggedInController{
 	private static String getLocalUrl(String s3key) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("sourceId", s3key);	
-		String url = Router.getFullUrl("MyClips.index", map);
+		String url = getFull9DialsUrl("MyClips.index", map);
 		return url;
 	}
 
 	private static String getPlayableUrl(String s3key) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("sourceId", s3key);	
-		String url = Router.getFullUrl("Share.index", map);
+		String url = getFull9DialsUrl("Share.index", map);
 		return url;
 	}
 	
@@ -88,6 +88,15 @@ public class Sources extends FacebookLoggedInController{
         }
 	}
 	
+	public static String getFull9DialsUrl(String action, Map<String, Object> args) {
+        ActionDefinition actionDefinition = Router.reverse(action, args);
+        String base = getBase9DialsUrl();
+        if (actionDefinition.method.equals("WS")) {
+            return base.replaceFirst("https?", "ws") + actionDefinition;
+        }
+        return base + actionDefinition;
+    }
+	
 	public static String getFullUrl(String action, Map<String, Object> args) {
         ActionDefinition actionDefinition = Router.reverse(action, args);
         String base = getBaseUrl();
@@ -98,9 +107,9 @@ public class Sources extends FacebookLoggedInController{
     }
 
     // Gets baseUrl from current request or application.baseUrl in application.conf
-    protected static String getBaseUrl() {
+    protected static String getBase9DialsUrl() {
             // No current request is present - must get baseUrl from config
-            String appBaseUrl = Play.configuration.getProperty("facebook.baseUrl", "facebook.baseUrl");
+            String appBaseUrl = Play.configuration.getProperty("application.baseUrl", "application.baseUrl");
             if (appBaseUrl.endsWith("/")) {
                 // remove the trailing slash
                 appBaseUrl = appBaseUrl.substring(0, appBaseUrl.length()-1);
@@ -108,6 +117,16 @@ public class Sources extends FacebookLoggedInController{
             return appBaseUrl;
     }
 
+    protected static String getBaseUrl() {
+        // No current request is present - must get baseUrl from config
+        String appBaseUrl = Play.configuration.getProperty("facebook.baseUrl", "facebook.baseUrl");
+        if (appBaseUrl.endsWith("/")) {
+            // remove the trailing slash
+            appBaseUrl = appBaseUrl.substring(0, appBaseUrl.length()-1);
+        }
+        return appBaseUrl;
+    }
+    
 	public static String getIndexUrl(){
 		Map<String,Object> map = new HashMap<String,Object>();
 		return getFullUrl("sources.index", map);
