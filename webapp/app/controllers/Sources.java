@@ -84,4 +84,9 @@ public class Sources extends FacebookLoggedInController{
             Logger.error(e, "local upload error");
         }
 	}
+	
+	public static String getIndexUrl(){
+		Map<String,Object> map = new HashMap<String,Object>();
+		return Router.getFullUrl("sources.index", map);
+	}
 }

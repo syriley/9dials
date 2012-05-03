@@ -51,7 +51,7 @@
 	<li style="vertical-align:top;">
 	<a class="inline-playable sm2_link"  href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> 
 	<input class="btn" type="button" value="Post to timeline" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" />
-	<input class="btn" type="button" value="Send to friends" onclick="sendClip('http://www.facebook.com/dialog/send?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=@@{Sources.index()}')" />	
+	<input class="btn" type="button" value="Send to friends" onclick="sendClip('http://www.facebook.com/dialog/send?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=${controllers.Sources.getIndexUrl()}')" />	
 #{/list}
 </form>
 </ul>
