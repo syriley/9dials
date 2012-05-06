@@ -21,7 +21,7 @@
                                
         #{get 'moreScripts' /}        
         <script type="text/javascript">
-  		function postClip(url){
+  		function postClip(url){  		
       FB.api(
         '/me/ninedials:share?audio_clip='+url,
         'post',
@@ -29,13 +29,15 @@
            if (!response || response.error) {
               alert('Error occured');
            } else {
-              alert('Cook was successful! Action ID: ' + response.id);
+              alert('Posted to wall successfully');
            }
         });
         }
-        function sendClip(url){
-      		window.location.href = url;
-      		
+        function sendClip(type,url){
+        	#{if play.Play.configuration.get("application.mode") == 'prod'}
+        	_gaq.push(['_trackEvent', 'Facebook', type, 'Sent']);
+        	#{/if}        	
+      		window.location.href = url;      		
         }; 
   </script>
   <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
