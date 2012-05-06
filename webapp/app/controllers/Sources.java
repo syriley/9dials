@@ -128,7 +128,7 @@ public class Sources extends FacebookLoggedInController{
     }
     
 	public static String getIndexUrl(){
-		Map<String,Object> map = new HashMap<String,Object>();
-		return getFullUrl("sources.index", map);
+		String base = getBaseUrl();
+		return base+"/wall";
 	}
 }
