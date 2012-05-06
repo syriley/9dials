@@ -37,7 +37,7 @@
         	#{if play.Play.configuration.get("application.mode") == 'prod'}
         	_gaq.push(['_trackEvent', 'Facebook', type, 'Sent']);
         	#{/if}        	
-      		window.location.href = url;      		
+      		top.location.href = url;      		
         }; 
   </script>
   <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
