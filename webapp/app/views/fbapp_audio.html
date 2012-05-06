@@ -4,8 +4,8 @@
   	<meta property="fb:app_id"      content="351696901530052" /> 
   	<meta property="og:type"        content="ninedials:audio_clip" /> 
   	<meta property="og:url"         content="${play.Play.configuration.get("application.baseUrl")+request.url}" /> 
-  	<meta property="og:title"       content="Sample Clip Name" /> 
-  	<meta property="og:description" content="Listen to me singing in my lounge!" /> 
+  	<meta property="og:title"       content="${source?.name}" /> 
+  	<meta property="og:description" content="${source?.name}" /> 
   	<meta property="og:image"       content="http://www.9dials.com/public/images/audio_waveform.jpg" />
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
