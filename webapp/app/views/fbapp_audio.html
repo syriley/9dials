@@ -4,8 +4,8 @@
   	<meta property="fb:app_id"      content="351696901530052" /> 
   	<meta property="og:type"        content="ninedials:audio_clip" /> 
   	<meta property="og:url"         content="${play.Play.configuration.get("application.baseUrl")+request.url}" /> 
-  	<meta property="og:title"       content="Sample Clip Name" /> 
-  	<meta property="og:description" content="Listen to me singing in my lounge!" /> 
+  	<meta property="og:title"       content="${source?.name}" /> 
+  	<meta property="og:description" content="${source?.name}" /> 
   	<meta property="og:image"       content="http://www.9dials.com/public/images/audio_waveform.jpg" />
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
@@ -21,7 +21,7 @@
                                
         #{get 'moreScripts' /}        
         <script type="text/javascript">
-  		function postClip(url){
+  		function postClip(url){  		
       FB.api(
         '/me/ninedials:share?audio_clip='+url,
         'post',
@@ -29,13 +29,15 @@
            if (!response || response.error) {
               alert('Error occured');
            } else {
-              alert('Cook was successful! Action ID: ' + response.id);
+              alert('Posted to wall successfully');
            }
         });
         }
-        function sendClip(url){
-      		window.location.href = url;
-      		
+        function sendClip(type,url){
+        	#{if play.Play.configuration.get("application.mode") == 'prod'}
+        	_gaq.push(['_trackEvent', 'Facebook', type, 'Sent']);
+        	#{/if}        	
+      		top.location.href = url;      		
         }; 
   </script>
   <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
