@@ -4,7 +4,7 @@
 <div class="row">        
     <div class="span9 columns">
 		<ul id="myTab" class="nav nav-tabs">
-			<li class="active"><a href="#record" data-toggle="tab">Record something new</a></li>
+			<li class="active"><a href="#record" data-toggle="tab">Record something</a></li>
 	        <li ><a href="#upload" data-toggle="tab">Upload</a></li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
@@ -56,7 +56,15 @@
 	</form>
  </ul>
 <script>
-$('#refreshBtn').click(function() {
-  location.reload();
+function reload() {
+	console.log('reloading page');
+	location.reload();
+};
+$(function(){
+	
+	$('#refreshBtn').click(function() {
+	  	reload();
+	});
 });
+
 </script>

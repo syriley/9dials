@@ -21,7 +21,7 @@ package com.sjriley
 		public function upload($fileBytes:ByteArray, $title:String):void
 		{
 			urlLoader = new MultipartURLLoader();
-			//urlLoader.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
+			urlLoader.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
 			//urlRequest = new URLRequest();
 
 			//urlRequest.url = FlexGlobals.topLevelApplication.parameters.uploadUrl;
@@ -44,6 +44,7 @@ package com.sjriley
 		//Event
 		private function handleUploadComplete(e:Event):void {
 			Logger.log("upload completed successfully");
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 	}
 }
