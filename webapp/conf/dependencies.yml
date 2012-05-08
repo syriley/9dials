@@ -13,7 +13,8 @@ require:
     - com.amazonaws -> aws-java-sdk 1.2.7
     - provided -> silvertunnel 0.13
     - provided -> jsoup 1.6.2
-    - play -> fbgraph 0.4
+    - play-fbgraph -> play-fbgraph 0.5
+#    - play -> fbgraph 0.4
 
 repositories:
  - provided:
@@ -29,11 +30,12 @@ repositories:
             - net.liftweb.*
  - Custom_Modules:
       type: local
-      artifact: "${application.path}/../[module]"
+      artifact: "/home/tim/dev/[module]"
       contains:
-         - local -> *
+         - fbgraph
  - 9 Dials Utils:
         type:       http
         artifact:   "http://util.9dials.com/dist/[module]-[revision].zip"
         contains:
             - securesocial
+            - play-fbgraph

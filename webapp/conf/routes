@@ -24,8 +24,8 @@ GET 	/tabs/list/{artist}				 			Tabs.list
 WS   /helloSocket            MyWebSocket.hello
 
 #FB App
-GET     /fb/canvas/                                Wall.index
-POST    /fb/canvas/                               Wall.index
+GET     /fb/canvas/                                Sources.index
+POST    /fb/canvas/                               Sources.index
 POST    /fb/canvas/wall                               Sources.index
 GET    /fb/canvas/wall                               Sources.index
 GET     /fb/canvas/myclips/{sourceId}			  MyClips.index

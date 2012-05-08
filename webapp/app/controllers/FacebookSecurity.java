@@ -17,7 +17,7 @@ public class FacebookSecurity extends Controller{
             if(fbUser==null){
             	fbUser = createFbUser(FbGraph.getObject("me"));
             }            
-            Session.current().put("fbuserid", fbUser.externalId); // put the email into the session (for the Secure module)
+            Session.current().put("fbuserid", fbUser.externalId);
         } catch (FbGraphException fbge) {
             flash.error(fbge.getMessage());
             if (fbge.getType() != null && fbge.getType().equals("OAuthException")) {
@@ -47,6 +47,7 @@ public class FacebookSecurity extends Controller{
 			String sessionFbId = Session.current().get("fbuserid");
 			if(sessionFbId==null){				
 				sessionFbId = getUserExternalFbId();
+				Session.current().put("fbuserid", sessionFbId);
 			}
 			User fbUser = User.find("byExternalIdAndExternalProvider", sessionFbId,"facebook").first();
 	        return fbUser;

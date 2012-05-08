@@ -11,6 +11,7 @@ public class FacebookLoggedInController extends Controller{
 
 	@Before
     public static void checkAccess() throws Throwable {
+		FbGraph.init();
 	        try {
 	            User fbUser = FacebookSecurity.getCurrentFbUser();
 	            if(fbUser == null){
