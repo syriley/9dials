@@ -2,63 +2,69 @@
 #{set title:'My Sound Wall' /}
 <h1>My Sound Wall ${fbuser.name}</h1>
 <div class="row">        
-        <div class="span9 columns">
-                
-<ul id="myTab" class="nav nav-tabs">
-            <li class="active"><a href="#upload" data-toggle="tab">Upload</a></li>
-            <li><a href="#record" data-toggle="tab">Record something new</a></li>            
-</ul>
-<div id="myTabContent" class="tab-content">
-	<div class="tab-pane fade in active" id="upload">
-      <form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
-      <input class="input-file" id="file" name="file" type="file">
-      <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
-      <button type="submit" class="btn">Upload</button>    
-	</form>
-    </div>
-    <div class="tab-pane fade" id="record">
-    	<input style="margin-bottom:5px;" id="refreshBtn" class="btn btn-primary" type="button" value="Refresh list">
-    	<div style="text-align:center margin:0; padding:0">	
-			<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="140">
-				<param name="movie" value="/public/assets/recorder.swf" />
-				<param name="flashVars" value="uploadUrl=/sources" />
-				
-        		<!--[if !IE]>-->
-				<object type="application/x-shockwave-flash" data="/public/assets/recorder.swf" width="500" height="140" flashVars="uploadUrl=/sources">
-				<!--<![endif]-->
-				<div>
-					<h1>Alternative content</h1>
-					<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+    <div class="span9 columns">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#record" data-toggle="tab">Record something</a></li>
+	        <li ><a href="#upload" data-toggle="tab">Upload</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+			<div class="tab-pane fade in active" id="record">
+		    	<div style="text-align:center margin:0; padding:0">	
+					<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="140">
+						<param name="movie" value="/public/assets/recorder.swf" />
+						<param name="flashVars" value="uploadUrl=/sources" />
+						
+		        		<!--[if !IE]>-->
+						<object type="application/x-shockwave-flash" data="/public/assets/recorder.swf" width="500" height="140" flashVars="uploadUrl=/sources">
+						<!--<![endif]-->
+						<div>
+							<h1>Alternative content</h1>
+							<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+						</div>
+						<!--[if !IE]>-->
+						</object>
+						<!--<![endif]-->
+					</object>
 				</div>
-				<!--[if !IE]>-->
-				</object>
-				<!--<![endif]-->
-			</object>
-		</div>
-			
-    </div>
-</div>	
-        </div>
-      </div>
- <div id="sm2-container">
+		    </div>
+		    <div class="tab-pane fade" id="upload">
+		    	<form action="@{Sources.upload()}" class="well form-inline" method="POST" enctype="multipart/form-data">
+			      <input class="input-file" id="file" name="file" type="file">
+			      <input type="text" class="input-xlarge" id="name" name="name" placeholder="Track name">                   
+			      <button type="submit" class="btn">Upload</button>    
+				</form>
+		    </div>
+		</div>	
+     </div>
+   </div>
+  <div id="sm2-container">
   <!-- SM2 flash goes here -->
  </div> 
-<ul class="graphic">
-<form>
-#{if controllers.Sources.findMine().size() == 0}
-	#{include 'Sources/intro.html' /}
-#{/if}
-#{list items:controllers.Sources.findMine(), as:'source'}
-	<li style="vertical-align:top;">
-	<a class="inline-playable sm2_link"  href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> 
-	<input class="btn" type="button" value="Post to timeline" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" />
-	<input class="btn" type="button" value="Post on wall" onclick="sendClip('Post','http://www.facebook.com/dialog/feed?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=${controllers.Sources.getIndexUrl()}')" />
-	<input class="btn" type="button" value="Send to friends" onclick="sendClip('Message','http://www.facebook.com/dialog/send?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=${controllers.Sources.getIndexUrl()}')" />	
-#{/list}
-</form>
-</ul>
+ <input style="margin-bottom:5px;" id="refreshBtn" class="btn btn-primary" type="button" value="Refresh list">
+ <ul class="graphic">
+	<form>
+	#{if controllers.Sources.findMine().size() == 0}
+		#{include 'Sources/intro.html' /}
+	#{/if}
+	#{list items:controllers.Sources.findMine(), as:'source'}
+		<li style="vertical-align:top;">
+		<a class="inline-playable sm2_link"  href="${controllers.Sources.getPlayableUrl(source.s3key)}" class="inline-playable">${source.name}</a> 
+		<input class="btn" type="button" value="Post to timeline" onclick="postClip('${controllers.Sources.getLocalUrl(source.s3key)}')" />
+		<input class="btn" type="button" value="Post on wall" onclick="sendClip('Post','http://www.facebook.com/dialog/feed?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=${controllers.Sources.getIndexUrl()}')" />
+		<input class="btn" type="button" value="Send to friends" onclick="sendClip('Message','http://www.facebook.com/dialog/send?app_id=351696901530052&name=${source.name}&picture=http://www.9dials.com/public/images/audio_waveform.jpg&link=${controllers.Sources.getLocalUrl(source.s3key)}&description=Easy%20audio%20sharing%20with%20the%209%20Dials%20App%20on%20Facebook.%20&redirect_uri=${controllers.Sources.getIndexUrl()}')" />	
+	#{/list}
+	</form>
+ </ul>
 <script>
-$('#refreshBtn').click(function() {
-  location.reload();
+function reload() {
+	console.log('reloading page');
+	location.reload();
+};
+$(function(){
+	
+	$('#refreshBtn').click(function() {
+	  	reload();
+	});
 });
+
 </script>

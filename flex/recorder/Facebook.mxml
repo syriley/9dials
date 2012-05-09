@@ -66,6 +66,8 @@
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
+
+				uploadManager.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
 			}
 			private function handleRecordClick(event:Event):void
 			{               
@@ -95,7 +97,7 @@
 			{//handleMicManagerChange
 				if (micManager.isRecording)
 				{//update label
-					recordButton.label = "Complete";
+					recordButton.label = "Stop";
 					Logger.log("Started Recording");
 				}//update label
 				else
@@ -170,11 +172,8 @@
 			{//handleEncodeComplete
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Upload complete";
+				progressLabel.text = "Uploading";
 				uploadManager.upload(oggManager.encodedBytes, titleTextbox.text)	;
-				playPauseButton.enabled = true;
-				uploadButton.enabled = true;
-				
 			}//handleEncodeComplete
 			
 			private function handleEncodeBegin(e:OggManagerEvent):void 
@@ -204,6 +203,15 @@
 				Logger.log("WAV Progress: " + e.data);
 			}//handleWavEncodeProgress
 			
+			private function handleUploadComplete(e:Event):void 
+			{//handleUploadComplete
+				Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
+				progressLabel.text = "Upload complete";
+				playPauseButton.enabled = true;
+				uploadButton.enabled = true;
+				ExternalInterface.call('console.log', 'nothing');
+				ExternalInterface.call('reload', 'nothing');
+			}//handleUploadComplete
 		]]>
 	</fx:Script>
 	<mx:VBox height="60" backgroundColor="#3B5998" width="500"

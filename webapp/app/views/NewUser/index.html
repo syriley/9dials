@@ -1,91 +1,97 @@
 #{extends 'studio.html' /}
 #{set id:"single"/}
 #{set title:" Welcome " + _user.name /}
-<h3>Welcome to 9 Dials</h3>
-#{if _user.username == null }
-Thanks for trying 9 Dials, all we need to get started is a username: 
-#{form @Profile.createUsername(),  id:"userform", class:'form-horizontal'}
-<fieldset>
-	<legend>Setup a username</legend>	
-    <div id="usergroup" class="control-group  #{ifError 'username'} error #{/ifError}">
-      <label class="control-label" for="username">Username:</label>
-      <div class="controls">
-        <input type="text" class="input-xlarge" id="username" name="username" value="#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}"><span class="add-on"><i id="usercheck" ></i></span>        
-        <span id="userhelp" class="help-inline">#{error 'username' /}</span>
-        <p class="help-block">Your profile will be at: 9dials.com/<span id="usersuggestion">#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}</span></p>        
-      </div>
-    </div>    
-    <div class="form-actions">
-    	<button type="submit" class="btn btn-primary">Create username</button>
-    </div>
-    </fieldset>     
-    #{/form}
-    #{/if}
-    #{else}
-    <div class="row">
-    <p>Thanks for joining, you're ready to go.</p>
-      <div class="span4">
-        <h2>Create Music</h2>
-        <p>Record your own tracks directly in the browser, or upload them to start editing</p>
-        <a href="@{CreateMusic.index}" class="btn">Start making music</a> 
-      </div>
-      <div class="span4">
-        <h2>Share Online</h2>
-        <p>Open your session to the community to allow like minded musicians to add their own flavour to your music</p>
-        <a href="@{Share.index}" class="btn">Read more &raquo;</a>
-      </div>
-      <div class="span4">
-        <h2>Publish to the world</h2>
-        <p>Use our connections to get your music heard by the right people</p>
-        <a href="@{HowToPublish.index}" class="btn">Read more &raquo;</a>
-      </div>
-    </div>
-    #{/else}    
-  </div>
-  <script type="text/javascript">
-  $(document).ready(function() { 
-    // validate signup form on keyup and submit 
-    var validator = $("#userform").validate({ 
-        rules: { 
-            username: { 
-                required: true, 
-                minlength: 2, 
-                remote: "/api/users/validate" 
-            } 
-        }, 
-        messages: { 
-            username: { 
-                required: "Enter a username", 
-                minlength: "Enter at least 5 characters", 
-                remote: jQuery.format("{0} is already in use")  
-            } 
-        }, 
-        // the errorPlacement has to take the table layout into account 
-        errorPlacement: function(error, element) { 
-            if ( element.is(":radio") ) 
-                error.appendTo( element.parent().next().next() ); 
-            else if ( element.is(":checkbox") ) 
-                error.appendTo ( element.next() ); 
-            else 
-                error.appendTo( element.parent().next() ); 
-        }, 
-        highlight: function(element, errorClass) {        
-        	$('#usergroup').removeClass("success");
-        	$('#usergroup').addClass("error");
-        	$('#userhelp').text("Username taken");
-        },
-        // set this class to error-labels to indicate valid fields 
-        success: function(label) {
-        $('#usergroup').removeClass("error");
-        $('#usergroup').addClass("success");                
-        $('#userhelp').text("Username available");
-        } 
-    });       
-	}); 
-  $('#username').keyup(function() {
-   $("#userform").validate().element( "#username" );
-  	newval = $('#username').val();
-    $('#usersuggestion').text(newval);
-	});
-  </script>  
+
+<div class="row frow">
+	<div class="span12">
+		<h2>Welcome to 9 Dials</h2>
+		#{if _user.username == null }
+			In order to enable session sharing you will need to select a unique username: 
+			#{form @Profile.createUsername(),  id:"userform", class:'form-horizontal'}
+				<fieldset>
+					<div id="usergroup" class="control-group  #{ifError 'username'} error #{/ifError}">
+				      <label class="control-label" for="username">Username:</label>
+				      <div class="controls">
+				        <input type="text" class="input-xlarge" id="username" name="username" value="#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}"><span class="add-on"><i id="usercheck" ></i></span>        
+				        <span id="userhelp" class="help-inline">#{error 'username' /}</span>
+				        <p class="help-block">Your profile will be at: 9dials.com/<span id="usersuggestion">#{if flash.username !=null}${flash.username}#{/if}#{else}${_user.username}#{/else}</span></p>        
+				      </div>
+				    </div>    
+				    <div class="form-actions">
+				    	<button type="submit" class="btn btn-primary">Create username</button>
+				    	<a href="/sessions">skip this step</a>
+				    </div>
+			    </fieldset>     
+		    #{/form}
+	    #{/if}
+	    #{else}
+		    <div class="row">
+		    <p>Thanks for joining, you're ready to go.</p>
+		      <div class="span4">
+		        <h2>Create Music</h2>
+		        <p>Record your own tracks directly in the browser, or upload them to start editing</p>
+		        <a href="@{CreateMusic.index}" class="btn">Start making music</a> 
+		      </div>
+		      <div class="span4">
+		        <h2>Share Online</h2>
+		        <p>Open your session to the community to allow like minded musicians to add their own flavour to your music</p>
+		        <a href="@{Share.index}" class="btn">Read more &raquo;</a>
+		      </div>
+		      <div class="span4">
+		        <h2>Publish to the world</h2>
+		        <p>Use our connections to get your music heard by the right people</p>
+		        <a href="@{HowToPublish.index}" class="btn">Read more &raquo;</a>
+		      </div>
+		    </div>
+	     #{/else}    
+		  <script type="text/javascript">
+		  $(document).ready(function() { 
+		    // validate signup form on keyup and submit 
+		    var validator = $("#userform").validate({ 
+		        rules: { 
+		            username: { 
+		                required: true, 
+		                minlength: 2, 
+		                remote: "/api/users/validate" 
+		            } 
+		        }, 
+		        messages: { 
+		            username: { 
+		                required: "Enter a username", 
+		                minlength: "Enter at least 5 characters", 
+		                remote: jQuery.format("{0} is already in use")  
+		            } 
+		        }, 
+		        // the errorPlacement has to take the table layout into account 
+		        errorPlacement: function(error, element) { 
+		            if ( element.is(":radio") ) 
+		                error.appendTo( element.parent().next().next() ); 
+		            else if ( element.is(":checkbox") ) 
+		                error.appendTo ( element.next() ); 
+		            else 
+		                error.appendTo( element.parent().next() ); 
+		        }, 
+		        highlight: function(element, errorClass) {        
+		        	$('#usergroup').removeClass("success");
+		        	$('#usergroup').addClass("error");
+		        	$('#userhelp').text("Username taken");
+		        },
+		        // set this class to error-labels to indicate valid fields 
+		        success: function(label) {
+		        $('#usergroup').removeClass("error");
+		        $('#usergroup').addClass("success");                
+		        $('#userhelp').text("Username available");
+		        } 
+		    });       
+			}); 
+		  $('#username').keyup(function() {
+		   $("#userform").validate().element( "#username" );
+		  	newval = $('#username').val();
+		    $('#usersuggestion').text(newval);
+			});
+		  </script>
+	</div>
+	 
+</div>
+<hr class="soften" />  
     
