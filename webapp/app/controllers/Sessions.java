@@ -3,15 +3,16 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Session;
+import models.User;
+import models.UserSession;
+
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import controllers.admin.UserSessions;
-
-import models.User;
-import models.Session;
-import models.UserSession;
 
 public class Sessions extends LoggedInController {
 	
@@ -24,8 +25,18 @@ public class Sessions extends LoggedInController {
         render(otherSeshions);
 	}
 	
-	public static void show() {
-		render();
+	public static void indexJson() {
+        User ourUser = (User)renderArgs.get("_user");
+        renderJSON(ourUser.getSessions());
+    }
+	
+	public static void showJson(long id) {
+	    Session seshion = Session.findById(id);
+	    JsonObject dto = (JsonObject)parser.parse(seshion.data);
+	    JsonElement sessionMeta = toJson(seshion, getSessionExclusionStrategy());
+	    
+	    dto.add("session", sessionMeta);
+        renderJSON(dto.toString());
 	}
 	
 	public static void form(Long id) {
@@ -34,7 +45,6 @@ public class Sessions extends LoggedInController {
 
 	        List<UserSession> userSessions = UserSession.getSharedUserSessions(seshion);
 	        List<User> sharedUsers = new ArrayList<User>();
-	       
 	        
 	        List<User> allOtherUsers = User.findAll();
 	        allOtherUsers.removeAll(sharedUsers);
@@ -169,5 +179,26 @@ public class Sessions extends LoggedInController {
         session.save();
         app2(sessionId);
     }
+	
+	private static ExclusionStrategy getSessionExclusionStrategy() {
+	    return new ExclusionStrategy() {
+            
+            @Override
+            public boolean shouldSkipField(FieldAttributes field) {
+                if(field.getName().equals("data")) {
+                    return true;
+                }
+                    
+                return false;
+            }
+            
+            @Override
+            public boolean shouldSkipClass(Class<?> clazz) {
+                return clazz == UserSession.class;
+            }
+        };
+	}
 }
+
+
 

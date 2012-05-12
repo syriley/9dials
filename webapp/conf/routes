@@ -41,15 +41,16 @@ GET     /collaborate/share/{id}/{access}   Collaborate.share
 GET     /sessions/index     Sessions.index
 GET		/sessions/new		Sessions.form
 POST	/sessions/new		Sessions.save
-#GET    /sessions/{id}      Sessions.app
 GET     /sessions/edit/{id} Sessions.form
 
 #API
+GET    	/api/sessions  		Sessions.indexJson
+GET    	/api/sessions/{id} 	Sessions.showJson
 POST    /api/sessions/{id} 	Sessions.saveData
 GET     /api/instruments 	Instruments.list
 GET     /api/users 			Users.list
 GET     /api/users/validate Users.validate
- GET     /api/images/{id}    PictureServer.getPicture
+GET     /api/images/{id}    PictureServer.getPicture
 
 #User management
 GET		/welcome		NewUser.index

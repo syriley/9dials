@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.google.gson.JsonObject;
 
 import play.db.jpa.Model;
