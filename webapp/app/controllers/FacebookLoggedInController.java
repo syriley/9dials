@@ -11,6 +11,7 @@ public class FacebookLoggedInController extends Controller{
 
 	@Before
     public static void checkAccess() throws Throwable {
+		FbGraph.init();
 	        try {
 	            User fbUser = FacebookSecurity.getCurrentFbUser();
 	            if(fbUser == null){
@@ -18,7 +19,7 @@ public class FacebookLoggedInController extends Controller{
 	            }
 	            renderArgs.put("fbuser", fbUser); // put the email into the session (for the Secure module)
 	        } catch (FbGraphException fbge) {
-	            flash.error("Sorry, we can't find you Facebook account. Please try logging in again");
+	            flash.error("Sorry, we can't find your Facebook account. Please try logging in again");
 	            if (fbge.getType() != null && fbge.getType().equals("OAuthException")) {
 	                Session.current().remove("fbuserid");
 	            }

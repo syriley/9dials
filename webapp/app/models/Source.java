@@ -1,5 +1,8 @@
 package models;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -22,6 +25,16 @@ public class Source extends Model
     public String name;
     public String s3key;
     public String url;
+    public long playCount;
+    
+    @Column(updatable=false, insertable=false)
+    public Date createDate;
+    
     @ManyToOne
     public User creator;
+    
+    public Source registerPlay(){
+    	playCount++;
+    	return this;
+    }
 }
