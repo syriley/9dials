@@ -6,6 +6,7 @@ import java.util.List;
 import models.Session;
 import models.User;
 import models.UserSession;
+import play.Play;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -21,8 +22,9 @@ public class Sessions extends LoggedInController {
 	public static void index() {
 		List<Session> otherSeshions = Session.findAll();
         User ourUser = (User)renderArgs.get("_user");
+        String studioUrl = (String)Play.configuration.get("studio.url");
         otherSeshions.removeAll(ourUser.getSessions());
-        render(otherSeshions);
+        render(otherSeshions, studioUrl);
 	}
 	
 	public static void indexJson() {

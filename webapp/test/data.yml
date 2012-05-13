@@ -145,7 +145,82 @@
    name: session1
    access: Private
    data: | 
-     {"version":0.1,"name":"hope","sample_rate":48000,"sources":[{"url":"sounds/hope/solo_guitar.ogg","id":1,"sample_rate":48000},{"url":"sounds/hope/bass.ogg","id":2,"sample_rate":48000},{"url":"sounds/hope/rhythm_guitar.ogg","id":3,"sample_rate":48000}],"tracks":[{"id":4,"name":"SoloGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":7,"start_position":0,"length":432212,"source_id":1}]},{"id":5,"name":"BassGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":8,"start_position":0,"length":232212,"source_id":2}]},{"id":6,"name":"RhythmGuitar","mute":0,"solo":0,"gain":1.0,"pan":0.0,"regions":[{"id":9,"start_position":1223000,"length":232212,"source_id":3}]}],"playhead":{"position":0}}
+      {
+        version: 0.1, 
+        name: "hope",
+        sample_rate: 48000,
+        sources:  [
+            {
+                url: "assets/sounds/solo_guitar.ogg", 
+                id: 1,
+                sample_rate: 48000
+            },
+            { 
+                url: "assets/sounds/bass.ogg",
+                id: 2,
+                sample_rate: 48000
+            },
+            { 
+                url: "assets/sounds/rhythm_guitar.ogg",
+                id: 3,
+                sample_rate: 48000
+            }
+        ],
+        tracks:  [
+            {
+                id: 4,
+                name: "Solo Guitar",
+                mute: 0,
+                solo: 0,
+                gain: 1.0,
+                pan: 0.0,
+                regions:  [
+                    { 
+                        id: 7,
+                        start_position: 0,
+                        length: 10000,
+                        source_id: 1
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "Bassoon",
+                mute: 0,
+                solo: 0,
+                gain: 1.0,
+                pan: 0.0,
+                regions:  [
+                    { 
+                        id: 8,
+                        start_position: 1000,
+                        length: 20000,
+                        source_id: 2
+                    }
+                ]
+            },
+            { 
+                id: 6,
+                name: "Rhythm Guitar",
+                mute: 0,
+                solo: 0,
+                gain: 1.0,
+                pan: 0.0,
+                regions:  [
+                    { 
+                        id: 9,
+                        start_position: 2000,
+                        length: 20000,
+                        source_id: 3
+                    }
+                ]
+            }
+        ],
+        playhead: {
+            position: 0
+        }
+      }
+
 
  Session(session2):
    name: session2
