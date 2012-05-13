@@ -2,11 +2,35 @@
 #{set title:'Home' /}
 #{set home:'active' /}
 
-  <!-- Main hero unit for a primary marketing message or call to action -->
-  <div class="hero-unit frontpage">
-    <h1>Coming Soon</h1>
-    <p>9dials aims to be the worlds first free and truly collaborative online recording studio where you can share your music and get it heard by the right people.</p>
-    <a href="@{Sessions.app2(1)}" target="_blank" class="btn btn-primary btn-large">Try it now &raquo;</a> 
+  <div class="hero-unit">
+  	<div class="row">
+  		<div class="span12">
+  			<h1>9dials Music Studio</h1>
+  		</div>
+  	</div>
+  	<div class="row">
+	  	<div class="span6">
+		    <p>9dials aims to be the worlds first free and truly collaborative online recording studio where you can share your music and get it heard by the right people.</p>
+		    <a href="http://studio.9dials.com" target="_blank" class="btn btn-primary btn-large">Try it now &raquo;</a>
+	    </div>
+	    <div class="span4 pull-right">
+	    	<div class="well">
+		    	<p>Sign in</p>
+		    	Username
+		    	<input />
+		    	Password
+		    	<input />
+		    	<div class="row">
+		    		<div class="span3">
+		    			<a href="@{ComingSoon.index}" class="btn">Sign in</a>
+						<p style="font-size:12px">Or use Google or Facebook</p>		    			
+				    	<a href="@{ComingSoon.index}"><img src="@{'/public/images/providers/google.png'}"/></a>
+				    	<a href="@{ComingSoon.index}"><img src="@{'/public/images/providers/facebook.png'}"/></a>
+			    	</div>
+		    	</div>
+	    	</div>
+	   	</div>
+    </div> 
   </div>
   <hr class="soften">
   <section id="homepage">
