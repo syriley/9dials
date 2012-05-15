@@ -46,6 +46,10 @@ public class Session extends Model{
 		userSession.delete();
 	}
 	
+	public static Session findByName(String name) {
+	    return Session.find("byName", name).first();
+	}
+	
 	public List<UserSession> getUserSessions() {
 		return UserSession.getSharedUserSessions(this);
 	}

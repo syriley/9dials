@@ -11,7 +11,7 @@ import com.google.gson.JsonParser;
 
 import controllers.securesocial.SecureSocial;
 
-//@With( SecureSocial.class )
+@With( SecureSocial.class )
 public class LoggedInController extends UserCheckController {
     public static JsonElement toJson(Object o, ExclusionStrategy exclusionStrategy) {
         Gson gson = new GsonBuilder()
