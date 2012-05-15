@@ -67,7 +67,7 @@
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
 
-				uploadManager.addEventListener(Event.COMPLETE, handleUploadComplete, false, 0, true);
+				uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
 			}
 			private function handleRecordClick(event:Event):void
 			{               
@@ -203,13 +203,12 @@
 				Logger.log("WAV Progress: " + e.data);
 			}//handleWavEncodeProgress
 			
-			private function handleUploadComplete(e:Event):void 
+			private function handleUploadComplete(e:UploadManagerEvent):void 
 			{//handleUploadComplete
 				Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
 				progressLabel.text = "Upload complete";
 				playPauseButton.enabled = true;
 				uploadButton.enabled = true;
-				ExternalInterface.call('console.log', 'nothing');
 				ExternalInterface.call('reload', 'nothing');
 			}//handleUploadComplete
 		]]>

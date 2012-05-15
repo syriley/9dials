@@ -2,6 +2,7 @@ package com.sjriley
 {//Package
 	import flash.events.Event;
 	import flash.events.DataEvent;
+	import com.sjriley.events.UploadManagerEvent;
 	import flash.events.EventDispatcher;
 	import flash.net.FileFilter;
 	import flash.net.URLRequest;
@@ -42,9 +43,17 @@ package com.sjriley
 		}
 
 		//Event
-		private function handleUploadComplete(e:Event):void {
-			Logger.log("upload completed successfully");
-			dispatchEvent(new Event(Event.COMPLETE));
+		private function handleUploadComplete(e:Event):void {			
+			try {
+				dispatchEvent(new UploadManagerEvent(UploadManagerEvent.UPLOAD_COMPLETE, e.target.data));
+				Logger.log("upload completed successfully");
+    		}
+			 catch (err:Error)
+			{
+				Logger.log(err.message);
+				Logger.log(err.toString());
+				
+			}
 		}
 	}
 }

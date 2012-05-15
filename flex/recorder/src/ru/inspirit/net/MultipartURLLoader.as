@@ -263,6 +263,8 @@ package ru.inspirit.net
 			return _loader.dataFormat;
 		}
 
+		public function get data():String { return _loader.data; }
+
 		public function set dataFormat(format:String):void
 		{
 			if (format != URLLoaderDataFormat.BINARY && format != URLLoaderDataFormat.TEXT && format != URLLoaderDataFormat.VARIABLES) {
