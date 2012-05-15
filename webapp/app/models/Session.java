@@ -22,7 +22,6 @@ public class Session extends Model{
 	public String name;
 	public String description;
 	public String access;
-	@Lob
 	public String data;
 	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
