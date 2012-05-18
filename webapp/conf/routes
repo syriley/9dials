@@ -41,6 +41,8 @@ GET     /sessions/index     						Sessions.index
 GET		/sessions/new								Sessions.create
 GET     /sessions/edit/{id} 						Sessions.form
 
+POST	/api/tracks									Tracks.create
+
 #API
 
 GET    	/api/sessions  								Sessions.indexJson

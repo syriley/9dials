@@ -30,7 +30,7 @@ public class JsonUtilsTest extends NineDialsTest{
                 "id: 90," +
                 "sample_rate: 48000" +
             "}");
-        JsonObject newJson = JsonUtils.setJsonObject(root, source, "sources");
+        JsonObject newJson = JsonUtils.mergeJsonObjects(root, source, "sources");
         assertTrue(newJson.toString().contains("thisisunique"));
         assertTrue(newJson.toString().contains("90"));
     }
@@ -42,7 +42,7 @@ public class JsonUtilsTest extends NineDialsTest{
                 "id: 3," +
                 "sample_rate: 48000" +
             "}");
-        JsonObject newJson = JsonUtils.setJsonObject(root, source, "sources");
+        JsonObject newJson = JsonUtils.mergeJsonObjects(root, source, "sources");
         assertTrue(newJson.toString().contains("thisisunique"));
     }
     
@@ -53,7 +53,7 @@ public class JsonUtilsTest extends NineDialsTest{
                 "id: 90," +
                 "sample_rate: 48000" +
             "}");
-        JsonObject newJson = JsonUtils.setJsonObject(root, source, "tracks/3/regions");
+        JsonObject newJson = JsonUtils.mergeJsonObjects(root, source, "tracks/3/regions");
         assertTrue(newJson.toString().contains("thisisunique"));
         assertTrue(newJson.toString().contains("90"));
     }
