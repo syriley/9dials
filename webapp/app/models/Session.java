@@ -27,13 +27,18 @@ public class Session extends Model{
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
+	
 	public Session() {
-		this(null,null);
-	}
-	public Session(String name, String description) {
 		userSessions = new ArrayList<UserSession>();
-		this.name = name;
-		this.description = description;
+		this.data= "{ " +
+		                "version: 0.1," +
+		                "name: \"Untitled\", " +
+		                "sample_rate: 48000," +
+		                "tracks:  []," +
+		                "playhead: {" +
+		                    "position: 0" +
+		                "}" +
+	                "}";
 	}
 	
 	public void shareWithUser(User user) {

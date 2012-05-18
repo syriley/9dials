@@ -1,19 +1,27 @@
 package controllers;
 
+import java.util.Collection;
+
 import models.MailingListRecipient;
 import models.OAuthUserHelper;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
+import securesocial.provider.ProviderRegistry;
+import securesocial.provider.ProviderType;
 
 import com.google.gson.JsonObject;
 
 import controllers.securesocial.SecureSocialPublic;
 
 public class Application extends PublicUserController {
-	
+    private static final String ORIGINAL_URL = "originalUrl";
+
     public static void index() {
-    	render();
+        final Collection providers = ProviderRegistry.all();
+        flash.keep(ORIGINAL_URL);
+        boolean userPassEnabled = ProviderRegistry.get(ProviderType.userpass) != null;
+    	render(providers, userPassEnabled);
     }
     
     public static void loginRouter(){
@@ -21,7 +29,7 @@ public class Application extends PublicUserController {
     		NewUser.index();
     	}
     	else{
-    		Sessions.index();
+    		Sessions.index(-1L);
     	}
     }
     
