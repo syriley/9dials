@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -22,19 +23,24 @@ public class Session extends Model{
 	public String name;
 	public String description;
 	public String access;
-	@Lob
+	@Column(length=2048)
 	public String data;
 	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;
 	
+	
 	public Session() {
-		this(null,null);
-	}
-	public Session(String name, String description) {
 		userSessions = new ArrayList<UserSession>();
-		this.name = name;
-		this.description = description;
+		this.data= "{ " +
+		                "version: 0.1," +
+		                "name: \"Untitled\", " +
+		                "sample_rate: 48000," +
+		                "tracks:  []," +
+		                "playhead: {" +
+		                    "position: 0" +
+		                "}" +
+	                "}";
 	}
 	
 	public void shareWithUser(User user) {
@@ -44,6 +50,10 @@ public class Session extends Model{
 	public void removeUser(Long userId) {
 		UserSession userSession = UserSession.findByUserAndSession(userId, this.id);
 		userSession.delete();
+	}
+	
+	public static Session findByName(String name) {
+	    return Session.find("byName", name).first();
 	}
 	
 	public List<UserSession> getUserSessions() {

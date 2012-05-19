@@ -17,6 +17,7 @@
 			import com.sjriley.Logger;
 			import com.sjriley.PlaybackManager;
 			import com.sjriley.UploadManager;
+			import com.sjriley.events.UploadManagerEvent;
 			import com.jac.ogg.adobe.audio.format.events.WAVWriterEvent;
 			import com.jac.ogg.events.OggManagerEvent;
 			import com.jac.ogg.OggComments;
@@ -66,6 +67,9 @@
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
 				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
+
+				uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
+
 			}
 			private function handleRecordClick(event:Event):void
 			{               
@@ -170,7 +174,7 @@
 			{//handleEncodeComplete
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Upload complete";
+				progressLabel.text = "Uploading";
 				uploadManager.upload(oggManager.encodedBytes, 'untitled')	;
 				playPauseButton.enabled = true;
 				uploadButton.enabled = true;
@@ -203,6 +207,16 @@
 			{//handleWavEncodeProgress
 				Logger.log("WAV Progress: " + e.data);
 			}//handleWavEncodeProgress
+
+			private function handleUploadComplete(e:UploadManagerEvent):void 
+			{//handleUploadComplete
+				Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
+				progressLabel.text = "Upload complete";
+				playPauseButton.enabled = true;
+				uploadButton.enabled = true;
+				ExternalInterface.call('console.log', e.data);
+				ExternalInterface.call('sourceLoaded', e.data);
+			}//handleUploadComplete
 			
 		]]>
 	</fx:Script>

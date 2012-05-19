@@ -16,56 +16,55 @@ GET     /                                       Application.index
 GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
-GET 	/tabs/show/{id}							Tabs.show
+GET     /public/                                	staticDir:public
+GET 	/tabs/show/{id}								Tabs.show
 GET 	/tabs/list/{artist}				 			Tabs.list
 # Catch all
 
-WS   /helloSocket            MyWebSocket.hello
-
 #FB App
-GET     /fb/canvas/                                Sources.index
-POST    /fb/canvas/                               Sources.index
-POST    /fb/canvas/wall                               Sources.index
-GET    /fb/canvas/wall                               Sources.index
-GET     /fb/canvas/myclips/{sourceId}			  MyClips.index
-POST    /fb/canvas/myclips/{sourceId}			  MyClips.index
-GET     /wall                                      Sources.index
-GET     /share/{sourceId}								   Share.index
-GET     /myclips/{sourceId}								   MyClips.index
+GET     /fb/canvas/                                	Sources.index
+POST    /fb/canvas/                               	Sources.index
+POST    /fb/canvas/wall                             Sources.index
+GET     /fb/canvas/wall                             Sources.index
+GET     /fb/canvas/myclips/{sourceId}			  	MyClips.index
+POST    /fb/canvas/myclips/{sourceId}			  	MyClips.index
+GET     /wall                                      	Sources.index
+GET     /share/{sourceId}							Share.index
+GET     /myclips/{sourceId}							MyClips.index
+
 #Sessions
 
-GET     /collaborate/index   Collaborate.index
-GET     /collaborate/index/{id}   Collaborate.index
-GET     /collaborate/share/{id}/{access}   Collaborate.share
-GET     /sessions/index     Sessions.index
-GET		/sessions/new		Sessions.form
-POST	/sessions/new		Sessions.save
-GET     /sessions/edit/{id} Sessions.form
+GET     /collaborate/index   						Collaborate.index
+GET     /collaborate/index/{id}   					Collaborate.index
+GET     /collaborate/share/{id}/{access}   			Collaborate.share
+GET     /sessions/index     						Sessions.index
+GET		/sessions/new								Sessions.create
+GET     /sessions/edit/{id} 						Sessions.form
+
+POST	/api/tracks									Tracks.create
 
 #API
-GET    	/api/sessions  		Sessions.indexJson
-GET    	/api/sessions/{id} 	Sessions.showJson
-POST    /api/sessions/{id} 	Sessions.saveData
-GET     /api/instruments 	Instruments.list
-GET     /api/users 			Users.list
-GET     /api/users/validate Users.validate
-GET     /api/images/{id}    PictureServer.getPicture
+
+GET    	/api/sessions  								Sessions.indexJson
+GET    	/api/sessions/{id} 							Sessions.showJson
+POST    /api/sessions/{id} 							Sessions.saveData
+GET     /api/instruments 							Instruments.list
+GET     /api/users 									Users.list
+GET     /api/users/validate 						Users.validate
+GET     /api/images/{id}    						PictureServer.getPicture
 
 #User management
-GET		/welcome		NewUser.index
-GET     /loginrouter    Application.loginRouter
-GET     /fakefblogin    Application.fakeLogin                      
 
-POST    /sources Sources.upload
-POST    /api/sources TheSources.upload
+GET		/welcome									NewUser.index
+GET     /loginrouter    							Application.loginRouter
+GET     /fakefblogin    							Application.fakeLogin                      
+POST    /sources 									Sources.upload
+POST    /api/sources 								TheSources.upload
+POST    /bands/?             						Bands.create
+POST    /tabs/?             						Tabs.create
 
-POST    /bands/?             Bands.create
-POST    /tabs/?             Tabs.create
+*       /me/{username}                  			PublicProfile.profile
 
-*       /me/{username}                  PublicProfile.profile
-
-*       /admin/{controller}/{action}            admin.{controller}.{action}
-*       /{controller}/{action}                  {controller}.{action}
-
-*       /{controller}                  {controller}.index
+*       /admin/{controller}/{action}            	admin.{controller}.{action}
+*       /{controller}/{action}                  	{controller}.{action}
+*       /{controller}                  				{controller}.index

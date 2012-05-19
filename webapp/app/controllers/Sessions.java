@@ -19,18 +19,13 @@ public class Sessions extends LoggedInController {
 	
     private static JsonParser parser = new JsonParser();
     
-	public static void index() {
-		List<Session> otherSeshions = Session.findAll();
-        User ourUser = (User)renderArgs.get("_user");
+	public static void index(long seshionId) {
+	    User ourUser = (User)renderArgs.get("_user");
+        List<Session> otherSeshions = Session.findAll();
         String studioUrl = (String)Play.configuration.get("studio.url");
         otherSeshions.removeAll(ourUser.getSessions());
-        render(otherSeshions, studioUrl);
+        render(otherSeshions, studioUrl, seshionId);
 	}
-	
-	public static void indexJson() {
-        User ourUser = (User)renderArgs.get("_user");
-        renderJSON(ourUser.getSessions());
-    }
 	
 	public static void showJson(long id) {
 	    Session seshion = Session.findById(id);
@@ -56,25 +51,12 @@ public class Sessions extends LoggedInController {
 		render();
 	}
 	
-	public static void save(Long id, String name, String description) {
-		Session session;
-		
-		if(id == null) {
-		    User user = User.find("byEmail", Security.connected()).first();
-		    session = new Session(name, description).save();
-		  	   
-		    validate();
-		    // Save
-		    user.createSession(session);
-		}
-		else {
-			 validate();
-			 session = Session.findById(id);
-			 session.name = name;
-			 session.description = description;
-			 session.save();
-		}		
-	    index();
+	public static void create() {
+	    User user = (User)renderArgs.get("_user");
+	    Session seshion = new Session().save();
+	    user.createSession(seshion);
+	    String studioUrl = (String)Play.configuration.get("studio.url");
+	    redirect(studioUrl + seshion.id);
 	}
 	
 	private static void validate() {
@@ -95,19 +77,7 @@ public class Sessions extends LoggedInController {
 		Session seshion = Session.findById(id);
 		render(seshion);
 	}
-	
-	public static void app2(long id) {
-        Session seshion = Session.findById(id);
-        render(seshion);
-    }
-	
-	public static void shareWithUser(Long sessionId, String username) {
-		User user = User.find("byUsername", username).first();
-		Session session = Session.findById(sessionId);
-		session.shareWithUser(user);
-		form(sessionId);
-	}
-	
+
 	
 	public static void share(Long sessionId, String access) {
 		Session session = Session.findById(sessionId);
@@ -135,7 +105,6 @@ public class Sessions extends LoggedInController {
         sessionJson.add("tracks", tracks);
         session.data = sessionJson.toString();
         session.save();
-        app2(sessionId);
     }
 	
 	public static void addSource(long sessionId, String source) {
@@ -149,7 +118,6 @@ public class Sessions extends LoggedInController {
 
         session.data = sessionJson.toString();
         session.save();
-        app2(sessionId);
     }
 	
 	public static void addRegion(long sessionId, int trackId, String region) {
@@ -179,7 +147,6 @@ public class Sessions extends LoggedInController {
         
         session.data = sessionJson.toString();
         session.save();
-        app2(sessionId);
     }
 	
 	private static ExclusionStrategy getSessionExclusionStrategy() {
