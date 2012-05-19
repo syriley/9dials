@@ -15,7 +15,7 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/inlineplayer.css'}" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/flashblock.css'}" />
-		<script type="text/javascript" src="@{'/public/javascripts/lib/soundmanager2-nodebug-jsmin.js'}"></script>
+		<script type="text/javascript" src="@{'/public/javascripts/lib/soundmanager2-jsmin.js'}"></script>
 		<script type="text/javascript" src="@{'/public/javascripts/lib/inlineplayer.js'}"></script>
 		<script type="text/javascript" src="@{'/public/bootstrap/js/bootstrap.js'}"></script>
                                
@@ -43,6 +43,11 @@
   <script type="text/javascript" src="/public/javascripts/swfobject.js"></script>
 		<script type="text/javascript">
 		swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+		</script>
+		<script>
+			soundManager.url = '/public/assets/soundmanager2/';
+			soundManager.useFlashBlock = false; // optionally, enable when you're ready to dive in
+			soundManager.debugMode = true
 		</script>
         #{if play.Play.configuration.get("application.mode") == 'prod'}
 		<script type="text/javascript">
