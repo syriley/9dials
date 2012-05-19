@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -22,6 +23,7 @@ public class Session extends Model{
 	public String name;
 	public String description;
 	public String access;
+	@Column(length=2048)
 	public String data;
 	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)

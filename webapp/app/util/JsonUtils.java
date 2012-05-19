@@ -1,12 +1,10 @@
 package util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.jsoup.parser.Parser;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -30,37 +28,33 @@ public class JsonUtils {
     
     public static JsonObject mergeJsonObjects(JsonObject root, JsonObject node, String path) {
         JsonElement parent = getJsonElement(root, path);
-        JsonArray newJsonArray = (JsonArray)setJsonElement(parent, node);
-        do {
-            root.add(path, newJsonArray);
-        }while(getParentPath(path) != null);
+        mergeJsonElement(parent, node);
         return root;
     }
     
-    public static JsonElement setJsonElement(JsonElement parent, JsonObject child) {
+    public static void mergeJsonElement(JsonElement parent, JsonObject child) {
         if(parent.isJsonArray()) {
             JsonArray jsonArray = parent.getAsJsonArray();
-            JsonArray newJsonArray = new JsonArray();
+            boolean alreadyInArray = false;
             
-            boolean alreadyContained = false;
-            if(child.has("id")) {
-                for (JsonElement jsonElement : jsonArray) {
-                    JsonObject item = (JsonObject)jsonElement;
-                    if(item.get("id").getAsInt() == child.get("id").getAsInt()) {
-                        newJsonArray.add(child);
-                        alreadyContained = true;
+            for (JsonElement jsonElement : jsonArray) {
+                JsonObject item = (JsonObject)jsonElement;
+                if(item.get("id").getAsInt() == child.get("id").getAsInt()) {
+                    for(Map.Entry<String,JsonElement> entry : child.entrySet()) {
+                        item.add(entry.getKey(), entry.getValue());
                     }
-                    else {
-                        newJsonArray.add(jsonElement);
-                    }
+                    alreadyInArray = true;
+                    break;
                 }
             }
-            if(!alreadyContained) {
-                newJsonArray.add(child);
+            if(!alreadyInArray){
+                jsonArray.add(child);
             }
-            return newJsonArray;
         }
-        return null;
+    }
+    
+    public static JsonObject getJsonEObject(String jsonString) {
+        return parser.parse(jsonString).getAsJsonObject();
     }
     
     public static JsonElement getJsonElement(String jsonString) {
