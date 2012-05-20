@@ -42,6 +42,7 @@ GET		/sessions/new								Sessions.create
 GET     /sessions/edit/{id} 						Sessions.form
 
 POST	/api/tracks									Tracks.create
+PUT		/api/tracks									Tracks.update
 
 #API
 

@@ -23,4 +23,12 @@ public class Tracks extends Controller{
 	     seshion.save();
          renderJSON(mergedSession);
      }
+	 
+	 public static void update(String body, long sessionId) {
+         Session seshion = Session.findById(sessionId);
+         JsonObject mergedSession = JsonUtils.mergeJsonObjects(seshion.data, body, "tracks");
+         seshion.data = mergedSession.toString();
+         seshion.save();
+         renderJSON(mergedSession);
+     }
 }
