@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import jobs.AudioConverterJob;
+
 import models.Source;
 import models.User;
 
@@ -17,10 +19,11 @@ import org.apache.commons.io.IOUtils;
 
 import play.Logger;
 import play.Play;
+import play.libs.F.Promise;
 import play.modules.facebook.FbGraphException;
-import play.mvc.Http;
 import play.mvc.Router;
 import play.mvc.Router.ActionDefinition;
+import util.FileUtils;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -46,17 +49,30 @@ public class Sources extends FacebookLoggedInController{
 	}
 	
 	public static void upload(File file, String name) throws FileNotFoundException, FbGraphException {
-		User fbUser = FacebookSecurity.getCurrentFbUser();	
-	    AWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
-	    AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
+        String extension = FileUtils.extension(file);
 	    String s3key = UUID.randomUUID().toString();
-	    s3Client.putObject(BUCKET_NAME, s3key, file);
-	    String url = getLocalUrl(s3key);
-	    Source source = new Source(fbUser,file.getName(),s3key,name, url);
-	    source.save();
+        if(extension.equals("ogg")){
+        	String mp3Name = s3key+".mp3";
+        	Promise<File> mp3 = new AudioConverterJob(file, s3key, "mp3").now();
+        	File mp3File = await(mp3);
+        	uploadToS3(mp3File,mp3Name,name);
+        }
+        else{
+        	uploadToS3(file,s3key,name);
+        }
 	    index();
 	}
 	
+	private static void uploadToS3(File file, String objectKey,String name) throws FbGraphException {
+		User fbUser = FacebookSecurity.getCurrentFbUser();	
+	    AWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
+	    AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
+	    s3Client.putObject(BUCKET_NAME, objectKey, file);
+	    String url = getLocalUrl(objectKey);
+	    Source source = new Source(fbUser,file.getName(),objectKey,name, url);
+	    source.save();		
+	}
+
 	public static List<Source> findMine() throws FbGraphException{
 		User fbUser = FacebookSecurity.getCurrentFbUser();		
 		return Source.find("byCreator", fbUser).fetch(10);
