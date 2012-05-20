@@ -11,6 +11,7 @@ require:
 #   - org.scalatest -> scalatest_2.9.1 1.7.RC2
 #   - net.liftweb -> lift-json_2.9.1 2.4
     - com.amazonaws -> aws-java-sdk 1.2.7
+    - org.apache.commons -> commons-exec 1.1
     - provided -> silvertunnel 0.13
     - provided -> jsoup 1.6.2
     - play-fbgraph -> play-fbgraph 0.5
