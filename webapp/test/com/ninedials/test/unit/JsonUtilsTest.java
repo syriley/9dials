@@ -53,7 +53,7 @@ public class JsonUtilsTest extends NineDialsTest{
                 "id: 90," +
                 "sample_rate: 48000" +
             "}");
-        JsonObject newJson = JsonUtils.mergeJsonObjects(root, source, "tracks/3/regions");
+        JsonObject newJson = JsonUtils.mergeJsonObjects(root, source, "tracks/4/regions");
         assertTrue(newJson.toString().contains("thisisunique"));
         assertTrue(newJson.toString().contains("90"));
     }
