@@ -78,6 +78,7 @@
 				if (micManager.isRecording)
 				{//disable
 					Logger.log("Start Recording");
+					ExternalInterface.call('recordClicked', '');
 					
 					playPauseButton.enabled = false;
 					uploadButton.enabled = false;
@@ -121,10 +122,12 @@
 				if (playbackManager.isPlaying)
 				{//update play button status
 					playPauseButton.label = "Stop";
+					ExternalInterface.call('startPlaying', '');
 				}//update play button status
 				else
 				{//update play button status
 					playPauseButton.label = "Play";
+					ExternalInterface.call('stopPlaying', '');
 				}//update play button status
 				
 				if (playbackManager.newBytes)
