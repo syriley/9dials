@@ -44,6 +44,9 @@ GET     /sessions/edit/{id} 						Sessions.form
 POST	/api/tracks									Tracks.create
 PUT		/api/tracks									Tracks.update
 
+POST	/api/regions								Regions.create
+PUT		/api/regions								Regions.update
+
 #API
 
 GET    	/api/sessions  								Sessions.indexJson

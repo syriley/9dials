@@ -57,6 +57,10 @@ public class JsonUtils {
         return parser.parse(jsonString).getAsJsonObject();
     }
     
+    public static JsonArray getJsonArray(String jsonString) {
+        return parser.parse(jsonString).getAsJsonArray();
+    }
+    
     public static JsonElement getJsonElement(String jsonString) {
         return parser.parse(jsonString);
     }
@@ -77,8 +81,8 @@ public class JsonUtils {
         for (String pathElement : paths) {
             if(json.isJsonArray()) {
                 try { 
-                    int index = Integer.parseInt(pathElement);
-                    json = ((JsonArray)json).get(index - 1);
+                    int id = Integer.parseInt(pathElement);
+                    json = getById(json.getAsJsonArray(), id);
                 }
                 catch (NumberFormatException e) {
                     throw new IllegalArgumentException("Expected Array index for " + json.toString());
@@ -89,5 +93,15 @@ public class JsonUtils {
             }
         }
         return json;
+    }
+    
+    public static JsonObject getById(JsonArray array, int id) {
+        for (JsonElement element : array) {
+            JsonObject jsonElement = element.getAsJsonObject();
+            if(jsonElement.get("id").getAsInt() == id) {
+                return jsonElement.getAsJsonObject();
+            }
+        }
+        return null;
     }
 }

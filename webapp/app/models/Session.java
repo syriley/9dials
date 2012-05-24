@@ -3,18 +3,19 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import com.google.gson.JsonObject;
-
 import play.db.jpa.Model;
+import util.JsonUtils;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 @Entity
 public class Session extends Model{
@@ -58,5 +59,17 @@ public class Session extends Model{
 	
 	public List<UserSession> getUserSessions() {
 		return UserSession.getSharedUserSessions(this);
+	}
+	
+	public int getTrackIdFromRegionId(int id) {
+	    JsonObject session = JsonUtils.getJsonEObject(data);
+	    JsonArray tracks = session.get("tracks").getAsJsonArray();
+	    for (JsonElement track : tracks) {
+	        JsonArray regions = track.getAsJsonObject().get("regions").getAsJsonArray();
+	        if(JsonUtils.getById(regions, id) != null){
+	            return track.getAsJsonObject().get("id").getAsInt();
+	        }
+        }
+	    return -1;
 	}
 }
