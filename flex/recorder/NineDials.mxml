@@ -70,7 +70,29 @@
 
 				uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
 
+                //add the javascript callbacks
+                ExternalInterface.addCallback("triggerFlexRecord", externalRecordClick);
+                ExternalInterface.addCallback("triggerFlexPlay", externalPlayClick);
+                ExternalInterface.addCallback("triggerFlexStop", externalStopClick);
+                ExternalInterface.addCallback("triggerFlexUpload", externalStopClick);
 			}
+            
+            public function externalRecordClick():void {
+                handleRecordClick(null);
+            }
+
+            public function externalPlayClick():void {
+                handlePlayClick(null);
+            }
+
+            public function externalStopClick():void {
+                handleStopClick(null);
+            }
+
+            public function externalUploadClick():void {
+                handleUploadClick(null);
+            }
+
 			private function handleRecordClick(event:Event):void
 			{               
 				micManager.toggleRecording();
@@ -109,6 +131,16 @@
 					Logger.log("Stopped Recording");
 				}//update label
 			}//handleMicManagerChange
+            
+            private function handlePlayClick(e:MouseEvent):void
+            {
+                playbackManager.startPlay();
+            }
+
+            private function handleStopClick(e:MouseEvent):void
+            {
+                playbackManager.stopPlay();
+            }
 
 			private function handlePlayPauseClick(e:MouseEvent):void 
 			{//handlePlayPauseClick
