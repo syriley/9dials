@@ -9,7 +9,7 @@ play dependencies --sync
 
 echo "Building flash recorder..."
 pushd $FLEX_ROOT
-./build.sh
+./build.sh fb
 popd
 cp $FLEX_ROOT/recorder.swf public/assets/
 
