@@ -122,7 +122,7 @@
 				}//enable           
 			}
             
-            private function stopRecording(event:Event):void
+            private function stopRecording():void
 			{               
 				micManager.stopRecording();
 			
@@ -131,8 +131,9 @@
                 uploadButton.enabled = true;
 			}
 
-			private function startRecording(event:Event):void
+			private function startRecording():void
 			{               
+				Logger.log("Start Recording");
 				micManager.startRecording();
 			
                 Logger.log("Start Recording");
