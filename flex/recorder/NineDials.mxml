@@ -76,6 +76,9 @@
                 ExternalInterface.addCallback("triggerFlexPlay", externalPlayClick);
                 ExternalInterface.addCallback("triggerFlexStop", externalStopClick);
                 ExternalInterface.addCallback("triggerFlexUpload", externalStopClick);
+
+                ExternalInterface.call('flexRecorderInitialised', '');
+                Logger.log('flexRecorderInitialised');
 			}
             
             public function externalRecordClick():void {
