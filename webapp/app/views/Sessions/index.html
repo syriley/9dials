@@ -7,10 +7,7 @@
 <a href="@{create}" target="_blank">Create a new session</a> <br/>
 <div>
 #{list items: _user.userSessions, as:'userSession'}
-<h4 class="song"><a href="${studioUrl}{userSession.session.id}" target="_blank">${userSession.session.name}</a> (${userSession.role})</h4>
-	<object height="81" width="100%"> 
-		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
-	</object>   
+<h3 class="song"><a href="${studioUrl}{userSession.session.id}" target="_blank">${userSession.session.name}</a> (${userSession.role})</h3>
 	<div class="actions">
 		<a href="@{form(userSession.session.id)}">edit</a>,
 	  	<a href="/publish">publish</a>
@@ -18,13 +15,11 @@
 #{/list}
 </div>
 
-<h2>Sessions you may be interested in...</h2>
+<hr class="soften"/>
+<h2>Other sessions you may be interested in...</h2>
 <div>
 #{list items: otherSeshions, as:'seshion'}
-<h4 class="song"><a href="${ studioUrl }${seshion.id}" target="_blank">${seshion.name}</a></h4>
-	<object height="81" width="100%"> 
-		<param name="movie" value="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="https://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F33262317&amp;show_comments=false&amp;auto_play=false&amp;color=ff7700" type="application/x-shockwave-flash" width="100%"></embed> 
-	</object>   
+<h3 class="song"><a href="${ studioUrl }${seshion.id}" target="_blank">${seshion.name}</a></h3>
 	<div class="actions">
 		<a href="#">request admin</a>
 	  </div>
