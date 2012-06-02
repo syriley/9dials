@@ -3,19 +3,28 @@
 #{set id:'single' /}
 
 <hr class="soften" />
+
 <h2>Current Sessions</h2>
-<a href="@{create}" target="_blank">Create a new session</a> <br/>
-<div>
+<hr class="soften" />
+
+<a class="btn btn-primary" href="@{create}" target="_blank">Create a new session</a>
+<div class="offset2">
 #{list items: _user.userSessions, as:'userSession'}
-<h3 class="song"><a href="${studioUrl}{userSession.session.id}" target="_blank">${userSession.session.name}</a> (${userSession.role})</h3>
-	<div class="actions">
-		<a href="@{form(userSession.session.id)}">edit</a>,
-	  	<a href="/publish">publish</a>
-	  </div>
+	#{if userSession.session.enabled}
+		<div class="well">
+			<a class="pull-right close" href="#" onclick="if(confirm('Are you sure you want to delete this session?')) window.location = '@{delete(userSession.session.id)}'; ">x</a>
+			<h3 class="song"><a href="${studioUrl}${userSession.session.id}" target="_blank">${util.JsonUtils.getString(userSession.session.data, "name")}</a> (${userSession.role})</h3>
+			<div class="actions">
+				<a href="@{form(userSession.session.id)}">edit</a>,
+				<a href="/publish">publish</a>
+			</div>
+		 </div>
+	#{/if}
 #{/list}
+
 </div>
 
-<hr class="soften"/>
+<!-- >hr class="soften"/>
 <h2>Other sessions you may be interested in...</h2>
 <div>
 #{list items: otherSeshions, as:'seshion'}
@@ -24,5 +33,5 @@
 		<a href="#">request admin</a>
 	  </div>
 #{/list}
-</div>
-
+</div -->
+<hr class="space"/>

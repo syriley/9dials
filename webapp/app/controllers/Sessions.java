@@ -74,17 +74,17 @@ public class Sessions extends LoggedInController {
                     "}" +
                 "]" +
             "}";
+	    seshion.save();
 	    user.createSession(seshion);
 	    String studioUrl = (String)Play.configuration.get("studio.url");
 	    redirect(studioUrl + seshion.id);
 	}
 	
-	private static void validate() {
-        // Validate
-       validation.valid(session);
-       if(validation.hasErrors()) {
-           render("@form", session);
-       }
+	public static void delete(Long id) {
+	    Session session = Session.findById(id);
+	    session.enabled = false;
+	    session.save();
+	    index(session.id);
 	}
 	
 	public static void saveData(Long id, String data) {
@@ -92,12 +92,6 @@ public class Sessions extends LoggedInController {
 		session.data = data;
 		session.save();
 	}
-	
-	public static void app(long id) {
-		Session seshion = Session.findById(id);
-		render(seshion);
-	}
-
 	
 	public static void share(Long sessionId, String access) {
 		Session session = Session.findById(sessionId);
@@ -111,63 +105,6 @@ public class Sessions extends LoggedInController {
 		userSesssion.delete();
 		form(sessionId);
 	}
-	
-	
-	
-	public static void addTrack(long sessionId, String track) {
-	    Session session = Session.findById(sessionId);
-        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
-        
-        JsonObject trackJson = (JsonObject) parser.parse(track);
-        
-        JsonArray tracks = sessionJson.getAsJsonArray("tracks");
-        tracks.add(trackJson);
-        sessionJson.add("tracks", tracks);
-        session.data = sessionJson.toString();
-        session.save();
-    }
-	
-	public static void addSource(long sessionId, String source) {
-	    Session session = Session.findById(sessionId);
-        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
-	    
-        JsonObject sourceJson = (JsonObject) parser.parse(source);
-        JsonArray trackJsonArray = sessionJson.getAsJsonArray("sources");
-        trackJsonArray.add(sourceJson);
-        sessionJson.add("sources", trackJsonArray);
-
-        session.data = sessionJson.toString();
-        session.save();
-    }
-	
-	public static void addRegion(long sessionId, int trackId, String region) {
-	    Session session = Session.findById(sessionId);
-        JsonObject sessionJson = (JsonObject) parser.parse(session.data);
-        
-        JsonObject regionJson = (JsonObject) parser.parse(region);
-        JsonArray tracksJson = sessionJson.getAsJsonArray("tracks");
-        JsonArray newTracksJson = new JsonArray();
-        
-        for(int i = 0; i < tracksJson.size(); i++) {
-            JsonObject track = tracksJson.get(i).getAsJsonObject();
-            
-            if(track.get("id").getAsInt() == trackId) {
-                JsonArray regionsJson = (JsonArray)track.get("regions");
-                if (regionsJson == null) {
-                    regionsJson = new JsonArray();
-                }
-                regionsJson.add(regionJson);
-                track.add("regions", regionJson);
-            }
-            
-            newTracksJson.add(track);
-        }
-        
-        sessionJson.add("tracks", newTracksJson);
-        
-        session.data = sessionJson.toString();
-        session.save();
-    }
 	
 	private static ExclusionStrategy getSessionExclusionStrategy() {
 	    return new ExclusionStrategy() {

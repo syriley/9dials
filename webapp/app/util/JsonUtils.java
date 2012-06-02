@@ -61,6 +61,11 @@ public class JsonUtils {
         return parser.parse(jsonString).getAsJsonArray();
     }
     
+    public static String getString(String bodyString, String jsonString) {
+        JsonObject body = parser.parse(bodyString).getAsJsonObject();
+        return body.get(jsonString).getAsString();
+    }
+    
     public static JsonElement getJsonElement(String jsonString) {
         return parser.parse(jsonString);
     }

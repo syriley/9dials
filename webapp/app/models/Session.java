@@ -26,6 +26,7 @@ public class Session extends Model{
 	public String access;
 	@Column(length=2048)
 	public String data;
+	public boolean enabled = true;
 	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
 	public List<UserSession> userSessions;

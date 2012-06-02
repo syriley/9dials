@@ -89,7 +89,9 @@ public class User extends Model {
 	public List<Session> getSessions() {
 		List<Session> sessions = new ArrayList<Session>();
 		for (UserSession userSession : userSessions ) {
-			sessions.add(userSession.session);
+		    if(userSession.session.enabled) {
+		        sessions.add(userSession.session);
+		    }
 		}
 		return sessions;
 	}
