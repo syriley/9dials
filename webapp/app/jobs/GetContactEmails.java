@@ -40,6 +40,9 @@ public class GetContactEmails extends Job {
     }
     
     public void doJob() {
+        if(true) {
+            return;
+        }
         if(Play.mode == Mode.DEV) {
             return;
         }

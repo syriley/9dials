@@ -11,7 +11,8 @@ import javax.persistence.Table;
 
 import play.db.jpa.Model;
 import play.libs.Crypto;
-
+import util.JsonUtils;
+import models.Track;
 import com.google.gson.JsonObject;
  
 @Entity
@@ -66,6 +67,19 @@ public class User extends Model {
 		UserSession userSession = new UserSession(this, session, role).save();
 		userSessions.add(userSession);
 		session.userSessions.add(userSession);
+        //add a default track
+
+        JsonObject track = JsonUtils.getJsonEObject(" {" +
+                "id: 4," +
+                "name: \"Untitled\"," +
+                "mute: 0," + 
+                "solo: 0," +
+                "gain: 1.0," +
+                "pan: 0.0," + 
+                "regions:[]" +
+            "}");
+
+        Track.create(track.toString(), session.id);
 	}
 	
 	public String getImageUrl(){
