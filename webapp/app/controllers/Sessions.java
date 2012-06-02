@@ -54,6 +54,26 @@ public class Sessions extends LoggedInController {
 	public static void create() {
 	    User user = (User)renderArgs.get("_user");
 	    Session seshion = new Session().save();
+	    seshion.data= "{ " +
+	            "id:" + seshion.id + "," +
+                "version: 0.1," +
+                "name: \"Untitled\", " +
+                "sample_rate: 48000," +
+                "playhead: {" +
+                    "position: 0" +
+                "}, " +
+                "tracks: [" +
+                    "{" +
+                        "id: 4," +
+                        "name: \"Untitled\"," +
+                        "mute: 0," + 
+                        "solo: 0," +
+                        "gain: 1.0," +
+                        "pan: 0.0," + 
+                        "regions:[]" +
+                    "}" +
+                "]" +
+            "}";
 	    user.createSession(seshion);
 	    String studioUrl = (String)Play.configuration.get("studio.url");
 	    redirect(studioUrl + seshion.id);

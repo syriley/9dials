@@ -146,6 +146,7 @@
    access: Private
    data: | 
       {
+        id:1,
         version: 0.1, 
         name: "hope",
         sample_rate: 48000,

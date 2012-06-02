@@ -33,15 +33,6 @@ public class Session extends Model{
 	
 	public Session() {
 		userSessions = new ArrayList<UserSession>();
-		this.data= "{ " +
-		                "version: 0.1," +
-		                "name: \"Untitled\", " +
-		                "sample_rate: 48000," +
-		                "tracks:  []," +
-		                "playhead: {" +
-		                    "position: 0" +
-		                "}" +
-	                "}";
 	}
 	
 	public void shareWithUser(User user) {
