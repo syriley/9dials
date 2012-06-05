@@ -31,6 +31,7 @@ package com.sjriley.events
 	{//MicManagerEvent Class
 
 		static public const NEW_DATA:String = "micManagerNewData";
+		static public const MIC_MUTED:String = "micManagerMicMuted";
 	
 		private var _data:Object;
 	

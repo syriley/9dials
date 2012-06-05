@@ -54,7 +54,7 @@
 
 				//mic events
 				micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
-
+				micManager.initialise();
 				//playback events
 				playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
 

@@ -13,6 +13,7 @@
 		<![CDATA[
 			
 			import mx.events.FlexEvent;
+			import com.sjriley.events.MicManagerEvent;
 			import com.sjriley.MicManager;
 			import com.sjriley.Logger;
 			import com.sjriley.PlaybackManager;
@@ -37,7 +38,7 @@
 			
 			public function init(e:FlexEvent):void
 			{
-				ExternalInterface.call( 'console.log', "Starting process" );
+				ExternalInterface.call( 'console.log', "Starting Flex app" );
 				 // volume in the final WAV file will be downsampled to 50%
 				var volume:Number = .5;
 				// we create the WAV encoder to be used by MicRecorder
@@ -55,7 +56,8 @@
 
 				//mic events
 				micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
-
+				micManager.addEventListener(MicManagerEvent.MIC_MUTED, handleMicMuted, false, 0, true);
+				micManager.initialise();
 				//playback events
 				playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
 
@@ -129,6 +131,12 @@
                 Logger.log("Complete");
                 playPauseButton.enabled = true;
                 uploadButton.enabled = true;
+			}
+
+			private function handleMicMuted(e:Event):void
+			{
+				Logger.log('micMuted event fired');
+				ExternalInterface.call('micMuted', '');
 			}
 
 			private function startRecording():void

@@ -1,9 +1,12 @@
 package com.sjriley 
 
 {//Package
+	import com.sjriley.Logger;
 	import com.sjriley.events.MicManagerEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.system.Security;
+	import flash.system.SecurityPanel;
 	import flash.events.SampleDataEvent;
 	import flash.events.StatusEvent;
 	import flash.media.Microphone;
@@ -22,7 +25,10 @@ package com.sjriley
 			_isRecording = false;
 			_micDenied = false;
 			_recData = new ByteArray();
-			
+		}//MicManager
+		
+		public function initialise():void
+		{
 			//Setup mic
 			_mic = Microphone.getMicrophone();
 			if (_mic != null)
@@ -31,15 +37,17 @@ package com.sjriley
 				_mic.setUseEchoSuppression(false);
 				_mic.rate = 44;
 				_mic.addEventListener(StatusEvent.STATUS, handleMicStatus, false, 0, true);
-				trace("good mic");
+				if(_mic.muted){
+					Logger.log("the mic is muted");
+					dispatchEvent(new MicManagerEvent(MicManagerEvent.MIC_MUTED));
+					Security.showSettings(SecurityPanel.PRIVACY);
+				}
 			}//wait for ready
 			else
 			{//no mic
-				trace("no mic");
+				Logger.log("no mic");
 			}//no mic
-			
-		}//MicManager
-		
+		}
 		public function toggleRecording():void
 		{//toggleRecording
 			if (_isRecording)
@@ -72,10 +80,11 @@ package com.sjriley
 		
 		private function handleMicStatus(e:StatusEvent):void 
 		{//handleMicStatus
-			trace("Got Mic Status: " + e.code);
+			Logger.log("Got Mic Status: " + e.code);
 			
 			if (e.code == "Microphone.Muted")
 			{//denied
+				Logger.log("Mic permission denied");
 				stopRecording();
 			}//denied
 			
@@ -84,6 +93,7 @@ package com.sjriley
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
 			while (e.data.bytesAvailable)
+			Logger.log("actually recording");
 			{//save data
 				//Grab bytes
 				var samp:Number = e.data.readFloat();
