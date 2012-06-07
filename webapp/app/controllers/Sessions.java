@@ -68,8 +68,8 @@ public class Sessions extends LoggedInController {
                         "name: \"Untitled\"," +
                         "mute: 0," + 
                         "solo: 0," +
-                        "gain: 1.0," +
-                        "pan: 0.0," + 
+                        "gain: 8.0," +
+                        "pan: 0.5," + 
                         "regions:[]" +
                     "}" +
                 "]" +
@@ -80,17 +80,20 @@ public class Sessions extends LoggedInController {
 	    redirect(studioUrl + seshion.id);
 	}
 	
+    public static void update(Long id, String sessionData) {
+        Session seshion = Session.findById(id);
+        JsonObject root = JsonUtils.getJsonEObject(seshion.data);
+        JsonObject newSessionData = JsonUtils.getJsonEObject(sessionData);
+        JsonObject mergedSession = JsonUtils.mergeJsonObjects(root, newSessionData, "");
+        seshion.data = mergedSession.toString();
+        seshion.save();
+        renderJSON(mergedSession);
+    } 
 	public static void delete(Long id) {
 	    Session session = Session.findById(id);
 	    session.enabled = false;
 	    session.save();
 	    index(session.id);
-	}
-	
-	public static void saveData(Long id, String data) {
-		Session session = Session.findById(id);
-		session.data = data;
-		session.save();
 	}
 	
 	public static void share(Long sessionId, String access) {
