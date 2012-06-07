@@ -15,8 +15,8 @@ public class Tracks extends Controller{
 	 
 	 public static void create(String body, long sessionId) {
 	     Session seshion = Session.findById(sessionId);
-	     JsonObject jsonTrack = JsonUtils.getJsonEObject(body);
-	     JsonObject root = JsonUtils.getJsonEObject(seshion.data);
+	     JsonObject jsonTrack = JsonUtils.getJsonObject(body);
+	     JsonObject root = JsonUtils.getJsonObject(seshion.data);
 	     Version version = new Version().save();
 	     jsonTrack.addProperty("id", version.id);
 	     JsonObject mergedSession = JsonUtils.mergeJsonObjects(root, jsonTrack, "tracks");

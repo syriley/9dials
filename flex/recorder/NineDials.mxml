@@ -77,7 +77,7 @@
                 ExternalInterface.addCallback("triggerFlexStopRecord", stopRecording);
                 ExternalInterface.addCallback("triggerFlexPlay", externalPlayClick);
                 ExternalInterface.addCallback("triggerFlexStop", externalStopClick);
-                ExternalInterface.addCallback("triggerFlexUpload", externalStopClick);
+                ExternalInterface.addCallback("triggerFlexUpload", uploadRecording);
 
                 ExternalInterface.call('flexRecorderInitialised', '');
                 Logger.log('flexRecorderInitialised');
@@ -94,10 +94,6 @@
             public function externalStopClick():void {
                 handleStopClick(null);
             }
-
-            public function externalUploadClick():void {
-                handleUploadClick(null);
-            }
 			
             private function handleRecordClick(event:Event):void
 			{               
@@ -107,30 +103,18 @@
 				{//disable
 					Logger.log("Start Recording");
 					ExternalInterface.call('recordClicked', '');
-					
-					playPauseButton.enabled = false;
-					uploadButton.enabled = false;
-					
+										
 					if (playbackManager.isPlaying)
 					{//stop
 						playbackManager.stopPlay();
 					}//stop
-				}//disable
-				else
-				{//enable
-					Logger.log("Complete");
-					playPauseButton.enabled = true;
-					uploadButton.enabled = true;
-				}//enable           
+				}//disable       
 			}
             
             private function stopRecording():void
 			{               
 				micManager.stopRecording();
-			
-                Logger.log("Complete");
-                playPauseButton.enabled = true;
-                uploadButton.enabled = true;
+                Logger.log("Stopped recording");
 			}
 
 			private function handleMicMuted(e:Event):void
@@ -143,13 +127,7 @@
 			{               
 				Logger.log("Start Recording");
 				micManager.startRecording();
-			
-                Logger.log("Start Recording");
-                ExternalInterface.call('recordClicked', '');
-                
-                playPauseButton.enabled = false;
-                uploadButton.enabled = false;
-                
+			                                
                 if (playbackManager.isPlaying)
                 {//stop
                     playbackManager.stopPlay();
@@ -160,12 +138,10 @@
 			{//handleMicManagerChange
 				if (micManager.isRecording)
 				{//update label
-					recordButton.label = "Complete";
 					Logger.log("Started Recording");
 				}//update label
 				else
 				{//update label
-					recordButton.label = "Record";
 					Logger.log("Stopped Recording");
 				}//update label
 			}//handleMicManagerChange
@@ -191,12 +167,10 @@
 				Logger.log('playback changed')
 				if (playbackManager.isPlaying)
 				{//update play button status
-					playPauseButton.label = "Stop";
 					ExternalInterface.call('startPlaying', '');
 				}//update play button status
 				else
 				{//update play button status
-					playPauseButton.label = "Play";
 					ExternalInterface.call('stopPlaying', '');
 				}//update play button status
 				
@@ -204,20 +178,9 @@
 				{//new bytes
 					Logger.log("New Bytes Loaded");
 				}//new bytes
-				
-				if (playbackManager.playBackBytes && playbackManager.playBackBytes.length > 0)
-				{//we have bytes to work with
-					playPauseButton.enabled = true;
-					uploadButton.enabled = true;
-				}//we have bytes to work with
-				else
-				{//no bytes
-					playPauseButton.enabled = false;
-					uploadButton.enabled = false;
-				}//no bytes
 			}//handlePlaybackChange
 		   
-			private function handleUploadClick(event:Event):void {
+			private function uploadRecording():void {
 			//handleUploadClick
 				var oggComments:OggComments = new OggComments();
 				
@@ -234,11 +197,7 @@
 				Logger.log("Encode Quality: " + encodeQuality);
 				Logger.log("Encode Loops Per Yield: " + encodeLoopsPerYield);
 				Logger.log("Bytes to encode: " + playbackManager.playBackBytes.length)
-				
-				//handle UI
-				playPauseButton.enabled = false;
-				uploadButton.enabled = false;
-				
+								
 				startTime = getTimer();
 				oggManager.encode(playbackManager.playBackBytes, oggComments, encodeQuality, 10,encodeLoopsPerYield, notifyProgress);
 			}//handleUploadClick
@@ -247,11 +206,7 @@
 			{//handleEncodeComplete
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Uploading";
-				uploadManager.upload(oggManager.encodedBytes, 'untitled')	;
-				playPauseButton.enabled = true;
-				uploadButton.enabled = true;
-				
+				uploadManager.upload(oggManager.encodedBytes, 'untitled');				
 			}//handleEncodeComplete
 			
 			private function handleEncodeBegin(e:OggManagerEvent):void 
@@ -262,11 +217,12 @@
 			
 			private function handleEncodeProgress(e:OggManagerEvent):void 
 			{//handleEncodeProgress
-				progressLabel.text = "Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%";
+				Logger.log("Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%");
 			}//handleEncodeProgress
 			
 			private function handleWavEncodeComplete(e:OggManagerEvent):void 
 			{//handleWavEncodeComplete
+				Logger.log('encoding complete');
 				Logger.log("WAV encoding completed: " + (Math.round((getTimer() - wavStartTime)/1000)) + " second(s)");
 			}//handleWavEncodeComplete
 			
@@ -284,23 +240,11 @@
 			private function handleUploadComplete(e:UploadManagerEvent):void 
 			{//handleUploadComplete
 				Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Upload complete";
-				playPauseButton.enabled = true;
-				uploadButton.enabled = true;
-				ExternalInterface.call('console.log', e.data);
+				Logger.log(e.data);
 				ExternalInterface.call('sourceUploadComplete', e.data);
 			}//handleUploadComplete
 			
 		]]>
 	</fx:Script>
-	<mx:VBox height="60" backgroundColor="black" width="260"
-		paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
-		<mx:HBox x="40">
-			<s:Button id="recordButton" label="Record" width="80" click="handleRecordClick(event)" />
-			<s:Button id="playPauseButton" label="Play" click="handlePlayPauseClick(event)" />
-			<s:Button id="uploadButton" label="Upload" click="handleUploadClick(event)" />
-		</mx:HBox>
-		<s:Label color="white" fontWeight="bold" id="progressLabel" text="Progress" />
-	</mx:VBox>
 </s:Application>
 

@@ -54,7 +54,7 @@ public class Session extends Model{
 	}
 	
 	public int getTrackIdFromRegionId(int id) {
-	    JsonObject session = JsonUtils.getJsonEObject(data);
+	    JsonObject session = JsonUtils.getJsonObject(data);
 	    JsonArray tracks = session.get("tracks").getAsJsonArray();
 	    for (JsonElement track : tracks) {
 	        JsonArray regions = track.getAsJsonObject().get("regions").getAsJsonArray();

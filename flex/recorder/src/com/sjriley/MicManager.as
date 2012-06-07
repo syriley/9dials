@@ -93,7 +93,6 @@ package com.sjriley
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
 			while (e.data.bytesAvailable)
-			Logger.log("actually recording");
 			{//save data
 				//Grab bytes
 				var samp:Number = e.data.readFloat();

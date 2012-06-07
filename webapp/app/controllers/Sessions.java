@@ -7,6 +7,7 @@ import models.Session;
 import models.User;
 import models.UserSession;
 import play.Play;
+import util.JsonUtils;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
@@ -80,10 +81,10 @@ public class Sessions extends LoggedInController {
 	    redirect(studioUrl + seshion.id);
 	}
 	
-    public static void update(Long id, String sessionData) {
+    public static void update(Long id, String body) {
         Session seshion = Session.findById(id);
-        JsonObject root = JsonUtils.getJsonEObject(seshion.data);
-        JsonObject newSessionData = JsonUtils.getJsonEObject(sessionData);
+        JsonObject root = JsonUtils.getJsonObject(seshion.data);
+        JsonObject newSessionData = JsonUtils.getJsonObject(body);
         JsonObject mergedSession = JsonUtils.mergeJsonObjects(root, newSessionData, "");
         seshion.data = mergedSession.toString();
         seshion.save();

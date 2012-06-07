@@ -51,9 +51,14 @@ public class JsonUtils {
                 jsonArray.add(child);
             }
         }
+        else if(parent.isJsonObject()){
+            for(Map.Entry<String,JsonElement> entry : child.entrySet()) {
+                parent.getAsJsonObject().add(entry.getKey(), entry.getValue());
+            }
+        }
     }
     
-    public static JsonObject getJsonEObject(String jsonString) {
+    public static JsonObject getJsonObject(String jsonString) {
         return parser.parse(jsonString).getAsJsonObject();
     }
     
@@ -80,6 +85,9 @@ public class JsonUtils {
     }
     
     public static JsonElement getJsonElement(JsonElement json, String path) {
+        if (StringUtils.isEmpty(path)){
+            return json;
+        }
         List<String> paths;
         paths = Arrays.asList(path.split("/"));
          
