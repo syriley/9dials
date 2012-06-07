@@ -32,22 +32,22 @@ GET     /wall                                      	Sources.index
 GET     /share/{sourceId}							Share.index
 GET     /myclips/{sourceId}							MyClips.index
 
-#Sessions
-
+#collaborate (old)
 GET     /collaborate/index   						Collaborate.index
 GET     /collaborate/index/{id}   					Collaborate.index
 GET     /collaborate/share/{id}/{access}   			Collaborate.share
+
+#Sessions
 GET     /sessions/index     						Sessions.index
 GET		/sessions/new								Sessions.create
 GET     /sessions/edit/{id} 						Sessions.form
 
+#API
 POST	/api/tracks									Tracks.create
 PUT		/api/tracks									Tracks.update
 
 POST	/api/regions								Regions.create
 PUT		/api/regions								Regions.update
-
-#API
 
 GET    	/api/sessions  								Sessions.indexJson
 GET    	/api/sessions/{id} 							Sessions.showJson
