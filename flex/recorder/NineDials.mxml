@@ -280,7 +280,7 @@
 				playPauseButton.enabled = true;
 				uploadButton.enabled = true;
 				ExternalInterface.call('console.log', e.data);
-				ExternalInterface.call('sourceLoaded', e.data);
+				ExternalInterface.call('sourceUploadComplete', e.data);
 			}//handleUploadComplete
 			
 		]]>
