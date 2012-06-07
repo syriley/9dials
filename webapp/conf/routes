@@ -52,6 +52,7 @@ PUT		/api/regions								Regions.update
 GET    	/api/sessions  								Sessions.indexJson
 GET    	/api/sessions/{id} 							Sessions.showJson
 POST    /api/sessions/{id} 							Sessions.saveData
+PUT     /api/sessions/{id}                          Sessions.update
 GET     /api/instruments 							Instruments.list
 GET     /api/users 									Users.list
 GET     /api/users/validate 						Users.validate
