@@ -151,6 +151,11 @@
                 playbackManager.startPlay();
             }
 
+            private function updateProgress(status:String):void
+            {
+                ExternalInterface.call('updateFlexProgress', status);
+            }
+
             private function handleStopClick(e:MouseEvent):void
             {
                 playbackManager.stopPlay();
@@ -206,6 +211,7 @@
 			{//handleEncodeComplete
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
+                updateProgress('Encoding complete');
 				uploadManager.upload(oggManager.encodedBytes, 'untitled');				
 			}//handleEncodeComplete
 			
@@ -217,12 +223,12 @@
 			
 			private function handleEncodeProgress(e:OggManagerEvent):void 
 			{//handleEncodeProgress
-				Logger.log("Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%");
+				updateProgress("Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%");
 			}//handleEncodeProgress
 			
 			private function handleWavEncodeComplete(e:OggManagerEvent):void 
 			{//handleWavEncodeComplete
-				Logger.log('encoding complete');
+				updateProgress('WAV encoding complete');
 				Logger.log("WAV encoding completed: " + (Math.round((getTimer() - wavStartTime)/1000)) + " second(s)");
 			}//handleWavEncodeComplete
 			
@@ -234,7 +240,7 @@
 			
 			private function handleWavEncodeProgress(e:OggManagerEvent):void 
 			{//handleWavEncodeProgress
-				Logger.log("WAV Progress: " + e.data);
+				updateProgress("WAV Progress: " + e.data);
 			}//handleWavEncodeProgress
 
 			private function handleUploadComplete(e:UploadManagerEvent):void 
