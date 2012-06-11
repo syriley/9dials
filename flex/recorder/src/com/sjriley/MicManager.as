@@ -19,6 +19,7 @@ package com.sjriley
 		private var _isRecording:Boolean;
 		private var _mic:Microphone;
 		private var _micDenied:Boolean;
+		private var _streamOutput:Boolean;
 		
 		public function MicManager() 
 		{//MicManager
@@ -92,16 +93,24 @@ package com.sjriley
 		
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
-			while (e.data.bytesAvailable)
-			{//save data
-				//Grab bytes
-				var samp:Number = e.data.readFloat();
-				
-				//convert to stereo
-				_recData.writeFloat(samp);	//Left Channel
-				_recData.writeFloat(samp);	//Right Channel
-				
-			}//save data
+			if(_streamOutput)
+			{
+				dispatchEvent(new MicManagerEvent.SAMPLE_DATA, e.data);
+			}
+			else{
+				while (e.data.bytesAvailable)
+				{//save data
+					//Grab bytes
+					var samp:Number = e.data.readFloat();
+					
+					//convert to stereo
+					_recData.writeFloat(samp);	//Left Channel
+					_recData.writeFloat(samp);	//Right Channel
+					
+				}//save data
+			}
+
+
 		}//handleSampleData
 		
 		public function reset():void
@@ -109,6 +118,7 @@ package com.sjriley
 			_recData.length = 0;
 		}//reset
 		
+		public function set streamOutput(value:String):void { this._streamOutput = value; }
 		public function get recData():ByteArray { return _recData; }
 		public function get isRecording():Boolean { return _isRecording; }
 		public function get micDenied():Boolean { return _micDenied; }

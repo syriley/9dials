@@ -13,3 +13,8 @@ if [ $1 == "fb" ]; then
     echo 'Building Facebook flash recorder'
     mxmlc -source-path=src -library-path=lib -output=recorder.swf Facebook.mxml
 fi
+if [ $1 == "fb" ]; then
+    echo 'Building Tuna flash recorder'
+    mxmlc -source-path=src -library-path=lib -output=recorder.swf Tuna.mxml
+fi
+

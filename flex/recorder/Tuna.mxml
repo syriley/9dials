@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	minWidth="270" minHeight="140"
+	creationComplete="init(event)">
+
+	<fx:Script>
+		<![CDATA[
+			
+			import mx.events.FlexEvent;
+			import com.sjriley.events.MicManagerEvent;
+			import com.sjriley.MicManager;
+			import com.sjriley.Logger;
+			
+			private var micManager:MicManager;
+			
+			public function init(e:FlexEvent):void
+			{
+				ExternalInterface.call( 'console.log', "Starting Flex app" );
+
+				encodeQuality = 1;
+				encodeLoopsPerYield = 10;
+				micManager = new MicManager();
+				
+
+				//mic events
+				micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
+				micManager.addEventListener(MicManagerEvent.MIC_MUTED, handleMicMuted, false, 0, true);
+				micManager.addEventListener(MicManagerEvent.SAMPLE_DATA, handleSampleData, false, 0, true);
+				micManager.streamOutput = true;
+				micManager.initialise();
+				
+                //add the javascript callbacks
+                ExternalInterface.addCallback("triggerFlexRecord", startRecording);
+                ExternalInterface.addCallback("triggerFlexStopRecord", stopRecording);
+
+                ExternalInterface.call('flexRecorderInitialised', '');
+                Logger.log('flexRecorderInitialised');
+			}
+            
+            public function externalRecordClick():void {
+                handleRecordClick(null);
+            }
+
+            private function handleRecordClick(event:Event):void
+			{               
+				micManager.toggleRecording();
+			
+				if (micManager.isRecording)
+				{//disable
+					Logger.log("Start Recording");
+					ExternalInterface.call('recordClicked', '');
+										
+					if (playbackManager.isPlaying)
+					{//stop
+						playbackManager.stopPlay();
+					}//stop
+				}//disable       
+			}
+            
+            private function handleSampleData(event:MicManagerEvent):void
+			{
+				ExternalInterface.call('sampleData', e.data);
+			}
+            private function stopRecording():void
+			{               
+				micManager.stopRecording();
+                Logger.log("Stopped recording");
+			}
+
+			private function handleMicMuted(e:Event):void
+			{
+				Logger.log('micMuted event fired');
+				ExternalInterface.call('micMuted', '');
+			}
+
+			private function startRecording():void
+			{               
+				Logger.log("Start Recording");
+				micManager.startRecording();
+			                                
+                if (playbackManager.isPlaying)
+                {//stop
+                    playbackManager.stopPlay();
+                }//stop
+			}
+
+			private function handleMicManagerChange(e:Event):void 
+			{//handleMicManagerChange
+				if (micManager.isRecording)
+				{//update label
+					Logger.log("Started Recording");
+				}//update label
+				else
+				{//update label
+					Logger.log("Stopped Recording");
+				}//update label
+			}//handleMicManagerChange		
+		]]>
+	</fx:Script>
+</s:Application>
+
