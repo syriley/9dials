@@ -61,7 +61,7 @@
             
             private function handleSampleData(event:MicManagerEvent):void
 			{
-				ExternalInterface.call('sampleData', e.data);
+				ExternalInterface.call('flexSampleData', e.data);
 			}
             private function stopRecording():void
 			{               
