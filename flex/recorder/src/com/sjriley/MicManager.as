@@ -11,6 +11,8 @@ package com.sjriley
 	import flash.events.StatusEvent;
 	import flash.media.Microphone;
 	import flash.utils.ByteArray;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 
 	public class MicManager extends EventDispatcher
 	{//MicManager Class
@@ -20,11 +22,14 @@ package com.sjriley
 		private var _mic:Microphone;
 		private var _micDenied:Boolean;
 		private var _streamOutput:Boolean;
+		private var _throttleOpen:Boolean;
+		private var _throttle:Timer;
 		
 		public function MicManager() 
 		{//MicManager
 			_isRecording = false;
 			_micDenied = false;
+			_throttleOpen = false;
 			_recData = new ByteArray();
 		}//MicManager
 		
@@ -48,6 +53,12 @@ package com.sjriley
 			{//no mic
 				Logger.log("no mic");
 			}//no mic
+
+			if(_streamOutput){
+				_throttle = new Timer(500,0);
+				_throttle.addEventListener(TimerEvent.TIMER, timerHandler);
+				_throttle.start();
+			}
 		}
 		public function toggleRecording():void
 		{//toggleRecording
@@ -60,6 +71,10 @@ package com.sjriley
 				startRecording();
 			}//start
 		}//toggleRecording
+
+		public function timerHandler(e:TimerEvent):void{
+			_throttleOpen = true;
+		}
 		
 		public function startRecording():void
 		{//startRecording
@@ -93,9 +108,10 @@ package com.sjriley
 		
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
-			if(_streamOutput)
+			if(_streamOutput && _throttleOpen)
 			{
-				dispatchEvent(new MicManagerEvent.SAMPLE_DATA, e.data);
+				dispatchEvent(new MicManagerEvent(MicManagerEvent.SAMPLE_DATA, e.data));
+				_throttleOpen = false;
 			}
 			else{
 				while (e.data.bytesAvailable)
@@ -109,8 +125,6 @@ package com.sjriley
 					
 				}//save data
 			}
-
-
 		}//handleSampleData
 		
 		public function reset():void
@@ -118,7 +132,7 @@ package com.sjriley
 			_recData.length = 0;
 		}//reset
 		
-		public function set streamOutput(value:String):void { this._streamOutput = value; }
+		public function set streamOutput(value:Boolean):void { this._streamOutput = value; }
 		public function get recData():ByteArray { return _recData; }
 		public function get isRecording():Boolean { return _isRecording; }
 		public function get micDenied():Boolean { return _micDenied; }

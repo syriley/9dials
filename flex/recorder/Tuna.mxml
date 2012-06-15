@@ -19,8 +19,6 @@
 			{
 				ExternalInterface.call( 'console.log', "Starting Flex app" );
 
-				encodeQuality = 1;
-				encodeLoopsPerYield = 10;
 				micManager = new MicManager();
 				
 
@@ -36,14 +34,13 @@
                 ExternalInterface.addCallback("triggerFlexStopRecord", stopRecording);
 
                 ExternalInterface.call('flexRecorderInitialised', '');
-                Logger.log('flexRecorderInitialised');
 			}
             
             public function externalRecordClick():void {
                 handleRecordClick(null);
             }
 
-            private function handleRecordClick(event:Event):void
+            private function handleRecordClick(e:Event):void
 			{               
 				micManager.toggleRecording();
 			
@@ -51,17 +48,19 @@
 				{//disable
 					Logger.log("Start Recording");
 					ExternalInterface.call('recordClicked', '');
-										
-					if (playbackManager.isPlaying)
-					{//stop
-						playbackManager.stopPlay();
-					}//stop
 				}//disable       
 			}
             
-            private function handleSampleData(event:MicManagerEvent):void
+            private function handleSampleData(e:MicManagerEvent):void
 			{
-				ExternalInterface.call('flexSampleData', e.data);
+				var sampleArray:Array = new Array();
+				while (e.data.bytesAvailable)
+				{//save data
+					//Grab bytes
+					sampleArray.push(e.data.readFloat());
+				}
+					
+				ExternalInterface.call('flexSampleData', sampleArray);
 			}
             private function stopRecording():void
 			{               
@@ -79,11 +78,6 @@
 			{               
 				Logger.log("Start Recording");
 				micManager.startRecording();
-			                                
-                if (playbackManager.isPlaying)
-                {//stop
-                    playbackManager.stopPlay();
-                }//stop
 			}
 
 			private function handleMicManagerChange(e:Event):void 
