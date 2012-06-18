@@ -18,6 +18,7 @@ package com.sjriley
 	{//MicManager Class
 	
 		private var _recData:ByteArray;
+		private var _currentSample:ByteArray;
 		private var _isRecording:Boolean;
 		private var _mic:Microphone;
 		private var _micDenied:Boolean;
@@ -31,6 +32,7 @@ package com.sjriley
 			_micDenied = false;
 			_throttleOpen = false;
 			_recData = new ByteArray();
+			_currentSample = new ByteArray();
 		}//MicManager
 		
 		public function initialise():void
@@ -108,10 +110,16 @@ package com.sjriley
 		
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
-			if(_streamOutput && _throttleOpen)
-			{
-				dispatchEvent(new MicManagerEvent(MicManagerEvent.SAMPLE_DATA, e.data));
-				_throttleOpen = false;
+			if(_streamOutput) {
+				
+				_currentSample.writeBytes(e.data);
+							
+			 	if(_throttleOpen)
+				{
+					dispatchEvent(new MicManagerEvent(MicManagerEvent.SAMPLE_DATA, _currentSample));
+					_throttleOpen = false;
+					_currentSample.length = 0;
+				}
 			}
 			else{
 				while (e.data.bytesAvailable)

@@ -48,7 +48,7 @@ package com.sjriley
 			{//feed sound
 				if (_playBackBytes.bytesAvailable < 8)
 				{//loop
-					_playBackBytes.position = 0;
+					//_playBackBytes.position = 0;
 				}//loop
 				
 				//feed data

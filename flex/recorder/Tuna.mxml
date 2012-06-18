@@ -54,12 +54,16 @@
             private function handleSampleData(e:MicManagerEvent):void
 			{
 				var sampleArray:Array = new Array();
+				var count:int = 0;
+				e.data.position = 0;
 				while (e.data.bytesAvailable)
 				{//save data
 					//Grab bytes
 					sampleArray.push(e.data.readFloat());
+					if (count++ > 4096){
+						break;
+					}
 				}
-					
 				ExternalInterface.call('flexSampleData', sampleArray);
 			}
             private function stopRecording():void
