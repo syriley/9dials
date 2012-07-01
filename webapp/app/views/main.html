@@ -56,6 +56,7 @@
 		      <div class="span7">
 		        <ul class="nav nav-pills header-nav">
 		          <li class="#{get 'home' /}"><a href="@{Application.index}">Home page</a></li>
+		          <li><a target="_blank" href="http://tuner.9dials.com">Guitar Tuner</a></li>
 		          <li class="#{get 'studio' /}">  <a id="studioLink" href="@{Sessions.index}">Studio</a></li>
     			  <li><a id="academyLink" href="@{Schools.index}">School Directory</a></li>
     			  #{if _user }
@@ -77,6 +78,11 @@
 		  </div>
 		</header>
     	<div class="container" id="#{get 'id' /}">
+    		<div class="row" style="margin-top:20px;">
+				<div class="span12">
+					<img src="@{'/public/images/940-bonafide.png'}" />
+				</div> 
+		    </div>
   	    		#{doLayout /}
         </div>
 	    <footer class="footer">

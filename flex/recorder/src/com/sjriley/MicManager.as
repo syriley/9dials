@@ -57,7 +57,7 @@ package com.sjriley
 			}//no mic
 
 			if(_streamOutput){
-				_throttle = new Timer(500,0);
+				_throttle = new Timer(250,0);
 				_throttle.addEventListener(TimerEvent.TIMER, timerHandler);
 				_throttle.start();
 			}
