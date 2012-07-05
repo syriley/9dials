@@ -1,228 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
-	xmlns:s="library://ns.adobe.com/flex/spark"
-	xmlns:mx="library://ns.adobe.com/flex/mx"
-	minWidth="500" minHeight="140"
-	creationComplete="init(event)">
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    minWidth="500" minHeight="140"
+    creationComplete="init(event)">
 
-	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
-	</fx:Declarations>
-	<fx:Script>
-		<![CDATA[
-			
-			import mx.events.FlexEvent;
-			import com.sjriley.MicManager;
-			import com.sjriley.Logger;
-			import com.sjriley.PlaybackManager;
-			import com.sjriley.UploadManager;
-			import com.jac.ogg.adobe.audio.format.events.WAVWriterEvent;
-			import com.jac.ogg.events.OggManagerEvent;
-			import com.jac.ogg.OggComments;
-			import com.jac.ogg.OggLibVersionInfo;
-			import com.jac.ogg.OggManager;
-			
-			private var micManager:MicManager;
-			private var playbackManager:PlaybackManager;
-			private var uploadManager:UploadManager;
-			private var oggManager:OggManager;
-			private var encodeQuality:int;
-			private var encodeLoopsPerYield:int
-			private var notifyProgress:Boolean;
-			private var startTime:Number;
-			private var wavStartTime:Number;
-			private var vorbisStartTime:Number;
-			
-			public function init(e:FlexEvent):void
-			{
-				ExternalInterface.call( 'console.log', "Starting process" );
-				 // volume in the final WAV file will be downsampled to 50%
-				var volume:Number = .5;
-				// we create the WAV encoder to be used by MicRecorder
-				//var wavEncoder:WaveEncoder = new WaveEncoder( volume );
-				// we create the MicRecorder object which does the job
-				//recorder = new MicRecorder( wavEncoder );
-				encodeQuality = 1;
-				encodeLoopsPerYield = 10;
-				micManager = new MicManager();
-				playbackManager = new PlaybackManager(micManager);
-				uploadManager = new UploadManager();
-				oggManager = new OggManager();
-				notifyProgress = true;
-				oggManager.progressNotifications = true;
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+    <fx:Script>
+        <![CDATA[
+            
+            import mx.events.FlexEvent;
+            import com.sjriley.MicManager;
+            import com.sjriley.Logger;
+            import com.sjriley.PlaybackManager;
+            import com.sjriley.UploadManager;
+            import com.sjriley.events.UploadManagerEvent;
+            import com.jac.ogg.adobe.audio.format.events.WAVWriterEvent;
+            import com.jac.ogg.events.OggManagerEvent;
+            import com.jac.ogg.OggComments;
+            import com.jac.ogg.OggLibVersionInfo;
+            import com.jac.ogg.OggManager;
+            
+            private var micManager:MicManager;
+            private var playbackManager:PlaybackManager;
+            private var uploadManager:UploadManager;
+            private var oggManager:OggManager;
+            private var encodeQuality:int;
+            private var encodeLoopsPerYield:int
+            private var notifyProgress:Boolean;
+            private var startTime:Number;
+            private var wavStartTime:Number;
+            private var vorbisStartTime:Number;
+            
+            public function init(e:FlexEvent):void
+            {
+                ExternalInterface.call( 'console.log', "Starting process" );
+                 // volume in the final WAV file will be downsampled to 50%
+                var volume:Number = .5;
+                encodeQuality = 1;
+                encodeLoopsPerYield = 10;
+                micManager = new MicManager();
+                playbackManager = new PlaybackManager(micManager);
+                uploadManager = new UploadManager();
+                oggManager = new OggManager();
+                notifyProgress = true;
+                oggManager.progressNotifications = true;
 
-				//mic events
-				micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
-				micManager.initialise();
-				//playback events
-				playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
+                //mic events
+                micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
+                micManager.initialise();
+                //playback events
+                playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
 
-				//Ogg Manager Events
-				oggManager.addEventListener(OggManagerEvent.ENCODE_BEGIN, handleEncodeBegin, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.ENCODE_PROGRESS, handleEncodeProgress, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.ENCODE_COMPLETE, handleEncodeComplete, false, 0, true);
-				
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
+                //Ogg Manager Events
+                oggManager.addEventListener(OggManagerEvent.ENCODE_BEGIN, handleEncodeBegin, false, 0, true);
+                oggManager.addEventListener(OggManagerEvent.ENCODE_PROGRESS, handleEncodeProgress, false, 0, true);
+                oggManager.addEventListener(OggManagerEvent.ENCODE_COMPLETE, handleEncodeComplete, false, 0, true);
+                
+                oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
+                oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
+                oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
 
-				uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
-			}
-			private function handleRecordClick(event:Event):void
-			{               
-				micManager.toggleRecording();
-			
-				if (micManager.isRecording)
-				{//disable
-					Logger.log("Start Recording");
-					
-					playPauseButton.enabled = false;
-					uploadButton.enabled = false;
-					
-					if (playbackManager.isPlaying)
-					{//stop
-						playbackManager.stopPlay();
-					}//stop
-				}//disable
-				else
-				{//enable
-					Logger.log("Complete");
-					playPauseButton.enabled = true;
-					uploadButton.enabled = true;
-				}//enable           
-			}
+                uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
+            }
+            private function handleRecordClick(event:Event):void
+            {               
+                micManager.toggleRecording();
+            
+                if (micManager.isRecording)
+                {//disable
+                    Logger.log("Start Recording");
+                    
+                    playPauseButton.enabled = false;
+                    uploadButton.enabled = false;
+                    
+                    if (playbackManager.isPlaying)
+                    {//stop
+                        playbackManager.stopPlay();
+                    }//stop
+                }//disable
+                else
+                {//enable
+                    Logger.log("Complete");
+                    playPauseButton.enabled = true;
+                    uploadButton.enabled = true;
+                }//enable           
+            }
 
-			private function handleMicManagerChange(e:Event):void 
-			{//handleMicManagerChange
-				if (micManager.isRecording)
-				{//update label
-					recordButton.label = "Stop";
-					Logger.log("Started Recording");
-				}//update label
-				else
-				{//update label
-					recordButton.label = "Record";
-					Logger.log("Stopped Recording");
-				}//update label
-			}//handleMicManagerChange
+            private function handleMicManagerChange(e:Event):void 
+            {//handleMicManagerChange
+                if (micManager.isRecording)
+                {//update label
+                    recordButton.label = "Stop";
+                    Logger.log("Started Recording");
+                }//update label
+                else
+                {//update label
+                    recordButton.label = "Record";
+                    Logger.log("Stopped Recording");
+                }//update label
+            }//handleMicManagerChange
 
-			private function handlePlayPauseClick(e:MouseEvent):void 
-			{//handlePlayPauseClick
-				Logger.log('toggling play!')
-				playbackManager.togglePlay();
-			}//handlePlayPauseClick
+            private function handlePlayPauseClick(e:MouseEvent):void 
+            {//handlePlayPauseClick
+                Logger.log('toggling play!')
+                playbackManager.togglePlay();
+            }//handlePlayPauseClick
 
-			private function handlePlaybackChange(e:Event):void 
-			{//handlePlaybackChange
-				Logger.log('playback changed')
-				if (playbackManager.isPlaying)
-				{//update play button status
-					playPauseButton.label = "Stop";
-				}//update play button status
-				else
-				{//update play button status
-					playPauseButton.label = "Play";
-				}//update play button status
-				
-				if (playbackManager.newBytes)
-				{//new bytes
-					Logger.log("New Bytes Loaded");
-				}//new bytes
-				
-				if (playbackManager.playBackBytes && playbackManager.playBackBytes.length > 0)
-				{//we have bytes to work with
-					playPauseButton.enabled = true;
-					uploadButton.enabled = true;
-				}//we have bytes to work with
-				else
-				{//no bytes
-					playPauseButton.enabled = false;
-					uploadButton.enabled = false;
-				}//no bytes
-			}//handlePlaybackChange
-		   
-			private function handleUploadClick(event:Event):void {
-			//handleUploadClick
-				var oggComments:OggComments = new OggComments();
-				
-				oggComments.title = '9dialstitle';
-				oggComments.album = '9dialsalbum';
-				oggComments.artist = '9dialsartist';
-				
-				if (playbackManager.isPlaying)
-				{//stop
-					playbackManager.stopPlay();
-				}//stop
-				
-				Logger.log("Starting Encode...");
-				Logger.log("Encode Quality: " + encodeQuality);
-				Logger.log("Encode Loops Per Yield: " + encodeLoopsPerYield);
-				Logger.log("Bytes to encode: " + playbackManager.playBackBytes.length)
-				
-				//handle UI
-				playPauseButton.enabled = false;
-				uploadButton.enabled = false;
-				
-				startTime = getTimer();
-				oggManager.encode(playbackManager.playBackBytes, oggComments, encodeQuality, 10,encodeLoopsPerYield, notifyProgress);
-			}//handleUploadClick
-			
-			private function handleEncodeComplete(e:OggManagerEvent):void 
-			{//handleEncodeComplete
-				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
-				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Uploading";
-				uploadManager.upload(oggManager.encodedBytes, titleTextbox.text)	;
-			}//handleEncodeComplete
-			
-			private function handleEncodeBegin(e:OggManagerEvent):void 
-			{//handleEncodeBegin
-				Logger.log("Ogg Vorbis Encode Start...");
-				vorbisStartTime = getTimer();
-			}//handleEncodeBegin
-			
-			private function handleEncodeProgress(e:OggManagerEvent):void 
-			{//handleEncodeProgress
-				progressLabel.text = "Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%";
-			}//handleEncodeProgress
-			
-			private function handleWavEncodeComplete(e:OggManagerEvent):void 
-			{//handleWavEncodeComplete
-				Logger.log("WAV encoding completed: " + (Math.round((getTimer() - wavStartTime)/1000)) + " second(s)");
-			}//handleWavEncodeComplete
-			
-			private function handleWavEncodeBegin(e:OggManagerEvent):void 
-			{//handleWavEncodeBegin
-				Logger.log("WAV encoding started...");
-				wavStartTime = getTimer();
-			}//handleWavEncodeBeing
-			
-			private function handleWavEncodeProgress(e:OggManagerEvent):void 
-			{//handleWavEncodeProgress
-				Logger.log("WAV Progress: " + e.data);
-			}//handleWavEncodeProgress
-			
-			private function handleUploadComplete(e:UploadManagerEvent):void 
-			{//handleUploadComplete
-				Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
-				progressLabel.text = "Upload complete";
-				playPauseButton.enabled = true;
-				uploadButton.enabled = true;
-				ExternalInterface.call('reload', 'nothing');
-			}//handleUploadComplete
-		]]>
-	</fx:Script>
-	<mx:VBox height="60" backgroundColor="#3B5998" width="500"
-		paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
-		<mx:HBox x="40">
-			<s:Button id="recordButton" label="Record" width="80" click="handleRecordClick(event)" />
-			<s:Button id="playPauseButton" label="Play" click="handlePlayPauseClick(event)" />
-			<s:Label color="white" text="Title:" paddingTop="5" fontWeight="bold" />
-			<s:TextInput id="titleTextbox" width="170" text="Untitled" />
-			<s:Button id="uploadButton" label="Upload" click="handleUploadClick(event)" />
-		</mx:HBox>
-		<s:Label color="white" fontWeight="bold" id="progressLabel" text="Progress" />
-	</mx:VBox>
+            private function handlePlaybackChange(e:Event):void 
+            {//handlePlaybackChange
+                Logger.log('playback changed')
+                if (playbackManager.isPlaying)
+                {//update play button status
+                    playPauseButton.label = "Stop";
+                }//update play button status
+                else
+                {//update play button status
+                    playPauseButton.label = "Play";
+                }//update play button status
+                
+                if (playbackManager.newBytes)
+                {//new bytes
+                    Logger.log("New Bytes Loaded");
+                }//new bytes
+                
+                if (playbackManager.playBackBytes && playbackManager.playBackBytes.length > 0)
+                {//we have bytes to work with
+                    playPauseButton.enabled = true;
+                    uploadButton.enabled = true;
+                }//we have bytes to work with
+                else
+                {//no bytes
+                    playPauseButton.enabled = false;
+                    uploadButton.enabled = false;
+                }//no bytes
+            }//handlePlaybackChange
+           
+            private function handleUploadClick(event:Event):void {
+            //handleUploadClick
+                var oggComments:OggComments = new OggComments();
+                
+                oggComments.title = '9dialstitle';
+                oggComments.album = '9dialsalbum';
+                oggComments.artist = '9dialsartist';
+                
+                if (playbackManager.isPlaying)
+                {//stop
+                    playbackManager.stopPlay();
+                }//stop
+                
+                Logger.log("Starting Encode...");
+                Logger.log("Encode Quality: " + encodeQuality);
+                Logger.log("Encode Loops Per Yield: " + encodeLoopsPerYield);
+                Logger.log("Bytes to encode: " + playbackManager.playBackBytes.length)
+                
+                //handle UI
+                playPauseButton.enabled = false;
+                uploadButton.enabled = false;
+                
+                startTime = getTimer();
+                oggManager.encode(playbackManager.playBackBytes, oggComments, encodeQuality, 10,encodeLoopsPerYield, notifyProgress);
+            }//handleUploadClick
+            
+            private function handleEncodeComplete(e:OggManagerEvent):void 
+            {//handleEncodeComplete
+                Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
+                Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
+                progressLabel.text = "Uploading";
+                uploadManager.upload(oggManager.encodedBytes, titleTextbox.text)    ;
+            }//handleEncodeComplete
+            
+            private function handleEncodeBegin(e:OggManagerEvent):void 
+            {//handleEncodeBegin
+                Logger.log("Ogg Vorbis Encode Start...");
+                vorbisStartTime = getTimer();
+            }//handleEncodeBegin
+            
+            private function handleEncodeProgress(e:OggManagerEvent):void 
+            {//handleEncodeProgress
+                progressLabel.text = "Encoding : " + int(parseFloat(e.data.toString()) * 100)  + "%";
+            }//handleEncodeProgress
+            
+            private function handleWavEncodeComplete(e:OggManagerEvent):void 
+            {//handleWavEncodeComplete
+                Logger.log("WAV encoding completed: " + (Math.round((getTimer() - wavStartTime)/1000)) + " second(s)");
+                playPauseButton.enabled = true;
+                uploadButton.enabled = true;
+            }//handleWavEncodeComplete
+            
+            private function handleWavEncodeBegin(e:OggManagerEvent):void 
+            {//handleWavEncodeBegin
+                Logger.log("WAV encoding started...");
+                wavStartTime = getTimer();
+            }//handleWavEncodeBeing
+            
+            private function handleWavEncodeProgress(e:OggManagerEvent):void 
+            {//handleWavEncodeProgress
+                Logger.log("WAV Progress: " + e.data);
+            }//handleWavEncodeProgress
+            
+            private function handleUploadComplete(e:UploadManagerEvent):void 
+            {//handleUploadComplete
+                Logger.log("Total Upload Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
+                playPauseButton.enabled = true;
+                uploadButton.enabled = true;
+                Logger.log(e.data);
+                ExternalInterface.call('sourceUploadComplete', e.data);
+            }//handleUploadComplete
+        ]]>
+    </fx:Script>
+    <mx:VBox height="60" backgroundColor="#3B5998" width="500"
+        paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10">
+        <mx:HBox x="40">
+            <s:Button id="recordButton" label="Record" width="80" click="handleRecordClick(event)" />
+            <s:Button id="playPauseButton" label="Play" click="handlePlayPauseClick(event)" />
+            <s:Label color="white" text="Title:" paddingTop="5" fontWeight="bold" />
+            <s:TextInput id="titleTextbox" width="170" text="Untitled" />
+            <s:Button id="uploadButton" label="Upload" click="handleUploadClick(event)" />
+        </mx:HBox>
+        <s:Label color="white" fontWeight="bold" id="progressLabel" text="Progress" />
+    </mx:VBox>
 </s:Application>
 

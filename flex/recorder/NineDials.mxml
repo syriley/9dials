@@ -186,7 +186,6 @@
 			}//handlePlaybackChange
 		   
 			private function uploadRecording():void {
-			//handleUploadClick
 				var oggComments:OggComments = new OggComments();
 				
 				oggComments.title = '9dialstitle';
