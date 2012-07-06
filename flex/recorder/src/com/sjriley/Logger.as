@@ -4,7 +4,7 @@ package com.sjriley
 
 	public class Logger {
 		public static function log (message:String):void {
-	        ExternalInterface.call( 'console.log', message);
+	        ExternalInterface.call( 'console.log', 'Flex: ' + message);
 	    }
 	}
 }

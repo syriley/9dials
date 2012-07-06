@@ -36,21 +36,19 @@ package com.sjriley
 			
 			_sound = new Sound();
 			_sound.addEventListener(SampleDataEvent.SAMPLE_DATA, handleSampleData, false, 0, true);
-			
 			_micManager = $micManager;
 			_micManager.addEventListener(MicManagerEvent.NEW_DATA, handleNewMicData, false, 0, true);
 		}//PlaybackManager
 		
 		private function handleSampleData(e:SampleDataEvent):void 
 		{//handleSampleData
-			
 			for (var i:int = 0; i < NUM_SAMPLES; i++)
 			{//feed sound
 				if (_playBackBytes.bytesAvailable < 8)
 				{//loop
-					//_playBackBytes.position = 0;
+					_playBackBytes.position = 0;
+					playbackComplete();
 				}//loop
-				
 				//feed data
 				e.data.writeFloat(_playBackBytes.readFloat());		//Left Channel
 				e.data.writeFloat(_playBackBytes.readFloat());		//Right Channel
@@ -73,9 +71,12 @@ package com.sjriley
 		
 		public function startPlay():void
 		{//startPlay
-			Logger.log('Starting play')
+
+			Logger.log('ACTUALLY Starting play')
+			Logger.log('this many bytes to play: ' + _playBackBytes.length);
 			_isPlaying = true;
-			_soundChannel = _sound.play(0,1);
+			_soundChannel = _sound.play();
+			_soundChannel.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete);
 			
 			dispatchEvent(new Event(Event.CHANGE));
 		}//startPlay
@@ -97,6 +98,18 @@ package com.sjriley
 			dispatchEvent(new Event(Event.CHANGE));
 			_newBytes = false;
 		}//loadBytes
+
+		public function handlePlaybackComplete(event:Event):void
+		{
+			playbackComplete();
+		}
+
+		public function playbackComplete():void
+		{
+			Logger.log('Playback complete');
+			dispatchEvent(new Event(Event.SOUND_COMPLETE));
+			_soundChannel.stop();
+		}
 		
 		public function forceDataUpdate():void
 		{//forceDataUpdate
@@ -113,7 +126,7 @@ package com.sjriley
 		
 		private function handleNewMicData(e:MicManagerEvent):void 
 		{//handleNewMicData
-			trace("New Mic Data: " + ByteArray(e.data).length);
+			Logger.log("New Mic Data: " + ByteArray(e.data).length);
 			_newMicData = true;
 			updateDataFromMic();
 		}//handleNewMicData

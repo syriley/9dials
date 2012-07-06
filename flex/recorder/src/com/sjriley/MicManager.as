@@ -109,7 +109,7 @@ package com.sjriley
 		}//handleMicStatus
 		
 		private function handleSampleData(e:SampleDataEvent):void 
-		{//handleSampleData
+		{
 			if(_streamOutput) {
 				
 				_currentSample.writeBytes(e.data);
@@ -126,7 +126,6 @@ package com.sjriley
 				{//save data
 					//Grab bytes
 					var samp:Number = e.data.readFloat();
-					
 					//convert to stereo
 					_recData.writeFloat(samp);	//Left Channel
 					_recData.writeFloat(samp);	//Right Channel

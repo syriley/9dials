@@ -60,6 +60,7 @@
 				micManager.initialise();
 				//playback events
 				playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
+				playbackManager.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete, false, 0, true);
 
 				//Ogg Manager Events
 				oggManager.addEventListener(OggManagerEvent.ENCODE_BEGIN, handleEncodeBegin, false, 0, true);
@@ -75,8 +76,8 @@
                 //add the javascript callbacks
                 ExternalInterface.addCallback("triggerFlexRecord", startRecording);
                 ExternalInterface.addCallback("triggerFlexStopRecord", stopRecording);
-                ExternalInterface.addCallback("triggerFlexPlay", externalPlayClick);
-                ExternalInterface.addCallback("triggerFlexStop", externalStopClick);
+                ExternalInterface.addCallback("triggerFlexPlay", play);
+                ExternalInterface.addCallback("triggerFlexStopPlaying", stopPlaying);
                 ExternalInterface.addCallback("triggerFlexUpload", uploadRecording);
 
                 ExternalInterface.call('flexRecorderInitialised', '');
@@ -123,6 +124,12 @@
 				ExternalInterface.call('micMuted', '');
 			}
 
+			private function handlePlaybackComplete(e:Event):void
+			{
+				Logger.log('playComplete event fired');
+				ExternalInterface.call('playComplete', '');
+			}
+
 			private function startRecording():void
 			{               
 				Logger.log("Start Recording");
@@ -146,9 +153,14 @@
 				}//update label
 			}//handleMicManagerChange
             
+            private function play():void
+            {
+            	playbackManager.startPlay();
+            }
+
             private function handlePlayClick(e:MouseEvent):void
             {
-                playbackManager.startPlay();
+                play();
             }
 
             private function updateProgress(status:String):void
@@ -156,10 +168,17 @@
                 ExternalInterface.call('updateFlexProgress', status);
             }
 
+            private function stopPlaying():void
+            {
+            	playbackManager.stopPlay();
+            }
+
             private function handleStopClick(e:MouseEvent):void
             {
-                playbackManager.stopPlay();
+             	stopPlaying();   
             }
+
+
 
 			private function handlePlayPauseClick(e:MouseEvent):void 
 			{//handlePlayPauseClick
