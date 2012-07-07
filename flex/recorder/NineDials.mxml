@@ -126,8 +126,8 @@
 
 			private function handlePlaybackComplete(e:Event):void
 			{
-				Logger.log('playComplete event fired');
-				ExternalInterface.call('playComplete', '');
+				Logger.log('playbackComplete event fired');
+				ExternalInterface.call('playbackComplete', '');
 			}
 
 			private function startRecording():void

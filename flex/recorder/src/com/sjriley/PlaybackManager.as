@@ -75,6 +75,7 @@ package com.sjriley
 			Logger.log('ACTUALLY Starting play')
 			Logger.log('this many bytes to play: ' + _playBackBytes.length);
 			_isPlaying = true;
+			_playBackBytes.position = 0;
 			_soundChannel = _sound.play();
 			_soundChannel.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete);
 			
