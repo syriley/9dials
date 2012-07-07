@@ -72,14 +72,22 @@ package com.sjriley
 		public function startPlay():void
 		{//startPlay
 
-			Logger.log('ACTUALLY Starting play')
-			Logger.log('this many bytes to play: ' + _playBackBytes.length);
-			_isPlaying = true;
-			_playBackBytes.position = 0;
-			_soundChannel = _sound.play();
-			_soundChannel.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete);
+			if(_playBackBytes.length > 0) {
+				Logger.log('Starting play')
+				
+
+				_isPlaying = true;
+				_playBackBytes.position = 0;
+				_soundChannel = _sound.play();
+				_soundChannel.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete);
 			
-			dispatchEvent(new Event(Event.CHANGE));
+				dispatchEvent(new Event(Event.CHANGE));
+			}
+			else {
+				Logger.log('nothing to playback');
+				dispatchEvent(new Event(Event.SOUND_COMPLETE));
+			}
+
 		}//startPlay
 		
 		public function stopPlay():void

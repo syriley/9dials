@@ -4,6 +4,7 @@
 	xmlns:s="library://ns.adobe.com/flex/spark"
 	xmlns:mx="library://ns.adobe.com/flex/mx"
 	minWidth="270" minHeight="140"
+	usePreloader="false"
 	creationComplete="init(event)">
 
 	<fx:Declarations>
@@ -188,7 +189,6 @@
 
 			private function handlePlaybackChange(e:Event):void 
 			{//handlePlaybackChange
-				Logger.log('playback changed')
 				if (playbackManager.isPlaying)
 				{//update play button status
 					ExternalInterface.call('startPlaying', '');

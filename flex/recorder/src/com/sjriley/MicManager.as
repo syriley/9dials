@@ -89,11 +89,13 @@ package com.sjriley
 		
 		public function stopRecording():void
 		{//stopRecording
-			_isRecording = false;
-			_mic.setSilenceLevel(100);
-			_mic.removeEventListener(SampleDataEvent.SAMPLE_DATA, handleSampleData, false);
-			dispatchEvent(new Event(Event.CHANGE));
-			dispatchEvent(new MicManagerEvent(MicManagerEvent.NEW_DATA, _recData));
+			if(isRecording) {
+				_isRecording = false;
+				_mic.setSilenceLevel(100);
+				_mic.removeEventListener(SampleDataEvent.SAMPLE_DATA, handleSampleData, false);
+				dispatchEvent(new Event(Event.CHANGE));
+				dispatchEvent(new MicManagerEvent(MicManagerEvent.NEW_DATA, _recData));
+			}
 		}//stopRecording
 		
 		private function handleMicStatus(e:StatusEvent):void 
