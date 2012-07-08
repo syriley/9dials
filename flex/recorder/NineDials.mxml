@@ -39,42 +39,24 @@
 			
 			public function init(e:FlexEvent):void
 			{
-				ExternalInterface.call( 'console.log', "Starting Flex app" );
+				Logger.log("Starting Flex app" );
 				 // volume in the final WAV file will be downsampled to 50%
 				var volume:Number = .5;
-				// we create the WAV encoder to be used by MicRecorder
-				//var wavEncoder:WaveEncoder = new WaveEncoder( volume );
-				// we create the MicRecorder object which does the job
-				//recorder = new MicRecorder( wavEncoder );
+
 				encodeQuality = 1;
 				encodeLoopsPerYield = 10;
 				micManager = new MicManager();
-				playbackManager = new PlaybackManager(micManager);
-				uploadManager = new UploadManager();
-				oggManager = new OggManager();
-				notifyProgress = true;
-				oggManager.progressNotifications = true;
-
-				//mic events
 				micManager.addEventListener(Event.CHANGE, handleMicManagerChange, false, 0, true);
 				micManager.addEventListener(MicManagerEvent.MIC_MUTED, handleMicMuted, false, 0, true);
 				micManager.initialise();
-				//playback events
+
+				playbackManager = new PlaybackManager(micManager);
 				playbackManager.addEventListener(Event.CHANGE, handlePlaybackChange, false, 0, true);
 				playbackManager.addEventListener(Event.SOUND_COMPLETE, handlePlaybackComplete, false, 0, true);
 
-				//Ogg Manager Events
-				oggManager.addEventListener(OggManagerEvent.ENCODE_BEGIN, handleEncodeBegin, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.ENCODE_PROGRESS, handleEncodeProgress, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.ENCODE_COMPLETE, handleEncodeComplete, false, 0, true);
-				
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
-				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);
-
+				uploadManager = new UploadManager();
 				uploadManager.addEventListener(UploadManagerEvent.UPLOAD_COMPLETE, handleUploadComplete, false, 0, true);
 
-                //add the javascript callbacks
                 ExternalInterface.addCallback("triggerFlexRecord", startRecording);
                 ExternalInterface.addCallback("triggerFlexStopRecord", stopRecording);
                 ExternalInterface.addCallback("triggerFlexPlay", play);
@@ -82,7 +64,24 @@
                 ExternalInterface.addCallback("triggerFlexUpload", uploadRecording);
 
                 ExternalInterface.call('flexRecorderInitialised', '');
-                Logger.log('flexRecorderInitialised');
+                
+
+				oggManager = new OggManager();
+				oggManager.progressNotifications = true;
+				notifyProgress = true;
+				//Ogg Manager Events
+				oggManager.addEventListener(OggManagerEvent.ENCODE_BEGIN, handleEncodeBegin, false, 0, true);
+				oggManager.addEventListener(OggManagerEvent.ENCODE_PROGRESS, handleEncodeProgress, false, 0, true);
+				oggManager.addEventListener(OggManagerEvent.ENCODE_COMPLETE, handleEncodeComplete, false, 0, true);
+				
+				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_BEGIN, handleWavEncodeBegin, false, 0, true);
+				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_COMPLETE, handleWavEncodeComplete, false, 0, true);
+				oggManager.addEventListener(OggManagerEvent.WAV_ENCODE_PROGRESS, handleWavEncodeProgress, false, 0, true);		
+
+				
+				Logger.log('OggManager initialised');
+
+                //add the javascript callbacks
 			}
             
             public function externalRecordClick():void {

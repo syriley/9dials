@@ -28,7 +28,7 @@ package com.sjriley
 		
 		public function PlaybackManager($micManager:MicManager) 
 		{//PlaybackManager
-			Logger.log('new PlaybackManager')
+			Logger.log('new PlaybackManager');
 			_playBackBytes = new ByteArray;
 			_newMicData = false;
 			_isPlaying = false;
@@ -38,6 +38,7 @@ package com.sjriley
 			_sound.addEventListener(SampleDataEvent.SAMPLE_DATA, handleSampleData, false, 0, true);
 			_micManager = $micManager;
 			_micManager.addEventListener(MicManagerEvent.NEW_DATA, handleNewMicData, false, 0, true);
+			Logger.log('PlaybackManager initialised');
 		}//PlaybackManager
 		
 		private function handleSampleData(e:SampleDataEvent):void 

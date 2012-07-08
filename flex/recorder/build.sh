@@ -15,6 +15,6 @@ if [ $1 == "fb" ]; then
 fi
 if [ $1 == "tuna" ]; then
     echo 'Building Tuna flash recorder'
-    mxmlc -source-path=src -library-path=lib -output=recorder.swf -optimize=true 	Tuna.mxml
+    mxmlc -source-path=src -library-path=lib -output=recorder.swf -optimize=true Tuna.mxml
 fi
 
