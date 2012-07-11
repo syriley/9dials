@@ -75,7 +75,6 @@ package com.sjriley
 
 			if(_playBackBytes.length > 0) {
 				Logger.log('Starting play')
-				
 
 				_isPlaying = true;
 				_playBackBytes.position = 0;

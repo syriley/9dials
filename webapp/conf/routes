@@ -63,8 +63,8 @@ GET     /api/images/{id}    						PictureServer.getPicture
 GET		/welcome									NewUser.index
 GET     /loginrouter    							Application.loginRouter
 GET     /fakefblogin    							Application.fakeLogin                      
-POST    /sources 									Sources.upload
-POST    /api/sources 								TheSources.upload
+POST    /api/sources 								Sources.upload
+POST    /api/facebooksources						FacebookSources.upload
 POST    /bands/?             						Bands.create
 POST    /tabs/?             						Tabs.create
 

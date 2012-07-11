@@ -31,7 +31,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
-public class Sources extends LoggedInController{
+public class FacebookSources extends FacebookLoggedInController {
     
 	public static void index() {
 		render();
