@@ -28,6 +28,14 @@ public class Sessions extends LoggedInController {
         render(otherSeshions, studioUrl, seshionId);
 	}
 	
+	public static void indexJson(long seshionId) {
+        User ourUser = (User)renderArgs.get("_user");
+        List<Session> otherSeshions = Session.findAll();
+        String studioUrl = (String)Play.configuration.get("studio.url");
+        otherSeshions.removeAll(ourUser.getSessions());
+        renderJSON(ourUser.getSessionDtos());
+    }
+	
 	public static void showJson(long id) {
 	    Session seshion = Session.findById(id);
 	    JsonObject dto = (JsonObject)parser.parse(seshion.data);

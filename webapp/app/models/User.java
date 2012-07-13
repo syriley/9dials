@@ -14,6 +14,8 @@ import play.libs.Crypto;
 import util.JsonUtils;
 import models.Track;
 import com.google.gson.JsonObject;
+
+import dtos.SessionDto;
  
 @Entity
 @Table(name="auser")
@@ -95,4 +97,18 @@ public class User extends Model {
 		}
 		return sessions;
 	}
+	
+	public List<SessionDto> getSessionDtos() {
+       List<Session> sessions = getSessions();
+       List<SessionDto> sessionDtos = new ArrayList<SessionDto>();
+       for (Session session : sessions) {
+           sessionDtos.add(new SessionDto(session.modified,
+                   session.name, 
+                   session.description, 
+                   session.access, 
+                   session.data, 
+                   session.enabled));
+       }
+        return sessionDtos;
+    }
 }

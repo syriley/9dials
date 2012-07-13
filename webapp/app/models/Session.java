@@ -29,7 +29,7 @@ public class Session extends Model{
 	public boolean enabled = true;
 	
 	@OneToMany(mappedBy="session", cascade=CascadeType.ALL)
-	public List<UserSession> userSessions;
+	public volatile List<UserSession> userSessions;
 	
 	
 	public Session() {
