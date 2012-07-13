@@ -3,6 +3,8 @@ package controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bouncycastle.jce.provider.JDKGOST3410Signer.gost3410;
+
 import models.Session;
 import models.User;
 import models.UserSession;
@@ -30,10 +32,13 @@ public class Sessions extends LoggedInController {
 	
 	public static void indexJson(long seshionId) {
         User ourUser = (User)renderArgs.get("_user");
-        List<Session> otherSeshions = Session.findAll();
-        String studioUrl = (String)Play.configuration.get("studio.url");
-        otherSeshions.removeAll(ourUser.getSessions());
-        renderJSON(ourUser.getSessionDtos());
+        List<Session> seshions = ourUser.getSessions();
+        JsonArray jsonSessions = new JsonArray();
+        for (Session seshion : seshions) {
+            jsonSessions.add(getDto(seshion));
+        }
+
+        renderJSON(jsonSessions.toString());
     }
 	
 	public static void showJson(long id) {
@@ -43,6 +48,14 @@ public class Sessions extends LoggedInController {
 	    
 	    dto.add("session", sessionMeta);
         renderJSON(dto.toString());
+	}
+	
+	private static JsonObject getDto(Session seshion){
+	    JsonObject dto = (JsonObject)parser.parse(seshion.data);
+        JsonElement sessionMeta = toJson(seshion, getSessionExclusionStrategy());
+        
+        dto.add("session", sessionMeta);
+        return dto;
 	}
 	
 	public static void form(Long id) {
