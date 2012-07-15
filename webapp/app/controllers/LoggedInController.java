@@ -1,5 +1,6 @@
 package controllers;
 
+import models.User;
 import play.mvc.With;
 
 import com.google.gson.ExclusionStrategy;
@@ -19,6 +20,11 @@ public class LoggedInController extends UserCheckController {
             .serializeNulls()
             .create();
         return gson.toJsonTree(o);
-      } 
+      }
+
+    public static User getCurrentUser(){
+        return (User)renderArgs.get("_user");
+    }
+    
 }
 

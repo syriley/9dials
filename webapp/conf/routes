@@ -49,6 +49,7 @@ PUT		/api/tracks									Tracks.update
 POST	/api/regions								Regions.create
 PUT		/api/regions								Regions.update
 
+POST	/api/sessions								Sessions.create
 GET    	/api/sessions  								Sessions.indexJson
 GET    	/api/sessions/{id} 							Sessions.showJson
 POST    /api/sessions/{id} 							Sessions.saveData
@@ -57,14 +58,16 @@ GET     /api/instruments 							Instruments.list
 GET     /api/users 									Users.list
 GET     /api/users/validate 						Users.validate
 GET     /api/images/{id}    						PictureServer.getPicture
+GET    	/api/sources								Sources.list
 
 #User management
 
 GET		/welcome									NewUser.index
-GET     /loginrouter    							Application.loginRouter
-GET     /fakefblogin    							Application.fakeLogin                      
+GET     /loginrouter    							Application.loginRouter                      
 POST    /api/sources 								Sources.upload
-POST    /api/facebooksources						FacebookSources.upload
+POST    /api/facebooksources						Sources.upload
+
+
 POST    /bands/?             						Bands.create
 POST    /tabs/?             						Tabs.create
 

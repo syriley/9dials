@@ -2,37 +2,33 @@ package models;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
-import jobs.AudioConverterJob;
 
 import org.apache.commons.io.IOUtils;
 
 import play.Logger;
 import play.Play;
 import play.db.jpa.Model;
-import play.libs.F.Promise;
 import play.modules.facebook.FbGraphException;
 import play.mvc.Router;
 import play.mvc.Router.ActionDefinition;
-import util.FileUtils;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
-import controllers.FacebookSecurity;
+import dtos.SourceDto;
 
 @Entity
 public class Source extends Model
@@ -71,13 +67,12 @@ public class Source extends Model
     	return this;
     }
     
-    public static Source uploadToS3(File file, String objectKey,String name) throws FbGraphException {
-        User fbUser = FacebookSecurity.getCurrentFbUser();  
+    public static Source uploadToS3(User user, File file, String objectKey,String name) throws FbGraphException {
         AWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
         AmazonS3 s3Client = new AmazonS3Client(awsCredentials);
         s3Client.putObject(BUCKET_NAME, objectKey, file);
         String url = getLocalUrl(objectKey);
-        Source source = new Source(fbUser,file.getName(),objectKey,name, url);
+        Source source = new Source(user, file.getName(),objectKey,name, url);
         source.save();
         return source;
     }
@@ -150,5 +145,18 @@ public class Source extends Model
     public static String getIndexUrl(){
         String base = getBaseUrl();
         return base+"/wall";
+    }
+    
+    public SourceDto getDto(){
+        return new SourceDto(fileName, name, s3key, url, playCount, createDate);
+    }
+    
+    public static List<SourceDto> getDtosByUser(User user){
+        List<Source> sources = Source.find("byCreator", user).fetch();
+        List<SourceDto> sourceDtos= new ArrayList<SourceDto>();
+        for (Source source : sources) {
+            sourceDtos.add(source.getDto());
+        }
+        return sourceDtos;
     }
 }

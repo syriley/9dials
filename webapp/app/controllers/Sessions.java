@@ -23,16 +23,16 @@ public class Sessions extends LoggedInController {
     private static JsonParser parser = new JsonParser();
     
 	public static void index(long seshionId) {
-	    User ourUser = (User)renderArgs.get("_user");
+	    User user = getCurrentUser();
         List<Session> otherSeshions = Session.findAll();
         String studioUrl = (String)Play.configuration.get("studio.url");
-        otherSeshions.removeAll(ourUser.getSessions());
+        otherSeshions.removeAll(user.getSessions());
         render(otherSeshions, studioUrl, seshionId);
 	}
 	
 	public static void indexJson(long seshionId) {
-        User ourUser = (User)renderArgs.get("_user");
-        List<Session> seshions = ourUser.getSessions();
+        User user = getCurrentUser();
+        List<Session> seshions = user.getSessions();
         JsonArray jsonSessions = new JsonArray();
         for (Session seshion : seshions) {
             jsonSessions.add(getDto(seshion));
@@ -43,11 +43,7 @@ public class Sessions extends LoggedInController {
 	
 	public static void showJson(long id) {
 	    Session seshion = Session.findById(id);
-	    JsonObject dto = (JsonObject)parser.parse(seshion.data);
-	    JsonElement sessionMeta = toJson(seshion, getSessionExclusionStrategy());
-	    
-	    dto.add("session", sessionMeta);
-        renderJSON(dto.toString());
+        renderJSON(getDto(seshion).toString());
 	}
 	
 	private static JsonObject getDto(Session seshion){
@@ -56,21 +52,6 @@ public class Sessions extends LoggedInController {
         
         dto.add("session", sessionMeta);
         return dto;
-	}
-	
-	public static void form(Long id) {
-	 if(id != null) {
-	        Session seshion = Session.findById(id);
-
-	        List<UserSession> userSessions = UserSession.getSharedUserSessions(seshion);
-	        List<User> sharedUsers = new ArrayList<User>();
-	        
-	        List<User> allOtherUsers = User.findAll();
-	        allOtherUsers.removeAll(sharedUsers);
-	        
-	        render(seshion, userSessions, allOtherUsers);
-	    }
-		render();
 	}
 	
 	public static void create() {
@@ -98,8 +79,8 @@ public class Sessions extends LoggedInController {
             "}";
 	    seshion.save();
 	    user.createSession(seshion);
-	    String studioUrl = (String)Play.configuration.get("studio.url");
-	    redirect(studioUrl + seshion.id);
+	    renderJSON(getDto(seshion).toString());
+	    
 	}
 	
     public static void update(Long id, String body) {
@@ -122,13 +103,11 @@ public class Sessions extends LoggedInController {
 		Session session = Session.findById(sessionId);
 		session.access = access;
 		session.save();
-		form(sessionId);
 	}
 	
 	public static void removeUser(Long sessionId, Long userId) {
 		UserSession userSesssion = UserSession.findByUserAndSession(userId, sessionId);
 		userSesssion.delete();
-		form(sessionId);
 	}
 	
 	private static ExclusionStrategy getSessionExclusionStrategy() {

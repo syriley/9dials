@@ -42,6 +42,7 @@ public class Sources extends LoggedInController{
 	}
 	
 	public static void upload(File file, String name) throws FileNotFoundException, FbGraphException {
+	    User user = getCurrentUser();
 	    String extension = FileUtils.extension(file);
         String s3key = UUID.randomUUID().toString();
         Source source = null;
@@ -49,17 +50,17 @@ public class Sources extends LoggedInController{
             String mp3Name = s3key+".mp3";
             Promise<File> mp3 = new AudioConverterJob(file, s3key, "mp3").now();
             File mp3File = await(mp3);
-            source = Source.uploadToS3(mp3File,mp3Name,name);
+            source = Source.uploadToS3(user, mp3File,mp3Name,name);
         }
         else{
-            source = Source.uploadToS3(file,s3key,name);
+            source = Source.uploadToS3(user, file,s3key,name);
         }
        
-        renderJSON(source);
+        renderJSON(source.getDto());
 	}
 
-	public static List<Source> findMine() throws FbGraphException{
-		User fbUser = FacebookSecurity.getCurrentFbUser();		
-		return Source.find("byCreator", fbUser).fetch(10);
+	public static void list() throws FbGraphException{
+		User user = getCurrentUser();		
+		renderJSON(Source.getDtosByUser(user));
 	}
 }
