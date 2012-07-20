@@ -16,6 +16,7 @@ import models.Track;
 import com.google.gson.JsonObject;
 
 import dtos.SessionDto;
+import dtos.UserDto;
  
 @Entity
 @Table(name="auser")
@@ -111,4 +112,16 @@ public class User extends Model {
        }
         return sessionDtos;
     }
+	
+	public UserDto getDto(){
+	    return new UserDto(name, 
+	            username, 
+	            email, 
+	            password, 
+	            bio, 
+	            imageUrl, 
+	            externalId, 
+	            externalProvider, 
+	            isEmailVerified);
+	}
 }

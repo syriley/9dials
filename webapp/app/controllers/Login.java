@@ -1,9 +1,12 @@
 package controllers;
 
-import play.mvc.Controller;
+import models.User;
+import dtos.UserDto;
 
-public class Login extends Controller{
+public class Login extends LoggedInController{
     public static void success() {
-        render();
+        User user = getCurrentUser();
+        UserDto dto = user.getDto(); 
+        render(dto);
     }
 }
