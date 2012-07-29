@@ -6,6 +6,7 @@ import javax.persistence.Column;
 
 public class SourceDto {
     
+    public long id;
     public String fileName;
     public String name;
     public String s3key;
@@ -13,9 +14,10 @@ public class SourceDto {
     public long playCount;
     public Date createDate;
     
-    public SourceDto(String fileName, String name, String s3key, String url,
+    public SourceDto(long id, String fileName, String name, String s3key, String url,
             long playCount, Date createDate) {
         super();
+        this.id = id; 
         this.fileName = fileName;
         this.name = name;
         this.s3key = s3key;

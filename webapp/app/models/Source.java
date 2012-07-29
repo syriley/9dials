@@ -33,9 +33,9 @@ import dtos.SourceDto;
 @Entity
 public class Source extends Model
 {
-    public static final String AWS_ACCESS_KEY = "AKIAJLGV564C5LYG5WHQ";
-    public static final String AWS_SECRET_KEY = "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";
-    public static final String BUCKET_NAME = "media.9dials.com";
+    public static final String AWS_ACCESS_KEY = "AKIAINI42VXO6I5GWCJQ";
+    public static final String AWS_SECRET_KEY = "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";
+    public static final String BUCKET_NAME = "sources.9dials.com";
     
     public static String getFileUrl(String fileName){
         return "http://"+BUCKET_NAME+"/"+fileName;
@@ -48,9 +48,11 @@ public class Source extends Model
         this.s3key = s3key;
         this.name=sourceName;
         this.url=url;
+        this.enabled = true;
     }
     
     public String fileName;
+    public boolean enabled;
     public String name;
     public String s3key;
     public String url;
@@ -76,19 +78,7 @@ public class Source extends Model
         source.save();
         return source;
     }
-    
-    public static void uploadLocally(File file) {
-        
-        FileOutputStream moveTo = null;
-        try {
-            moveTo = new FileOutputStream(new File("/tmp/test.ogg"));
-            FileInputStream fileInputStream = new FileInputStream(file);
-            IOUtils.copy(fileInputStream, moveTo);
-        } catch (IOException e) {
-            Logger.error(e, "local upload error");
-        }
-    }
-    
+      
     public static String getFull9DialsUrl(String action, Map<String, Object> args) {
         ActionDefinition actionDefinition = Router.reverse(action, args);
         String base = getBase9DialsUrl();
@@ -148,14 +138,16 @@ public class Source extends Model
     }
     
     public SourceDto getDto(){
-        return new SourceDto(fileName, name, s3key, url, playCount, createDate);
+        return new SourceDto(id, fileName, name, s3key, url, playCount, createDate);
     }
     
     public static List<SourceDto> getDtosByUser(User user){
         List<Source> sources = Source.find("byCreator", user).fetch();
         List<SourceDto> sourceDtos= new ArrayList<SourceDto>();
         for (Source source : sources) {
-            sourceDtos.add(source.getDto());
+            if (source.enabled){
+                sourceDtos.add(source.getDto());
+            }
         }
         return sourceDtos;
     }

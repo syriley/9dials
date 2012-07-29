@@ -59,8 +59,15 @@ public class Sources extends LoggedInController{
         renderJSON(source.getDto());
 	}
 
-	public static void list() throws FbGraphException{
+	public static void list() {
 		User user = getCurrentUser();		
 		renderJSON(Source.getDtosByUser(user));
+	}
+	
+	public static void remove(long id) {
+	    Source source = Source.findById(id);
+	    source.enabled = false;
+	    source.save();
+	    renderJSON(source.getDto());
 	}
 }

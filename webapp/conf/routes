@@ -59,6 +59,7 @@ GET     /api/users 									Users.list
 GET     /api/users/validate 						Users.validate
 GET     /api/images/{id}    						PictureServer.getPicture
 GET    	/api/sources								Sources.list
+DELETE  /api/sources/{id}							Sources.remove
 
 #User management
 

@@ -26,6 +26,7 @@
 			import com.jac.ogg.OggLibVersionInfo;
 			import com.jac.ogg.OggManager;
 			
+			private var sourceName:String;
 			private var micManager:MicManager;
 			private var playbackManager:PlaybackManager;
 			private var uploadManager:UploadManager;
@@ -43,6 +44,7 @@
 				 // volume in the final WAV file will be downsampled to 50%
 				var volume:Number = .5;
 
+				sourceName = 'Untitled';
 				encodeQuality = 1;
 				encodeLoopsPerYield = 10;
 				micManager = new MicManager();
@@ -203,9 +205,10 @@
 				}//new bytes
 			}//handlePlaybackChange
 		   
-			private function uploadRecording():void {
+			private function uploadRecording(sourceName:String):void {
 				var oggComments:OggComments = new OggComments();
-				
+				Logger.log("Saving as " + sourceName);
+				this.sourceName = sourceName;
 				oggComments.title = '9dialstitle';
 				oggComments.album = '9dialsalbum';
 				oggComments.artist = '9dialsartist';
@@ -229,7 +232,7 @@
 				Logger.log("Ogg Vorbis Encode Complete: " + (Math.round((getTimer() - vorbisStartTime)/1000) + " second(s)"));
 				Logger.log("Total Encode Time: " + (Math.round((getTimer() - startTime)/1000) + " second(s)"));
                 updateProgress('Encoding complete');
-				uploadManager.upload(oggManager.encodedBytes, 'untitled');				
+				uploadManager.upload(oggManager.encodedBytes, this.sourceName);				
 			}//handleEncodeComplete
 			
 			private function handleEncodeBegin(e:OggManagerEvent):void 
